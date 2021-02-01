@@ -1,2 +1,1 @@
-# SweetyPie Airbnb Clone Coding 
-## Test
+# SweetyPie Airbnb Clone Coding
