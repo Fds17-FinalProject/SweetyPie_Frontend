@@ -27,7 +27,9 @@ module.exports = {
       backgroundColor: {
         '#f7f7f7': '#f7f7f7',
         '#D70466': '#D70466',
-        '#717171': '#717171'
+        '#717171': '#717171',
+        '#444': '#444',
+        modal: 'rgba(62, 60, 70, 0.5)'
       },
       boxShadow: {
         before: 'rgba(0, 0, 0, 0.12) 0px 6px 16px',
