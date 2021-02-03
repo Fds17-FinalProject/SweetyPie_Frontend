@@ -1,13 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
 import './assets/output.css'
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import MainPage from './pages/mainPage';
+import ModifyAccountPage from './pages/ModifyAccountPage';
+
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
-  );
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={MainPage} />
+        <Route path="/modify" component={ModifyAccountPage} />
+      </Switch>
+    </BrowserRouter>
+  )
 }
 
 export default App;
+
