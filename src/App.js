@@ -1,8 +1,13 @@
 import './App.css';
 import './assets/output.css';
+import RoomDetailPage from './pages/RoomDetailPage';
 
 function App() {
-  return <div className="App">안녕</div>;
+  return (
+    <div>
+      <RoomDetailPage />
+    </div>
+  );
 }
 
 export default App;

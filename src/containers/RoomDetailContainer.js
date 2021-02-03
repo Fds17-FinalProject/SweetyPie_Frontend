@@ -1,8 +1,12 @@
 import React from 'react';
-import RoomDetail from './components/RoomDetail';
+import RoomDetailTemplate from '../components/roomDetail/RoomDetailTemplate';
 
 const RoomDetailContainer = () => {
-  return <RoomDetail />;
+  return (
+    <div>
+      <RoomDetailTemplate />
+    </div>
+  );
 };
 
 export default RoomDetailContainer;

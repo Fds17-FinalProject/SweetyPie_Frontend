@@ -1,54 +1,56 @@
 import React from 'react';
 import '../../assets/output.css';
-import Button from './components/Button';
+import Button from '../common/Button';
 import {
   HiChevronRight,
   HiOutlineHeart,
   HiChevronLeft,
   HiHeart,
-  HiOutlineX
+  HiOutlineX,
 } from 'react-icons/hi';
 import { FcGoogle } from 'react-icons/fc';
+import Photos from './Photos';
+import Introduction from './Introduction';
+import Title from './Title';
+import Icons from './Icons';
+import Description from './Description';
+import CalendarDetail from './CalendarDetail';
+import Payment from './Payment';
+import Beds from './Beds';
+import Reviews from './Reviews';
+import Map from './Map';
+import Host from './Host';
+import ThingsToKnow from './ThingsToKnow';
 
-const RoomDetail = () => {
+const RoomDetailTemplate = () => {
   return (
     <>
-      <div>
-        <h1>메인 / 팝업창 / 필터 / 달력 </h1>
-        <Button size="sm" color="pink">
-          확인
-        </Button>
-        <Button size="sm" color="gray">
-          취소
-        </Button>
-        <Button size="sm" color="white">
-          더보기
-        </Button>
-        <Button size="sm" color="black">
-          확인
-        </Button>
-        <Button size="sm" color="black">
-          닫기
-        </Button>
-      </div>
-      <div className="mt-8">
-        <h1>Fullsize Button</h1>
-        <Button size="lg" color="pink">
-          로그인
-        </Button>
-        <Button size="lg" color="white">
-          <FcGoogle className="inline-flex items-center justify-center mx-2" />
-          구글 계정으로 로그인
-        </Button>
-        <Button size="lg" color="pink">
-          회원가입
-        </Button>
-        <Button size="lg" color="pink">
-          예약하기
-        </Button>
+      <div className="max-w-screen-2xl mt-32">
+        <div className="mx-48 px-32">
+          <Title />
+          <Photos />
+        </div>
+        <div className="mx-48 px-32 mt-4.8rem mb-20 flex justify-between">
+          <div className="w-3/5">
+            <Introduction />
+            <Icons />
+            <Description />
+            <Beds />
+            <CalendarDetail />
+          </div>
+          <div className="w-1/3 h-full sticky top-10">
+            <Payment />
+          </div>
+        </div>
+        <div className="mx-48 px-32 bg-gray-400">
+          <Reviews />
+          <Map />
+          <Host />
+          <ThingsToKnow />
+        </div>
       </div>
     </>
   );
 };
 
-export default RoomDetail;
+export default RoomDetailTemplate;
