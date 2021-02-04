@@ -1,12 +1,9 @@
 import React from 'react';
-// import {HeaderLogo, HeaderUser} from '../common/CommonHeader';
 import Footer from '../Main/Footer';
-import { Link } from 'react-router-dom';
 import ModifyInput from './ModifyInput';
 import ModifyContent from './ModifyContent';
 import HeaderLogo from '../Main/HeaderLogo';
 import HeaderUser from '../Main/HeaderUser';
-import SVG from '../../assets/Svg';
 import ModifyDescription from './ModifyDescription';
 
 const res = {
@@ -27,7 +24,6 @@ const ModifyAccount = ({ onClick, modify }) => {
         <HeaderLogo color="#FF385C"/>
         <HeaderUser/>
       </header>
-      {/* <CommonHeader/> */}
       <div className="max-w-screen-2xl w-full flex-grow-1 px-72 pt-32 min-h-75rem">
         <h1 className="a11y-hidden">개인정보 수정</h1>
         {/* <Link className="text-#727272 text-1.4rem">계정</Link> */}
@@ -48,37 +44,14 @@ const ModifyAccount = ({ onClick, modify }) => {
             <ModifyContent htmlFor="password-input" id="password-input" name="password" onClick={onClick} content={res.password}>비밀번호</ModifyContent>}
           
             {modify.contact ? <ModifyInput name="contact" onClick={onClick} content={res.contact}>전화번호 수정</ModifyInput> : 
-            <ModifyContent htmlFor="contact-input" id="contact-input" name="contact" onClick={onClick} content={res.contact}>전화번호</ModifyContent>}
+              <ModifyContent htmlFor="contact-input" id="contact-input" name="contact" onClick={onClick} content={res.contact}>전화번호</ModifyContent>}
           </div>
           {/* right */}
-          <ModifyDescription/>
-          {/* <div className=" w-1/3 h-full py-12 pl-10 pr-12	border rounded-lg">
-            <div>
-              <div className="relative">
-                <SVG viewBox="0 0 24 24" width="4rem" height="4rem" color="rgb(96, 182, 181" name="locksub" className="absolute top-0 left-0"/>
-                <SVG viewBox="0 0 24 24" width="4rem" height="4rem" name="lock" className="absolute top-0 left-0"/>
-              </div>
-              <div className="pt-20">
-                <h2 className="text-1.8rem font-bold text-#727272 pb-3">수정할 수 있는 세부 정보는 무엇인가요?</h2>
-                <span className="text-1.6rem text-#727272">
-                  에어비앤비에서 본인 인증 시 사용하는 세부 정보는 변경할 수 없습니다.
-                  연락처 정보와 일부 개인정보는 수정할 수 있지만,
-                  다음번 예약 또는 숙소를 등록할 때 본인 인증 절차를 거쳐야 할 수도 있습니다.
-                  </span>
-              </div>
-              <div className="relative">
-                <SVG viewBox="0 0 24 24" width="4rem" height="4rem" color="rgb(96, 182, 181" name="camerasub" className="absolute top-0 left-0"/>
-                <SVG viewBox="0 0 24 24" width="4rem" height="4rem" name="camera" className="absolute top-0 left-0"/>
-              </div>
-              <div className="pt-20">
-                <h2 className="text-1.8rem font-bold text-#727272 pb-3">다른 사람에게 어떤 정보가 공개되나요?</h2>
-                <span className="text-1.6rem text-#727272">
-                에어비앤비는 예약이 확정된 후에만 호스트 및 게스트의 연락처 정보를 공개합니다.
-                  </span>
-              </div>
-            </div>
-            
-          </div> */}
+          <ModifyDescription />
+        </div>
+        <div className="flex flex-col justify-center items-center pt-16 pb-20">
+          <h2 className="text-#717171 text-1.6rem">계정을 비활성화 하셔야 하나요?</h2>
+          <button className="text-#008489 text-1.4rem font-semibold">지금 처리하기</button>
         </div>
       </div>
       <Footer/>
