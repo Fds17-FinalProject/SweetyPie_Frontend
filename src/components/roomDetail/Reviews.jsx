@@ -2,7 +2,7 @@ import React from 'react';
 import { HiStar } from 'react-icons/hi';
 import ReviewProfile from './ReviewProfile';
 
-const Reviews = ({ name, guestPhoto }) => {
+const Reviews = ({ guestPhoto }) => {
   const ratingAvg = 4.58;
   const reviewNum = 24;
 
@@ -68,7 +68,7 @@ const Reviews = ({ name, guestPhoto }) => {
             <div className="">가격 대비 만족도</div>
             <div className="flex items-center">
               <div className="w-48 h-2 bg-gray-300 mr-8 rounded-2xl overflow-hidden">
-                <div className="w-44 h-2 bg-gray-500"></div>
+                <div className="w-48 h-2 bg-gray-500"></div>
               </div>
               <span>4.9</span>
             </div>

@@ -15,7 +15,6 @@ const ReviewProfile = ({ name, photo }) => {
           alt="guest"
         />
         <div className="">
-          {/* <div className="">{guestName}</div> */}
           <div className="text-1.6rem font-bold">{name}</div>
           <div className="text-1.4rem text-#717171">
             {createdDate.split(' -')[0]}년 {createdDate.split(' -')[1]}월
