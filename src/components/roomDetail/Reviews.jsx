@@ -7,7 +7,7 @@ const Reviews = ({ name, guestPhoto }) => {
   const reviewNum = 24;
 
   return (
-    <div className="border bg-gray-100 pt-20">
+    <div className="pt-20">
       <div className="inline-flex text-2.2rem font-bold mb-12">
         <span className="inline-flex items-center flex-start mr-1 mb-1">
           <HiStar className="inline-block text-airbnb" />
