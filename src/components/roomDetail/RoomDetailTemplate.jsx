@@ -42,7 +42,7 @@ const RoomDetailTemplate = () => {
             <Payment />
           </div>
         </div>
-        <div className="mx-48 px-32 bg-gray-400">
+        <div className="mx-48 px-32">
           <Reviews />
           <Map />
           <Host />
