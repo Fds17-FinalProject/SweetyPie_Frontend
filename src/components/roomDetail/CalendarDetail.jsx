@@ -17,7 +17,7 @@ const CalendarDetail = () => {
         <img src={img + '/img/calendar.jpg'} alt="달력" />
         <Calendar />
       </div>
-      <div className="my-20 border-b"></div>
+      <div className="mt-20 border-b"></div>
     </div>
   );
 };

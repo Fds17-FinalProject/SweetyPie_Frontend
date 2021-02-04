@@ -1,7 +1,7 @@
 import React from 'react';
 
-const roomDetailHeader = () => {
-  return <div>roomDetailHeader</div>;
+const RoomDetailHeader = () => {
+  return <div>RoomDetailHeader</div>;
 };
 
-export default roomDetailHeader;
+export default RoomDetailHeader;

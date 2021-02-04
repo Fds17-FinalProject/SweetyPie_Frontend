@@ -1,7 +1,7 @@
 import React from 'react';
-const img = window.location.origin;
 
 const Introduction = () => {
+  const img = window.location.origin;
   const host = 'JamJam';
   const buildingType = '펜션';
   const capacity = '5명';

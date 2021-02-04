@@ -30,7 +30,7 @@ const RoomDetailTemplate = () => {
           <Title />
           <Photos />
         </div>
-        <div className="mx-48 px-32 mt-4.8rem mb-20 flex justify-between">
+        <div className="mx-48 px-32 mt-4.8rem flex justify-between">
           <div className="w-3/5">
             <Introduction />
             <Icons />

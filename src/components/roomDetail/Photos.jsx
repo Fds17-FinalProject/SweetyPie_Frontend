@@ -11,7 +11,7 @@ const img = window.location.origin;
 const Photos = () => {
   return (
     <div className="mt-2.4rem h-38.8rem w-full rounded-3xl flex justify-between overflow-hidden bg-gray-500">
-      <div className="w-56.4rem h-full">
+      <div className="w-56.4rem ">
         <img
           className="block w-full h-full"
           src={img + '/img/room01.jpg'}
@@ -20,24 +20,24 @@ const Photos = () => {
       </div>
       <div className="w-27.4rem pl-4">
         <img
-          className="block w-full h-22.8rem mb-10"
+          className="block w-full h-19.4rem mb-10"
           src={img + '/img/room02.jpg'}
           alt="..."
         />
         <img
-          className="block w-full h-22.8rem"
+          className="block w-full h-19.4rem"
           src={img + '/img/room04.jpg'}
           alt="..."
         />
       </div>
       <div className="w-27.4rem pl-4">
         <img
-          className="block w-full h-22.8rem mb-10"
+          className="block w-full h-19.4rem mb-10"
           src={img + '/img/room03.jpg'}
           alt="..."
         />
         <img
-          className="block w-full h-22.8rem"
+          className="block w-full h-19.4rem"
           src={img + '/img/room05.jpg'}
           alt="..."
         />
