@@ -8,17 +8,23 @@ import Button from '../common/Button';
 const Payment = () => {
   const ratingAvg = 4.58;
   const reviewNum = 24;
-  const price = 106000; // 계산할 때 106,000으로 나오게 할 것
+  const price = 106000;
   const day = 4; // day 계산해서 넣기
   const pricewithDay = price * day;
   const fees = Math.round(price * 0.07);
   const totalPrice = +price * +day + +fees + 10000;
 
+  function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
   return (
     <div className="w-full px-2.4rem py-10 sticky border rounded-3xl shadow-xl bg-white">
       <div>
         <div className="space-between">
-          <span className="text-2.2rem font-bold">₩{price}원</span>
+          <span className="text-2.2rem font-bold">
+            ₩{numberWithCommas(price)}원
+          </span>
           <span className="text-#717171 text-1.6rem"> / 박</span>
           <div className="inline-flex text-1.4rem ml-36">
             <span className="inline-flex items-center flex-start mr-1 mb-1">
@@ -72,7 +78,7 @@ const Payment = () => {
             <span className="underline">
               ₩{price} × {day}박
             </span>
-            <span>₩{pricewithDay}원</span>
+            <span>₩{numberWithCommas(pricewithDay)}원</span>
           </li>
           <li className="mb-3 flex justify-between">
             <span className="underline">청소비</span>
@@ -80,7 +86,7 @@ const Payment = () => {
           </li>
           <li className="mb-3 flex justify-between">
             <span className="underline">서비스 수수료</span>
-            <span>₩{fees}원</span>
+            <span>₩{numberWithCommas(fees)}원</span>
           </li>
         </ul>
       </div>
@@ -89,7 +95,7 @@ const Payment = () => {
         <span>
           총 합계<span className="underline">(KRW)</span>
         </span>
-        <span>₩{totalPrice}원</span>
+        <span>₩{numberWithCommas(totalPrice)}원</span>
       </div>
     </div>
   );
