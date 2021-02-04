@@ -8,9 +8,7 @@ module.exports = {
     extend: {
       border:['responsive', 'hover', 'focus'],
       borderRadius:['responsive', 'hover', 'focus'],
-      scale: {
-        '3': '0.3' 
-      },
+
       // keyframes: {
       //   slidedown: {
       //     '0%': {
@@ -23,6 +21,9 @@ module.exports = {
       //     },
       //   }
       // },
+      minHeight: {
+        '75rem':'75rem',
+      },
       flexGrow: {
         '2':'2',
       },
@@ -46,6 +47,7 @@ module.exports = {
         '#EBEBEB': '#EBEBEB',
         '#727272': 'rgb(72, 72, 72)',
         '#rgb235': 'rgb(235, 235, 235)',
+        '#008489': '#008489',
       },
       width: {
         '4.8rem': '4.8rem',
@@ -56,11 +58,13 @@ module.exports = {
         '37.2rem': '37.2rem',
         '85rem': '85rem',
       },
+      maxWidth: {
+        '1080':'10.8rem',
+      },
       height:{
         '4.8rem': '4.8rem',
         '70rem': '70rem',
       },
-  
     },
 
     screens: {
