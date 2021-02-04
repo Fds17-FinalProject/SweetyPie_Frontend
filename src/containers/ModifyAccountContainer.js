@@ -10,15 +10,9 @@ const ModifyAccountContainer = () => {
     password: false,
     contact: false,
   });
-
-  // const {
-  //   email, name, birthDate, password, contact,
-  // } = modify;
-
   const onClick = e => {
     e.preventDefault();
     console.log(['TARGET'], e.target.name);
-    // modify ? setModify(!MO) : setModify(true);
     setModify({ ...modify, [e.target.name]: !modify[e.target.name] });
     console.log(['MODIFY'], modify);
     };
