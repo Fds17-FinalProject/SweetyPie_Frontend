@@ -5,7 +5,7 @@ import { FaCheckCircle } from 'react-icons/fa';
 
 const ThingsToKnow = () => {
   return (
-    <div>
+    <div className="pb-56">
       <h1 className="text-2.2rem mb-2.4rem font-bold">알아두어야 할 사항</h1>
       <div className="flex text-1.6rem">
         <div className="w-1/3">

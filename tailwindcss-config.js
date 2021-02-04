@@ -32,6 +32,7 @@ module.exports = {
         '0.8rem': '0.8rem',
         '1.2rem': '1.2rem',
         '1.4rem': '1.4rem',
+        '1.6rem': '1.6rem',
         '2.4rem': '2.4rem',
         '2.6rem': '2.6rem',
         '4.5rem': '4.5rem',
