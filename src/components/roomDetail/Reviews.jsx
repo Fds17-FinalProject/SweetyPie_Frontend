@@ -97,6 +97,7 @@ const Reviews = ({ name, guestPhoto }) => {
           <ReviewProfile name="준철" photo={guestPhoto} />
         </div>
       </div>
+      <div className="mb-20 border-b"></div>
     </div>
   );
 };
