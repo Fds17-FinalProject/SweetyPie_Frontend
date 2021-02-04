@@ -1,43 +1,48 @@
 import React from 'react';
-const img = window.location.origin;
-
-// h-60 = 15rem
-
-// img
-// object-fit: cover;
-// vertical-align: bottom;
-// 사진
 
 const Photos = () => {
+  const img = window.location.origin;
+  const accommodationPictures = [
+    {
+      url:
+        'https://a0.muscache.com/pictures/1c1654ed-0f90-458f-a577-aa4a2e2c1462.jpg',
+    },
+    { url: 'window.location.origin/img/room01.jpg' },
+    { url: 'window.location.origin/img/room02.jpg' },
+    { url: 'window.location.origin/img/room03.jpg' },
+    { url: 'window.location.origin/img/room04.jpg' },
+    { url: 'window.location.origin/img/room05.jpg' },
+  ];
+  console.log(accommodationPictures);
   return (
-    <div className="mt-2.4rem h-38.8rem w-full rounded-3xl flex justify-between overflow-hidden bg-gray-500">
+    <div className="mt-2.4rem h-38.8rem w-full rounded-3xl flex justify-between overflow-hidden">
       <div className="w-56.4rem ">
         <img
-          className="block w-full h-full"
-          src={img + '/img/room01.jpg'}
+          className="block w-full h-full object-cover	"
+          src={accommodationPictures[0].url}
           alt="..."
         />
       </div>
-      <div className="w-27.4rem pl-4">
+      <div className="w-27.4rem ml-0.8rem">
         <img
-          className="block w-full h-19.4rem mb-10"
+          className="block w-full h-19.4rem mb-0.8rem object-cover"
           src={img + '/img/room02.jpg'}
           alt="..."
         />
         <img
-          className="block w-full h-19.4rem"
+          className="block w-full h-19.4rem object-cover"
           src={img + '/img/room04.jpg'}
           alt="..."
         />
       </div>
-      <div className="w-27.4rem pl-4">
+      <div className="w-27.4rem ml-0.8rem">
         <img
-          className="block w-full h-19.4rem mb-10"
+          className="block w-full h-19.4rem mb-0.8rem object-cover"
           src={img + '/img/room03.jpg'}
           alt="..."
         />
         <img
-          className="block w-full h-19.4rem"
+          className="block w-full h-19.4rem object-cover"
           src={img + '/img/room05.jpg'}
           alt="..."
         />
