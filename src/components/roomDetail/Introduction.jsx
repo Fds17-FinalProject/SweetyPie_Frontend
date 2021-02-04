@@ -28,7 +28,7 @@ const Introduction = () => {
         </div>
         <img
           className="inline-block rounded-full w-32 h-32"
-          src={img + '/img/avatar.png'}
+          src={img + '/img/JamJam2.jpg'}
           alt="..."
         />
       </div>
