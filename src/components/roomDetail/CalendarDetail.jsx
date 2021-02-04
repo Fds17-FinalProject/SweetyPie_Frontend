@@ -1,8 +1,9 @@
 import React from 'react';
 import Calendar from '../common/Calender';
-const img = window.location.origin;
 
 const CalendarDetail = () => {
+  const img = window.location.origin;
+
   return (
     <div className="">
       <div>
