@@ -36,12 +36,9 @@ const Host = () => {
               본인 인증 완료
             </span>
           </div>
-          <p className="mb-1.6rem">{hostDesc}</p>
+          <p className="mb-10">{hostDesc}</p>
           <h2 className="font-bold mb-0.8rem">숙박중 게스트와의 교류</h2>
           <p className="">
-            불편사항 및 궁금하신 점은 언제든지 연락주세요. 24시간 대기하며
-            최대한 빠르게 연락드리겠습니다^^
-            <br />
             If you need any help, always feel free to ask us. Please contact us
             in advance if you want to hang out together.
           </p>
