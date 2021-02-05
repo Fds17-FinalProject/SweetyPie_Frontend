@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchTemplate from '../components/Search/SearchTemplate';
+import SearchTemplate from '../components/search/SearchTemplate';
 
 const SearchContainer = () => {
   return <SearchTemplate />;

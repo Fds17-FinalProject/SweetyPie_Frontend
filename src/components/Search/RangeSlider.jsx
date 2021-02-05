@@ -1,8 +1,8 @@
-import React from "react";
-import { Grid, Button, TextField, InputAdornment } from "@material-ui/core";
-import { Slider, Rail, Handles, Tracks, Ticks } from "react-compound-slider";
-import { MuiRail, MuiHandle, MuiTrack, MuiTick } from "./components";
-import BarChart from "./BarChart";
+import React from 'react';
+import { Grid, Button, TextField, InputAdornment } from '@material-ui/core';
+import { Slider, Rail, Handles, Tracks, Ticks } from 'react-compound-slider';
+import { MuiRail, MuiHandle, MuiTrack, MuiTick } from './Components';
+import BarChart from './BarChart';
 
 class RangeSlider extends React.Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class RangeSlider extends React.Component {
       domain: range,
       update: range,
       values: range,
-      inputValues: range
+      inputValues: range,
     };
   }
 
@@ -25,7 +25,7 @@ class RangeSlider extends React.Component {
     return (
       <div className="w-36rem h-6.4rem">
         <Grid item xs={12}>
-          <div style={{ margin: "10%", height: 120, width: "80%" }}>
+          <div style={{ margin: '10%', height: 120, width: '80%' }}>
             <BarChart
               data={this.props.data}
               highlight={update}
@@ -36,8 +36,8 @@ class RangeSlider extends React.Component {
               step={1}
               domain={domain}
               rootStyle={{
-                position: "relative",
-                width: "100%"
+                position: 'relative',
+                width: '100%',
               }}
               onUpdate={update =>
                 this.setState({ update, inputValues: update })
@@ -90,9 +90,13 @@ class RangeSlider extends React.Component {
               container
               alignItems="center"
               justify="space-around"
-              style={{ marginTop: "20px" }}
+              style={{ marginTop: '20px' }}
             >
-              <Grid item xs={4} style={{ textAlign: "right", marginRight: '10px' }}>
+              <Grid
+                item
+                xs={4}
+                style={{ textAlign: 'right', marginRight: '10px' }}
+              >
                 <TextField
                   variant="outlined"
                   label="최저 요금"
@@ -108,12 +112,12 @@ class RangeSlider extends React.Component {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">₩</InputAdornment>
-                    )
+                    ),
                   }}
                 />
               </Grid>
-  
-              <Grid item xs={4} style={{ textAlign: "left" }}>
+
+              <Grid item xs={4} style={{ textAlign: 'left' }}>
                 <TextField
                   variant="outlined"
                   label="최대 요금"
@@ -129,23 +133,21 @@ class RangeSlider extends React.Component {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">₩</InputAdornment>
-                    )
+                    ),
                   }}
                 />
               </Grid>
             </Grid>
             <Button
-              style={{ marginTop: "3%", marginBottom: "3%" }}
+              style={{ marginTop: '3%', marginBottom: '3%' }}
               onClick={() => {
                 this.setState({
                   values: domain,
                   update: domain,
-                  inputValues: domain
+                  inputValues: domain,
                 });
               }}
-            >
-              
-            </Button>
+            ></Button>
           </div>
         </Grid>
       </div>
