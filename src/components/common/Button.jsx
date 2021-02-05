@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 // Button.jsx
->>>>>>> 254186d0f8acff228844b52ac016b61043b37f0a
 const ButtonColor = {
   pink:
     'bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none',
@@ -25,33 +21,6 @@ const Button = ({ color, size, children }) => {
   return <button className={classNames}>{children}</button>;
 };
 export default Button;
-<<<<<<< HEAD
-=======
-// Button.jsx
-const ButtonColor = {
-  pink:
-    'bg-red-500 hover:bg-red-600 text-white font-bold rounded-xl transition-all duration-150 shadow-md focus:outline-none',
-  gray:
-    'bg-gray-400 hover:bg-gray-500 text-white font-bold rounded-xl transition-all duration-150 shadow-md focus:outline-none ',
-  white:
-    'bg-white hover:bg-gray-100 text-grey-700 font-bold rounded-xl transition-colors duration-150 shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-400 border',
-  green:
-    'bg-green-600 hover:bg-green-700 text-white font-bold rounded-xl transition-colors duration-150 shadow-md focus:outline-none ',
-  black:
-    'bg-black hover:bg-gray-600 text-white font-bold rounded-xl transition-colors duration-150 shadow-md focus:outline-none '
-};
-const ButtonSize = {
-  sm: 'h-14 w-28 px-5 m-2 text-xl transform focus:scale-90',
-  md: 'h-16 w-32 px-5 m-2 text-xl transform focus:scale-90',
-  lg: 'w-full h-20 px-6 m-2 text-2xl transform focus:scale-90'
-};
-const Button = ({ color, size, children }) => {
-  const classNames = ButtonColor[color] + ' ' + ButtonSize[size];
-  return <button className={classNames}>{children}</button>;
-};
-export default Button;
-=======
->>>>>>> 254186d0f8acff228844b52ac016b61043b37f0a
 // 아이콘 모음
 // import {
 //   HiChevronRight,
@@ -79,7 +48,3 @@ export default Button;
   </button>
            */
 }
-<<<<<<< HEAD
->>>>>>> 199b1195dac238c635d16e89c4b58431a6ad5a8c
-=======
->>>>>>> 254186d0f8acff228844b52ac016b61043b37f0a
