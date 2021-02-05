@@ -1,6 +1,7 @@
 html {
   height: 100%;
   font-size: 10px;
+  color: #222;
 }
 @import url('https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@latest/nanumbarungothicsubset.css');
 *,
@@ -8,8 +9,9 @@ html {
 *::after {
   box-sizing: border-box;
 }
-*:focus {
-  outline: 2px solid #00b050;
+button:focus,
+input:focus {
+  outline: none !important;
 }
 a {
   color: inherit;
