@@ -2,19 +2,47 @@ html {
   height: 100%;
   font-size: 10px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 199b1195dac238c635d16e89c4b58431a6ad5a8c
 @import url('https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@latest/nanumbarungothicsubset.css');
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+<<<<<<< HEAD
 *:focus {
   outline: 2px solid #00b050;
 }
+=======
+
+>>>>>>> 199b1195dac238c635d16e89c4b58431a6ad5a8c
 a {
   color: inherit;
   text-decoration: none;
 }
+<<<<<<< HEAD
+=======
+
+li {
+  list-style: none;
+}
+
+button {
+  outline: none !important;
+}
+
+input {
+  outline: none !important;
+}
+
+textarea {
+  outline: none !important;
+}
+
+>>>>>>> 199b1195dac238c635d16e89c4b58431a6ad5a8c
 .a11y-hidden,
 legend {
   overflow: hidden;
@@ -28,6 +56,10 @@ legend {
   border: 0;
   padding: 0;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 199b1195dac238c635d16e89c4b58431a6ad5a8c
 .clearfix::after {
   content: '';
   display: block;
