@@ -76,7 +76,7 @@ const Payment = () => {
         <ul className="text-1.6rem">
           <li className="mb-3 flex justify-between">
             <span className="underline">
-              ₩{price} × {day}박
+              ₩{numberWithCommas(price)} × {day}박
             </span>
             <span>₩{numberWithCommas(pricewithDay)}원</span>
           </li>
