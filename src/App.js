@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import RoomDetailPage from './pages/roomDetailPage';
 import TripListPage from './pages/TripListPage';
 import BookingContainer from './containers/BookingContainer';
+import SearchContainer from './containers/SearchContainer';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Route path="/booking" component={BookingContainer} />
       <Route path="/room" component={RoomDetailPage} />
       <Route path="/reservation" component={TripListPage} />
+      <Route path="/accommodations" component={SearchContainer} />
     </BrowserRouter>
   );
 }
