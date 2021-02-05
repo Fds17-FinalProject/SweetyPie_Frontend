@@ -1,4 +1,4 @@
-import SVG from "../../assets/SVG";
+import SVG from "../../assets/svg";
 import { Link } from "react-router-dom";
 
 

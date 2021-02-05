@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid, Button, TextField, InputAdornment } from "@material-ui/core";
 import { Slider, Rail, Handles, Tracks, Ticks } from "react-compound-slider";
-import { MuiRail, MuiHandle, MuiTrack, MuiTick } from "./components";
+import { MuiRail, MuiHandle, MuiTrack, MuiTick } from "./Components";
 import BarChart from "./BarChart";
 
 class RangeSlider extends React.Component {

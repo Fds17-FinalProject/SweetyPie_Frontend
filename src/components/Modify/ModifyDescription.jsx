@@ -1,5 +1,5 @@
 import React from 'react';
-import SVG from '../../assets/SVG';
+import SVG from '../../assets/svg';
 
 const ModifyDescription = () => {
   return (
@@ -7,7 +7,7 @@ const ModifyDescription = () => {
     <div>
       <div className="relative">
         <SVG viewBox="0 0 24 24" width="4rem" height="4rem" color="rgb(96, 182, 181" name="locksub" className="absolute top-0 left-0"/>
-        <SVG viewBox="0 0 24 24" width="4rem" height="4rem" name="lock" className="absolute top-0 left-0"/>
+        <SVG viewBox="0 0 24 24" width="4rem" height="4rem" name="lockcontainer" className="absolute top-0 left-0"/>
       </div>
       <div className="pt-20">
         <h2 className="text-1.8rem font-bold text-#727272 pb-3">수정할 수 있는 세부 정보는 무엇인가요?</h2>

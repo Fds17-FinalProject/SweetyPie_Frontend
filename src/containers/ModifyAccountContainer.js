@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ModifyAccount from '../components/Modify/ModifyAccount';
+import ModifyAccount from '../components/modify/ModifyAccount';
 
 
 const ModifyAccountContainer = () => {
