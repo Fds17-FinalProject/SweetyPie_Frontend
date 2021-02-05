@@ -16,8 +16,8 @@ function App() {
         <Route path="/room" component={RoomDetailPage} />
         <Route path="/reservation" component={TripListPage} />
         <Route path="/accommodations" component={SearchContainer} />
-        <Route exact path="/" component={MainPage} />
         <Route path="/modify" component={ModifyAccountPage} />
+        <Route exact path="/" component={MainPage} />
       </Switch>
     </BrowserRouter>
   );

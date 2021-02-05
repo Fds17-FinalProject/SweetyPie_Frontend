@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import ModifyAccount from '../components/modify/ModifyAccount';
 
-
 const ModifyAccountContainer = () => {
   const [modify, setModify] = useState({
     email: false,
@@ -15,13 +14,8 @@ const ModifyAccountContainer = () => {
     console.log(['TARGET'], e.target.name);
     setModify({ ...modify, [e.target.name]: !modify[e.target.name] });
     console.log(['MODIFY'], modify);
-    };
-  return (
-    <ModifyAccount
-      onClick={onClick}
-      modify={modify}
-    />      
-  );
+  };
+  return <ModifyAccount onClick={onClick} modify={modify} />;
 };
 
 export default ModifyAccountContainer;
