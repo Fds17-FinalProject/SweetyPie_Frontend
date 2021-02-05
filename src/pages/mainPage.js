@@ -1,11 +1,11 @@
-import React from 'react';
+import MainContainer from '../containers/MainContainer';
 
-const mainPage = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+const MainPage = () => {
+  return (
+    <div className="flex-column flex-nowrap relative">
+      <MainContainer />
+    </div>
+  );
 };
 
-export default mainPage;
+export default MainPage;

@@ -63,6 +63,7 @@ module.exports = {
       72: '18rem',
       80: '20rem',
       96: '24rem',
+      '10%':'10%',
     },
     animation: {
       none: 'none',
@@ -229,6 +230,7 @@ module.exports = {
       36: '36px',
       48: '48px',
       64: ['64px', { lineHeight: '1' }],
+      '1rem': '100rem',
     },
     fontWeight: {
       thin: '100',

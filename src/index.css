@@ -38,3 +38,35 @@ legend {
   display: block;
   clear: both;
 }
+@import url('https://cdn.jsdelivr.net/gh/moonspam/NanumBarunGothic@latest/nanumbarungothicsubset.css');
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+button:focus,
+input:focus {
+  outline: none !important;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+.a11y-hidden,
+legend {
+  overflow: hidden;
+  position: absolute;
+  clip: rect(0 0 0 0);
+  /* IE 6,7 */
+  clip: rect(0, 0, 0, 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+}
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
