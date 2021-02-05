@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const BookingRefundRule = () => {
+const BookingRefundRule = ({ checkInDate, checkoutDate }) => {
   return (
     <section className="mt-10">
       <div className="pl-10 border-l-8 border-orange">
