@@ -4,6 +4,8 @@ import { BiMenu, BiSearch } from 'react-icons/bi';
 import SVG from '../../assets/Svg';
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
+import HeaderLogo from './HeaderLogo';
+import HeaderUser from './HeaderUser';
 
 
 const Button = styled.button`
@@ -13,27 +15,6 @@ const Button = styled.button`
     z-index: 1;
   }
 `;
-const slideDown = keyframes`
-  from {
-    transform: scale(0.3, 0.75) translateY(-80px);
-  }
-  to {
-    transform: scale(1, 1) translateY(0px);
-  }
-`;
-
-const slideUp = keyframes`
-  from {
-    transform: scale(1, 1) translateY(0px);
-    opacity: 0.5;
-  }
-  to {
-    transform: scale(0.3, 0.75) translateY(-80px);
-    opacity: 0;
-    visibility: hidden;
-  }
-`;
-
 const HeaderWrap = styled.div`
   animation-duration: 0.2s;
   animation-timing-function: ease-out;
@@ -41,17 +22,6 @@ const HeaderWrap = styled.div`
   animation-name: slideUp;
 `;
 
-
-
-const HeaderLogo = () => {
-  return (
-    <div>
-      <Link to="#">
-        <SVG name="logo" width="102px" color="#fff" height="32px" />
-      </Link>
-    </div>
-  );
-};
 
 const HeaderSearch = () => {
   return (
@@ -91,7 +61,7 @@ const HeaderSearch = () => {
           <div className="relative">
             <b className="block text-1.2rem">인원</b>
             <span className="block text-1.4rem text-#717171">게스트 추가</span>
-            <button className="absolute right-0 -top-2 flex justify-center items-center w-4.8rem h-4.8rem rounded-full bg-airbnb hover:bg-#DE1661 z-10 transition transform hover:ease-in-out">
+            <button className="absolute right-0 -top-2 flex justify-center items-center w-4.8rem h-4.8rem rounded-full bg-airbnb hover:bg-#DE1661 transition transform hover:ease-in-out">
               <BiSearch className=" w-6 h-6 text-white" />
               {/* <div className="hidden">검색</div> */}
             </button>
@@ -102,43 +72,20 @@ const HeaderSearch = () => {
   );
 };
 
-const HeaderUser = () => {
-  return (
-    <div>
-      <nav>
-        <button className="flex bg-white p-2 rounded-3xl w-28	h-14 ">
-          <div className="flex-grow w-full h-full">
-            <BiMenu className="w-full h-full text-gray-600" />
-          </div>
-          <div className="flex-grow w-full h-full">
-            <SVG
-              name="user"
-              width="100%"
-              viewBox="0 0 32 32"
-              height="100%"
-              xmlns="http://www.w3.org/2000/svg"
-            />
-          </div>
-        </button>
-      </nav>
-    </div>
-  );
-};
 
-const Header = () => {
+const Header = ({showModal, visible}) => {
   
   return (
-    <header
-      className="
-      max-w-screen-2xl w-full h-32 px-32 flex items-center justify-between absolute
-      "
-    >
-      <HeaderLogo />
-      <HeaderSearch />
-      <HeaderUser />
+    <header className="max-w-screen-2xl w-full h-32 px-32 absolute	">
+      <div className=" w-full h-32  flex items-center justify-between">
+        <HeaderLogo color="#FFf"/>
+        <HeaderSearch />
+        <HeaderUser showModal={showModal} visible={visible}/>
+      </div>
     </header>
   );
 };
 
 export default Header;
 
+// className="max-w-screen-2xl w-full h-32 px-32 flex items-center justify-between absolute"
