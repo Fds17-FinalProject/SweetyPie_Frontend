@@ -23,6 +23,14 @@ button {
   outline: none !important;
 }
 
+input {
+  outline: none !important;
+}
+
+textarea {
+  outline: none !important;
+}
+
 .a11y-hidden,
 legend {
   overflow: hidden;
