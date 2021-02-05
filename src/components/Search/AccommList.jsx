@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Svg from '../../assets/SVG';
+import SVG from '../../assets/svg';
 import Carousel from '../common/Carousel';
 import {
   HiOutlineHeart,
@@ -40,16 +40,17 @@ const AccommList = () => {
   return (
     <li>
       <div className="h-25rem border-t border-#EBEBEB pt-10 pb-10 relative">
+        <HoverSvg className="absolute top-8 right-8 z-20" onClick={bookMarkClick}>
+                <FiHeart fill={bookMark ? 'rgb(255, 56, 92)' : '#fff'} size={30} stroke={bookMark ? '' : 'black'} className="absolute top-2 left-2" />
+        </HoverSvg>
        
         <Link to="/" className="flex focus:outline-none">
         <Carousel size="Large" img={img}/>
         <div className="relative w-54rem truncate ml-5">
           <span className="text-#717171 text-1.4rem inline-block">
+
               Sokcho-si의 아파트(콘도) 전체
           </span>
-            <HoverSvg className="absolute top-1 right-8" onClick={bookMarkClick}>
-              <FiHeart fill={bookMark ? 'rgb(255, 56, 92)' : '#fff'} size={30} stroke={bookMark ? '' : 'black'} className="absolute top-2 left-2" />
-            </HoverSvg>
             <div className="w-34rem">
               <div className="text-1.8rem w-34rem truncate">
                 블루테라 코랄 #5, 속초더블루마크, 투베이 오션뷰. 속초해수욕장 도보 5분

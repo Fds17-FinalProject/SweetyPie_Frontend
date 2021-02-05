@@ -1,9 +1,9 @@
 import React from 'react';
-import Footer from '../Main/Footer';
+import Footer from '../main/Footer';
 import ModifyInput from './ModifyInput';
 import ModifyContent from './ModifyContent';
-import HeaderLogo from '../Main/HeaderLogo';
-import HeaderUser from '../Main/HeaderUser';
+import HeaderLogo from '../main/HeaderLogo';
+import HeaderUser from '../main/HeaderUser';
 import ModifyDescription from './ModifyDescription';
 
 const res = {
