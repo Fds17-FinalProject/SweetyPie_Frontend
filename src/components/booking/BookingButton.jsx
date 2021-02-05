@@ -1,5 +1,5 @@
 import React from 'react';
-import SVG from '../../assets/Svg';
+import SVG from '../../assets/SVG';
 
 const BookingButton = ({ bookingEdit }) => {
   return (
