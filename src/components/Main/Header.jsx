@@ -1,12 +1,11 @@
 import React from 'react';
 import '../../assets/output.css';
 import { BiMenu, BiSearch } from 'react-icons/bi';
-import SVG from '../../assets/SVG';
+import SVG from '../../assets/svg';
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import HeaderLogo from './HeaderLogo';
 import HeaderUser from './HeaderUser';
-
 
 const Button = styled.button`
   :hover {
@@ -22,12 +21,13 @@ const HeaderWrap = styled.div`
   animation-name: slideUp;
 `;
 
-
 const HeaderSearch = () => {
   return (
     <form>
-      <HeaderWrap className="flex border rounded-full bg-white w-85rem h-28 mt-44
-      ">
+      <HeaderWrap
+        className="flex border rounded-full bg-white w-85rem h-28 mt-44
+      "
+      >
         <Button className="w-27rem text-left">
           <div className="border-r px-14">
             <b className="block text-1.2rem">위치</b>
@@ -72,15 +72,13 @@ const HeaderSearch = () => {
   );
 };
 
-
-const Header = ({showModal, visible}) => {
-  
+const Header = ({ showModal, visible }) => {
   return (
     <header className="max-w-screen-2xl w-full h-32 px-32 absolute	">
       <div className=" w-full h-32  flex items-center justify-between">
-        <HeaderLogo color="#FFf"/>
+        <HeaderLogo color="#FFf" />
         <HeaderSearch />
-        <HeaderUser showModal={showModal} visible={visible}/>
+        <HeaderUser showModal={showModal} visible={visible} />
       </div>
     </header>
   );
