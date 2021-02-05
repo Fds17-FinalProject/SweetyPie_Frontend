@@ -7,20 +7,8 @@ module.exports = {
   theme: {
     extend: {
       border:['responsive', 'hover', 'focus'],
-      borderRadius:['responsive', 'hover', 'focus'],
-
-      // keyframes: {
-      //   slidedown: {
-      //     '0%': {
-      //       transform: 'scale-3 scale-75',
-      //       transition: 'translateY(-8rem)',
-      //     '100%': {
-      //       transform: 'scale-75',
-      //       transition: 'translateY(-8rem)',
-      //     }
-      //     },
-      //   }
-      // },
+      borderRadius: ['responsive', 'hover', 'focus'],
+      
       minHeight: {
         '75rem':'75rem',
       },
