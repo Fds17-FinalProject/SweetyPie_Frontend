@@ -1,12 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
-import './assets/output.css'
+import { BrowserRouter, Route } from 'react-router-dom';
+import './assets/output.css';
+import RoomDetailPage from './pages/roomDetailPage';
+import TripListPage from './pages/TripListPage';
+import BookingContainer from './containers/BookingContainer';
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <BrowserRouter>
+      <Route path="/booking" component={BookingContainer} />
+      <Route path="/room" component={RoomDetailPage} />
+      <Route path="/reservation" component={TripListPage} />
+    </BrowserRouter>
   );
 }
 

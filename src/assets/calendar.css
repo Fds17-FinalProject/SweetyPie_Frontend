@@ -1,0 +1,210 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 오른쪽 구석의 화살표를 안보이게 한다. */
+.DayPickerKeyboardShortcuts_buttonReset {
+  display: none;
+}
+
+/* 달력 각 칸의 기본 스타일. */
+.CalendarDay__default {
+  border: none;
+  border-radius: 50%;
+  vertical-align: middle;
+  outline: none;
+}
+
+/* 달력 각 칸에 호버가 되었을 때 스타일 */
+.CalendarDay__default:hover {
+  background: transparent;
+  border: none;
+  color: black;
+  box-shadow: inset 0 0 0 1px black;
+}
+
+/* 체크인 체크아웃이 선택되었을 때 그 사의 날짜들에 대한 스타일 */
+.CalendarDay__selected_span {
+  background-color: #f7f7f7;
+  border: none;
+  color: black;
+}
+
+/* 체크인 체크아웃이 선택되었을 때 그 사의 날짜들에 호버 혹은 클릭했을 시 스타일 */
+.CalendarDay__selected_span:active,
+.CalendarDay__selected_span:hover {
+  color: black;
+  background-color: #f7f7f7;
+}
+
+/* 선택된 체크인 체크아웃 날짜에 대한 스타일 */
+.CalendarDay__selected,
+.CalendarDay__selected:active,
+.CalendarDay__selected:hover {
+  background: black;
+  border: none;
+  color: white;
+}
+
+/* 블록된 날짜에 대한 스타일링 */
+.CalendarDay__blocked_calendar,
+.CalendarDay__blocked_calendar:active,
+.CalendarDay__blocked_calendar:hover {
+  background: white;
+  border: none;
+  color: #d2d2d2;
+  box-shadow: none;
+  text-decoration: line-through;
+}
+
+/* 선택될 범위에 대한 스타일링 */
+.CalendarDay__hovered_span,
+.CalendarDay__hovered_span:hover {
+  color: black;
+  background-color: #f7f7f7;
+  border: none;
+}
+
+/* 요일 표시 부분에 대한 스타일. */
+.CalendarMonth_caption {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+/* 월 이전 다음 버튼 */
+.DayPickerNavigation_button__default {
+  /* border: none; */
+}
+
+/* 전체 래퍼 */
+.DayPicker__withBorder {
+  /* box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px; */
+  /* border-radius: 32px; */
+  box-shadow: none;
+}
+
+/* 트랜지션 박스 */
+.DayPicker_transitionContainer__horizontal {
+  /* box-shadow: rgba(0, 0, 0, 0.2) 0px 6px 20px; */
+  /* border-radius: 32px; */
+  background-color: #fff;
+}
+
+/* 달력 몸체 */
+.CalendarMonth_1:first-child {
+  /* margin-left: -20px;
+  margin-right: 60px; */
+}
+
+.CalendarMonthGrid {
+  /* background: none; */
+}
+
+.CalendarMonthGrid__horizontal {
+  /* top: 9px; */
+}
+
+/* 화살표 svg 제거 */
+svg:not(:root) {
+  /* display: none; */
+}
+
+/* 비활성화 된 날짜 오버라이딩 */
+.CalendarDay__blocked_out_of_range {
+  color: #cacccd;
+}
+
+/* 요일 표시 */
+.DayPicker_weekHeader {
+  color: #717171;
+}
+
+/* 날짜 입력창 */
+.DateRangePicker {
+  margin-top: 100px;
+  margin-left: 100px;
+}
+
+/* 날짜 입력창 래퍼 */
+.DateRangePickerInput {
+  padding-right: 70px;
+}
+
+/* 각 입력창 래퍼 */
+.DateInput {
+  border-right: 1px solid #ccc;
+  margin-left: 10px;
+  width: 150px;
+}
+
+/* 실제 입력창 */
+.DateInput_input {
+  font-size: 10px;
+  box-sizing: border-box;
+}
+
+.DateInput_input:hover {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #ccc;
+}
+
+/* 실제 입력창 포커스 */
+.DateInput_input__focused {
+  border-bottom: none;
+}
+
+/* 취소 버튼 */
+.DateRangePickerInput_clearDates {
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  padding: 10px;
+  margin: 0;
+  margin-right: 10px;
+}
+
+/* 각 입력창 아래 화살표 svg */
+.DateInput_fangStroke {
+  display: none;
+}
+
+/* 체크인 입력창 체크아웃 입력창 사이 화살표 svg */
+.DateRangePickerInput_arrow_svg {
+  display: none;
+}
+
+/* 달력 위 화살표 svg */
+.DateInput_fangShape {
+  display: none;
+}
+
+/* 날짜 선택 범위 기본 border-radius 설정 */
+.CalendarDay__default {
+  /* border-radius: 0; */
+}
+
+.CalendarDay__selected,
+.CalendarDay__selected:active,
+.CalendarDay__selected:hover {
+  border-radius: 50%;
+}
+
+/* 이전, 다음달 이동 버튼  */
+.DayPickerNavigation_button__default {
+  border: none;
+  outline: none;
+}
+
+.DayPickerNavigation_button__default:focus,
+.DayPickerNavigation_button__default:hover {
+  border: none;
+  border-radius: 50%;
+}
+
+/* 이전, 다음달 이동 버튼 위치 커스텀 */
+.DayPickerNavigation_button__horizontalDefault {
+  top: 22px;
+}
