@@ -10,7 +10,7 @@ const Description = () => {
 
   return (
     <div className="text-1.6rem">
-      <pre>{accommodationDesc}</pre>
+      {accommodationDesc}
       <div className="my-20 border-b"></div>
     </div>
   );
