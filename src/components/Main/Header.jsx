@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../assets/output.css';
 import { BiMenu, BiSearch } from 'react-icons/bi';
-import SVG from '../../assets/Svg';
+import SVG from '../../assets/SVG';
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import HeaderLogo from './HeaderLogo';

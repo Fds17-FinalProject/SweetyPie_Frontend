@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Search = () => {
+const Footer = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const Search = () => {
     );
 };
 
-export default Search;
+export default Footer;

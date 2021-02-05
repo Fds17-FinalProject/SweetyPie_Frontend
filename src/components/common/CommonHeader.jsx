@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
 import '../../assets/output.css';
-import SVG from '../../assets/Svg';
+import SVG from '../../assets/SVG';
 import {BiSearch} from "react-icons/bi"
 import HeaderLogo from '../Main/HeaderLogo';
 import HeaderUser from '../Main/HeaderUser';
-
 export const HeaderSearch = () => {
   return (
     <button className="flex rounded-full p-4 border border-gray-300 w-32rem
@@ -16,9 +15,7 @@ export const HeaderSearch = () => {
     </button>
   );
 };
-
 const CommonHeader = ({ showModal, visible }) => {
-
   // const [isActive, setIsActive] = useState(false);
   // let className = "max-w-screen-2xl fixed z-10";
   // if (isActive) {
@@ -29,8 +26,6 @@ const CommonHeader = ({ showModal, visible }) => {
   //   className = "max-w-screen-2xl fixed z-10"
   //   setIsActive(false);
   // };
-
-  
   return (
     <header className="max-w-screen-2xl fixed z-10 hidden">
       <div className="bg-white w-full px-32 h-32 flex items-center justify-between	fixed z-10">
@@ -41,7 +36,5 @@ const CommonHeader = ({ showModal, visible }) => {
     </header>
   );
 };
-
 // className="max-w-screen-2xl px-32 bg-white w-full h-32 flex items-center justify-between	fixed z-10"
-
 export default CommonHeader;
