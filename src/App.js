@@ -5,7 +5,7 @@ import RoomDetailPage from './pages/RoomDetailPage';
 import TripListPage from './pages/TripListPage';
 import BookingContainer from './containers/BookingContainer';
 import SearchContainer from './containers/SearchContainer';
-import MainPage from './pages/mainPage';
+import MainPage from './pages/MainPage';
 import ModifyAccountPage from './pages/ModifyAccountPage';
 
 function App() {
@@ -16,8 +16,8 @@ function App() {
         <Route path="/room" component={RoomDetailPage} />
         <Route path="/reservation" component={TripListPage} />
         <Route path="/accommodations" component={SearchContainer} />
-        <Route exact path="/" component={MainPage} />
         <Route path="/modify" component={ModifyAccountPage} />
+        <Route exact path="/" component={MainPage} />
       </Switch>
     </BrowserRouter>
   );

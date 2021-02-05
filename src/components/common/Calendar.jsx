@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import {
   DayPickerRangeControllerWrapper,
-  DayPickerRangeController
+  DayPickerRangeController,
 } from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import 'moment/locale/ko';
 import moment from 'moment';
 import '../../assets/calendar.css';
-import SVG from '../../assets/SVG';
+import SVG from '../../assets/svg';
 
 const Calendar = () => {
   // 체크인 날짜와 체크아웃 날짜의 모멘트 객체가 각각 상태로 관리된다.
   const [dateRange, setdateRange] = useState({
     startDate: null,
-    endDate: null
+    endDate: null,
   });
   const [focus, setFocus] = useState('startDate');
 
@@ -32,7 +32,7 @@ const Calendar = () => {
 
   const onClick = () => {
     console.log(
-      `${startDate.year()}-${startDate.months() + 1}-${startDate.date()}`
+      `${startDate.year()}-${startDate.months() + 1}-${startDate.date()}`,
     );
     console.log(`${endDate.year()}-${endDate.months() + 1}-${endDate.date()}`);
     console.log(todayYear, todayMonth, todayDate);

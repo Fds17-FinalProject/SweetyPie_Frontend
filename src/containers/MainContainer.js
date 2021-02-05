@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import Header from '../components/Main/Header';
+import Header from '../components/main/Header';
 import CommonHeader from '../components/common/CommonHeader';
-import Main from '../components/Main/Main';
-import Footer from '../components/Main/Footer';
+import Main from '../components/main/Main';
+import Footer from '../components/main/Footer';
 import Modal from '../components/common/Modal';
-import UserMenu from '../components/Main/UserMenu';
+import UserMenu from '../components/main/UserMenu';
 
 const MainContainer = () => {
   const [visible, setVisible] = useState(false);
