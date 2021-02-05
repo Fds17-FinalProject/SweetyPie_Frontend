@@ -36,3 +36,72 @@
     transform: rotate(360deg);
   }
 }
+
+button {
+  outline: none !important;
+}
+
+/* pagination library css custom */
+.pagination {
+  margin: 15px auto;
+  display: flex;
+  list-style: none;
+  outline: none;
+}
+.pagination > .previous > a {
+}
+
+.pagination > .active > a {
+  background-color: #47ccde;
+  color: #fff;
+}
+.pagination > li > a {
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: #47ccde;
+  border-color: #47ccde;
+  outline: none;
+}
+.pagination > li > a,
+.pagination > li > span {
+  color: #47ccde;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span,
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-radius: unset;
+}
+
+/* charge chart library css custom */
+.MuiOutlinedInput-adornedStart {
+  width: 130px;
+  height: 50px;
+}
+
+.MuiInputBase-input {
+  font-size: 16px;
+}
+
+.MuiInputLabel-outlined.MuiInputLabel-shrink {
+  font-size: 16px !important;
+  margin-top: 10px;
+}
+.MuiTypography-colorTextSecondary {
+  font-size: 16px;
+  color: #222222;
+}
+.MuiInputBase-root {
+  font-size: 16px;
+}
+canvas {
+  height: 70px !important;
+}
