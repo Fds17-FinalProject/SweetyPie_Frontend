@@ -1,5 +1,5 @@
 import React from 'react';
-import Calendar from '../common/Calender';
+import Calendar from '../common/Calendar';
 
 const CalendarDetail = () => {
   const img = window.location.origin;

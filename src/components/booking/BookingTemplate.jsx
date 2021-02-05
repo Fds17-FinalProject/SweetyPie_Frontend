@@ -40,9 +40,9 @@ const BookingTemplate = ({ visible, showModal, hideModal, modalElement }) => {
               checkoutDate="2021.3.21"
             />
             <BookingBorder />
-            <BookingButton bookingEdit />
+            <BookingButton />
           </div>
-          <BookingDetailTemplate />
+          <BookingDetailTemplate bookingEdit />
         </div>
       </main>
     </>

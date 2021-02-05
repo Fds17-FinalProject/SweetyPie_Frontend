@@ -1,13 +1,12 @@
 import './App.css';
 import './assets/output.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import RoomDetailPage from './pages/roomDetailPage';
+import RoomDetailPage from './pages/RoomDetailPage';
 import TripListPage from './pages/TripListPage';
 import BookingContainer from './containers/BookingContainer';
 import SearchContainer from './containers/SearchContainer';
 import MainPage from './pages/mainPage';
 import ModifyAccountPage from './pages/ModifyAccountPage';
-
 
 function App() {
   return (
@@ -21,8 +20,7 @@ function App() {
         <Route path="/modify" component={ModifyAccountPage} />
       </Switch>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App;
-
