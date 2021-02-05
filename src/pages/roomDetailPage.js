@@ -1,11 +1,12 @@
 import React from 'react';
+import RoomDetailContainer from '../containers/RoomDetailContainer';
 
-const roomDetailPage = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+const RoomDetailPage = () => {
+  return (
+    <div>
+      <RoomDetailContainer />
+    </div>
+  );
 };
 
-export default roomDetailPage;
+export default RoomDetailPage;

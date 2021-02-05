@@ -2,7 +2,11 @@
   "printWidth": 80,
   "tabWidth": 2,
   "singleQuote": true,
+<<<<<<< HEAD
   "trailingComma": "none",
+=======
+  "trailingComma": "all",
+>>>>>>> 254186d0f8acff228844b52ac016b61043b37f0a
   "bracketSpacing": true,
   "semi": true,
   "useTabs": false,
