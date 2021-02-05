@@ -25,8 +25,12 @@ const svg = {
   prev:
     'm13.7 16.29a1 1 0 1 1 -1.42 1.41l-8-8a1 1 0 0 1 0-1.41l8-8a1 1 0 1 1 1.42 1.41l-7.29 7.29z',
   next:
-    'm4.29 1.71a1 1 0 1 1 1.42-1.41l8 8a1 1 0 0 1 0 1.41l-8 8a1 1 0 1 1 -1.42-1.41l7.29-7.29z'
+    'm4.29 1.71a1 1 0 1 1 1.42-1.41l8 8a1 1 0 0 1 0 1.41l-8 8a1 1 0 1 1 -1.42-1.41l7.29-7.29z',
+  heart:
+    'm16 28c7-4.733 14-10 14-17 0-1.792-.683-3.583-2.05-4.95-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05l-2.051 2.051-2.05-2.051c-1.367-1.366-3.158-2.05-4.95-2.05-1.791 0-3.583.684-4.949 2.05-1.367 1.367-2.051 3.158-2.051 4.95 0 7 7 12.267 14 17z',
+  check: 'm4 16.5 8 8 16-16',
 };
+
 const SVG = props => {
   return (
     <svg
@@ -35,11 +39,11 @@ const SVG = props => {
       fill={props.color}
       y="0px"
       x="0px"
-      width={props.width ? props.width : 'auto'}
-      height={props.height ? props.height : 'auto'}
       xmlns={props.xmlns}
       stroke={props.stroke}
       strokeWidth={props.strokeWidth}
+      width={props.width}
+      height={props.height}
     >
       <path d={svg[props.name]} />
     </svg>
