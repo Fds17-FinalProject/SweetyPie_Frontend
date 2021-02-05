@@ -14,7 +14,7 @@ const Host = () => {
       <div className="flex mb-2.4rem">
         <img
           className="inline-block rounded-full w-28 h-28 mr-10"
-          src={img + '/img/JamJam2.jpg'}
+          src={img + '/img/JamJam.jpg'}
           alt="..."
         />
         <div className="">
