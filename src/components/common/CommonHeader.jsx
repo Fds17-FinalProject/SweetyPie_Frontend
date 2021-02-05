@@ -1,29 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../assets/output.css';
-import { BiMenu } from "react-icons/bi";
 import SVG from '../../assets/Svg';
-import { Link } from 'react-router-dom';
 import {BiSearch} from "react-icons/bi"
-import styled from 'styled-components';
+import HeaderLogo from '../Main/HeaderLogo';
+import HeaderUser from '../Main/HeaderUser';
 
-const Button = styled.button`
-  /* width:32rem; */
-  /* border:1px solid rgb(118, 118, 118); */
-`;
-
-
-
-const HeaderLogo = () => {
-  return (
-    <div>
-        <Link to="#">
-        <SVG name="logo" width="102px" color="#FF385C" height="32px"/>
-        </Link>
-      </div>
-  )
-}
-
-const HeaderSearch = () => {
+export const HeaderSearch = () => {
   return (
     <button className="flex rounded-full p-4 border border-gray-300 w-32rem
     ">
@@ -32,40 +14,34 @@ const HeaderSearch = () => {
         <BiSearch className="w-6 h-6 text-white"/>
       </div>
     </button>
-  )
-}
+  );
+};
 
-const HeaderUser = () => {
+const CommonHeader = ({ showModal, visible }) => {
+
+  // const [isActive, setIsActive] = useState(false);
+  // let className = "max-w-screen-2xl fixed z-10";
+  // if (isActive) {
+  //   className += 'active'
+  // setIsActive(true);
+  // console.log(isActive);
+  // } else {
+  //   className = "max-w-screen-2xl fixed z-10"
+  //   setIsActive(false);
+  // };
+
+  
   return (
-    <div>
-        <nav>
-        <button className="flex bg-white p-2 border-gray-300 border rounded-full w-28	h-14 ">
-          <div className="flex-grow w-full h-full">
-            <BiMenu className="w-full h-full text-gray-500"/>
-          </div>
-          <div className="flex-grow w-full h-full">
-            <SVG className="bg-gray-300" name="user" width="100%" viewBox="0 0 32 32" height="100%" xmlns="http://www.w3.org/2000/svg"/>
-          </div>
-        </button>
-        </nav>
+    <header className="max-w-screen-2xl fixed z-10 hidden">
+      <div className="bg-white w-full px-32 h-32 flex items-center justify-between	fixed z-10">
+        <HeaderLogo color="#FF385C"/>
+        <HeaderSearch />
+        <HeaderUser showModal={showModal} visible={visible} />
       </div>
-  )
-}
-
-
-const CommonHeader = () => {
-  return (
-    <header
-      className="
-      max-w-screen-2xl px-32 bg-white w-full h-32 flex items-center justify-between	fixed
-      ">
-      <HeaderLogo />
-      <HeaderSearch />
-      <HeaderUser />
     </header>
-  )
-}
+  );
+};
 
-
+// className="max-w-screen-2xl px-32 bg-white w-full h-32 flex items-center justify-between	fixed z-10"
 
 export default CommonHeader;
