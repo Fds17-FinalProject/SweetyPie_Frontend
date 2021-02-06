@@ -1,21 +1,47 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from '../components/main/Header';
 import CommonHeader from '../components/common/CommonHeader';
 import Main from '../components/main/Main';
 import Footer from '../components/main/Footer';
 import Modal from '../components/common/Modal';
 import UserMenu from '../components/main/UserMenu';
+import AuthModal from '../components/main/AuthModal';
 
 const MainContainer = () => {
-  const [visible, setVisible] = useState(false);
+  const [ visible, setVisible ] = useState(false);
+  const [authVisible, setAuthVisible] = useState({
+    state: false,
+    type: null,
+  });
   const modalElement = useRef(null);
   const showModal = () => {
     setVisible(true);
   };
+  const showAuthModal = ( auth ) => {
+    console.log(auth);
+    if (auth === 'login') {
+      setVisible(false);
+      setAuthVisible({
+        ...authVisible,
+        state: true,
+        type: 'login',
+      });
+    }
+    if (auth === 'register') {
+      setVisible(false);
+      setAuthVisible({
+        ...authVisible,
+        state: true,
+        type: 'register',
+      });
+    }
+  };
 
-  const hideModal = modalElement => {
-    if (modalElement.target.id !== '1') return;
-    setVisible(false);
+  const hideModal = ({ target }) => {
+    if (target.dataset.name) {
+      setVisible(false);
+      setAuthVisible(false);
+    }
   };
 
   const [scrollY, setScrollY] = useState(0);
@@ -36,18 +62,25 @@ const MainContainer = () => {
     <div className="flex-column flex-nowrap relative">
       {visible && (
         <Modal>
-          <UserMenu hideModal={hideModal} />
+          <UserMenu hideModal={hideModal} showAuthModal={showAuthModal} authVisible={authVisible}/>
+        </Modal>
+      )}
+      {authVisible.state && (
+        <Modal>
+          <AuthModal hideModal={hideModal} authVisible={authVisible}/>
         </Modal>
       )}
       <Header
         showModal={showModal}
         modalElement={modalElement}
         visible={visible}
+        showAuthModal={showAuthModal}
       />
       <CommonHeader
         showModal={showModal}
         modalElement={modalElement}
         visible={visible}
+        showAuthModal={showAuthModal}
       />
       <Main />
       <Footer />
