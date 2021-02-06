@@ -2,8 +2,6 @@ import React from 'react';
 import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
 const AuthModal = ({ hideModal, authVisible }) => {
-  console.log(authVisible);
-  console.log(authVisible.state);
   
   return (
     <div
