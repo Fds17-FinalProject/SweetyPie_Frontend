@@ -4,6 +4,11 @@
 
 <br>
 
+# Demo
+- Click here to see our website.
+- Click here to see our demo video.
+
+
 # 프론트엔드 핵심 목표
 
 
@@ -39,11 +44,6 @@
 -
 
 <br>
-
-# Demo
-- Click here to see our website.
-- Click here to see our demo video.
-
 
 # 개발기간
 - 기획 : 21.01.25 - 21.01.29 (1주)
