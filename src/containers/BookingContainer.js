@@ -1,27 +1,50 @@
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import BookingTemplate from '../components/booking/BookingTemplate';
 
 const BookingContainer = () => {
   // 모달창 상태
   const [visible, setVisible] = useState(false);
-  const modalElement = useRef(null);
+  const [visibleGuest, setVisibleGuest] = useState(false);
 
-  // 모달 열기
+  // 날짜 모달 열기
   const showModal = () => {
     setVisible(true);
   };
 
-  // 모달 숨기기
-  const hideModal = modalElement => {
-    if (modalElement.target.id !== '1') return;
-    setVisible(false);
+  // 날짜 모달 숨기기
+  const hideModal = ({ target }) => {
+    if (target.dataset.name) {
+      setVisible(false);
+    }
   };
+
+  // 게스트 모달 열기
+  const showGuestModal = () => {
+    setVisibleGuest(true);
+  };
+
+  // 게스트 모달 닫기
+  const hideGuestModal = ({ target }) => {
+    if (target.dataset.name) {
+      setVisibleGuest(false);
+    }
+  };
+
+  const [date, setDate] = useState({
+    checkinDate: null,
+    checkoutDate: null,
+  });
+
   return (
     <BookingTemplate
       visible={visible}
+      visibleGuest={visibleGuest}
       showModal={showModal}
       hideModal={hideModal}
-      modalElement={modalElement}
+      showGuestModal={showGuestModal}
+      hideGuestModal={hideGuestModal}
+      date={date}
+      setDate={setDate}
     />
   );
 };
