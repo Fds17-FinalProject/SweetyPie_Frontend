@@ -4,8 +4,15 @@
 
 <br>
 
+# Demo
+- Click here to see our website.
+- Click here to see our demo video.
+
+
 # 프론트엔드 핵심 목표
 
+
+<br>
 
 # 서비스 기능
 ### 1. 메인 페이지
@@ -40,15 +47,9 @@
 
 <br>
 
-# Demo
-- [Click]() here to see our website.
-- [Click]() here to see our demo video.
-
-
 # 개발기간
 - 기획 : 21.01.25 - 21.01.29 (1주)
 - 프로젝트 : 21.02.01 - 21.02.26 (4주)
-
 
 # 기술스택 & 툴
 ### Front-End
