@@ -2,23 +2,38 @@ import React, { useState } from 'react';
 import BookingDetailTemplate from './BookingDetailTemplate';
 import Modal from '../common/Modal';
 import BookingTitle from './BookingTitle';
-
 import BookingBanner from './BookingBanner';
 import BookingInfo from './BookingInfo';
 import BookingRefundRule from './BookingRefundRule';
 import BookingButton from './BookingButton';
 import BookingBorder from './BookingBorder';
 import BookingDateEditModal from './BookingDateEditModal';
+import BookingGuestEditModal from './BookingGuestEditModal';
 
-const BookingTemplate = ({ visible, showModal, hideModal, modalElement }) => {
+const BookingTemplate = ({
+  visible,
+  visibleGuest,
+  showModal,
+  hideModal,
+  showGuestModal,
+  hideGuestModal,
+  date,
+  setDate,
+}) => {
   return (
     <>
       {visible && (
         <Modal>
           <BookingDateEditModal
             hideModal={hideModal}
-            modalElement={modalElement}
+            date={date}
+            setDate={setDate}
           />
+        </Modal>
+      )}
+      {visibleGuest && (
+        <Modal>
+          <BookingGuestEditModal hideGuestModal={hideGuestModal} />
         </Modal>
       )}
       <BookingTitle bookingEdit />
@@ -33,6 +48,7 @@ const BookingTemplate = ({ visible, showModal, hideModal, modalElement }) => {
               guestNum="1"
               bookingEdit
               showModal={showModal}
+              showGuestModal={showGuestModal}
             />
             <BookingBorder />
             <BookingRefundRule
@@ -40,9 +56,9 @@ const BookingTemplate = ({ visible, showModal, hideModal, modalElement }) => {
               checkoutDate="2021.3.21"
             />
             <BookingBorder />
-            <BookingButton />
+            <BookingButton bookingEdit />
           </div>
-          <BookingDetailTemplate bookingEdit />
+          <BookingDetailTemplate />
         </div>
       </main>
     </>

@@ -5,7 +5,8 @@ const BookingInfo = ({
   checkoutDate,
   guestNum,
   bookingEdit,
-  showModal
+  showModal,
+  showGuestModal,
 }) => {
   return (
     <section className="mt-10">
@@ -29,7 +30,10 @@ const BookingInfo = ({
       <div className="mt-10 relative">
         <p className="text-1.6rem font-semibold">게스트</p>
         {bookingEdit && (
-          <button className="text-1.6rem font-semibold underline absolute right-0 top-0">
+          <button
+            className="text-1.6rem font-semibold underline absolute right-0 top-0"
+            onClick={showGuestModal}
+          >
             수정
           </button>
         )}
