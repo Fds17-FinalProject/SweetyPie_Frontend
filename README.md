@@ -12,6 +12,8 @@
 # 프론트엔드 핵심 목표
 
 
+<br>
+
 # 서비스 기능
 ### 1. 메인 페이지
 - 
@@ -67,6 +69,8 @@
 
 ### 개발 프로세스
 - Agile - Scrum
+
+<br>
 
 # 구성원
 [Frontend](https://github.com/Fds17-FinalProject/SweetyPie_Frontend): 김동찬, 김재민, 이한슬, 임영서 <br>
