@@ -1,6 +1,9 @@
 import React from 'react';
-import {FcGoogle} from 'react-icons/fc';
-const LoginModal = ({ hideModal }) => {
+import { FcGoogle } from 'react-icons/fc';
+
+
+const LoginModal = ({ hideModal, changeModal }) => {
+
   return (
     <>
           <h1 className="a11y-hidden">로그인 팝업창</h1>
@@ -50,7 +53,7 @@ const LoginModal = ({ hideModal }) => {
 
           <div className="mt-8 mb-2">
             <span>이미 에어비앤비 계정이 있나요?</span>
-            <button className="text-#008489 ml-0.8rem border-b border-#008489">회원가입</button>
+            <button className="text-#008489 ml-0.8rem border-b border-#008489" onClick={() => changeModal('register')}>회원가입</button>
           </div>
         </>
   );

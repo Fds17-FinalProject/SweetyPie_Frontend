@@ -1,7 +1,8 @@
 import React from 'react';
 import {FcGoogle} from 'react-icons/fc';
 import SVG from '../../assets/svg';
-const RegisterModal = ({ hideModal }) => {
+import { Link } from 'react-router-dom';
+const RegisterModal = ({ hideModal, changeModal }) => {
   return (
     <>
       <h1 className="a11y-hidden">회원가입 팝업창</h1>
@@ -20,7 +21,7 @@ const RegisterModal = ({ hideModal }) => {
       </button>
       <button className="flex items-center rounded-lg	border border-#e5e7eb py-4 px-1.2rem hover:border-#727272">
         <FcGoogle className="w-2.4rem h-2rem"/>
-        <span className="flex-grow">구글 계정으로 회원가입</span>
+        <Link to="#" className="flex-grow">구글 계정으로 회원가입</Link>
       </button>
 
       <div className="h-5rem flex justify-center items-center relative">
@@ -35,9 +36,9 @@ const RegisterModal = ({ hideModal }) => {
 
       <div className="mt-8 mb-2">
         <span>이미 에어비앤비 계정이 있나요?</span>
-        <button className="text-#008489 ml-0.8rem border-b border-#008489">로그인</button>
+        <button className="text-#008489 ml-0.8rem border-b border-#008489" onClick={() => changeModal('login')}>로그인</button>
       </div>
-  </>
+    </>
   );
 };
 

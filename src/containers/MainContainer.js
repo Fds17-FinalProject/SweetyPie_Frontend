@@ -11,13 +11,13 @@ const MainContainer = () => {
   // 유저 메뉴 모달 초기 상태
   const [visible, setVisible] = useState(false);
   // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
-  // 하나의 모달 컴포넌트로 두개의 모달을 넣기 위해서 객체 상태로 정의
+  // 하나의 모달 회원가입 폼 모달 띄우는것 때문에 생각정리안된게있어서 일단 객체 상태로 냅둠!
   const [authVisible, setAuthVisible] = useState({
-    state: false,
     // 'login' or 'register'
     type: null,
   });
-
+  console.log('authvisibl은 뭐가 나와?',authVisible);
+  
   const modalElement = useRef(null);
   // 유저 메뉴 모달 open
   const showModal = () => {
@@ -25,26 +25,47 @@ const MainContainer = () => {
   };
   // 유저 메뉴 -> 로그인 or 회원가입 눌렀을 시 authVisible의 타입에 따라 모달 Open 
   // userMenu -> menuList 컴포넌트에서 auth를 인자로 받아서 type이 로그인인지 회원가입인지 구분
-  const showAuthModal = ( auth ) => {
+  const showAuthModal = (auth) => {    
     if (auth === 'login') {
       // 로그인 or 회원가입 누를 시 유저메뉴 close 
       setVisible(false);
       // type에 들어온 조건 별로 모달 Open
       setAuthVisible({
         ...authVisible,
-        state: true,
         type: 'login',
       });
     }
-    if (auth === 'register') {
+    else if (auth === 'register') {
       setVisible(false);
       setAuthVisible({
         ...authVisible,
-        state: true,
         type: 'register',
       });
     }
   };
+
+  // 회원가입 모달에서 아이디가 있으세요? -> 로그인 버튼
+  // 온클릭 이벤트 만들어서 type:'login'
+  // 로그인 모달에서 아이디가 없으세요? -> 회원가입 버튼
+  // type: 'register'
+  const changeModal = (auth) => {
+    if (auth === 'register') {
+      setAuthVisible({
+        ...authVisible,
+        type: 'login',
+      });
+      showAuthModal(auth);
+    }
+    else if (auth === 'login') {
+      setAuthVisible({
+        ...authVisible,
+        type: 'register',
+      });
+      showAuthModal(auth);
+    }
+  };
+
+
   // 모달 close
   const hideModal = ({ target }) => {
     if (target.dataset.name) {
@@ -59,6 +80,16 @@ const MainContainer = () => {
       setScrollY(window.pageYOffset);
       // scrollY === 30 ?
     }
+    // 모달창 뜨웠을 때 스크롤 정지
+    // const stopScroll = e => {
+    //   console.log('얍', authVisible.state);
+    //   if (authVisible.state) {
+    //     e.preventDefault();
+    //   }
+    // }
+    // window.addEventListener('touchmove', stopScroll, {
+    //   passive: false
+    // });
     (function watchScroll() {
       window.addEventListener('scroll', logit);
     })();
@@ -73,13 +104,18 @@ const MainContainer = () => {
       {/* UserMenu -> MenuList에 showAuthModal, authVisible props 전달 */}
       {visible && (
         <Modal>
-          <UserMenu hideModal={hideModal} showAuthModal={showAuthModal} authVisible={authVisible}/>
+          <UserMenu hideModal={hideModal} showAuthModal={showAuthModal} authVisible={authVisible} />
         </Modal>
       )}
       {/* 로그인 회원가입 Modal 렌더링 */}
-      {authVisible.state && (
+      {authVisible.type === 'login' && (
         <Modal>
-          <AuthModal hideModal={hideModal} authVisible={authVisible}/>
+          <AuthModal hideModal={hideModal} authVisible={authVisible} changeModal={changeModal}/>
+        </Modal>
+      )}
+      {authVisible.type === 'register' && (
+        <Modal>
+          <AuthModal hideModal={hideModal} authVisible={authVisible} changeModal={changeModal}/>
         </Modal>
       )}
       <Header
