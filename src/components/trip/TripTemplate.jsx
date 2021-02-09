@@ -8,9 +8,8 @@ const TripTemplate = ({
   visible,
   showModal,
   hideModal,
-  modalElement,
   ratings,
-  changeRating
+  changeRating,
 }) => {
   return (
     <div className="max-w-screen-2xl mt-3.6rem px-32 pb-6.5rem">
@@ -18,7 +17,6 @@ const TripTemplate = ({
         <Modal>
           <TripReviewModal
             hideModal={hideModal}
-            modalElement={modalElement}
             ratings={ratings}
             changeRating={changeRating}
           />
