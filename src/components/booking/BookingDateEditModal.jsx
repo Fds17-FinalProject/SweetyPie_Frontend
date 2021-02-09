@@ -1,6 +1,6 @@
 import Calendar from '../common/Calendar';
 
-const BookingDateEditModal = ({ hideModal, date, setDate }) => {
+const BookingDateEditModal = ({ hideModal }) => {
   return (
     <div
       data-name="modal"
@@ -8,13 +8,12 @@ const BookingDateEditModal = ({ hideModal, date, setDate }) => {
       className="w-screen h-screen flex justify-center items-center bg-modal text-white fixed top-0"
     >
       <div
-        className="w-66rem px-3.2rem pt-6.4rem pb-3.2rem z-50 bg-white relative top-0 
+        className="w-66rem px-3.2rem pt-6.4rem pb-3.2rem bg-white relative top-0 
         overflow-y-auto flex flex-col text-black rounded-3xl border border-#b0b0b0"
       >
         <button
           data-name="close"
           className="flex w-3.6rem h-3.6rem absolute top-8 left-8 justify-center items-center rounded-50% hover:bg-#f7f7f7"
-          onClick={hideModal}
         >
           <img
             data-name="close"
@@ -33,25 +32,17 @@ const BookingDateEditModal = ({ hideModal, date, setDate }) => {
           <div className="w-5/12 ml-10% flex">
             <div>
               <div className="font-semibold">체크인</div>
-              <input
-                placeholder="날짜 추가"
-                value={date.checkinDate}
-                className="text-1.4rem"
-              />
+              <input placeholder="날짜 추가" className="text-1.4rem" />
             </div>
 
             <div>
               <div className="font-semibold">체크아웃</div>
-              <input
-                placeholder="날짜 추가"
-                value={date.checkoutDate}
-                className="text-1.4rem"
-              />
+              <input placeholder="날짜 추가" className="text-1.4rem" />
             </div>
           </div>
         </div>
         <div className="flex justify-around">
-          <Calendar date={date} setDate={setDate} />
+          <Calendar />
         </div>
         <div className="flex items-center text-1.4rem justify-end pr-1.6rem">
           <button className="underline p-0.8rem font-semibold">
