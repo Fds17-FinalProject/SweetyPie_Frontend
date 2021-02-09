@@ -6,7 +6,6 @@ const BookingInfo = ({
   guestNum,
   bookingEdit,
   showModal,
-  showGuestModal,
 }) => {
   return (
     <section className="mt-10">
@@ -18,7 +17,7 @@ const BookingInfo = ({
         {bookingEdit && (
           <button
             className="text-1.6rem font-semibold underline absolute right-0 top-0"
-            onClick={showModal}
+            onClick={() => showModal('date')}
           >
             수정
           </button>
@@ -32,7 +31,7 @@ const BookingInfo = ({
         {bookingEdit && (
           <button
             className="text-1.6rem font-semibold underline absolute right-0 top-0"
-            onClick={showGuestModal}
+            onClick={() => showModal('guest')}
           >
             수정
           </button>

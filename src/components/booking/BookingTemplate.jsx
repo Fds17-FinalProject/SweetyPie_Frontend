@@ -9,31 +9,41 @@ import BookingButton from './BookingButton';
 import BookingBorder from './BookingBorder';
 import BookingDateEditModal from './BookingDateEditModal';
 import BookingGuestEditModal from './BookingGuestEditModal';
+import CommonSuccessModal from '../common/CommonSuccessModal';
+import CommonChoiceModal from '../common/CommonChoiceModal';
 
-const BookingTemplate = ({
-  visible,
-  visibleGuest,
-  showModal,
-  hideModal,
-  showGuestModal,
-  hideGuestModal,
-  date,
-  setDate,
-}) => {
+const BookingTemplate = ({ visible, showModal, hideModal, confirmModal }) => {
   return (
     <>
-      {visible && (
+      {visible.type === 'date' && visible.state && (
         <Modal>
-          <BookingDateEditModal
-            hideModal={hideModal}
-            date={date}
-            setDate={setDate}
-          />
+          <BookingDateEditModal hideModal={hideModal} />
         </Modal>
       )}
-      {visibleGuest && (
+      {visible.type === 'guest' && visible.state && (
         <Modal>
-          <BookingGuestEditModal hideGuestModal={hideGuestModal} />
+          <BookingGuestEditModal hideModal={hideModal} />
+        </Modal>
+      )}
+      {visible.type === 'edit' && visible.state && (
+        <Modal>
+          <CommonSuccessModal hideModal={hideModal}>
+            수정이 완료되었습니다.
+          </CommonSuccessModal>
+        </Modal>
+      )}
+      {visible.type === 'payment' && visible.state && (
+        <Modal>
+          <CommonSuccessModal hideModal={hideModal}>
+            결제가 완료되었습니다.
+          </CommonSuccessModal>
+        </Modal>
+      )}
+      {visible.type === 'delete' && visible.state && (
+        <Modal>
+          <CommonChoiceModal hideModal={hideModal} confirmModal={confirmModal}>
+            예약을 취소하시겠습니까?
+          </CommonChoiceModal>
         </Modal>
       )}
       <BookingTitle bookingEdit />
@@ -48,7 +58,6 @@ const BookingTemplate = ({
               guestNum="1"
               bookingEdit
               showModal={showModal}
-              showGuestModal={showGuestModal}
             />
             <BookingBorder />
             <BookingRefundRule
@@ -56,7 +65,11 @@ const BookingTemplate = ({
               checkoutDate="2021.3.21"
             />
             <BookingBorder />
-            <BookingButton bookingEdit />
+            <BookingButton
+              bookingEdit
+              showModal={showModal}
+              confirmModal={confirmModal}
+            />
           </div>
           <BookingDetailTemplate />
         </div>

@@ -3,48 +3,36 @@ import BookingTemplate from '../components/booking/BookingTemplate';
 
 const BookingContainer = () => {
   // 모달창 상태
-  const [visible, setVisible] = useState(false);
-  const [visibleGuest, setVisibleGuest] = useState(false);
+  const [visible, setVisible] = useState({
+    state: false,
+    type: null,
+  });
 
-  // 날짜 모달 열기
-  const showModal = () => {
-    setVisible(true);
+  // 모달 열기
+  const showModal = type => {
+    setVisible({ ...visible, state: true, type });
   };
 
-  // 날짜 모달 숨기기
+  // 모달 숨기기
   const hideModal = ({ target }) => {
     if (target.dataset.name) {
-      setVisible(false);
+      setVisible({ ...visible, state: false });
     }
   };
 
-  // 게스트 모달 열기
-  const showGuestModal = () => {
-    setVisibleGuest(true);
-  };
-
-  // 게스트 모달 닫기
-  const hideGuestModal = ({ target }) => {
+  // 모달 숨기기 + 데이터 변경
+  const confirmModal = ({ target }) => {
     if (target.dataset.name) {
-      setVisibleGuest(false);
+      setVisible({ ...visible, state: false });
     }
   };
-
-  const [date, setDate] = useState({
-    checkinDate: null,
-    checkoutDate: null,
-  });
 
   return (
     <BookingTemplate
       visible={visible}
-      visibleGuest={visibleGuest}
       showModal={showModal}
       hideModal={hideModal}
-      showGuestModal={showGuestModal}
-      hideGuestModal={hideGuestModal}
-      date={date}
-      setDate={setDate}
+      confirmModal={confirmModal}
     />
   );
 };
