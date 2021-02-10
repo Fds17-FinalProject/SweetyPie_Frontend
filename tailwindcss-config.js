@@ -36,11 +36,18 @@ module.exports = {
         '#fff': '#ffffff',
         '#EBEBEB': '#EBEBEB',
         '#f7f7f7': '#f7f7f7',
+        '#rgb113': 'rgb(113, 113, 113)',
+        '#rgb176': 'rgb(176, 176, 176)',
         '#rgb235': 'rgb(235, 235, 235)',
         '#008489': '#008489',
         orange: 'rgb(255, 175, 15)',
         '#b0b0b0': '#b0b0b0',
         '#D70466': '#D70466',
+<<<<<<< HEAD
+=======
+        '#e5e7eb': '#e5e7eb',
+        '#fff':'#ffffff',
+>>>>>>> cabf24bf346e4d7445f63870e72c18f41ceca11c
         modal: 'rgba(62, 60, 70, 0.5)',
       },
       boxShadow: {
@@ -54,6 +61,7 @@ module.exports = {
       spacing: {
         '10%': '10%',
         '45%': '45%',
+        '0.05rem': '0.05rem',
         '0.4rem': '0.4rem',
         '0.8rem': '0.8rem',
         '1.2rem': '1.2rem',
@@ -62,10 +70,12 @@ module.exports = {
         '1.6rem': '1.6rem',
         '1.8rem': '1.8rem',
         '2rem': '2rem',
+        '2.2rem': '2.2rem',
         '2.4rem': '2.4rem',
         '2.6rem': '2.6rem',
         '3rem': '3rem',
         '3.2rem': '3.2rem',
+        '3.4rem': '3.4rem',
         '3.5rem': '3.5rem',
         '3.6rem': '3.6rem',
         '4.5rem': '4.5rem',
@@ -79,6 +89,7 @@ module.exports = {
         '7rem': '7rem',
         '8.5rem': '8.5rem',
         '9.5rem': '9.5rem',
+        '10.4rem': '10.4rem',
         '11rem': '11rem',
         '11.2rem': '11.2rem',
         '14rem': '14rem',
@@ -861,7 +872,11 @@ module.exports = {
       30: '30',
       40: '40',
       50: '50',
+<<<<<<< HEAD
     },
+=======
+      60: '60',
+>>>>>>> cabf24bf346e4d7445f63870e72c18f41ceca11c
   },
   variantOrder: [
     'first',

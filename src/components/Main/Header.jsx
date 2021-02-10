@@ -1,33 +1,29 @@
 import React from 'react';
 import '../../assets/output.css';
-import { BiMenu, BiSearch } from 'react-icons/bi';
-import SVG from '../../assets/svg';
-import { Link } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
+import { BiSearch } from 'react-icons/bi';
+import styled from 'styled-components';
 import HeaderLogo from './HeaderLogo';
 import HeaderUser from './HeaderUser';
 
-const Button = styled.button`
+const Button = styled.button.attrs(() => ({type: 'button'}))`
   :hover {
     background: #ebebeb;
     border-radius: 999rem;
     z-index: 1;
   }
 `;
-const HeaderWrap = styled.div`
-  animation-duration: 0.2s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
-  animation-name: slideUp;
-`;
+// const HeaderWrap = styled.div`
+//   animation-duration: 0.2s;
+//   animation-timing-function: ease-out;
+//   animation-fill-mode: forwards;
+//   animation-name: slideUp;
+// `;
 
 const HeaderSearch = () => {
   return (
     <form>
-      <HeaderWrap
-        className="flex border rounded-full bg-white w-85rem h-28 mt-44
-      "
-      >
+      <div
+        className="flex border rounded-full bg-white w-85rem h-28 mt-44">
         <Button className="w-27rem text-left">
           <div className="border-r px-14">
             <b className="block text-1.2rem">위치</b>
@@ -67,7 +63,7 @@ const HeaderSearch = () => {
             </button>
           </div>
         </Button>
-      </HeaderWrap>
+      </div>
     </form>
   );
 };
@@ -86,4 +82,3 @@ const Header = ({ showModal, visible }) => {
 
 export default Header;
 
-// className="max-w-screen-2xl w-full h-32 px-32 flex items-center justify-between absolute"

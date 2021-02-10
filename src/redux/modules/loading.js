@@ -29,7 +29,8 @@ const loading = handleActions(
       [action.payload]: true,
     }),
     [FINISH_LOADING]: (state, action) => {
-      console.log(state, action);
+      // console.log(state, action);
+
       return {
         ...state,
         [action.payload]: false,
@@ -40,7 +41,6 @@ const loading = handleActions(
 );
 
 export default loading;
-
 // 디스패치할 액션 예시
 /*
 {
