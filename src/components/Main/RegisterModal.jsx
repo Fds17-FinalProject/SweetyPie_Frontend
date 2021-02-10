@@ -1,6 +1,6 @@
 import React from 'react';
 import {FcGoogle} from 'react-icons/fc';
-import SVG from '../../assets/svg';
+import SVG from '../../assets/Svg';
 import axios from 'axios';
 
 
