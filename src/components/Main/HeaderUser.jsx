@@ -1,6 +1,7 @@
 import SVG from "../../assets/svg";
 import { BiMenu } from "react-icons/bi";
 
+
 const HeaderUser = ({ showModal }) => {
   return (
     <div>

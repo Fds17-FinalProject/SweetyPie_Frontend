@@ -20,7 +20,7 @@ export const HeaderSearch = () => {
 };
 const CommonHeader = ({ showModal, visible }) => {
   return (
-    <header className="max-w-screen-2xl fixed z-10 hidden">
+    <header className="max-w-screen-2xl fixed z-10">
       <div className="bg-white w-full px-32 h-32 flex items-center justify-between	fixed z-10">
         <HeaderLogo color="#FF385C" />
         <HeaderSearch />

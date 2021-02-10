@@ -9,6 +9,8 @@ const MenuList = ({ children, showAuthModal, auth }) => {
     </li>
   );
 };
+
+
 const UserMenu = ({ hideModal, showAuthModal }) => {
   return (
     <div

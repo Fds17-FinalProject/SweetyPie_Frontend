@@ -15,9 +15,7 @@ const MainContainer = () => {
   const [authVisible, setAuthVisible] = useState({
     // 'login' or 'register'
     type: null,
-  });
-  console.log('authvisibl은 뭐가 나와?',authVisible);
-  
+  });  
   const modalElement = useRef(null);
   // 유저 메뉴 모달 open
   const showModal = () => {
@@ -63,6 +61,20 @@ const MainContainer = () => {
       });
       showAuthModal(auth);
     }
+    else if (auth === 'form') {
+      console.log('form', auth);
+      setAuthVisible({
+        ...authVisible,
+        type: 'form',
+      });
+    }
+      // socialRegister form
+    // else if (auth === 'socialRegister') {
+    //   setAuthVisible({
+    //     ...authVisible,
+    //     type: 'socialRegister',
+    //   });
+    // }
   };
 
 
@@ -78,6 +90,7 @@ const MainContainer = () => {
   useEffect(() => {
     function logit() {
       setScrollY(window.pageYOffset);
+      console.log(scrollY);
       // scrollY === 30 ?
     }
     // 모달창 뜨웠을 때 스크롤 정지
@@ -118,7 +131,12 @@ const MainContainer = () => {
           <AuthModal hideModal={hideModal} authVisible={authVisible} changeModal={changeModal}/>
         </Modal>
       )}
-      <Header
+      {authVisible.type === 'form' && (
+        <Modal>
+          <AuthModal hideModal={hideModal} authVisible={authVisible}/>
+        </Modal>
+      )}
+      {/* <Header
         showModal={showModal}
         modalElement={modalElement}
         visible={visible}
@@ -129,7 +147,18 @@ const MainContainer = () => {
         modalElement={modalElement}
         visible={visible}
         showAuthModal={showAuthModal}
-      />
+      /> */}
+      {scrollY > 30 ? <CommonHeader
+        showModal={showModal}
+        modalElement={modalElement}
+        visible={visible}
+        showAuthModal={showAuthModal}
+      /> : <Header
+      showModal={showModal}
+      modalElement={modalElement}
+      visible={visible}
+      showAuthModal={showAuthModal}
+    />}
       <Main />
       <Footer />
     </div>

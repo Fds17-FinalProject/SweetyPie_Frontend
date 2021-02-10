@@ -39,7 +39,9 @@ module.exports = {
         orange: 'rgb(255, 175, 15)',
         '#b0b0b0': '#b0b0b0',
         '#D70466': '#D70466',
-        modal: 'rgba(62, 60, 70, 0.5)'
+        '#e5e7eb': '#e5e7eb',
+        '#fff':'#ffffff',
+        modal: 'rgba(62, 60, 70, 0.5)',
       },
       boxShadow: {
         before: 'rgba(0, 0, 0, 0.12) 0px 6px 16px',
@@ -52,6 +54,7 @@ module.exports = {
       spacing: {
         '10%': '10%',
         '45%': '45%',
+        '0.05rem': '0.05rem',
         '0.4rem': '0.4rem',
         '0.8rem': '0.8rem',
         '1.2rem': '1.2rem',
