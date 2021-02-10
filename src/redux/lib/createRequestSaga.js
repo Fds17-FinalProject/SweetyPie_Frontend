@@ -1,5 +1,7 @@
 import { call, put } from 'redux-saga/effects';
 import { finishLoading, startLoading } from '../modules/loading';
+import { assignError, resetError } from '../modules/error';
+
 
 // 한번에 3개의 액션 타입을 설정하기 위한 함수
 export const createRequestActionTypes = type => {
@@ -15,6 +17,7 @@ export default function createRequestSaga(type, request) {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
 
+
   console.log(type, request);
 
   return function* (action) {
@@ -26,7 +29,6 @@ export default function createRequestSaga(type, request) {
     try {
       const response = yield call(request, action.payload);
       // console.log(response.data);
-
       yield put({
         type: SUCCESS,
         payload: response.data,
@@ -41,7 +43,6 @@ export default function createRequestSaga(type, request) {
       });
       // 에러 객체 왜 안담기지???????
     }
-
     // api 요청 끝났으면 로딩을 false로 바꾼다.
     yield put(finishLoading(type));
   };

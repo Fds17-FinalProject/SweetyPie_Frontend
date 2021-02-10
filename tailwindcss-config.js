@@ -42,6 +42,8 @@ module.exports = {
         orange: 'rgb(255, 175, 15)',
         '#b0b0b0': '#b0b0b0',
         '#D70466': '#D70466',
+        '#e5e7eb': '#e5e7eb',
+        '#fff':'#ffffff',
         modal: 'rgba(62, 60, 70, 0.5)',
       },
       boxShadow: {
@@ -55,6 +57,7 @@ module.exports = {
       spacing: {
         '10%': '10%',
         '45%': '45%',
+        '0.05rem': '0.05rem',
         '0.4rem': '0.4rem',
         '0.8rem': '0.8rem',
         '1.2rem': '1.2rem',
@@ -864,7 +867,7 @@ module.exports = {
       30: '30',
       40: '40',
       50: '50',
-    },
+      60: '60',
   },
   variantOrder: [
     'first',

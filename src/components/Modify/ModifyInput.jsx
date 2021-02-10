@@ -1,7 +1,7 @@
 
 const ModifyInput = ({ children, content, name, onClick, htmlFor, id}) => {
   return (
-    <form className=" flex relative flex-wrap border-b border-#rgb235 pt-3.3 pb-8.4">
+    <form className=" flex relative flex-wrap border-b border-#rgb235 pt-0.8rem pb-2.4rem">
       <label className="w-full text-1.6rem font-semibold text-#727272" htmlFor={htmlFor}>{children}</label>
       <input defaultValue={content} className="rounded-lg border w-full h-16 p-4 mt-4 text-1.6rem font-normal text-#717171" id-={id}></input>
       <button className="absolute top-0.8 right-0 text-#008489 text-1.6rem" name={name} onClick={onClick}>취소</button>

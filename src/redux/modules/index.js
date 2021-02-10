@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+
 import { all } from 'redux-saga/effects';
 import loading from './loading';
 import reservation, { reservationSaga } from './reservation';
@@ -6,6 +7,7 @@ import reservation, { reservationSaga } from './reservation';
 const rootReducer = combineReducers({
   loading,
   reservation,
+
 });
 
 export function* rootSaga() {
