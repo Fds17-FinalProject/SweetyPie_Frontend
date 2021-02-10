@@ -1,20 +1,14 @@
 import TripReviewRating from './TripReviewRating';
 
-const TripReviewModal = ({
-  hideModal,
-  modalElement,
-  ratings,
-  changeRating
-}) => {
+const TripReviewModal = ({ hideModal, ratings, changeRating }) => {
   return (
     <div
-      id="1"
-      ref={modalElement}
+      data-name="modal"
       onClick={hideModal}
       className="w-screen h-screen flex justify-center items-center bg-modal text-white fixed top-0"
     >
       <div
-        className="w-1/3 h-2/3 px-6 py-20 z-50 bg-white relative top-0 
+        className="w-1/3 h-2/3 px-6 py-20 bg-white relative top-0 
         overflow-y-auto flex flex-col text-black rounded-3xl border border-#b0b0b0"
       >
         <h3 className="text-2.4rem font-semibold">
@@ -43,7 +37,7 @@ const TripReviewModal = ({
                 changeRating={changeRating}
                 unchecked
               />
-            )
+            ),
           )}
         </div>
         <textarea
