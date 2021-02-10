@@ -27,6 +27,7 @@ module.exports = {
         airbnbHover: '#ff5473',
         searchBorder: 'rgba(118, 118, 118, 0.28)',
         searchBackground: 'rgb(255, 255, 255)',
+        '#222': '#222',
         '#444': '#444',
         '#717171': '#717171',
         '#727272': 'rgb(72, 72, 72)',
@@ -42,8 +43,11 @@ module.exports = {
         orange: 'rgb(255, 175, 15)',
         '#b0b0b0': '#b0b0b0',
         '#D70466': '#D70466',
+<<<<<<< HEAD
+=======
         '#e5e7eb': '#e5e7eb',
         '#fff':'#ffffff',
+>>>>>>> cabf24bf346e4d7445f63870e72c18f41ceca11c
         modal: 'rgba(62, 60, 70, 0.5)',
       },
       boxShadow: {
@@ -92,6 +96,7 @@ module.exports = {
         '14.2rem': '14.2rem',
         '14.5rem': '14.5rem',
         '15rem': '15rem',
+        '17rem': '17rem',
         '17.3rem': '17.3rem',
         '17.4rem': '17.4rem',
         '17.5rem': '17.5rem',
@@ -867,7 +872,11 @@ module.exports = {
       30: '30',
       40: '40',
       50: '50',
+<<<<<<< HEAD
+    },
+=======
       60: '60',
+>>>>>>> cabf24bf346e4d7445f63870e72c18f41ceca11c
   },
   variantOrder: [
     'first',

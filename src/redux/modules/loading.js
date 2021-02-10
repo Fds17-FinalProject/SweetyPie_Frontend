@@ -18,10 +18,8 @@ export const finishLoading = createAction(
   requestType => requestType,
 );
 
-
 // 초기 상태값 설정
 const initialState = {};
-
 
 // handle actions로 리듀서 함수 작성
 const loading = handleActions(
@@ -49,3 +47,4 @@ export default loading;
   type: 'loading/START_LOADING',
   payload: 'sample/GET_POST'
 }
+*/

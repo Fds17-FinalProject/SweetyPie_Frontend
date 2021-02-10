@@ -7,7 +7,6 @@ import reservation, { reservationSaga } from './reservation';
 const rootReducer = combineReducers({
   loading,
   reservation,
-
 });
 
 export function* rootSaga() {

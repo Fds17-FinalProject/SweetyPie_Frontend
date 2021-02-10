@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import MainCity from './MainCity';
 import MainRecommendation from './MainRecommendation';
+import MapPopup from '../search/MapPopup';
 
 const img = window.location.origin;
 const res = {
@@ -95,8 +96,20 @@ const Main = () => {
               이 달의 추천 여행지&#58; 강릉{' '}
             </div>
 
-            <div className="flex w-full font-extrabold">
-            <Link className="w-1/4 pr-3.5" to="#">
+            <div className="flex w-full">
+              <div className="w-1/4 mr-8">
+                <MapPopup style={{  paddingRight: '10px', borderRadius: '10px' }} />
+              </div>
+              <div className="w-1/4 mr-8">
+                <MapPopup style={{  paddingRight: '10px', borderRadius: '10px' }} />
+              </div>
+              <div className="w-1/4 mr-8">
+                <MapPopup style={{  paddingRight: '10px', borderRadius: '10px' }} />
+              </div>
+              <div className="w-1/4 mr-8">
+                <MapPopup style={{  paddingRight: '10px', borderRadius: '10px' }} />
+              </div>
+            {/* <Link className="w-1/4 pr-3.5" to="#">
                 <figure>
                   <img
                     className="rounded-lg"
@@ -138,7 +151,7 @@ const Main = () => {
                   />
                   <figcaption className="text-1.8rem p-4	">호텔</figcaption>
                 </figure>
-              </Link>
+              </Link> */}
             </div>
           </section>
         </div>
