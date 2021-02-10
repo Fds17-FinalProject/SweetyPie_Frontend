@@ -11,9 +11,9 @@ const ModifyAccountContainer = () => {
   });
   const onClick = e => {
     e.preventDefault();
-    console.log(['TARGET'], e.target.name);
+    // console.log(['TARGET'], e.target.name);
     setModify({ ...modify, [e.target.name]: !modify[e.target.name] });
-    console.log(['MODIFY'], modify);
+    // console.log(['MODIFY'], modify);
   };
   return <ModifyAccount onClick={onClick} modify={modify} />;
 };
