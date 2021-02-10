@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const TripCard = ({
   accomodationPicture,
@@ -8,10 +8,13 @@ const TripCard = ({
   title,
   city,
   gu,
-  visible,
   showModal,
-  hideModal
+  tab,
 }) => {
+  // // 쿼리 스트링
+  // const location = useLocation();
+  // const { tab } = queryStirng.parse(location.search);
+
   return (
     // 예정된 예약이 없다면 보여줄 화면
     // <div className="py-96">
@@ -47,11 +50,20 @@ const TripCard = ({
               />
               <p className="text-1.4rem truncate flex-1">{title}</p>
             </div>
-            <Link onClick={showModal}>
-              <div className="text-1.4rem h-24 flex flex-row items-center rounded-b-2xl justify-center border-t border-gray-300 font-semibold cursor-pointer hover:transition-all hover:bg-#f7f7f7">
-                예약 내역 수정하기
+            {tab === 'past' ? (
+              <div
+                onClick={showModal}
+                className="text-1.4rem h-24 flex flex-row items-center rounded-b-2xl justify-center border-t border-gray-300 font-semibold cursor-pointer hover:transition-all hover:bg-#f7f7f7"
+              >
+                내 리뷰 보기
               </div>
-            </Link>
+            ) : (
+              <Link to="/booking">
+                <div className="text-1.4rem h-24 flex flex-row items-center rounded-b-2xl justify-center border-t border-gray-300 font-semibold cursor-pointer hover:transition-all hover:bg-#f7f7f7">
+                  예약 내역 수정하기
+                </div>
+              </Link>
+            )}
           </div>
         </div>
       </div>

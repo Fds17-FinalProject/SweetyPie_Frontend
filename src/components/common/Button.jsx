@@ -20,7 +20,25 @@ const Button = ({ color, size, children }) => {
   const classNames = ButtonColor[color] + ' ' + ButtonSize[size];
   return <button className={classNames}>{children}</button>;
 };
+
 export default Button;
+
+const ButtonStatus = {
+  able:
+    'w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border border-#rgb176 text-#rgb113 cursor-pointer hover:border-black hover:text-black',
+  disable:
+    'w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235',
+};
+
+export const IconButton = ({ status, children, onClick }) => {
+  const classNames = ButtonStatus[status];
+  return (
+    <button onClick={onClick} className={classNames}>
+      {children}
+    </button>
+  );
+};
+
 // 아이콘 모음
 // import {
 //   HiChevronRight,
