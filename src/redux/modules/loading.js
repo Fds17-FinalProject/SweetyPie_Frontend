@@ -30,6 +30,7 @@ const loading = handleActions(
     }),
     [FINISH_LOADING]: (state, action) => {
       // console.log(state, action);
+
       return {
         ...state,
         [action.payload]: false,

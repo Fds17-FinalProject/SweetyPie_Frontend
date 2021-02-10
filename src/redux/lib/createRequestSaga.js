@@ -1,10 +1,19 @@
 import { call, put } from 'redux-saga/effects';
 import { finishLoading, startLoading } from '../modules/loading';
+import { assignError, resetError } from '../modules/error';
+
+<<<<<<< HEAD
+export const createRequestActionTypes = type => {
+  const SUCCESS = `${type}_SUCCESS`;
+  const FAILURE = `${type}_FAILURE`;
+
+=======
 
 // 한번에 3개의 액션 타입을 설정하기 위한 함수
 export const createRequestActionTypes = type => {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
+>>>>>>> cabf24bf346e4d7445f63870e72c18f41ceca11c
   return [type, SUCCESS, FAILURE];
 };
 
@@ -15,8 +24,6 @@ export default function createRequestSaga(type, request) {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
 
-  console.log(type, request);
-
   return function* (action) {
     // api 요청 날리기 전에 로딩을 true로 바꾼다.
     yield put(startLoading(type));
@@ -26,7 +33,6 @@ export default function createRequestSaga(type, request) {
     try {
       const response = yield call(request, action.payload);
       // console.log(response.data);
-
       yield put({
         type: SUCCESS,
         payload: response.data,
@@ -40,7 +46,6 @@ export default function createRequestSaga(type, request) {
         error: true,
       });
     }
-
     // api 요청 끝났으면 로딩을 false로 바꾼다.
     yield put(finishLoading(type));
   };

@@ -18,7 +18,7 @@ const ModifyDescription = () => {
             viewBox="0 0 24 24"
             width="4rem"
             height="4rem"
-            name="lock"
+            name="lockcontainer"
             className="absolute top-0 left-0"
           />
         </div>
