@@ -45,7 +45,6 @@ export default function createRequestSaga(type, request) {
         payload: e,
         error: true,
       });
-      // 에러 객체 왜 안담기지???????
     }
     // api 요청 끝났으면 로딩을 false로 바꾼다.
     yield put(finishLoading(type));

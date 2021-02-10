@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import HeaderLogo from './HeaderLogo';
 import HeaderUser from './HeaderUser';
 
-const Button = styled.button.attrs(() => ({type: 'button'}))`
+const Button = styled.button.attrs(() => ({ type: 'button' }))`
   :hover {
     background: #ebebeb;
     border-radius: 999rem;
@@ -22,8 +22,7 @@ const Button = styled.button.attrs(() => ({type: 'button'}))`
 const HeaderSearch = () => {
   return (
     <form>
-      <div
-        className="flex border rounded-full bg-white w-85rem h-28 mt-44">
+      <div className="flex border rounded-full bg-white w-85rem h-28 mt-44">
         <Button className="w-27rem text-left">
           <div className="border-r px-14">
             <b className="block text-1.2rem">위치</b>
@@ -81,4 +80,3 @@ const Header = ({ showModal, visible }) => {
 };
 
 export default Header;
-

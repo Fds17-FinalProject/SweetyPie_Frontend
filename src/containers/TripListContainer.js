@@ -30,7 +30,7 @@ const TripListContainer = () => {
   let pastReservations = [];
   let upcomingReservations = [];
 
-  // 예약 리스트 읽기 요청
+  // 예약 리스트 읽기 요청 GET
   useEffect(() => {
     dispatch(readReservation());
   }, [dispatch]);
@@ -66,6 +66,9 @@ const TripListContainer = () => {
     }
     setRatings(newRatings);
   };
+
+  // 리뷰 쓰기 요청 POST
+  const postingReview = () => {};
 
   return (
     <TripTemplate
