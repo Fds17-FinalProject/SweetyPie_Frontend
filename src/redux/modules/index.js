@@ -1,23 +1,19 @@
 import { combineReducers } from 'redux';
-import auth from './auth';
+
 import { all } from 'redux-saga/effects';
 import loading from './loading';
-import error from './error';
-// import accommodations, { searchSaga } from './accommodations';
-// import { searchSaga } from './accommodations';
+import reservation, { reservationSaga } from './reservation';
 
 const rootReducer = combineReducers({
-  // accommodations,
-  auth,
   loading,
-  error,
+  reservation,
 
 });
 
 export function* rootSaga() {
   // all 함수는 여러 사가를 합쳐 주는 역할을 한다.
   // put은 디스패치를 해준다.
-  // yield all([searchSaga()]);
+  yield all([reservationSaga()]);
 }
 
 export default rootReducer;

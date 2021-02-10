@@ -8,14 +8,19 @@ import rootReducer, { rootSaga } from './redux/modules';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
+
+
 const sagaMiddleware = createSagaMiddleware();
+
 // store 생성
 // rootReducer는 모든 리듀서들을 하나로 합친 함수
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(sagaMiddleware)),
 );
+
 sagaMiddleware.run(rootSaga);
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
