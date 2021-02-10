@@ -8,6 +8,7 @@ const TripCard = ({
   title,
   city,
   gu,
+  isWrittenReview,
   showModal,
   tab,
 }) => {
@@ -16,13 +17,6 @@ const TripCard = ({
   // const { tab } = queryStirng.parse(location.search);
 
   return (
-    // 예정된 예약이 없다면 보여줄 화면
-    // <div className="py-96">
-    //   <p className="text-2.4rem text-center font-semibold">
-    //     예정된 여행이 없습니다.
-    //   </p>
-    // </div>
-    // <div className="mt-6">
     <li className="px-6 w-1/3">
       <div className="mt-6 mb-8 rounded-2xl shadow-before hover:transition-shadow hover:shadow-after">
         <Link to="/room">
@@ -55,7 +49,7 @@ const TripCard = ({
                 onClick={showModal}
                 className="text-1.4rem h-24 flex flex-row items-center rounded-b-2xl justify-center border-t border-gray-300 font-semibold cursor-pointer hover:transition-all hover:bg-#f7f7f7"
               >
-                내 리뷰 보기
+                {isWrittenReview ? '리뷰 쓰기' : '내 리뷰 보기'}
               </div>
             ) : (
               <Link to="/booking">

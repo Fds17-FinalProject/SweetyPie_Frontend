@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Svg from '../../assets/svg';
+import SVG from '../../assets/Svg';
 import Carousel from '../common/Carousel';
 import { HiOutlineHeart, HiHeart, HiOutlineX } from 'react-icons/hi';
 import { FiHeart } from 'react-icons/fi';

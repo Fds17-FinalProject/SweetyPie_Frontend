@@ -1,4 +1,4 @@
-import SVG from '../../assets/svg';
+import SVG from '../../assets/Svg';
 import { Link } from 'react-router-dom';
 
 const HeaderLogo = ({ color }) => {

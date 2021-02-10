@@ -35,7 +35,7 @@ const TripReviewModal = ({ hideModal, ratings, changeRating }) => {
                 id={i}
                 key={`star-${i}`}
                 changeRating={changeRating}
-                unchecked
+                unchecked // 별점 채우지 않음
               />
             ),
           )}
@@ -48,8 +48,10 @@ const TripReviewModal = ({ hideModal, ratings, changeRating }) => {
         ></textarea>
         <div className="mt-10 text-right">
           <button
+            data-name="close"
             className="bg-gray-400 h-14 w-28 px-5 m-2 text-xl text-white font-bold rounded-xl"
             id="1"
+            onClick={hideModal}
           >
             취소
           </button>
