@@ -3,12 +3,11 @@ import Carousel from '../common/Carousel';
 import { AiFillStar } from 'react-icons/ai';
 const url = window.location.origin;
 
-const img = [url+ '/img/css.webp', url+ '/img/js.png', url+ '/img/git.jpg', url+ '/img/algo.png', url+ '/img/coding.jpg']
 const RecentSearch = () => {
   return (
       <li>
       <div className="w-14.5rem h-17.3rem truncate mt-8 mx-3 pb-4">
-        <Carousel size="small" img={img} />
+        {/* <Carousel size="small" img={img} /> */}
         <div className="text-1.4rem mt-2">
           <AiFillStar size={20} fill={'#FF385C'} className="inline-block"/>
         <span >4. 96</span>

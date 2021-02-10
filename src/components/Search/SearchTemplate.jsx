@@ -52,7 +52,7 @@ const MapContainer = styled.div`
   width: calc(100vw - 86.4rem);
 `;
 
-const SearchTemplate = () => {
+const SearchTemplate = ({ accommodations }) => {
   const [filter, setFilter] = useState({
     accommType: false,
     chargeMenu: false,
@@ -76,11 +76,9 @@ const SearchTemplate = () => {
           <ButtonWrapper>
             <StyledButton onClick={clickFilter} name="chargeMenu" style={{ border: `${filter.chargeMenu ? '2px solid #222222' : '1px solid #B0B0B0'}`}} filter={filter}>요금</StyledButton>
           </ButtonWrapper>
-          {/* <div className="absolute inset-0" ref={menu}> */}
             {filter.accommType ? <AccommTypeMenu /> : ''}
-          {/* </div> */}
 
-          {filter.chargeMenu ? <ChargeMenu /> : ''}
+            {filter.chargeMenu ? <ChargeMenu /> : ''}
         </div>
         <div className="text-1.6rem text-#717171 border-b border-searchBorder pb-10">
           여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수 있습니다.
@@ -89,15 +87,7 @@ const SearchTemplate = () => {
           예약하기 전에 코로나19 관련 여행 제한 사항을 확인하세요.
         </div>
         <ul>
-          <AccommList />
-          <AccommList />
-          <AccommList />
-          <AccommList />
-          <AccommList />
-          <AccommList />
-          <AccommList />
-          <AccommList />
-          <AccommList />
+          {accommodations && accommodations.map(accommodation => <AccommList {...accommodation} />)}
         </ul>
         <div className="pt-20 border-t border-#EBEBEB relative">
           <h2 className="text-2.2rem text-mainFont">최근 조회</h2>
@@ -130,7 +120,6 @@ const SearchTemplate = () => {
       </div>
       <MapContainer className=" border bg-red-400">
         <MapPopup className="absolute z-index-10 left-10" />
-        
       </MapContainer>
     </div>
   );
