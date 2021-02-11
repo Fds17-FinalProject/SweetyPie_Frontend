@@ -1,36 +1,16 @@
 import React from 'react';
 import TripReservation from './TripReservation';
 import TripCard from './TripCard';
-import Modal from '../common/Modal';
-import TripReviewModal from './TripReviewModal';
 import { useLocation } from 'react-router-dom';
 import queryStirng from 'query-string';
 
-const TripTemplate = ({
-  visible,
-  showModal,
-  hideModal,
-  ratings,
-  changeRating,
-  loading,
-  pastReservations,
-  upcomingReservations,
-}) => {
+const TripTemplate = ({ loading, pastReservations, upcomingReservations }) => {
   // 쿼리 스트링으로 어떤 tab인지 확인
   const location = useLocation();
   const { tab } = queryStirng.parse(location.search);
 
   return (
     <div className="max-w-screen-2xl mt-3.6rem px-32 pb-6.5rem">
-      {visible && (
-        <Modal>
-          <TripReviewModal
-            hideModal={hideModal}
-            ratings={ratings}
-            changeRating={changeRating}
-          />
-        </Modal>
-      )}
       <section>
         <h1 className="text-3.2rem mb-10 pl-6 font-semibold">예약 내역</h1>
         <TripReservation />
@@ -51,18 +31,9 @@ const TripTemplate = ({
             loading === false &&
             upcomingReservations.map(upcomingReservation => (
               <TripCard
-                key={upcomingReservation.accommodationId}
-                accomodationPicture={
-                  upcomingReservation.accommodationPicture.url
-                }
-                checkInDate={upcomingReservation.checkInDate}
-                checkoutDate={upcomingReservation.checkoutDate}
-                city={upcomingReservation.city}
-                gu={upcomingReservation.gu}
-                title={upcomingReservation.title}
-                showModal={showModal}
-                hideModal={hideModal}
+                key={upcomingReservation.reservationId}
                 tab={tab}
+                reservations={{ ...upcomingReservation }}
               />
             ))}
 
@@ -71,17 +42,9 @@ const TripTemplate = ({
             loading === false &&
             pastReservations.map(pastReservation => (
               <TripCard
-                key={pastReservation.accommodationId}
-                accomodationPicture={pastReservation.accommodationPicture.url}
-                checkInDate={pastReservation.checkInDate}
-                checkoutDate={pastReservation.checkoutDate}
-                city={pastReservation.city}
-                gu={pastReservation.gu}
-                title={pastReservation.title}
-                isWrittenReview={pastReservation.isWrittenReview}
-                showModal={showModal}
-                hideModal={hideModal}
+                key={pastReservation.reservationId}
                 tab={tab}
+                reservations={{ ...pastReservation }}
               />
             ))}
         </ul>
