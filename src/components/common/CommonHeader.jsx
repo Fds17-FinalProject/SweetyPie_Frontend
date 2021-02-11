@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../assets/output.css';
-import {BiSearch} from "react-icons/bi"
+import { BiSearch } from 'react-icons/bi';
 import HeaderLogo from '../main/HeaderLogo';
 import HeaderUser from '../main/HeaderUser';
 export const HeaderSearch = () => {

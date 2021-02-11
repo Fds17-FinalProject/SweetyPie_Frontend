@@ -15,7 +15,6 @@ const CalendarDetail = () => {
         </p>
       </div>
       <div className="w-68.8rem h-33rem">
-        <img src={img + '/img/calendar.jpg'} alt="달력" />
         <Calendar />
       </div>
       <div className="mt-20 border-b"></div>
