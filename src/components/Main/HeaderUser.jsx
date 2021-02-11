@@ -1,4 +1,4 @@
-import SVG from '../../assets/Svg';
+import SVG from '../../assets/svg';
 import { BiMenu } from 'react-icons/bi';
 
 const HeaderUser = ({ showModal }) => {

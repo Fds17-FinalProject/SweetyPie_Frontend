@@ -1,14 +1,5 @@
 import React from 'react';
 import '../../assets/output.css';
-import Button from '../common/Button';
-import {
-  HiChevronRight,
-  HiOutlineHeart,
-  HiChevronLeft,
-  HiHeart,
-  HiOutlineX,
-} from 'react-icons/hi';
-import { FcGoogle } from 'react-icons/fc';
 import Photos from './Photos';
 import Introduction from './Introduction';
 import Title from './Title';
@@ -21,10 +12,12 @@ import Reviews from './Reviews';
 import Map from './Map';
 import Host from './Host';
 import ThingsToKnow from './ThingsToKnow';
+import RoomDetailHeader from './RoomDetailHeader';
 
 const RoomDetailTemplate = () => {
   return (
     <>
+      <RoomDetailHeader />
       <div className="max-w-screen-2xl mt-32">
         <div className="mx-48 px-32">
           <Title />
@@ -38,7 +31,7 @@ const RoomDetailTemplate = () => {
             <Beds />
             <CalendarDetail />
           </div>
-          <div className="w-1/3 h-full sticky top-10">
+          <div className="w-1/3 h-full sticky top-44">
             <Payment />
           </div>
         </div>
