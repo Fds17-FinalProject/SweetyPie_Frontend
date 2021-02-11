@@ -1,4 +1,3 @@
-import './App.css';
 import './assets/output.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import RoomDetailPage from './pages/RoomDetailPage';
