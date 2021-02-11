@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../../assets/output.css';
 import SVG from '../../assets/svg';
 import { BiSearch } from 'react-icons/bi';
@@ -20,18 +20,8 @@ export const HeaderSearch = () => {
   );
 };
 const CommonHeader = ({ showModal, visible }) => {
-  // const [isActive, setIsActive] = useState(false);
-  // let className = "max-w-screen-2xl fixed z-10";
-  // if (isActive) {
-  //   className += 'active'
-  // setIsActive(true);
-  // console.log(isActive);
-  // } else {
-  //   className = "max-w-screen-2xl fixed z-10"
-  //   setIsActive(false);
-  // };
   return (
-    <header className="max-w-screen-2xl fixed z-10 hidden">
+    <header className="max-w-screen-2xl fixed z-10">
       <div className="bg-white w-full px-32 h-32 flex items-center justify-between	fixed z-10">
         <HeaderLogo color="#FF385C" />
         <HeaderSearch />
