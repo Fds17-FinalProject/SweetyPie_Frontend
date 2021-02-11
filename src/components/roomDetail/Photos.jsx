@@ -19,14 +19,14 @@ const Photos = () => {
       <div className="w-56.4rem ">
         <img
           className="block w-full h-full object-cover	"
-          src={accommodationPictures[0].url}
+          src={img + '/img/room01.jpg'}
           alt="..."
         />
       </div>
       <div className="w-27.4rem ml-0.8rem">
         <img
           className="block w-full h-19.4rem mb-0.8rem object-cover"
-          src={img + '/img/room02.jpg'}
+          src={accommodationPictures[0].url}
           alt="..."
         />
         <img
