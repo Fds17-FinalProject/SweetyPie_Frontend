@@ -4,7 +4,7 @@ import ModifyAccountContainer from '../containers/ModifyAccountContainer';
 const ModifyAccountPage = () => {
   return (
     <div>
-      <ModifyAccountContainer/>
+      <ModifyAccountContainer />
     </div>
   );
 };

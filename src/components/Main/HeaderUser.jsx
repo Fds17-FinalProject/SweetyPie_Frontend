@@ -1,11 +1,14 @@
-import SVG from "../../assets/SVG";
-import { BiMenu } from "react-icons/bi";
+import SVG from '../../assets/svg';
+import { BiMenu } from 'react-icons/bi';
 
-const HeaderUser = ({showModal}) => {
+const HeaderUser = ({ showModal }) => {
   return (
     <div>
       <nav>
-        <button className="flex bg-white p-2 rounded-3xl border-gray-300 border w-28	h-14" onClick={showModal}>
+        <button
+          className="flex bg-white p-2 rounded-3xl border-gray-300 border w-28	h-14"
+          onClick={showModal}
+        >
           <div className="flex-grow w-full h-full">
             <BiMenu className="w-full h-full text-gray-600" />
           </div>
