@@ -17,8 +17,7 @@ const res = {
 const ModifyAccount = ({ onClick, modify }) => {
   return (
     <div>
-      <header
-        className="max-w-screen-2xl px-32 bg-white w-full h-32 flex items-center justify-between	fixed z-10">
+      <header className="max-w-screen-2xl px-32 bg-white w-full h-32 flex items-center justify-between	fixed z-10">
         <HeaderLogo color="#FF385C" />
         <HeaderUser />
       </header>
@@ -31,9 +30,13 @@ const ModifyAccount = ({ onClick, modify }) => {
           {/* left */}
           <div className=" w-3/5 pt-8">
             <div className=" flex relative flex-wrap border-b border-#rgb235 pt-0.4rem pb-2.4rem">
-              <span className="w-full text-1.6rem font-semibold text-#727272">이메일</span>
-              <span className="w-full pt-2 text-1.6rem font-normal text-#717171">{res.email}</span>
-           </div>
+              <span className="w-full text-1.6rem font-semibold text-#727272">
+                이메일
+              </span>
+              <span className="w-full pt-2 text-1.6rem font-normal text-#717171">
+                {res.email}
+              </span>
+            </div>
             {modify.name ? (
               <ModifyInput name="name" onClick={onClick} content={res.name}>
                 이름 수정

@@ -1,10 +1,10 @@
 import { call, put } from 'redux-saga/effects';
 import { finishLoading, startLoading } from '../modules/loading';
 
+// 한번에 3개의 액션 타입을 설정하기 위한 함수
 export const createRequestActionTypes = type => {
   const SUCCESS = `${type}_SUCCESS`;
   const FAILURE = `${type}_FAILURE`;
-
   return [type, SUCCESS, FAILURE];
 };
 
