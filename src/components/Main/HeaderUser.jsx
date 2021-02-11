@@ -1,13 +1,6 @@
-<<<<<<< HEAD
 import SVG from '../../assets/svg';
 import { BiMenu } from 'react-icons/bi';
 
-=======
-import SVG from "../../assets/svg";
-import { BiMenu } from "react-icons/bi";
-
-
->>>>>>> 603f37e3412d3ba5e3298db53b00d1014c9f8955
 const HeaderUser = ({ showModal }) => {
   return (
     <div>
