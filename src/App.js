@@ -7,7 +7,7 @@ import BookingContainer from './containers/BookingContainer';
 import SearchContainer from './containers/SearchContainer';
 import MainPage from './pages/MainPage';
 import ModifyAccountPage from './pages/ModifyAccountPage';
-import RedirectPage from './pages/RedirectPage'
+import RedirectPage from './pages/RedirectPage';
 
 function App() {
   return (

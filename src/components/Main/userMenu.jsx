@@ -4,12 +4,14 @@ const MenuList = ({ children, showAuthModal, auth }) => {
   console.log(auth);
   return (
     // UserMenu에서 auth를 받아서 콜백함수로 showAuthModal에 전달 showAuthModal은 MainContainer.js에 정의
-    <li className="py-4 px-6 hover:bg-gray-100" onClick={() => showAuthModal(auth)}>
+    <li
+      className="py-4 px-6 hover:bg-gray-100"
+      onClick={() => showAuthModal(auth)}
+    >
       {children}
     </li>
   );
 };
-
 
 const UserMenu = ({ hideModal, showAuthModal }) => {
   return (
@@ -23,10 +25,14 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
         <div>
           {/* 로그인 안했을 시  */}
           <ul>
-          {/* MenuList에 auth props를 넣어서 로그인인지 회원가입인지 구분 */}
+            {/* MenuList에 auth props를 넣어서 로그인인지 회원가입인지 구분 */}
 
-            <MenuList auth='login' showAuthModal={showAuthModal} >로그인</MenuList>
-            <MenuList auth='register' showAuthModal={showAuthModal} >회원 가입</MenuList>
+            <MenuList auth="login" showAuthModal={showAuthModal}>
+              로그인
+            </MenuList>
+            <MenuList auth="register" showAuthModal={showAuthModal}>
+              회원 가입
+            </MenuList>
             <MenuList>도움말</MenuList>
             {/* <li className="py-4 px-6 hover:bg-gray-100">
           <Link to="#">회원 가입</Link>
