@@ -1,6 +1,26 @@
+import { useState } from 'react';
 import TripReviewRating from './TripReviewRating';
 
-const TripReviewModal = ({ hideModal, ratings, changeRating }) => {
+const TripReviewModal = ({
+  hideModal,
+  ratings,
+  changeRating,
+  accommodationId,
+  reservationId,
+  postingReview,
+  hostName,
+}) => {
+  // 리뷰 입력창
+  const [reviewContent, setReviewContent] = useState('');
+
+  // 리뷰 입력창 변경
+  const onChange = e => {
+    setReviewContent(e.target.value);
+  };
+
+  // 별점 배열의 true만 카운팅하여 변수에 저장
+  const rating = ratings.filter(rating => rating).length;
+
   return (
     <div
       data-name="modal"
@@ -12,7 +32,7 @@ const TripReviewModal = ({ hideModal, ratings, changeRating }) => {
         overflow-y-auto flex flex-col text-black rounded-3xl border border-#b0b0b0"
       >
         <h3 className="text-2.4rem font-semibold">
-          호스트 Juny님의 숙소를 평가해주세요.
+          {`호스트 ${hostName}님의 숙소를 평가해주세요.`}
         </h3>
         <p className="mt-1 text-#717171 text-1.2rem">
           응답하신 내용은 호스트에게만 전달되며, 후기 여러 건을 총체적으로
@@ -43,8 +63,10 @@ const TripReviewModal = ({ hideModal, ratings, changeRating }) => {
         <textarea
           cols="30"
           rows="10"
-          placeholder="세부정보 추가하기"
+          placeholder="리뷰를 작성해주세요."
           className="text-1.2rem border-2 p-4 rounded-xl"
+          value={reviewContent}
+          onChange={onChange}
         ></textarea>
         <div className="mt-10 text-right">
           <button
@@ -56,9 +78,19 @@ const TripReviewModal = ({ hideModal, ratings, changeRating }) => {
             취소
           </button>
           <button
+            data-name="close"
             className="bg-black h-14 w-28 px-5 m-2 text-xl text-white font-bold rounded-xl"
             id="1"
-            onClick={hideModal}
+            onClick={e =>
+              postingReview({
+                e,
+                memberId: 1,
+                accommodationId,
+                reservationId,
+                rating,
+                content: reviewContent,
+              })
+            }
           >
             확인
           </button>
