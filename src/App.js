@@ -1,4 +1,3 @@
-import './App.css';
 import './assets/output.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import RoomDetailPage from './pages/RoomDetailPage';
@@ -7,7 +6,7 @@ import BookingContainer from './containers/BookingContainer';
 import SearchContainer from './containers/SearchContainer';
 import MainPage from './pages/MainPage';
 import ModifyAccountPage from './pages/ModifyAccountPage';
-import RedirectPage from './pages/RedirectPage'
+import RedirectPage from './pages/RedirectPage';
 
 function App() {
   return (

@@ -1,21 +1,18 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import SearchTemplate from '../components/search/SearchTemplate';
 import { useDispatch, useSelector } from 'react-redux';
-import accommodations, {
-  getAccommList,
-  getAccommListSaga,
-} from '../redux/modules/accommodations';
-import { getList } from '../redux/lib/api';
+import { getAccommList } from '../redux/modules/accommodations';
+import { useLocation } from 'react-router-dom';
 
 const SearchContainer = () => {
   const accommodations = useSelector(state => state.accommodations);
   const dispatch = useDispatch();
+  const location = useLocation();
 
   useEffect(() => {
-    const response = getList();
-    dispatch(getAccommList(response));
-  }, [dispatch]);
+    dispatch(getAccommList(location.search));
+  }, [dispatch, location.search]);
+
   return <SearchTemplate accommodations={accommodations.accommodations} />;
 };
 
