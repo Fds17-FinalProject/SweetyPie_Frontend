@@ -4,15 +4,8 @@ import styled from 'styled-components';
 import AccommList from './AccommList';
 import RecentSearch from './RecentSearch';
 import MapPopup from './MapPopup';
-import {
-  HiChevronRight,
-  HiOutlineHeart,
-  HiChevronLeft,
-  HiHeart,
-  HiOutlineX,
-} from 'react-icons/hi';
+import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
 import Pagination from './Pagination';
-import RoomCharge from './RoomCharge';
 import ChargeMenu from './ChargeMenu';
 import MultipleCarousel from '../common/MultipleCarousel';
 const StyledButton = styled.button`

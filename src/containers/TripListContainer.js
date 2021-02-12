@@ -1,9 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TripTemplate from '../components/trip/TripTemplate';
 import { useDispatch, useSelector } from 'react-redux';
 import reservation, { readReservation } from '../redux/modules/reservation';
 import dayjs from 'dayjs';
-import { postReview } from '../redux/lib/api/review';
 
 const TripListContainer = () => {
   // dispatch 함수
@@ -18,6 +17,9 @@ const TripListContainer = () => {
     }),
   );
 
+  // 리뷰 텍스트 상태
+  const [reviewComment, setReviewComment] = useState('리뷰 쓰기');
+
   // 오늘 날짜
   const today = dayjs().format('YYYY-MM-DD');
 
@@ -28,7 +30,7 @@ const TripListContainer = () => {
   // 예약 리스트 읽기 요청 GET
   useEffect(() => {
     dispatch(readReservation());
-  }, [dispatch]);
+  }, [dispatch, reviewComment]);
 
   // 로딩이 완료되면 날짜에 따라 필터링
   if (loading === false) {
@@ -45,6 +47,8 @@ const TripListContainer = () => {
       loading={loading}
       pastReservations={pastReservations}
       upcomingReservations={upcomingReservations}
+      reviewComment={reviewComment}
+      setReviewComment={setReviewComment}
     />
   );
 };

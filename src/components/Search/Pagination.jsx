@@ -2,20 +2,11 @@ import React, { useState, useEffect } from 'react';
 // import axios from 'axios'
 import ReactPaginate from 'react-paginate';
 import '../../index.css';
-import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io';
-import axios from 'axios';
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useLocation } from 'react-router-dom';
-import { getList } from '../../redux/lib/api';
-import { getAccommList } from '../../redux/modules/accommodations';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 function Pagination() {
   const [offset, setOffset] = useState(0);
-  const [data, setData] = useState([]);
-  const [perPage] = useState(10);
-  const [pageCount, setPageCount] = useState(0);
-  const location = useLocation();
 
   const accommodations = useSelector(state => state.accommodations);
   

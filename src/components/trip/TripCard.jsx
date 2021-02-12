@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from '../common/Modal';
-import TripReviewModal from './TripReviewModal';
-import { postReview } from '../../redux/lib/api/review';
+import TripReviewPostModal from './TripReviewPostModal';
+import TripReviewGetModal from './TripReviewGetModal';
+import { readReview, postReview } from '../../redux/lib/api/review';
 
-const TripCard = ({ reservations, tab }) => {
+const TripCard = ({ reservations, tab, reviewComment, setReviewComment }) => {
   // 예약 숙소 정보
   const {
     memberId,
@@ -20,25 +21,50 @@ const TripCard = ({ reservations, tab }) => {
     accommodationPicture,
   } = reservations;
 
-  // 모달창 상태
+  // 작성된 리뷰 GET 한 상태
+  const [review, setReview] = useState({
+    ratings: null,
+    content: '',
+  });
+
+  // 리뷰 작성 모달창 상태
   const [visible, setVisible] = useState(false);
+
+  // 리뷰 보기 모달창 상태
+  const [revVisible, setRevVisible] = useState(false);
 
   // 별점 상태
   const [ratings, setRatings] = useState([true, true, true, true, false]);
 
-  // 리뷰 텍스트 상태
-  const [reviewComent, setReviewComent] = useState('리뷰 쓰기');
-
-  // 모달 열기
+  // 리뷰 작성 모달 열기
   const showModal = () => {
     setVisible(true);
     setRatings([true, true, true, true, false]);
   };
 
-  // 모달 숨기기
+  // 리뷰 보기 모달 열기
+  const showRevModal = async reservationId => {
+    setRevVisible(true);
+    const response = await readReview(reservationId);
+    const reviewData = await response.data;
+    setReview({
+      ...review,
+      ratings: reviewData.rating,
+      content: reviewData.content,
+    });
+  };
+
+  // 리뷰 작성 모달 숨기기
   const hideModal = ({ target }) => {
     if (target.dataset.name) {
       setVisible(false);
+    }
+  };
+
+  // 리뷰 보기 모달 숨기기
+  const hideRevModal = ({ target }) => {
+    if (target.dataset.name) {
+      setRevVisible(false);
     }
   };
 
@@ -70,20 +96,29 @@ const TripCard = ({ reservations, tab }) => {
     if (e.target.dataset.name) {
       setVisible(false);
     }
-    setReviewComent('내 리뷰 보기');
+    setReviewComment('내 리뷰 보기');
   };
 
   return (
     <>
       {visible && (
         <Modal>
-          <TripReviewModal
+          <TripReviewPostModal
             accommodationId={accommodationId}
             hideModal={hideModal}
             ratings={ratings}
             changeRating={changeRating}
             reservationId={reservationId}
             postingReview={postingReview}
+            hostName={hostName}
+          />
+        </Modal>
+      )}
+      {revVisible && (
+        <Modal>
+          <TripReviewGetModal
+            review={review}
+            hideRevModal={hideRevModal}
             hostName={hostName}
           />
         </Modal>
@@ -115,12 +150,19 @@ const TripCard = ({ reservations, tab }) => {
                 />
                 <p className="text-1.4rem truncate flex-1">{title}</p>
               </div>
-              {tab === 'past' ? (
+              {tab === 'past' && isWrittenReview ? (
+                <div
+                  onClick={() => showRevModal(reservationId)}
+                  className="text-1.4rem h-24 flex flex-row items-center rounded-b-2xl justify-center border-t border-gray-300 font-semibold cursor-pointer hover:transition-all hover:bg-#f7f7f7"
+                >
+                  내 리뷰 보기
+                </div>
+              ) : tab === 'past' && !isWrittenReview ? (
                 <div
                   onClick={showModal}
                   className="text-1.4rem h-24 flex flex-row items-center rounded-b-2xl justify-center border-t border-gray-300 font-semibold cursor-pointer hover:transition-all hover:bg-#f7f7f7"
                 >
-                  {isWrittenReview ? '내 리뷰 보기' : `${reviewComent}`}
+                  {reviewComment}
                 </div>
               ) : (
                 <Link to="/booking">

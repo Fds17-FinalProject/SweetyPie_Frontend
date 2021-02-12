@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import SVG from '../../assets/Svg';
+import SVG from '../../assets/svg';
 import { IconButton } from '../common/Button';
 
 const BookingGuestEditModal = ({ hideModal }) => {
