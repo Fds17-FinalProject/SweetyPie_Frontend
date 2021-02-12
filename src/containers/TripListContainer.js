@@ -3,7 +3,6 @@ import TripTemplate from '../components/trip/TripTemplate';
 import { useDispatch, useSelector } from 'react-redux';
 import reservation, { readReservation } from '../redux/modules/reservation';
 import dayjs from 'dayjs';
-import { postReview } from '../redux/lib/api/review';
 
 const TripListContainer = () => {
   // dispatch 함수
