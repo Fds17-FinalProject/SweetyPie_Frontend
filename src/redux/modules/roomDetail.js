@@ -46,3 +46,5 @@ const roomDetail = handleActions({
     roomDeatilError: error,
   }),
 });
+
+export default roomDetail;
