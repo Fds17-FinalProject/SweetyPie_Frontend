@@ -1,4 +1,4 @@
-import SVG from '../../assets/Svg';
+import SVG from '../../assets/svg';
 
 const TripReviewGetModal = ({ hideRevModal, review, hostName }) => {
   const { ratings, content } = review;
@@ -45,8 +45,7 @@ const TripReviewGetModal = ({ hideRevModal, review, hostName }) => {
               ),
             )}
         </div>
-
-        <div className="text-2rem">{content}</div>
+        <div className="text-1.6rem">{content}</div>
         <div className="text-right">
           <button
             data-name="close"
