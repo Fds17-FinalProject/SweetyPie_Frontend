@@ -5,7 +5,7 @@ import TripReviewPostModal from './TripReviewPostModal';
 import TripReviewGetModal from './TripReviewGetModal';
 import { readReview, postReview } from '../../redux/lib/api/review';
 
-const TripCard = ({ reservations, tab }) => {
+const TripCard = ({ reservations, tab, reviewComment, setReviewComment }) => {
   // 예약 숙소 정보
   const {
     memberId,
@@ -21,6 +21,12 @@ const TripCard = ({ reservations, tab }) => {
     accommodationPicture,
   } = reservations;
 
+  // 작성된 리뷰 GET 한 상태
+  const [review, setReview] = useState({
+    ratings: null,
+    content: '',
+  });
+
   // 리뷰 작성 모달창 상태
   const [visible, setVisible] = useState(false);
 
@@ -29,15 +35,6 @@ const TripCard = ({ reservations, tab }) => {
 
   // 별점 상태
   const [ratings, setRatings] = useState([true, true, true, true, false]);
-
-  // 리뷰 텍스트 상태
-  const [reviewComent, setReviewComent] = useState('리뷰 쓰기');
-
-  // 작성된 리뷰 GET 한 상태
-  const [review, setReview] = useState({
-    ratings: null,
-    content: '',
-  });
 
   // 리뷰 작성 모달 열기
   const showModal = () => {
@@ -99,7 +96,7 @@ const TripCard = ({ reservations, tab }) => {
     if (e.target.dataset.name) {
       setVisible(false);
     }
-    setReviewComent('내 리뷰 보기');
+    setReviewComment('내 리뷰 보기');
   };
 
   return (
@@ -165,7 +162,7 @@ const TripCard = ({ reservations, tab }) => {
                   onClick={showModal}
                   className="text-1.4rem h-24 flex flex-row items-center rounded-b-2xl justify-center border-t border-gray-300 font-semibold cursor-pointer hover:transition-all hover:bg-#f7f7f7"
                 >
-                  {reviewComent}
+                  {reviewComment}
                 </div>
               ) : (
                 <Link to="/booking">
