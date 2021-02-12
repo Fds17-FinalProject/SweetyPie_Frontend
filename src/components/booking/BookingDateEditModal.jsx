@@ -1,8 +1,23 @@
+import { useState } from 'react';
 import SVG from '../../assets/svg';
 import { AiOutlineClose } from 'react-icons/ai';
 import Calendar from '../common/Calendar';
 
 const BookingDateEditModal = ({ hideModal }) => {
+  // 체크인, 체크아웃 날짜에 대한 상태
+  const [dateRange, setDateRange] = useState({
+    startDate: null,
+    endDate: null,
+  });
+
+  // 날짜 변경 함수
+  const handleOnDateChange = ({ startDate, endDate }) => {
+    setDateRange({
+      startDate: startDate,
+      endDate: endDate,
+    });
+  };
+
   return (
     <div
       data-name="modal"
@@ -34,17 +49,34 @@ const BookingDateEditModal = ({ hideModal }) => {
           <div className="w-5/12 ml-10% flex">
             <div>
               <div className="font-semibold">체크인</div>
-              <input placeholder="날짜 추가" className="text-1.4rem" />
+              <input
+                placeholder="날짜 추가"
+                className="text-1.4rem"
+                defaultValue={
+                  dateRange.startDate &&
+                  dateRange.startDate.format('YYYY-MM-DD')
+                }
+              />
             </div>
 
             <div>
               <div className="font-semibold">체크아웃</div>
-              <input placeholder="날짜 추가" className="text-1.4rem" />
+              <input
+                placeholder="날짜 추가"
+                className="text-1.4rem"
+                defaultValue={
+                  dateRange.endDate && dateRange.endDate.format('YYYY-MM-DD')
+                }
+              />
             </div>
           </div>
         </div>
         <div className="flex justify-around">
-          <Calendar />
+          <Calendar
+            dateRange={dateRange}
+            setDateRange={setDateRange}
+            handleOnDateChange={handleOnDateChange}
+          />
         </div>
         <div className="flex items-center text-1.4rem justify-end pr-1.6rem">
           <button className="underline p-0.8rem font-semibold">

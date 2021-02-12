@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-// 리뷰 작성 POST 요청
+// 작성된 리뷰 GET 요청
+export const readReview = reservationId =>
+  axios.get(`http://3.34.50.91/api/review/${reservationId}`);
+
+// 작성한 리뷰 POST 요청
 export const postReview = ({
   memberId,
   accommodationId,
