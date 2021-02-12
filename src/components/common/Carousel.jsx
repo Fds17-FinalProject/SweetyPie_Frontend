@@ -86,8 +86,6 @@ const Carousel = ({ size, img }) => {
     return joinImage;
   })
 
-
-
   return (
     <StyledSlider size={size} LowQualityImg={LowQualityImg} {...settings} >
       {LowQualityImg.map(image => (<img src={image} alt="" />))}
