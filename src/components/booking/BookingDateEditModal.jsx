@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import SVG from '../../assets/svg';
+import { AiOutlineClose } from 'react-icons/ai';
 import Calendar from '../common/Calendar';
 
 const BookingDateEditModal = ({ hideModal }) => {

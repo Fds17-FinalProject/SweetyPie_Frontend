@@ -4,7 +4,7 @@ import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import 'moment/locale/ko';
 import '../../assets/calendar.css';
-import SVG from '../../assets/Svg';
+import SVG from '../../assets/svg';
 
 const Calendar = ({ dateRange, handleOnDateChange }) => {
   const [focus, setFocus] = useState('startDate');

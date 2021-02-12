@@ -70,3 +70,104 @@ legend {
   display: block;
   clear: both;
 }
+
+/* pagination library css custom */
+.pagination {
+  margin: 15px auto;
+  display: flex;
+  list-style: none;
+  outline: none;
+}
+.pagination > .previous > a {
+}
+.pagination > .active > a {
+  display: inline-block;
+  -ms-flex-negative: 0;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  margin: 0px;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 0px;
+  -webkit-transition: -webkit-transform 0.25s ease, transform 0.25s ease;
+  -moz-transition: transform 0.25s ease;
+  transition: -ms-transform 0.25s ease, -webkit-transform 0.25s ease,
+    transform 0.25s ease;
+  outline: none;
+  background: #222222;
+  color: #ffffff;
+}
+.pagination > .active {
+  /* border: none ;
+  border-radius: 50% ;
+  width: 32px ;
+  height: 32px ;
+  margin: 0px ;
+  margin-left: 8px ;
+  margin-right: 8px ;
+  padding: 0px ;
+  transition: -ms-transform 0.25s ease, -webkit-transform 0.25s ease,
+    transform 0.25s ease ;
+  outline: none ;
+  background: #222222 ;
+  color: #ffffff ; */
+}
+.pagination > li > a {
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+  -ms-flex-negative: 0;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 600;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-flex-shrink: 0;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #222222;
+  width: 32px;
+  height: 32px;
+  margin: 0px;
+  margin-left: 8px;
+  margin-right: 8px;
+  padding: 0px;
+  -webkit-transition: -webkit-transform 0.25s ease, transform 0.25s ease;
+  -moz-transition: transform 0.25s ease;
+  transition: -ms-transform 0.25s ease, -webkit-transform 0.25s ease,
+    transform 0.25s ease;
+  outline: none;
+}

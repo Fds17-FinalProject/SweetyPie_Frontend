@@ -25,16 +25,20 @@ export function* searchSaga() {
 }
 
 // 초기 상태 선언
-const initialState = { accommodations: [], error: null };
+const initialState = { accommodations: [], error: null, pageable: {} };
 
 const accommodations = handleActions(
   {
     [GET_ACCOMM_LIST_SUCCESS]: (state, action) => {
       console.log(state, action);
-      return { ...state, accommodations: action.payload.content };
+      return {
+        ...state,
+        accommodations: action.payload.content,
+        pageable: { totalPages: action.payload.totalPages },
+      };
     },
     [GET_ACCOMM_LIST_FAILURE]: (state, action) => {
-      console.log(state, action);
+      console.log(action);
       return { ...state, error: action.payload };
     },
   },

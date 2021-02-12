@@ -18,25 +18,19 @@ const HoverSvg = styled.button`
   }
 `;
 
-const url = window.location.origin;
+// className="hover:bg-gray-200 transform hover:scale-110 transition-colors duration-150 focus:outline-none rounded-full focus:shadow-outline"
 
 const AccommList = props => {
   const {
     id,
     accommodationPictures,
     accommodationType,
-    address,
     bathroomNum,
     bedNum,
     bedroomNum,
     buildingType,
     capacity,
-    city,
-    contact,
     gu,
-    hostName,
-    latitude,
-    longitude,
     price,
     rating,
     reviewNum,

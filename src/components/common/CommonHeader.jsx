@@ -1,8 +1,9 @@
 import React from 'react';
 import '../../assets/output.css';
+import SVG from '../../assets/svg';
 import { BiSearch } from 'react-icons/bi';
-import HeaderLogo from '../main/HeaderLogo';
-import HeaderUser from '../main/HeaderUser';
+import HeaderLogo from '../Main/HeaderLogo';
+import HeaderUser from '../Main/HeaderUser';
 export const HeaderSearch = () => {
   return (
     <button
