@@ -21,6 +21,15 @@ const TripReviewPostModal = ({
   // 별점 배열의 true만 카운팅하여 변수에 저장
   const rating = ratings.filter(rating => rating).length;
 
+  // 별점에 따른 코멘트 내용
+  const ratingComment = {
+    1: '괴로웠어요',
+    2: '별로였어요',
+    3: '보통이었어요',
+    4: '좋았어요',
+    5: '훌륭했어요',
+  };
+
   return (
     <div
       data-name="modal"
@@ -40,7 +49,10 @@ const TripReviewPostModal = ({
         </p>
         <div className="mt-10">
           {/* 별점에 따라 텍스트 내용 바뀌어야 함 */}
-          <p className="text-gray-700 text-2xl font-semibold">좋았어요</p>
+          <p className="text-gray-700 text-2xl font-semibold">
+            {/* 괴로웠어요? 별로였어요? 보통이었어요? 좋았어요? 훌륭했어요? */}
+            {ratingComment[rating]}
+          </p>
         </div>
         <div className="mt-5 mb-5 flex">
           {ratings.map((rating, i) =>
