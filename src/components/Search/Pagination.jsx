@@ -19,34 +19,30 @@ function Pagination() {
 
   const accommodations = useSelector(state => state.accommodations);
   
+  const url = new URL(window.location.href);
+  const page = url.searchParams.get('page');
   const history = useHistory();
   const handlePageClick = e => {
-    const url = new URL(window.location.href);
     const selectedPage = e.selected;
     setOffset(selectedPage + 1);
-    if (!url.searchParams.get('page')) { 
+
+    if (!page) { 
       url.searchParams.append('page', selectedPage + 1);
-      console.log('페이지 없을 경우 추가해서 값 넣어준다');
-      history.push(url.search);
-      window.scrollTo(0, 0);
     }
     
-    if (url.searchParams.get('page')) { 
-      console.log('페이지 있는 경우에는 덮어쓰기');
-
+    if (page) { 
       url.searchParams.set('page', selectedPage + 1);
-      history.push(url.search);
-      window.scrollTo(0, 0);
     } 
+    history.push(url.search);
+    window.scrollTo(0, 0);
   };
 
-  useEffect(() => {
-    // getData();
-  }, [ offset]);
+  useEffect(() => { 
+    setOffset(url.searchParams.get('page') || 1)
+  },[]);
 
   return (
     <div>
-      {/* {data} */}
       <ReactPaginate
         previousLabel={'<'}
         nextLabel={'>'}
@@ -55,6 +51,7 @@ function Pagination() {
         pageCount={accommodations.pageable.totalPages - 1}
         marginPagesDisplayed={1}
         pageRangeDisplayed={4}
+        pageNum={offset}
         onPageChange={handlePageClick}
         containerClassName={'pagination'}
         subContainerClassName={'pages pagination'}

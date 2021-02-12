@@ -78,8 +78,6 @@ legend {
   list-style: none;
   outline: none;
 }
-.pagination > .previous > a {
-}
 .pagination > .active > a {
   display: inline-block;
   -ms-flex-negative: 0;
