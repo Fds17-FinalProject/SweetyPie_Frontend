@@ -11,7 +11,7 @@ const RoomDetailContainer = () => {
     ({ roomDetail, loading }) => ({
       accommodation: roomDetail.accommodation,
       roomDetailError: roomDetail.roomDetailError,
-      loading: loading['/roomDetail/READ_ROOMDETAIL'],
+      loading: loading['roomDetail/READ_ROOMDETAIL'],
     }),
   );
   console.log(accommodation);
@@ -23,8 +23,6 @@ const RoomDetailContainer = () => {
   useEffect(() => {
     dispatch(readRoomDetail(room_id));
   }, [dispatch, room_id]);
-
-  // (room_id))
 
   return (
     <div>

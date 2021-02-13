@@ -42,17 +42,17 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
     bookedDates,
     accommodationPictures,
   } = accommodation;
-  const ratingRoundUp = rating.toFixed(2);
+  // const ratingRoundUp = rating.toFixed(2);
 
   return (
     <>
       <RoomDetailHeader />
-      {!loading && (
+      {loading === false && (
         <div className="max-w-screen-2xl mt-32">
           <div className="mx-48 px-32">
             <Title
               title={title}
-              rating={ratingRoundUp}
+              rating={rating}
               reviewNum={reviewNum}
               address={address}
             />
@@ -77,16 +77,16 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
               <CalendarDetail gu={gu} />
             </div>
             <div className="w-1/3 h-full sticky top-44">
-              {/* <Payment rating={ratingRoundUp} /> */}
+              <Payment rating={rating} reviewNum={reviewNum} price={price} />
             </div>
           </div>
           <div className="mx-48 px-32">
-            <Reviews rating={rating} reviewNum={reviewNum} />
+            <Reviews rating={rating} reviewNum={reviewNum} reviews={reviews} />
             <Map
               address={address}
-              locationDesc={locationDesc}
               latitude={latitude}
               longitude={longitude}
+              transportationDesc={transportationDesc}
             />
             <Host
               hostName={hostName}
