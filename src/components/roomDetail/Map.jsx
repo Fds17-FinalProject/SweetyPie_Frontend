@@ -1,11 +1,11 @@
 import React from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
-const Map = () => {
-  const address = '강릉시, 강원도, 대한민국';
-  const locationDesc =
-    '펜션에서 경포 해수욕장까지 도보 5분 소요됩니다.\n펜션 바로 앞에 버스정류장이 위치해 있습니다.\n\n주문진터미널 3km(차로 5분)\n강릉역(KTX)에서 차로 20분정도 소요';
-  locationDesc.split('\n');
+const Map = ({ address, transportationDesc, latitude, longitude }) => {
+  const transportationDescription = (
+    transportationDesc ||
+    '인천공항이나 김포공항에서 지하철 역으로 오는 방법은 공항버스, 공항철도, 택시가 있습니다.\n\n 짐이 많을 경우에는 공항버스가 이동하시기에 편리합니다.\n\n 지하철역 2번출구와 도보 5분 거리에 위치해 있습니다:)'
+  ).split('\n');
 
   const containerStyle = {
     width: '74vw',
@@ -13,8 +13,8 @@ const Map = () => {
   };
 
   const center = {
-    lat: 37.413294,
-    lng: 126.734086,
+    lat: latitude,
+    lng: longitude,
   };
 
   const { isLoaded } = useJsApiLoader({
@@ -27,7 +27,6 @@ const Map = () => {
     const bounds = new window.google.maps.LatLngBounds();
     // map.fitBounds(bounds);
     setMap(map);
-    console.log(map);
   }, []);
 
   const onUnmount = React.useCallback(function callback(map) {
@@ -38,12 +37,11 @@ const Map = () => {
     <div className="">
       <h1 className="text-2.2rem font-bold my-2.4rem">위치</h1>
       <div className="mb-2.4rem">
-        {/* <img src={img + '/img/map.jpg'} alt="map" className="w-full" /> */}
         {isLoaded ? (
           <GoogleMap
             mapContainerStyle={containerStyle}
             center={center}
-            zoom={12}
+            zoom={14}
             onLoad={onLoad}
             onUnmount={onUnmount}
           >
@@ -56,7 +54,7 @@ const Map = () => {
       </div>
       <div>
         <h2 className="text-1.6rem font-bold mb-6">{address}</h2>
-        <p className="text-1.6rem">{locationDesc}</p>
+        <p className="text-1.6rem">{transportationDescription}</p>
       </div>
       <div className="my-20 border-b"></div>
     </div>

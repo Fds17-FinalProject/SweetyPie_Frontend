@@ -1,11 +1,8 @@
 import React from 'react';
 import { HiStar, HiOutlineHeart, HiHeart } from 'react-icons/hi';
 
-const Title = () => {
-  const title = '스파의 이완과 테라스의 풍경이 멋진 강릉의 302호 객실';
-  const ratingAvg = 4.58;
-  const reviewNum = 24;
-  const address = '강릉시, 강원도, 대한민국';
+const Title = ({ title, rating, reviewNum, address }) => {
+  const ratingRoundUp = rating.toFixed(2);
 
   return (
     <div className="pt-2.4rem">
@@ -13,9 +10,11 @@ const Title = () => {
       <div className="mt-3 text-1.4rem flex justify-between	">
         <div className="inline-flex items-center flex-start">
           <span className="inline-flex items-center flex-start mr-2">
-            <HiStar className="inline-block text-airbnb" />
+            <div>
+              <HiStar className="inline-block text-airbnb" />
+            </div>
           </span>
-          <span className="font-bold mr-2">{ratingAvg}</span>
+          <span className="font-bold mr-2">{ratingRoundUp}</span>
           <span className="text-#717171">({reviewNum})</span>
           <span className="text-#717171 mr-1"> ㆍ </span>
           <span className="text-#717171 font-bold underline mr-2">

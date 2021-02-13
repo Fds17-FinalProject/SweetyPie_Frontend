@@ -19,18 +19,17 @@ export default function createRequestSaga(type, request) {
   return function* (action) {
     // api 요청 날리기 전에 로딩을 true로 바꾼다.
     yield put(startLoading(type));
+    console.log('loading start');
     // yield put(resetError(type));
     // put은 특정 액션을 디스패치 해준다.
-
     try {
       const response = yield call(request, action.payload);
-      // console.log(response.data);
+      console.log(request, action.payload);
       yield put({
         type: SUCCESS,
         payload: response.data,
       });
     } catch (e) {
-      // console.log(e);
       // 에러 객체 디스패치
       yield put({
         type: FAILURE,

@@ -56,6 +56,7 @@ module.exports = {
         '50%': '50%',
       },
       spacing: {
+        '8%': '8%',
         '10%': '10%',
         '45%': '45%',
         '0.05rem': '0.05rem',
@@ -85,6 +86,7 @@ module.exports = {
         '6.5rem': '6.5rem',
         '7rem': '7rem',
         '8.5rem': '8.5rem',
+        '9rem': '9rem',
         '9.5rem': '9.5rem',
         '10.4rem': '10.4rem',
         '11rem': '11rem',
