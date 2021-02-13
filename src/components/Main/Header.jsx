@@ -5,19 +5,13 @@ import styled from 'styled-components';
 import HeaderLogo from './HeaderLogo';
 import HeaderUser from './HeaderUser';
 
-const Button = styled.button.attrs(() => ({ type: 'button' }))`
+const Button = styled.button`
   :hover {
     background: #ebebeb;
     border-radius: 999rem;
     z-index: 1;
   }
 `;
-// const HeaderWrap = styled.div`
-//   animation-duration: 0.2s;
-//   animation-timing-function: ease-out;
-//   animation-fill-mode: forwards;
-//   animation-name: slideUp;
-// `;
 
 const HeaderSearch = () => {
   return (

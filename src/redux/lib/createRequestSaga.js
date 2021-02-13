@@ -1,6 +1,5 @@
 import { call, put } from 'redux-saga/effects';
 import { finishLoading, startLoading } from '../modules/loading';
-import { assignError, resetError } from '../modules/error';
 
 // 한번에 3개의 액션 타입을 설정하기 위한 함수
 export const createRequestActionTypes = type => {
@@ -19,7 +18,6 @@ export default function createRequestSaga(type, request) {
   return function* (action) {
     // api 요청 날리기 전에 로딩을 true로 바꾼다.
     yield put(startLoading(type));
-    console.log('loading start');
     // yield put(resetError(type));
     // put은 특정 액션을 디스패치 해준다.
     try {
