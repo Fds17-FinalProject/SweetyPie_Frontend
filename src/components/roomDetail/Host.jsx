@@ -2,12 +2,11 @@ import React from 'react';
 import { IoStar, IoShieldCheckmarkSharp } from 'react-icons/io5';
 import { GoShield } from 'react-icons/go';
 
-const Host = () => {
+const Host = ({ hostName, hostDesc, hostReviewNum }) => {
   const img = window.location.origin;
-  const host = 'JamJam';
-  const hostDesc =
-    '강릉 토박이이며, 가깝고도 먼 주문진으로 시집온지 이십년이 넘은 쌍둥이 맘입니다. 사람들을 워낙 좋아하며, 여행하고, 영화보는것을 좋아하지만, 맘대로 안되더라구요. ^*^ 여러나라, 지역에서 다양한 게스트들을 만나고 싶고, 많이 찾아 주셨으면 좋겠습니다......';
-  const hostReviewNum = 264;
+  const hostDescription =
+    hostDesc ||
+    '강릉 토박이이며, 가깝고도 먼 주문진으로 시집온지 이십년이 넘은 쌍둥이 맘입니다. 스킨스쿠버와 커피, 코딩을 좋아하며, 특기는 냥냥펀치 입니다:D 여러 나라, 지역에서 다양한 게스트들을 만나고 싶고, 많이 찾아 주셨으면 좋겠습니다~~';
 
   return (
     <div className="">
@@ -18,7 +17,9 @@ const Host = () => {
           alt="..."
         />
         <div className="">
-          <h1 className="text-2.2rem font-bold mb-0.8rem">호스트: {host}님</h1>
+          <h1 className="text-2.2rem font-bold mb-0.8rem">
+            호스트: {hostName}님
+          </h1>
           <span className="text-1.4rem text-#717171">
             회원 가입일: 2017년 2월
           </span>
@@ -36,7 +37,7 @@ const Host = () => {
               본인 인증 완료
             </span>
           </div>
-          <p className="mb-10">{hostDesc}</p>
+          <p className="mb-10">{hostDescription}</p>
           <h2 className="font-bold mb-0.8rem">숙박중 게스트와의 교류</h2>
           <p className="">
             If you need any help, always feel free to ask us. Please contact us
