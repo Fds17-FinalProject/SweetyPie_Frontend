@@ -13,8 +13,8 @@ const Host = ({ hostName, hostDesc, hostReviewNum }) => {
       <div className="flex mb-2.4rem">
         <img
           className="inline-block rounded-full w-28 h-28 mr-10"
-          src={img + '/img/JamJam.jpg'}
-          alt="..."
+          src={img + '/img/JamJam2.jpg'}
+          alt="호스트 프로필 사진"
         />
         <div className="">
           <h1 className="text-2.2rem font-bold mb-0.8rem">
@@ -37,7 +37,7 @@ const Host = ({ hostName, hostDesc, hostReviewNum }) => {
               본인 인증 완료
             </span>
           </div>
-          <p className="mb-10">{hostDescription}</p>
+          <p className="mb-10">{hostDescription.substring(0, 300)}</p>
           <h2 className="font-bold mb-0.8rem">숙박중 게스트와의 교류</h2>
           <p className="">
             If you need any help, always feel free to ask us. Please contact us
