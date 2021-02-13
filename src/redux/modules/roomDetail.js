@@ -2,7 +2,7 @@ import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga, {
   createRequestActionTypes,
 } from '../lib/createRequestSaga';
-import * as authAPI from '../lib/api/roomDetail';
+import * as roomDetailAPI from '../lib/api/roomDetail';
 import { takeLatest } from 'redux-saga/effects';
 
 // action types
@@ -13,18 +13,16 @@ const [
 ] = createRequestActionTypes('roomDetail/READ_ROOMDETAIL');
 
 // action creators
-export const readRoomDetail = createAction(
-  READ_ROOMDETAIL,
-  ({ accommodation }) => ({
-    accommodation,
-  }),
-);
+// payload로 room_id를 보낸다. 왜냐하면 url room_id에 따라 DB를 보내주기 때문!
+export const readRoomDetail = createAction(READ_ROOMDETAIL);
 
 // saga
 const readRoomDetailSaga = createRequestSaga(
   READ_ROOMDETAIL,
-  authAPI.readRoomDetail,
+  roomDetailAPI.readRoomDetail,
 );
+console.log(roomDetailAPI.readRoomDetail);
+
 export function* RoomDetailSaga() {
   yield takeLatest(READ_ROOMDETAIL, readRoomDetailSaga);
 }
@@ -32,19 +30,28 @@ export function* RoomDetailSaga() {
 // initialState
 const initialState = {
   accommodation: {},
-  roomDeatilError: null,
+  roomDetailError: null,
 };
 
 // reducer
-const roomDetail = handleActions({
-  [READ_ROOMDETAIL_SUCCESS]: (state, { payload: { accommodation } }) => ({
-    ...state,
-    accommodation,
-  }),
-  [READ_ROOMDETAIL_FAILURE]: (state, { payload: { error } }) => ({
-    ...state,
-    roomDeatilError: error,
-  }),
-});
+const roomDetail = handleActions(
+  {
+    [READ_ROOMDETAIL_SUCCESS]: (state, { payload: accommodation }) => {
+      // console.log(state, accommodation);
+      return {
+        ...state,
+        accommodation,
+      };
+    },
+    [READ_ROOMDETAIL_FAILURE]: (state, { payload: error }) => {
+      // console.log(state, error);
+      return {
+        ...state,
+        roomDeatilError: error,
+      };
+    },
+  },
+  initialState,
+);
 
 export default roomDetail;

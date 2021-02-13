@@ -24,13 +24,11 @@ export default function createRequestSaga(type, request) {
 
     try {
       const response = yield call(request, action.payload);
-      // console.log(response.data);
       yield put({
         type: SUCCESS,
         payload: response.data,
       });
     } catch (e) {
-      // console.log(e);
       // 에러 객체 디스패치
       yield put({
         type: FAILURE,
