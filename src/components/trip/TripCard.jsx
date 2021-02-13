@@ -5,7 +5,7 @@ import TripReviewPostModal from './TripReviewPostModal';
 import TripReviewGetModal from './TripReviewGetModal';
 import { readReview, postReview } from '../../redux/lib/api/review';
 
-const TripCard = ({ reservations, tab, reviewComment, setReviewComment }) => {
+const TripCard = ({ reservations, tab, reviewStatus, setReviewStatus }) => {
   // 예약 숙소 정보
   const {
     memberId,
@@ -47,6 +47,7 @@ const TripCard = ({ reservations, tab, reviewComment, setReviewComment }) => {
     setRevVisible(true);
     const response = await readReview(reservationId);
     const reviewData = await response.data;
+    console.log(reviewData);
     setReview({
       ...review,
       ratings: reviewData.rating,
@@ -96,7 +97,7 @@ const TripCard = ({ reservations, tab, reviewComment, setReviewComment }) => {
     if (e.target.dataset.name) {
       setVisible(false);
     }
-    setReviewComment('내 리뷰 보기');
+    setReviewStatus(!reviewStatus);
   };
 
   return (
@@ -162,7 +163,7 @@ const TripCard = ({ reservations, tab, reviewComment, setReviewComment }) => {
                   onClick={showModal}
                   className="text-1.4rem h-24 flex flex-row items-center rounded-b-2xl justify-center border-t border-gray-300 font-semibold cursor-pointer hover:transition-all hover:bg-#f7f7f7"
                 >
-                  {reviewComment}
+                  리뷰 쓰기
                 </div>
               ) : (
                 <Link to="/booking">

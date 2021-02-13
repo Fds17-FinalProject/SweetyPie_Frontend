@@ -8,8 +8,8 @@ const TripTemplate = ({
   loading,
   pastReservations,
   upcomingReservations,
-  reviewComment,
-  setReviewComment,
+  reviewStatus,
+  setReviewStatus,
 }) => {
   // 쿼리 스트링으로 어떤 tab인지 확인
   const location = useLocation();
@@ -51,8 +51,8 @@ const TripTemplate = ({
                 key={pastReservation.reservationId}
                 tab={tab}
                 reservations={{ ...pastReservation }}
-                reviewComment={reviewComment}
-                setReviewComment={setReviewComment}
+                setReviewStatus={setReviewStatus}
+                reviewStatus={reviewStatus}
               />
             ))}
         </ul>
