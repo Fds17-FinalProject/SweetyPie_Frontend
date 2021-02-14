@@ -2,8 +2,9 @@ import React from 'react';
 import { FiClock, FiHome, FiSlash, FiAlertTriangle } from 'react-icons/fi';
 import { MdSmokeFree, MdPets } from 'react-icons/md';
 import { FaCheckCircle } from 'react-icons/fa';
+import SVG from '../../assets/svg';
 
-const ThingsToKnow = () => {
+const ThingsToKnow = ({ onShowModal }) => {
   return (
     <div className="pb-56">
       <h1 className="text-2.2rem mb-2.4rem font-bold">알아두어야 할 사항</h1>
@@ -74,15 +75,25 @@ const ThingsToKnow = () => {
               </div>
               <span className="">일산화탄소 경보기</span>
             </li>
-            <li className="mb-0.8rem flex">
+            <li className="mb-6 flex">
               <div>
                 <FaCheckCircle className="w-8 h-8 mr-1.2rem" />
               </div>
               <span className="">화재 경보기 </span>
             </li>
             <li className="mb-0.8rem flex">
-              <button className="underline text-#717171">모두 보기</button>
-              {/* <svg></svg> */}
+              <button
+                className="flex items-center underline text-#717171"
+                onClick={() => onShowModal('safety')}
+              >
+                <span className="mr-2">모두 보기</span>
+                <SVG
+                  name="rightArrow"
+                  width="12px"
+                  height="12px"
+                  viewBox="0 0 18 18"
+                />
+              </button>
             </li>
           </ul>
         </div>
@@ -91,11 +102,22 @@ const ThingsToKnow = () => {
           <p className="mb-1.2rem">
             체크인 24시간 전까지 수수료 없이 예약 취소 가능
           </p>
-          <p className="mb-0.8rem">
+          <p className="mb-6">
             그 이후로는 체크인 전에 취소하면 첫 1박 요금과 서비스 수수료를
             제외한 전액이 환불됩니다.
           </p>
-          <button className="underline text-#717171">자세히 보기</button>
+          <button
+            className="flex items-center underline text-#717171"
+            onClick={() => onShowModal('refund')}
+          >
+            <span className="mr-2">자세히 보기</span>
+            <SVG
+              name="rightArrow"
+              width="12px"
+              height="12px"
+              viewBox="0 0 18 18"
+            />
+          </button>
         </div>
       </div>
     </div>

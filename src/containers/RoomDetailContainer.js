@@ -27,7 +27,6 @@ const RoomDetailContainer = () => {
   return (
     <div>
       <RoomDetailTemplate accommodation={accommodation} loading={loading} />
-      {/* <RoomDetailTemplate /> */}
     </div>
   );
 };
