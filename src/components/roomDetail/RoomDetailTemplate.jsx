@@ -15,6 +15,8 @@ import ThingsToKnow from './ThingsToKnow';
 import RoomDetailHeader from './RoomDetailHeader';
 import Modal from '../common/Modal';
 import RoomDetailSafetyModal from './RoomDetailSafetyModal';
+import RoomDetailGuestEditModal from './RoomDetailGuestEditModal';
+import qs from 'qs';
 
 const RoomDetailTemplate = ({ accommodation, loading }) => {
   const {
@@ -84,20 +86,16 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
       )}
       {/* {visible.type === 'refund' && visible.state && (
         <RoomDetailRefundModal onCloseModal={onCloseModal} />
-      )}
-      {visible.type === 'review' && visible.state && (
-        <RoomDetailReviewModal onCloseModal={onCloseModal} />
-      )}
-      {visible.type === 'date' && visible.state && (
-        <Modal>
-          <RoomDetailDateEditModal onCloseModal={onCloseModal} />
-        </Modal>
-      )}
-      {visible.type === 'guest' && visible.state && (
-        <Modal>
-          <RoomDetailGuestEditModal onCloseModal={onCloseModal} />
-        </Modal>
       )} */}
+      {/* {visible.type === 'review' && visible.state && (
+        <RoomDetailReviewModal onCloseModal={onCloseModal} />
+      )} */}
+      {/* {visible.type === 'date' && visible.state && (
+          <RoomDetailDateEditModal onCloseModal={onCloseModal} />
+      )} */}
+      {visible.type === 'guest' && visible.state && (
+        <RoomDetailGuestEditModal onCloseModal={onCloseModal} />
+      )}
       <RoomDetailHeader />
       {loading === false && (
         <div className="max-w-screen-2xl mt-32">

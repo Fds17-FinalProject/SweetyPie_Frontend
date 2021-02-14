@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { HiStar } from 'react-icons/hi';
 import { GrDown } from 'react-icons/gr';
 import Button from '../common/Button';
@@ -61,9 +62,11 @@ const Payment = ({ rating, reviewNum, price }) => {
             </button>
           </div>
         </div>
-        <Button size="lg" color="pink">
-          예약하기
-        </Button>
+        <Link to="/booking">
+          <Button size="lg" color="pink">
+            예약하기
+          </Button>
+        </Link>
       </div>
       <p className="my-5 text-1.4rem text-center">
         예약 확정 전에는 요금이 청구되지 않습니다.
