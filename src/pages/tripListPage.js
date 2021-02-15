@@ -1,11 +1,8 @@
 import React from 'react';
+import TripListContainer from '../containers/TripListContainer';
 
-const tripListPage = () => {
-    return (
-        <div>
-            
-        </div>
-    );
+const TripListPage = () => {
+  return <TripListContainer />;
 };
 
-export default tripListPage;
+export default TripListPage;
