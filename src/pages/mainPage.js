@@ -1,11 +1,13 @@
 import MainContainer from '../containers/MainContainer';
+// import CommonHeaderContainer from '../containers/CommonHeaderContainer';
 
 const MainPage = () => {
 
   return (
-    <div className="flex-column flex-nowrap relative">
+    <>
+      {/* <CommonHeaderContainer /> */}
       <MainContainer />
-    </div>
+    </>
   );
 };
 

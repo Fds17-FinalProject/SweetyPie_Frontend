@@ -8,7 +8,7 @@ import 'react-dates/lib/css/_datepicker.css';
 import 'moment/locale/ko';
 import moment from 'moment';
 import '../../assets/calendar.css';
-import SVG from '../../assets/Svg';
+import SVG from '../../assets/svg';
 
 const Calendar = () => {
   // 체크인 날짜와 체크아웃 날짜의 모멘트 객체가 각각 상태로 관리된다.

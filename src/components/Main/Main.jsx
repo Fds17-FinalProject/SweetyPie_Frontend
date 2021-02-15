@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../assets/output.css';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import MainCity from './MainCity';
 import MainRecommendation from './MainRecommendation';
+import CommonHeaderContainer from '../../containers/CommonHeaderContainer';
+import Footer from './Footer';
 
 const img = window.location.origin;
 const res = {
-  "id": 1,
+  "id": 1, 
   "city": "강릉시",
   "gu": "주문진읍",
   "title": "주문진 해변가 Ocean View, 넓고 쾌적한  Stuido Apartment",
@@ -48,8 +50,32 @@ const Textarea = styled.span`
 `;
 
 const Main = () => {
+  const [location, setLocation] = useState(false);
+  const [calendar, setCalendar] = useState(false);
+  const [personnel, setPersonnel] = useState(false);
+    // 검색 시작 하기 눌렀을 시 모달 초기 상태
+  const [searchStartState, setSearchStartState] = useState(false);
+  const hideSearchModal = ({ target }) => {
+    if (!target.dataset.name) {
+      setLocation(false);
+      setCalendar(false);
+      setPersonnel(false);
+      setSearchStartState(false);
+    }
+  }
+
   return (
-    <>
+    <div onClick={hideSearchModal} >
+      <CommonHeaderContainer
+        location={location}
+        setLocation={setLocation}
+        calendar={calendar}
+        setCalendar={setCalendar}
+        personnel={personnel}
+        setPersonnel={setPersonnel}
+        searchStartState={searchStartState}
+        setSearchStartState={setSearchStartState}
+      />
       <MainContainer>
         <section className="w-full pt-72 pb-16 px-32">
           <div>
@@ -143,7 +169,8 @@ const Main = () => {
           </section>
         </div>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 };
 
