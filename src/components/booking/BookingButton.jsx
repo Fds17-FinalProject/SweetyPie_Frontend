@@ -1,10 +1,15 @@
 import React from 'react';
-import SVG from '../../assets/SVG';
+import SVG from '../../assets/svg';
 
-const BookingButton = ({ bookingEdit }) => {
+const BookingButton = ({ bookingEdit, showModal, confirmModal }) => {
   return (
     <div className="mt-10 flex">
-      <button className="flex items-center justify-center w-60 h-20 mr-10 bg-#D70466 text-white font-bold rounded-2xl relative">
+      <button
+        onClick={
+          bookingEdit ? () => showModal('edit') : () => showModal('payment')
+        }
+        className="flex items-center justify-center w-60 h-20 mr-10 bg-#D70466 text-white font-bold rounded-2xl relative"
+      >
         <SVG
           name="lock"
           width="16px"
@@ -19,7 +24,10 @@ const BookingButton = ({ bookingEdit }) => {
         )}
       </button>
       {bookingEdit && (
-        <button className="flex items-center justify-center w-60 h-20 bg-gray-400 text-black font-bold rounded-2xl">
+        <button
+          onClick={() => showModal('delete')}
+          className="flex items-center justify-center w-60 h-20 bg-gray-400 text-black font-bold rounded-2xl"
+        >
           <span className="m-2 text-2xl">예약 취소</span>
         </button>
       )}
