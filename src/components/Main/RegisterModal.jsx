@@ -1,7 +1,7 @@
 import React from 'react';
 import {FcGoogle} from 'react-icons/fc';
-import SVG from '../../assets/Svg';
-import axios from 'axios';
+import SVG from '../../assets/svg';
+// import axios from 'axios';
 
 
 const RegisterModal = ({ hideModal, changeModal }) => {
