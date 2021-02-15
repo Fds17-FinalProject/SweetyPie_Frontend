@@ -6,7 +6,7 @@ const Reviews = ({ rating, reviewNum, reviews }) => {
   const ratingRoundUp = rating.toFixed(2);
   const names = [
     '동찬 킴',
-    'YoungSeo Lim',
+    'YoungSeo Im',
     '한슬',
     'Forever Na',
     'BokBok',
@@ -94,24 +94,6 @@ const Reviews = ({ rating, reviewNum, reviews }) => {
             </div>
           ))
           .slice(0, 6)}
-        {/* <div className="inline-block mr-8% w-5/12">
-          <ReviewProfile name="YoungSeo" reviews={reviews[0]} />
-        </div>
-        <div className="inline-block mr-8% w-5/12">
-          <ReviewProfile name="영원" reviews={reviews[1]} />
-        </div>
-        <div className="inline-block mr-8% w-5/12">
-          <ReviewProfile name="한슬" reviews={reviews[2]} />
-        </div>
-        <div className="inline-block mr-8% w-5/12">
-          <ReviewProfile name="DongChan" reviews={reviews[3]} />
-        </div>
-        <div className="inline-block mr-8% w-5/12">
-          <ReviewProfile name="Jaebok" reviews={reviews[4]} />
-        </div>
-        <div className="inline-block mr-8% w-5/12">
-          <ReviewProfile name="준철" reviews={reviews[5]} />
-        </div> */}
       </div>
       <div className="mb-20 border-b"></div>
     </div>
