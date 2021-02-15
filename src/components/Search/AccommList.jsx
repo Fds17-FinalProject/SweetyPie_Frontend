@@ -2,18 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SVG from '../../assets/Svg';
 import Carousel from '../common/Carousel';
-import { HiOutlineHeart, HiHeart, HiOutlineX } from 'react-icons/hi';
 import { FiHeart } from 'react-icons/fi';
-import Button from '../common/Button';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import styled from 'styled-components';
-
+import { AiFillStar } from 'react-icons/ai';
+import { IoMdHeartEmpty } from 'react-icons/io';
+// import { deleteBookMark, postBookMark } from '../../redux/lib/api';
 const HoverSvg = styled.button`
   transition: all 0.2s ease-in-out;
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
-
   &:hover {
     transform: scale(1.1);
     background-color: rgba(229, 231, 235, 1);
@@ -21,55 +19,92 @@ const HoverSvg = styled.button`
   }
 `;
 
-// className="hover:bg-gray-200 transform hover:scale-110 transition-colors duration-150 focus:outline-none rounded-full focus:shadow-outline"
+const recentSearch = [];
 
-const url = window.location.origin;
-
-const AccommList = () => {
+const AccommList = (props) => {
+  const {
+    id,
+    accommodationPictures,
+    accommodationType,
+    bathroomNum,
+    bedNum,
+    bedroomNum,
+    buildingType,
+    capacity,
+    gu,
+    price,
+    rating,
+    reviewNum,
+    title
+  } = props;
   const [bookMark, setBookMark] = useState(false);
-
-  const bookMarkClick = () => setBookMark(!bookMark);
-
-  const img = [
-    url + '/img/css.webp',
-    url + '/img/js.png',
-    url + '/img/git.jpg',
-    url + '/img/algo.png',
-    url + '/img/coding.jpg',
-  ];
-
+  const bookMarkClick = id => () => {
+    console.log(id);
+    setBookMark(!bookMark);
+    // if (!bookMark) {
+    //   console.log(bookMark);
+    //   postBookMark({
+    //     "memberId": "1",
+    //     "accommodationId": `${id}`
+    //   })
+    // }  
+  };
+  const img = accommodationPictures.map(picture => picture.url);
+  const setLocal = id => () => { 
+    recentSearch.unshift({
+      id,
+      title,
+      accommodationPictures: accommodationPictures.map(picture => picture.url),
+      rating,
+      buildingType,
+      accommodationType,
+      reviewNum,
+    });
+    const jsonObject = recentSearch.map(JSON.stringify);
+    const uniqueSet = new Set(jsonObject);
+    localStorage.setItem('bookMark', JSON.stringify([...uniqueSet]));
+  };
+  // const prevent = e => e.preventDefault();
   return (
-    <li>
+    <li key={id} onClick={setLocal(id)} data-name="accommList" >
       <div className="h-25rem border-t border-#EBEBEB pt-10 pb-10 relative">
-        <Link to="/" className="flex focus:outline-none">
+        <HoverSvg
+          className="absolute top-8 right-0 z-20"
+          onClick={bookMarkClick(id)}
+        >
+          <FiHeart
+            fill={bookMark ? 'rgb(255, 56, 92)' : '#fff'}
+            size={30}
+            stroke={bookMark ? '' : 'black'}
+            className="absolute top-2 left-2"
+          />
+        </HoverSvg>
+        <Link to={`/room/${id}`} className="flex focus:outline-none">
           <Carousel size="Large" img={img} />
           <div className="relative w-54rem truncate ml-5">
             <span className="text-#717171 text-1.4rem inline-block">
-              Sokcho-si의 아파트(콘도) 전체
+              {gu}의 {buildingType} {accommodationType}
             </span>
-            <HoverSvg
-              className="absolute top-1 right-8"
-              onClick={bookMarkClick}
-            >
-              <FiHeart
-                fill={bookMark ? 'rgb(255, 56, 92)' : '#fff'}
-                size={30}
-                stroke={bookMark ? '' : 'black'}
-                className="absolute top-2 left-2"
-              />
-            </HoverSvg>
             <div className="w-34rem">
               <div className="text-1.8rem w-34rem truncate">
-                블루테라 코랄 #5, 속초더블루마크, 투베이 오션뷰. 속초해수욕장
-                도보 5분
+                {title}
               </div>
               <div className="w-2.4rem border-t mt-4 mb-4"></div>
               <div className="text-1.4rem text-#717171">
-                최대 인원 2명 · 침실 1개 · 침대 2개 · 욕실 1개
+                최대 인원 {capacity}명 · 침실 {bedroomNum}개 · 침대 {bedNum}개 · 욕실 {bathroomNum}개
               </div>
               <div className="text-1.4rem text-#717171">
                 무료 주차 공간 · 주방 · 난방 · 무선 인터넷
               </div>
+            </div>
+              {rating !== 0 && (
+                <div className="text-1.4rem mt-2 inline-block absolute top-17rem">
+                  <AiFillStar size={20} fill={'#FF385C'} className="inline-block"/>
+                  <span >{rating} ({reviewNum})</span>
+                </div>
+              )}
+            <div className="absolute top-17.4rem right-0 text-1.8rem">
+             <span className="font-extrabold"> ₩{price} </span>/1박
             </div>
           </div>
         </Link>
@@ -77,5 +112,4 @@ const AccommList = () => {
     </li>
   );
 };
-
 export default AccommList;

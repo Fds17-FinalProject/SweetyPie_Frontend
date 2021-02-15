@@ -1,20 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import AccommTypeMenu from './AccommTypeMenu';
 import styled from 'styled-components';
 import AccommList from './AccommList';
 import RecentSearch from './RecentSearch';
 import MapPopup from './MapPopup';
-import {
-  HiChevronRight,
-  HiOutlineHeart,
-  HiChevronLeft,
-  HiHeart,
-  HiOutlineX,
-} from 'react-icons/hi';
+import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
 import Pagination from './Pagination';
-import RoomCharge from './RoomCharge';
 import ChargeMenu from './ChargeMenu';
-
+import MultipleCarousel from '../common/MultipleCarousel';
 const StyledButton = styled.button`
     cursor: pointer;
     text-align: center;
@@ -32,12 +25,10 @@ const StyledButton = styled.button`
     padding-right: 16px;
     font-size: 14px;
     line-height: 16px;
-
     &:hover {
       border: 1px solid #222222;
     }
 `;
-
 const ButtonWrapper = styled.div`
     box-sizing: border-box;
     display: inline-block;
@@ -47,22 +38,20 @@ const ButtonWrapper = styled.div`
     padding-bottom: 4px;
     margin-bottom: 10px;
 `;
-
 const MapContainer = styled.div`
   width: calc(100vw - 86.4rem);
 `;
-
-const SearchTemplate = () => {
+const SearchTemplate = ({ accommodations }) => {
   const [filter, setFilter] = useState({
     accommType: false,
     chargeMenu: false,
   })
   const menu = useRef();
-
   const clickFilter = ({target}) => {
     if (target.name === 'accommType') setFilter({ accommType: !filter.accommType, chargeMenu: false });
     if (target.name === 'chargeMenu') setFilter({ chargeMenu: !filter.chargeMenu, accommType: false });
   };
+  const getRecentSearch = JSON.parse(localStorage.getItem('bookMark')).map(JSON.parse);
 
   return (
     <div className="w-full flex flex-row flex-nowrap pt-32" >
@@ -76,11 +65,8 @@ const SearchTemplate = () => {
           <ButtonWrapper>
             <StyledButton onClick={clickFilter} name="chargeMenu" style={{ border: `${filter.chargeMenu ? '2px solid #222222' : '1px solid #B0B0B0'}`}} filter={filter}>요금</StyledButton>
           </ButtonWrapper>
-          {/* <div className="absolute inset-0" ref={menu}> */}
             {filter.accommType ? <AccommTypeMenu /> : ''}
-          {/* </div> */}
-
-          {filter.chargeMenu ? <ChargeMenu /> : ''}
+            {filter.chargeMenu ? <ChargeMenu /> : ''}
         </div>
         <div className="text-1.6rem text-#717171 border-b border-searchBorder pb-10">
           여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수 있습니다.
@@ -89,28 +75,26 @@ const SearchTemplate = () => {
           예약하기 전에 코로나19 관련 여행 제한 사항을 확인하세요.
         </div>
         <ul>
-          <AccommList />
-          <AccommList />
-          <AccommList />
-          <AccommList />
-          <AccommList />
-          <AccommList />
-          <AccommList />
-          <AccommList />
-          <AccommList />
+          {accommodations && accommodations.map(accommodation => <AccommList {...accommodation} />)}
         </ul>
         <div className="pt-20 border-t border-#EBEBEB relative">
           <h2 className="text-2.2rem text-mainFont">최근 조회</h2>
           <p className="text-1.6rem text-mainFont">현재 검색 결과와 일치하도록 날짜와 가격이 업데이트되었습니다.</p>
-          <div className="absolute top-24 right-0">
+          {/* <div className="absolute top-24 right-0">
             <button className="inline-flex items-center justify-center w-16 h-16 mr-4 text-black text-4xl border-2 border-gray-300 transition-colors duration-150 focus:outline-none bg-white  rounded-full focus:shadow-outline hover:bg-gray-100 transform hover:scale-110">
               <HiChevronLeft />
             </button>
             <button className="inline-flex items-center justify-center w-16 h-16 mr-4 text-black text-4xl border-2 border-gray-300 transition-colors duration-150 focus:outline-none bg-white  rounded-full focus:shadow-outline hover:bg-gray-100 transform hover:scale-110">
               <HiChevronRight />
             </button>
-          </div>  
-          <ul className="h-18rem flex flex-row flex-wrap overflow-hidden mb-4">
+          </div>   */}
+          <ul className="w-full h-18rem flex flex-row flex-wrap mb-4">
+            <MultipleCarousel>
+              {getRecentSearch}
+            </MultipleCarousel>
+              {/* {getRecentSearch.map(recent => <RecentSearch {...recent} />)} */}
+            
+            {/* <RecentSearch />
             <RecentSearch />
             <RecentSearch />
             <RecentSearch />
@@ -118,8 +102,7 @@ const SearchTemplate = () => {
             <RecentSearch />
             <RecentSearch />
             <RecentSearch />
-            <RecentSearch />
-            <RecentSearch />
+            <RecentSearch /> */}
           </ul>
         </div>
         <div className="pt-40 flex flex-col flex-wrap items-center">
@@ -130,10 +113,8 @@ const SearchTemplate = () => {
       </div>
       <MapContainer className=" border bg-red-400">
         <MapPopup className="absolute z-index-10 left-10" />
-        
       </MapContainer>
     </div>
   );
 };
-
 export default SearchTemplate;

@@ -1,4 +1,3 @@
-import './App.css';
 import './assets/output.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import RoomDetailPage from './pages/RoomDetailPage';
@@ -7,14 +6,14 @@ import BookingContainer from './containers/BookingContainer';
 import SearchContainer from './containers/SearchContainer';
 import MainPage from './pages/MainPage';
 import ModifyAccountPage from './pages/ModifyAccountPage';
-import RedirectPage from './pages/RedirectPage'
+import RedirectPage from './pages/RedirectPage';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/booking" component={BookingContainer} />
-        <Route path="/room" component={RoomDetailPage} />
+        <Route path="/accommodation/:room_id" component={RoomDetailPage} />
         <Route path="/reservation" component={TripListPage} />
         <Route path="/accommodations" component={SearchContainer} />
         <Route path="/ " component={ModifyAccountPage} />

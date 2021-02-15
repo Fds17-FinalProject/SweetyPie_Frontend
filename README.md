@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+# SweetyPie Airbnb Clone Coding
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> 2021.01.25부터 2021.02.26까지 5주간 진행한 airbnb 클론 코딩 프로젝트입니다. <br>
+> 기획 1주, 개발 4주의 일정으로 진행하였습니다.
 
-## Available Scripts
+<br>
 
-In the project directory, you can run:
+# Demo
 
-### `npm start`
+- Click here to see our website.
+- Click here to see our demo video.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# 프론트엔드 핵심 목표
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<br>
 
-### `npm test`
+# 서비스 기능
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 1. 메인 페이지
 
-### `npm run build`
+-
+-
+-
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 2. 검색 페이지
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-
+-
+-
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 3. 숙소 상세정보 페이지
 
-### `npm run eject`
+-
+-
+-
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### 4. 결제 페이지
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+-
+-
+-
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### 5. 예약 내역 페이지 / 저장 목록 페이지
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+-
+-
+-
 
-## Learn More
+### 6. 계정 페이지
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+-
+-
+-
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br>
 
-### Code Splitting
+# 개발기간
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- 기획 : 21.01.25 - 21.01.29 (1주)
+- 프로젝트 : 21.02.01 - 21.02.26 (4주)
 
-### Analyzing the Bundle Size
+# 기술스택 & 툴
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Front-End
 
-### Making a Progressive Web App
+- HTML/CSS
+- Javascript
+- React
+- redux
+- redux-saga
+- Tailwindcss
+- Styled-components
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 협업
 
-### Advanced Configuration
+- git/github
+- slack
+- zoom
+- notion
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 개발 프로세스
 
-### Deployment
+- Agile - Scrum
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+<br>
 
-### `npm run build` fails to minify
+# 구성원
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+[Frontend](https://github.com/Fds17-FinalProject/SweetyPie_Frontend): 김동찬, 김재민, 이한슬, 임영서 <br>
+[Backend](github.com/Fds17-FinalProject/SweetyPie_Backend): 나영원, 이재복, 임준철
+
+# Frontend 팀원 및 역할
+
+- [김동찬](https://github.com/dongchan-K) - 기획,
+- [김재민](https://github.com/Kim-Jaemin420) - 기획,
+- [이한슬](https://github.com/hanseul-lee) - 기획,
+- [임영서](https://github.com/youngseo-im) - 기획,

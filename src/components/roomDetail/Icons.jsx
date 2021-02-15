@@ -6,14 +6,13 @@ import {
   AiOutlineClear,
 } from 'react-icons/ai';
 
-const Icons = () => {
-  const accommodationType = '집 전체';
-  const buildingType = '펜션';
-
+const Icons = ({ accommodationType, buildingType }) => {
   return (
     <div className="">
       <div className="mb-8 flex">
-        <BsHouseDoor style={{ width: '2.4rem', height: '2.4rem' }} />
+        <div>
+          <BsHouseDoor style={{ width: '2.4rem', height: '2.4rem' }} />
+        </div>
         <div className="ml-6">
           <div className="mb-1 font-bold text-1.6rem">{accommodationType}</div>
           <div className="text-1.4rem text-#717171">
@@ -22,7 +21,9 @@ const Icons = () => {
         </div>
       </div>
       <div className="mb-8 flex">
-        <AiOutlineClear style={{ width: '2.4rem', height: '2.4rem' }} />
+        <div>
+          <AiOutlineClear style={{ width: '2.4rem', height: '2.4rem' }} />
+        </div>
         <div className="ml-6">
           <div className="mb-1 font-bold text-1.6rem">청결 강화</div>
           <div className="text-1.4rem text-#717171">
@@ -32,7 +33,9 @@ const Icons = () => {
         </div>
       </div>
       <div className="mb-8 flex">
-        <BsLock style={{ width: '2.4rem', height: '2.4rem' }} />
+        <div>
+          <BsLock style={{ width: '2.4rem', height: '2.4rem' }} />
+        </div>
         <div className="ml-6">
           <div className="mb-1 font-bold text-1.6rem">셀프 체크인</div>
           <div className="text-1.4rem text-#717171">
@@ -41,9 +44,11 @@ const Icons = () => {
         </div>
       </div>
       <div className="mb-8 flex">
-        <AiOutlineExclamationCircle
-          style={{ width: '2.4rem', height: '2.4rem' }}
-        />
+        <div>
+          <AiOutlineExclamationCircle
+            style={{ width: '2.4rem', height: '2.4rem' }}
+          />
+        </div>
         <div className="ml-6">
           <div className="mb-1 font-bold text-1.6rem">환불 정책</div>
           <div className="text-1.4rem text-#717171">
@@ -52,7 +57,9 @@ const Icons = () => {
         </div>
       </div>
       <div className="mb-8 flex">
-        <AiOutlineSchedule style={{ width: '2.4rem', height: '2.4rem' }} />
+        <div>
+          <AiOutlineSchedule style={{ width: '2.4rem', height: '2.4rem' }} />
+        </div>
         <div className="ml-6">
           <div className="mb-1 font-bold text-1.6rem">숙소 이용규칙</div>
           <div className="text-1.4rem text-#717171">

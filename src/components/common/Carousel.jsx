@@ -14,10 +14,6 @@ const StyledSlider = styled(Slider)`
     position: relative;
   }
 
-  .slick-slide > div {
-    position: relative;
-  }
-
   .slick-dots {
     position: absolute;
     bottom: 5px;
@@ -31,8 +27,8 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-arrow::before {
-    color: #181818;
-    font-size: 25px;
+    /* font-size: 25px; */
+    width: 30px;
   }
 
   img {
@@ -84,13 +80,15 @@ const Carousel = ({ size, img }) => {
 		nextArrow : <SlickArrowRight />,
   };
 
+  const LowQualityImg = img.map(image => {
+    const splitImage = image.split('pictures');
+    const joinImage = `${splitImage[0]}im/pictures${splitImage[1]}?im_w=720`;
+    return joinImage;
+  })
+
   return (
-    <StyledSlider size={size} img={img} {...settings} >
-      <img src={img[0]} alt="" className="rounded-xl" />
-      <img src={img[1]} alt="" className="rounded-xl" />
-      <img src={img[2]} alt="" className="rounded-xl" />
-      <img src={img[3]} alt="" className="rounded-xl" />
-      <img src={img[4]} alt="" className="rounded-xl" />
+    <StyledSlider size={size} LowQualityImg={LowQualityImg} {...settings} >
+      {LowQualityImg.map(image => (<img src={image} alt="" />))}
     </StyledSlider>
   );
 };
