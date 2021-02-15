@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import SVG from '../../assets/Svg';
+import SVG from '../../assets/svg';
 import Carousel from '../common/Carousel';
 import { FiHeart } from 'react-icons/fi';
 import styled from 'styled-components';

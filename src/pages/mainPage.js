@@ -4,7 +4,6 @@ import MainContainer from '../containers/MainContainer';
 const MainPage = () => {
   return (
     <>
-      {/* <CommonHeaderContainer /> */}
       <MainContainer />
     </>
   );

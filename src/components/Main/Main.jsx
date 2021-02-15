@@ -9,6 +9,7 @@ import Footer from './Footer';
 import MapPopup from '../search/MapPopup';
 
 const img = window.location.origin;
+
 const MainContainer = styled.div`
   background-image: url('/img/main.jpg');
   background-size: cover;
