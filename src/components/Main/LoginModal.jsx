@@ -3,10 +3,7 @@ import { FcGoogle } from 'react-icons/fc';
 
 
 const LoginModal = ({ hideModal, changeModal, onChange, loginSubmit, state }) => {
-  console.log('loginsubmit', onChange);
-  console.log(state);
   const { login } = state;
-  console.log('login', login);
   return (
     <>
           <h1 className="a11y-hidden">로그인 팝업창</h1>
@@ -24,7 +21,6 @@ const LoginModal = ({ hideModal, changeModal, onChange, loginSubmit, state }) =>
             />
           </button>
           <button className="flex items-center rounded-lg	border border-#e5e7eb py-4 px-1.2rem hover:border-#727272">
-            {/* <SVG></SVG> */}
             <FcGoogle className="w-2.4rem h-2rem"/>
             <span className="flex-grow">구글 계정으로 로그인</span>
           </button>
@@ -38,18 +34,15 @@ const LoginModal = ({ hideModal, changeModal, onChange, loginSubmit, state }) =>
        <form onSubmit={loginSubmit}>
             <div className="flex items-center mb-8">
               <label className="a11y-hidden" htmlFor="email-input">이메일</label>
-          <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="text" id="email-input" name="email" placeholder="이메일" onChange={(e) => onChange({ e, form: 'login' })} value={login.email}/>
-              {/* sgv */}
+              <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="text" id="email-input" name="email" placeholder="이메일" onChange={(e) => onChange({ e, form: 'login' })} value={login.email}/>
             </div>
 
             <div className="flex items-center mb-8">
               <label className="a11y-hidden" htmlFor="password-input">비밀번호</label>
               <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="password" id="password-input" name="password" placeholder="비밀번호" onChange={(e) => onChange({ e, form: 'login' })} value={login.password}/>
-              {/* sgv */}
             </div>
 
             <button className="flex items-center w-full rounded-lg	 py-4 px-1.2rem text-#fff bg-airbnb">
-              {/* <SVG name="letter" width="2rem" height="2rem" viewBox="0 0 24 24" color="#fff"/> */}
               <span className="flex-grow w-full h-full">로그인</span>
             </button>
           </form>
