@@ -19,7 +19,7 @@ const RegisterModal = ({ hideModal, changeModal }) => {
         <img
           data-name="close"
           src="/img/close.png"
-          alt="#"
+          alt="close button"
           className="w-1.8rem h-1.8rem"
         />
       </button>

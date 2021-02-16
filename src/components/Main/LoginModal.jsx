@@ -2,8 +2,11 @@ import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 
 
-const LoginModal = ({ hideModal, changeModal }) => {
-
+const LoginModal = ({ hideModal, changeModal, onChange, loginSubmit, state }) => {
+  console.log('loginsubmit', onChange);
+  console.log(state);
+  const { login } = state;
+  console.log('login', login);
   return (
     <>
           <h1 className="a11y-hidden">로그인 팝업창</h1>
@@ -32,16 +35,16 @@ const LoginModal = ({ hideModal, changeModal }) => {
             <span className="text-#717171 text-1.2rem bg-white w-3.5rem absolute my-0 mx-auto text-center">또는</span>
           </div>
 
-          <form>
+       <form onSubmit={loginSubmit}>
             <div className="flex items-center mb-8">
               <label className="a11y-hidden" htmlFor="email-input">이메일</label>
-              <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="text" id="email-input" placeholder="이메일" />
+          <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="text" id="email-input" name="email" placeholder="이메일" onChange={(e) => onChange({ e, form: 'login' })} value={login.email}/>
               {/* sgv */}
             </div>
 
             <div className="flex items-center mb-8">
               <label className="a11y-hidden" htmlFor="password-input">비밀번호</label>
-              <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="password" id="password-input" placeholder="비밀번호"/>
+              <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="password" id="password-input" name="password" placeholder="비밀번호" onChange={(e) => onChange({ e, form: 'login' })} value={login.password}/>
               {/* sgv */}
             </div>
 

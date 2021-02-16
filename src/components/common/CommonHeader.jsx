@@ -169,7 +169,8 @@ const SubmitButton = styled.button.attrs(() => ({ type: 'button' }))`
 `;
 
 const CommonHeader = (
-  { showModal,         // 유저메뉴(버거바) open
+  {
+    showModal,         // 유저메뉴(버거바) open
     hideModal,         // 모달 close
     changeModal,       // 유저메뉴 -> 로그인, 회원가입 모달 뷰 교체
     visible,           // 유저메뉴 open,close 상태
@@ -185,14 +186,17 @@ const CommonHeader = (
     showLocation,      // 위치 view open 
     showPersonnel ,    // 인원 수 view open
     searchOnclick,     // 헤더 검색 버튼 누를 시 위치로 focus가게 하면서 버튼 스타일 변경
+    onChange,          // 로그인 회원가입 모달 인풋 onChange
+    registerSubmit,    // 회원가입 모달 submit
+    loginSubmit,       // 로그인 모달 submit
+    state,
   }) => {
   // 버거바
 const HeaderUser = () => {
   return (
         <HeaderUserMenu
           className="flex bg-white p-2 rounded-3xl border-gray-300 border w-28	h-14"
-          onClick={showModal}
-        >
+          onClick={showModal}>
           <div className="flex-grow w-full h-full">
             <BiMenu className="w-full h-full text-gray-600" />
           </div>
@@ -212,7 +216,7 @@ const HeaderUser = () => {
   // 버거바 누르면 나오는 유저 메뉴 
 const MenuList = ({ children, showAuthModal, auth }) => {
   return (
-    // UserMenu에서 auth를 받아서 콜백함수로 showAuthModal에 전달 showAuthModal은 MainContainer.js에 정의
+    // UserMenu에서 auth를 받아서 콜백함수로 showAuthModal에 전달
     <li className="py-4 px-6 hover:bg-gray-100" onClick={() => showAuthModal(auth)}>
       {children}
     </li>
@@ -358,7 +362,7 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
       {/* 로그인 회원가입 Modal 렌더링 */}
       {authVisible.type === 'login' && (
         <Modal>
-          <AuthModal hideModal={hideModal} authVisible={authVisible} changeModal={changeModal}/>
+          <AuthModal hideModal={hideModal} authVisible={authVisible} changeModal={changeModal} onChange={onChange} loginSubmit={loginSubmit} state={state}/>
         </Modal>
       )}
       {authVisible.type === 'register' && (
@@ -368,7 +372,7 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
       )}
       {authVisible.type === 'form' && (
         <Modal>
-          <AuthModal hideModal={hideModal} authVisible={authVisible}/>
+          <AuthModal hideModal={hideModal} authVisible={authVisible} onChange={onChange} registerSubmit={registerSubmit} state={state}/>
         </Modal>
       )}
 

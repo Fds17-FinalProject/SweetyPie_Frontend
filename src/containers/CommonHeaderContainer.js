@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CommonHeader from '../components/common/CommonHeader';
 import { throttle } from 'lodash';
-import { changeField, initializeForm } from "../redux/modules/auth";
+import { changeField, initializeForm, authRegister, authLogin } from "../redux/modules/auth";
 import { useDispatch, useSelector } from 'react-redux';
 
 const CommonHeaderContainer = (
@@ -14,6 +14,7 @@ const CommonHeaderContainer = (
     searchStartState,
     setSearchStartState
   }) => {
+  
   // 스크롤 위치
   const [scrollY, setScrollY] = useState(false);
   // 3번째 헤더에서 스크롤 발생시 상태 false로 만들어서 애니메이션 되돌리기 위해서 초기값 할당
@@ -98,11 +99,12 @@ const CommonHeaderContainer = (
         showAuthModal(auth);
       }
       else if (auth === 'form') {
-        console.log('form', auth);
         setAuthVisible({
           ...authVisible,
           type: 'form',
         });
+        // open 시 회원가입 폼 초기화 
+        dispatch(initializeForm('register'));
       }
       // socialRegister form
       // else if (auth === 'socialRegister') {
@@ -157,7 +159,7 @@ const CommonHeaderContainer = (
       setLocation(true);
       setCalendar(false);
       setPersonnel(false);
-    } 
+    }
   };
   // 헤더 켈린더 ( 체크인, 체크아웃 )
   const showCalendar = ({ target }) => {
@@ -183,56 +185,86 @@ const CommonHeaderContainer = (
   };
 
 //  회원가입
-const RegisterForm = () => {
   const dispatch = useDispatch();
-  const { form } = useSelector(({ auth }) => ({
-    form: auth.register,
-  }));
+  const state = useSelector(state => state.auth);
+  const { register, login } = state;
+  console.log('register', register);
+  console.log('login', login);
+  console.log('state', state);
+  // const { login } = state;
+  // console.log('register', register);
+  // console.log('state', state);
+  // console.log('register', form);
+  // console.log('state', state.register);
+
   // 인풋 변경 이벤트 핸들러
-  const onChange = e => {
+  // 디스트럭처링으로 받기위해서 onChange에서 이벤트 객체와 form을 인자로 넘겨준다
+  // 현재 onChange의 form이 누구인지 구분하기 위해서
+  const onChange = ({e, form}) => {
     const { value, name } = e.target;
     dispatch(
       changeField({
-        form: 'register',
+        form,
         key: name,
-        value
+        value,
       })
     );
   };
+  // input focus 벗어 날때 검증
   // 폼 등록 이벤트 핸들러
-  const onSubmit = e => {
+  const registerSubmit = e => {
     e.preventDefault();
-    // 구현 예정
+    const { name, email, contact, birthDate, password, passwordConfirm } = register;
+    // if (password !== passwordConfirm) {
+      // 오류 처리
+    // }
+    dispatch(authRegister({ name, email, contact, birthDate, password, passwordConfirm }));
   };
   
-  useEffect(() => {
-    dispatch(initializeForm('register'));
-  }, [dispatch]);
+  const loginSubmit = e => {
+    e.preventDefault();
+    const { email, password } = login;
+    dispatch(authLogin({ email, password }));
+  };
 
-};
+ 
 
   useEffect(() => {
     // const scrollClose = () => {
-    //   // console.log('현재 스크롤 +- 150', x, y);
-    //   // console.log('현재 스크롤', window.scrollY);
-    //   // if (x < window.scrollY || y > window.scrollY) {
-    //   //   setSearchStartState(false);
-    //   //   setLocation(false);
-    //   //   setCalendar(false);
-    //   //   setPersonnel(false);
+      // console.log('현재 스크롤 +- 150', x, y);
+      // console.log('현재 스크롤', window.scrollY);
+      // if (x < window.scrollY || y > window.scrollY) {
+      //   setSearchStartState(false);
+      //   setLocation(false);
+      //   setCalendar(false);
+      //   setPersonnel(false);
     //   setX((window.scrollY + 500));
     //   setY((window.scrollY - 500));
     //   scrollClose1();
     // }
+
+    // if (authError) {
+    //   console.log('에러');
+    //   console.log(authError);
+    //   return;
+    // }
+    // else if (auth) {
+    //   console.log('회원가입 성공');
+    //   console.log(auth);
+    // }
+
   function watchScroll() {
     window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
-  }; 
+    }; 
+    
+
   window.addEventListener('scroll', throttle(watchScroll, 150));
   // window.addEventListener('scroll', scrollClose)
   return () => {
     window.removeEventListener('scroll', watchScroll);
   };
-}, []);
+}, [dispatch]);
+// }, [auth, authError, dispatch]);
 
 
   return (
@@ -254,6 +286,12 @@ const RegisterForm = () => {
         personnel={personnel}
         scrollY={scrollY}
         searchOnclick={searchOnclick}
+
+        onChange={onChange}
+        registerSubmit={registerSubmit}
+        loginSubmit={loginSubmit}
+        state={state}
+        // form={form}
       />  
     </>
   )
