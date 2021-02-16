@@ -87,7 +87,7 @@ const Reviews = ({ rating, reviewNum, reviews }) => {
           .map(review => (
             <div className="inline-block mr-8% w-5/12">
               <ReviewProfile
-                name={names[review.id % 5]}
+                name={names[review.id % 6]}
                 photo
                 reviews={review}
               />
