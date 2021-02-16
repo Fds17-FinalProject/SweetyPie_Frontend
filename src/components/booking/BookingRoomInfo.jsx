@@ -1,5 +1,5 @@
 import React from 'react';
-import SVG from '../../assets/Svg';
+import SVG from '../../assets/svg';
 
 const BookingRoomInfo = () => {
   return (
