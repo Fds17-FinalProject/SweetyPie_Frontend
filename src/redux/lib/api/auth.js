@@ -1,13 +1,18 @@
 import axios from 'axios';
 
 // 로그인
-export const login = ({ email, password }) =>
-  axios.post('http://3.34.122.155/api/login', { email, password });
+// export const login = ({ email, password }) =>
+//   axios.post('http://3.34.122.155/api/login', { email, password });
+
+export const login = async ({ email, password }) => {
+  const response = await axios.post('http://3.34.122.155/api/login', { email, password });
+  await localStorage.setItem('token', response.data.token);
+}
 
 // 회원가입
-export const register = async ({ name, email, contact, birthDate, password }) =>
+  
+export const register = async ({ name, email, contact, birthDate, password }) => 
   await axios.post('http://3.34.122.155/api/member', { name, email, contact, birthDate, password });
-
 
 // export const register = async (payload) => {
 //   console.log(payload);
@@ -25,9 +30,9 @@ export const register = async ({ name, email, contact, birthDate, password }) =>
   // dispatch가 날라오면 여기로 흐름이 이동한다
   // 얘의 처리에 따라 success, failure
 
-export const socialRegister = ({ email, contact, birthDate }) =>
+export const socialRegister = ({ name, email, contact, birthDate, socialId }) =>
   // social도 똑같이 ? 
-  axios.post('http://3.34.122.155/api/member', { email, contact, birthDate });
+  axios.post('http://3.34.122.155/api/member', {  name, email, contact, birthDate, socialId });
 
 // 로그인 상태 확인 ??? 
 // export const check = () => axios.get()
