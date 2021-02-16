@@ -24,10 +24,10 @@ const RoomDetailContainer = ({ location }) => {
     dispatch(readRoomDetail(room_id));
   }, [dispatch, room_id]);
 
-  const qs2 = qs.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
-  console.log(qs2);
+  // const qs2 = qs.parse(location.search, {
+  //   ignoreQueryPrefix: true,
+  // });
+  // console.log(qs2);
 
   return (
     <div>
