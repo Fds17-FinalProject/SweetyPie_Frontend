@@ -103,6 +103,8 @@ module.exports = {
         '18rem': '18rem',
         '18.1rem': '18.1rem',
         '18.5rem': '18.5rem',
+        '19.1rem': '19.1rem',
+        '19rem': '19rem',
         '19.2rem': '19.2rem',
         '19.4rem': '19.4rem',
         '21.4rem': '21.4rem',
