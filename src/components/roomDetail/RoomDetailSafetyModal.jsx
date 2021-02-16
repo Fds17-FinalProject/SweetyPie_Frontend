@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import React from 'react';
+import styled, { keyframes } from 'styled-components';
 import { FiAlertTriangle } from 'react-icons/fi';
 import { FaCheckCircle } from 'react-icons/fa';
 import { HiOutlineX } from 'react-icons/hi';
@@ -21,39 +21,15 @@ const slideUp = keyframes`
   }
 `;
 
-const slideDown = keyframes`
-  from {
-    transfrom: translateY(50%);
-  } to {
-    transfrom: translateY(0);
-  }
-`;
-
 const ModalBackground = styled.div`
   animation: ${fadeIn} 0.25s ease-in;
 `;
 
 const SafetyModal = styled.div`
   animation: ${slideUp} 0.25s ease-out;
-  /* animation-duration: 1s; */
-  /* animation-timing-function: ease-out;
-  animation-name: ${slideUp};
-  animation-fill-mode: forwards; */
 `;
 
 const RoomDetailSafetyModal = ({ onCloseModal, visible }) => {
-  // const [animate, setAnimate] = useState(false);
-  // const [localVisible, setLocalVisible] = useState(visible);
-  // useEffect(() => {
-  //   if (localVisible && !visible) {
-  //     setAnimate(true);
-  //     setTimeout(() => {
-  //       setAnimate(false);
-  //     }, 1000);
-  //     setLocalVisible(visible);
-  //   }
-  // }, [localVisible, visible]);
-  // if (!animate && !localVisible) return null;
   return (
     <ModalBackground
       className="fixed top-0 left-0 bg-modal flex justify-center items-center w-full h-full z-20"
