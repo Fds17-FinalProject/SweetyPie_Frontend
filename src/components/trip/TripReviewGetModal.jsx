@@ -2,6 +2,7 @@ import SVG from '../../assets/svg';
 
 const TripReviewGetModal = ({ hideRevModal, review, hostName }) => {
   const { ratings, content } = review;
+  // 별점을 출력하기 위한 length 5인 배열
   const ratingArray = ['_', '_', '_', '_', '_'];
 
   return (
