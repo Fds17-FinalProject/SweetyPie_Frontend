@@ -1,10 +1,7 @@
 import React from 'react';
 import { BiBed } from 'react-icons/bi';
 
-const Beds = () => {
-  const bedroomNum = 1;
-  const bedNum = 2;
-
+const Beds = ({ bedroomNum, bedNum }) => {
   return (
     <div className="">
       <h1 className="text-2.2rem mb-2.4rem font-bold">침대 / 침구 유형</h1>

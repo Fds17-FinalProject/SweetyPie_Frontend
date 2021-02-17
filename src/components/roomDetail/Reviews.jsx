@@ -2,9 +2,16 @@ import React from 'react';
 import { HiStar } from 'react-icons/hi';
 import ReviewProfile from './ReviewProfile';
 
-const Reviews = ({ guestPhoto }) => {
-  const ratingAvg = 4.58;
-  const reviewNum = 24;
+const Reviews = ({ rating, reviewNum, reviews }) => {
+  const ratingRoundUp = rating.toFixed(2);
+  const names = [
+    '동찬 킴',
+    'YoungSeo Lim',
+    '한슬',
+    'Forever Na',
+    'BokBok',
+    '준철',
+  ];
 
   return (
     <div className="pt-20">
@@ -12,7 +19,7 @@ const Reviews = ({ guestPhoto }) => {
         <span className="inline-flex items-center flex-start mr-1 mb-1">
           <HiStar className="inline-block text-airbnb" />
         </span>
-        <span className="mr-2">{ratingAvg}점</span>
+        <span className="mr-2">{ratingRoundUp}점</span>
         <span className="">(후기 {reviewNum}개)</span>
       </div>
       <div className="flex text-1.6rem px-0.8rem mb-12">
@@ -76,26 +83,35 @@ const Reviews = ({ guestPhoto }) => {
         </ul>
       </div>
       <div className="">
-        <div className="flex">
-          <ReviewProfile
-            name="YoungSeo"
-            photo={guestPhoto}
-            className="mr-9.5rem"
-          />
-          <ReviewProfile name="영원" photo={guestPhoto} />
+        {reviews
+          .map(review => (
+            <div className="inline-block mr-8% w-5/12">
+              <ReviewProfile
+                name={names[review.id % 6]}
+                photo
+                reviews={review}
+              />
+            </div>
+          ))
+          .slice(0, 6)}
+        {/* <div className="inline-block mr-8% w-5/12">
+          <ReviewProfile name="YoungSeo" reviews={reviews[0]} />
         </div>
-        <div className="flex">
-          <ReviewProfile name="한슬" photo={guestPhoto} />
-          <ReviewProfile name="DongChan" photo={guestPhoto} />
+        <div className="inline-block mr-8% w-5/12">
+          <ReviewProfile name="영원" reviews={reviews[1]} />
         </div>
-        <div className="flex">
-          <ReviewProfile
-            name="jaebok"
-            photo={guestPhoto}
-            className="mr-9.5rem"
-          />
-          <ReviewProfile name="준철" photo={guestPhoto} />
+        <div className="inline-block mr-8% w-5/12">
+          <ReviewProfile name="한슬" reviews={reviews[2]} />
         </div>
+        <div className="inline-block mr-8% w-5/12">
+          <ReviewProfile name="DongChan" reviews={reviews[3]} />
+        </div>
+        <div className="inline-block mr-8% w-5/12">
+          <ReviewProfile name="Jaebok" reviews={reviews[4]} />
+        </div>
+        <div className="inline-block mr-8% w-5/12">
+          <ReviewProfile name="준철" reviews={reviews[5]} />
+        </div> */}
       </div>
       <div className="mb-20 border-b"></div>
     </div>

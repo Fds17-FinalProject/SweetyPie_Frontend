@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
+    "@react-google-maps/api": "^2.1.1",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.2",
@@ -13,8 +14,10 @@
     "dayjs": "^1.10.4",
     "http-proxy-middleware": "^1.0.6",
     "jquery": "^3.5.1",
+    "lodash.chunk": "^4.2.0",
     "material-ui": "^0.20.2",
     "moment": "^2.29.1",
+    "qs": "^6.9.6",
     "query-string": "^6.13.8",
     "react": "^17.0.1",
     "react-chartjs-2": "^2.11.1",
