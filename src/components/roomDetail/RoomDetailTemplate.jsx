@@ -20,7 +20,6 @@ import qs from 'qs';
 
 const RoomDetailTemplate = ({ accommodation, loading }) => {
   const {
-    city,
     gu,
     address,
     title,
@@ -29,10 +28,8 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
     bedNum,
     capacity,
     price,
-    contact,
     latitude,
     longitude,
-    locationDesc,
     transportationDesc,
     accommodationDesc,
     rating,
@@ -43,7 +40,6 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
     hostDesc,
     hostReviewNum,
     reviews,
-    bookedDates,
     accommodationPictures,
   } = accommodation;
 
@@ -98,7 +94,7 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
       )}
       <RoomDetailHeader />
       {loading === false && (
-        <div className="max-w-screen-2xl mt-32">
+        <div className="max-w-screen-2xl mt-32" id="photos">
           <div className="mx-48 px-32">
             <Title
               title={title}

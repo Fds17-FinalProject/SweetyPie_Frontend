@@ -43,7 +43,7 @@ const Map = ({ address, transportationDesc, latitude, longitude }) => {
   );
 
   return (
-    <div className="">
+    <div id="map">
       <h1 className="text-2.2rem font-bold my-2.4rem">위치</h1>
       <div className="mb-2.4rem relative">
         <div style={{ width: '74vw', height: '50vh' }}>

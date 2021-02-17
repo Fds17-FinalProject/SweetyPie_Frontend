@@ -12,7 +12,7 @@ const Introduction = ({
 
   return (
     <>
-      <div className="pb-2.4rem flex justify-between">
+      <div id="introduction" className="pb-2.4rem flex justify-between">
         <div>
           <div className="text-2.2rem pt-4 mb-0.4rem font-bold ">
             {hostName}님이 호스팅하는 {buildingType}
@@ -30,7 +30,7 @@ const Introduction = ({
         <img
           className="inline-block rounded-full w-32 h-32"
           src={img + '/img/JamJam2.jpg'}
-          alt="..."
+          alt="호스트 프로필 사진"
         />
       </div>
       <div className="mb-20 border-b"></div>
