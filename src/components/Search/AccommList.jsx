@@ -36,10 +36,13 @@ const AccommList = props => {
     rating,
     reviewNum,
     title,
+    onMouseEnter,
+    onMouseLeave,
   } = props;
+  const cost = price && price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
   const [bookMark, setBookMark] = useState(false);
   const bookMarkClick = id => () => {
-    console.log(id);
     setBookMark(!bookMark);
     // if (!bookMark) {
     //   console.log(bookMark);
@@ -62,11 +65,18 @@ const AccommList = props => {
     });
     const jsonObject = recentSearch.map(JSON.stringify);
     const uniqueSet = new Set(jsonObject);
-    localStorage.setItem('bookMark', JSON.stringify([...uniqueSet]));
+    localStorage.setItem('recentSearch', JSON.stringify([...uniqueSet]));
   };
-  // const prevent = e => e.preventDefault();
+  const prevent = e => e.preventDefault();
+
   return (
-    <li key={id} onClick={setLocal(id)} data-name="accommList">
+    <li
+      key={id}
+      onClick={setLocal(id)}
+      onMouseEnter={onMouseEnter(id)}
+      onMouseLeave={onMouseLeave(id)}
+      data-name="accommList"
+    >
       <div className="h-25rem border-t border-#EBEBEB pt-10 pb-10 relative">
         <HoverSvg
           className="absolute top-8 right-0 z-20"
@@ -79,7 +89,11 @@ const AccommList = props => {
             className="absolute top-2 left-2"
           />
         </HoverSvg>
-        <Link to={`/room/${id}`} className="flex focus:outline-none">
+        <Link
+          to={`/room/${id}`}
+          className="flex focus:outline-none"
+          onClick={prevent}
+        >
           <Carousel size="Large" img={img} />
           <div className="relative w-54rem truncate ml-5">
             <span className="text-#717171 text-1.4rem inline-block">
@@ -109,7 +123,7 @@ const AccommList = props => {
               </div>
             )}
             <div className="absolute top-17.4rem right-0 text-1.8rem">
-              <span className="font-extrabold"> ₩{price} </span>/1박
+              <span className="font-extrabold"> ₩{cost} </span>/1박
             </div>
           </div>
         </Link>

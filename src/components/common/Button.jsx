@@ -24,9 +24,9 @@ const Button = ({ color, size, children }) => {
 export default Button;
 
 const ButtonStatus = {
-  able:
+  true:
     'w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border border-#rgb176 text-#rgb113 cursor-pointer hover:border-black hover:text-black',
-  disable:
+  false:
     'w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235',
 };
 

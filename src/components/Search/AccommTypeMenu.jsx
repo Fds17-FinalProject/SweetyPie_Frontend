@@ -2,12 +2,15 @@ import React from 'react';
 import Checkbox from './Checkbox';
 
 const AccommTypeMenu = () => {
+  const onClick = e => {
+    console.log(e.target);
+  }
   return (
     // box-shadow: rgba(0, 0, 0, 0.15) 0px 10px 37px
     <div className="w-36rem h-43rem border border-solid border-searchBorder rounded-3xl shadow-xl absolute top-20 z-20 bg-white" >
        <div className="pt-14 pb-14 border-b border-solid">
       <div className="flex flex-row" >
-        <Checkbox name="house" top="50px" />
+          <Checkbox name="house" top="50px" onClick={ onClick}/>
       <span className="mb-6 ml-20">
         <div className="text-1.6rem house">집 전체</div>
         <div className="text-1.4rem">집 전체를 단독으로 사용합니다.</div>

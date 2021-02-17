@@ -1,21 +1,51 @@
 import { useState } from 'react';
-import SVG from '../../assets/svg';
-import { AiOutlineClose } from 'react-icons/ai';
 import Calendar from '../common/Calendar';
+import { useHistory } from 'react-router-dom';
 
-const BookingDateEditModal = ({ hideModal }) => {
+const BookingDateEditModal = ({ hideModal, setVisible }) => {
   // 체크인, 체크아웃 날짜에 대한 상태
   const [dateRange, setDateRange] = useState({
     startDate: null,
     endDate: null,
   });
 
-  // 날짜 변경 함수
+  // 달력 날짜 포커스 상태
+  const [focus, setFocus] = useState('startDate');
+
+  // 달력 날짜 변경 함수
   const handleOnDateChange = ({ startDate, endDate }) => {
     setDateRange({
       startDate: startDate,
       endDate: endDate,
     });
+  };
+
+  // 현재 url
+  const url = new URL(window.location.href);
+
+  const history = useHistory();
+
+  // 달력 모달창 저장하기 클릭 시 쿼리 변경 및 모달 끄기
+  const modifyDate = () => {
+    url.searchParams.set(
+      'checkInDate',
+      dateRange.startDate.format('YYYY-MM-DD'),
+    );
+    url.searchParams.set(
+      'checkoutDate',
+      dateRange.endDate.format('YYYY-MM-DD'),
+    );
+    history.push(url.search);
+    setVisible(false);
+  };
+
+  // 날짜 지우기
+  const deleteDate = () => {
+    setDateRange({
+      startDate: null,
+      endDate: null,
+    });
+    setFocus('startDate');
   };
 
   return (
@@ -76,13 +106,21 @@ const BookingDateEditModal = ({ hideModal }) => {
             dateRange={dateRange}
             setDateRange={setDateRange}
             handleOnDateChange={handleOnDateChange}
+            focus={focus}
+            setFocus={setFocus}
           />
         </div>
         <div className="flex items-center text-1.4rem justify-end pr-1.6rem">
-          <button className="underline p-0.8rem font-semibold">
+          <button
+            onClick={deleteDate}
+            className="underline p-0.8rem font-semibold"
+          >
             날짜 지우기
           </button>
-          <button className="py-0.8rem px-1.6rem ml-1.6rem font-semibold text-#fff bg-black rounded-2xl">
+          <button
+            onClick={modifyDate}
+            className="py-0.8rem px-1.6rem ml-1.6rem font-semibold text-#fff bg-black rounded-2xl"
+          >
             저장하기
           </button>
         </div>

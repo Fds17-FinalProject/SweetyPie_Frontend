@@ -1,6 +1,13 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 const CommonSuccessModal = ({ hideModal, children }) => {
+  const history = useHistory();
+
+  const moveReservationPage = () => {
+    history.push('/reservation');
+  };
+
   return (
     <div
       data-name="modal"
@@ -17,7 +24,7 @@ const CommonSuccessModal = ({ hideModal, children }) => {
         <div className="flex items-center justify-center">
           <button
             data-name="close"
-            onClick={hideModal}
+            onClick={moveReservationPage}
             className="h-16 w-32 px-5 m-2 text-xl bg-black text-white font-bold rounded-2xl"
           >
             확인
