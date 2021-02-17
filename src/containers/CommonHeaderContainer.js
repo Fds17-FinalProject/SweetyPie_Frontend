@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import CommonHeader from '../components/common/CommonHeader';
 import { throttle } from 'lodash';
-import { changeField, initializeForm, authRegister, authLogin } from "../redux/modules/auth";
+import { changeField, initializeForm, authRegister, authLogin, socialRegister } from "../redux/modules/auth";
 import { useDispatch, useSelector } from 'react-redux';
+import { getToken } from '../redux/lib/api/auth';
+import { useHistory } from 'react-router-dom';
 
 const CommonHeaderContainer = (
   { location,
@@ -14,9 +16,11 @@ const CommonHeaderContainer = (
     searchStartState,
     setSearchStartState
   }) => {
-  
-  // 스크롤 위치
-  const [scrollY, setScrollY] = useState(false);
+   const history = useHistory();
+    // 로컬스토리지 토큰 유무 
+    const [token, setToken] = useState(false);
+    // 스크롤 위치
+    const [scrollY, setScrollY] = useState(false);
   // 3번째 헤더에서 스크롤 발생시 상태 false로 만들어서 애니메이션 되돌리기 위해서 초기값 할당
   // let currentScroll = window.scrollY;
   // const [currentScrollY, setCurrentScrollY] = useState(0);
@@ -48,7 +52,6 @@ const CommonHeaderContainer = (
     // // 검색 시작 하기 눌렀을 시 모달 초기 상태
     // const [searchStartState, setSearchStartState] = useState(false);
     // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
-  
     // 하나의 모달 회원가입 폼 모달 띄우는것 때문에 생각정리안된게있어서 일단 객체 상태로 냅둠!
     const [ authVisible, setAuthVisible ] = useState({
       // 'login' or 'register'
@@ -69,12 +72,21 @@ const CommonHeaderContainer = (
           ...authVisible,
           type: 'login',
         });
+        // open시 login form 초기화
+        dispatch(initializeForm('login'));
       }
       else if (auth === 'register') {
         setVisible(false);
         setAuthVisible({
           ...authVisible,
           type: 'register',
+        });
+      }
+      // socialRegister form
+      else if (auth === 'socialRegister') {
+        setAuthVisible({
+          ...authVisible,
+          type: 'socialRegister',
         });
       }
     };
@@ -115,7 +127,6 @@ const CommonHeaderContainer = (
       // }
     };
 
-  
   
     // 모달 close
     const hideModal = ({ target }) => {
@@ -184,19 +195,13 @@ const CommonHeaderContainer = (
     }
   };
 
-//  회원가입
+  // const { user } = useSelector(user => user.user);
+  // console.log('user', user);
+//  로그인, 회원가입
   const dispatch = useDispatch();
   const state = useSelector(state => state.auth);
   const { register, login } = state;
-  console.log('register', register);
-  console.log('login', login);
   console.log('state', state);
-  // const { login } = state;
-  // console.log('register', register);
-  // console.log('state', state);
-  // console.log('register', form);
-  // console.log('state', state.register);
-
   // 인풋 변경 이벤트 핸들러
   // 디스트럭처링으로 받기위해서 onChange에서 이벤트 객체와 form을 인자로 넘겨준다
   // 현재 onChange의 form이 누구인지 구분하기 위해서
@@ -210,7 +215,6 @@ const CommonHeaderContainer = (
       })
     );
   };
-  // input focus 벗어 날때 검증
   // 폼 등록 이벤트 핸들러
   const registerSubmit = e => {
     e.preventDefault();
@@ -221,23 +225,47 @@ const CommonHeaderContainer = (
     dispatch(authRegister({ name, email, contact, birthDate, password, passwordConfirm }));
   };
   
-  const loginSubmit = e => {
+  const loginSubmit = async e => {
     e.preventDefault();
     const { email, password } = login;
-    dispatch(authLogin({ email, password }));
+    // const res = await dispatch(authLogin({ email, password }));
+    const res = await getToken({ email, password });
+    const token = res.data.token;
+    console.log('RES', res);
+    console.log('token', token);
+    // error객체가 오면 에러메세지 띄워주고(서버에서 준 에러메세지 띄워주는거 아직 미구현)
+    // 성공하면 history.push('/)
+    console.log('history', history);
+    if (token) {
+      console.log('123');
+      localStorage.setItem('token', token);
+      // history.push('/');
+      setToken(true);
+      setAuthVisible(false);
+    }
+    else {
+      console.log('error');
+    }
   };
+  
+  // const socialRegisterSubmit = e => {
+  //   e.preventDefault();
+  //   const { name, email, contact, birthDate, socialId } = socialRegister;
+  //   dispatch(socialRegister({ name, email, contact, birthDate, socialId }));
+  // };
 
  
+  // state에 social 아이디가 있다면 회원가입 모달창 Open 
 
   useEffect(() => {
     // const scrollClose = () => {
-      // console.log('현재 스크롤 +- 150', x, y);
-      // console.log('현재 스크롤', window.scrollY);
-      // if (x < window.scrollY || y > window.scrollY) {
-      //   setSearchStartState(false);
-      //   setLocation(false);
-      //   setCalendar(false);
-      //   setPersonnel(false);
+    // console.log('현재 스크롤 +- 150', x, y);
+    // console.log('현재 스크롤', window.scrollY);
+    // if (x < window.scrollY || y > window.scrollY) {
+    //   setSearchStartState(false);
+    //   setLocation(false);
+    //   setCalendar(false);
+    //   setPersonnel(false);
     //   setX((window.scrollY + 500));
     //   setY((window.scrollY - 500));
     //   scrollClose1();
@@ -252,7 +280,6 @@ const CommonHeaderContainer = (
     //   console.log('회원가입 성공');
     //   console.log(auth);
     // }
-
   function watchScroll() {
     window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
     }; 
@@ -291,6 +318,7 @@ const CommonHeaderContainer = (
         registerSubmit={registerSubmit}
         loginSubmit={loginSubmit}
         state={state}
+        token={token}
         // form={form}
       />  
     </>

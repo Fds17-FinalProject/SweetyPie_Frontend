@@ -190,6 +190,7 @@ const CommonHeader = (
     registerSubmit,    // 회원가입 모달 submit
     loginSubmit,       // 로그인 모달 submit
     state,
+    token,             // 로컬스토리지에 토큰이 있는지 없는지 유무(로그인 됐는지)
   }) => {
   // 버거바
 const HeaderUser = () => {
@@ -237,15 +238,19 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
           {/* 로그인 안했을 시  */}
           <ul>
           {/* MenuList에 auth props를 넣어서 로그인인지 회원가입인지 구분 */}
-
-            <MenuList auth='login' showAuthModal={showAuthModal} >로그인</MenuList>
-            <MenuList auth='register' showAuthModal={showAuthModal} >회원 가입</MenuList>
-            <MenuList>도움말</MenuList>
+            {token ?
+            <>
+              <MenuList>예약 내역</MenuList>
+              <MenuList>저장 목록</MenuList>
+              <MenuList>계정</MenuList>
+               <MenuList>로그아웃</MenuList>
+            </> : 
+            <>
+              <MenuList auth='login' showAuthModal={showAuthModal} >로그인</MenuList>
+              <MenuList auth='register' showAuthModal={showAuthModal} >회원 가입</MenuList>
+              <MenuList>도움말</MenuList>
+            </>}
             {/* 로그인 했을 시 */}
-            {/* <MenuList>예약 내역</MenuList>
-            <MenuList>저장 목록</MenuList>
-            <MenuList>계정</MenuList>
-            <MenuList>로그아웃</MenuList> */}
           </ul>
         </div>
       </div>
@@ -373,6 +378,11 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
       {authVisible.type === 'form' && (
         <Modal>
           <AuthModal hideModal={hideModal} authVisible={authVisible} onChange={onChange} registerSubmit={registerSubmit} state={state}/>
+        </Modal>
+      )}
+      {authVisible.type === 'socialRegister' && (
+        <Modal>
+          <AuthModal hideModal={hideModal} authVisible={authVisible}/>
         </Modal>
       )}
 

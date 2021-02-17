@@ -4,10 +4,9 @@ import axios from 'axios';
 // export const login = ({ email, password }) =>
 //   axios.post('http://3.34.122.155/api/login', { email, password });
 
-export const login = async ({ email, password }) => {
-  const response = await axios.post('http://3.34.122.155/api/login', { email, password });
-  await localStorage.setItem('token', response.data.token);
-}
+export const getToken = async ({ email, password }) => 
+  await axios.post('http://3.34.122.155/api/login', { email, password });
+  // await localStorage.setItem('token', response.data.token);
 
 // 회원가입
   
