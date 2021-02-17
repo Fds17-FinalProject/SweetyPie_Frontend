@@ -83,7 +83,7 @@ const MultipleCarousel = ({children}) => {
   return (
     <li className="w-full">
       <Slider {...settings} >
-          {children.map(recent => (
+          {children && children.map(recent => (
             <div>
               <RecentSearch {...recent} />
             </div>
