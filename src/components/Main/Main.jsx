@@ -30,7 +30,7 @@ const Main = () => {
   const [location, setLocation] = useState(false);
   const [calendar, setCalendar] = useState(false);
   const [personnel, setPersonnel] = useState(false);
-    // 검색 시작 하기 눌렀을 시 모달 초기 상태
+  // 검색 시작 하기 눌렀을 시 모달 초기 상태
   const [searchStartState, setSearchStartState] = useState(false);
   const hideSearchModal = ({ target }) => {
     if (!target.dataset.name) {
@@ -39,10 +39,10 @@ const Main = () => {
       setPersonnel(false);
       setSearchStartState(false);
     }
-  }
+  };
 
   return (
-    <div onClick={hideSearchModal} >
+    <div onClick={hideSearchModal}>
       <CommonHeaderContainer
         location={location}
         setLocation={setLocation}
@@ -124,24 +124,24 @@ const Main = () => {
 
             <div className="flex w-full">
               <div className="w-1/4 mr-8">
-                <MapPopup
+                {/* <MapPopup
                   style={{ paddingRight: '10px', borderRadius: '10px' }}
-                />
+                /> */}
               </div>
               <div className="w-1/4 mr-8">
-                <MapPopup
+                {/* <MapPopup
                   style={{ paddingRight: '10px', borderRadius: '10px' }}
-                />
+                /> */}
               </div>
               <div className="w-1/4 mr-8">
-                <MapPopup
+                {/* <MapPopup
                   style={{ paddingRight: '10px', borderRadius: '10px' }}
-                />
+                /> */}
               </div>
               <div className="w-1/4 mr-8">
-                <MapPopup
+                {/* <MapPopup
                   style={{ paddingRight: '10px', borderRadius: '10px' }}
-                />
+                /> */}
               </div>
               {/* <Link className="w-1/4 pr-3.5" to="#">
                 <figure>
