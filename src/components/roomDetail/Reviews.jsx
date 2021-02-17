@@ -14,7 +14,7 @@ const Reviews = ({ rating, reviewNum, reviews }) => {
   ];
 
   return (
-    <div className="pt-20">
+    <div className="pt-20" id="reviews">
       <div className="inline-flex text-2.2rem font-bold mb-12">
         <span className="inline-flex items-center flex-start mr-1 mb-1">
           <HiStar className="inline-block text-airbnb" />
