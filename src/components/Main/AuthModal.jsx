@@ -2,10 +2,11 @@ import React from 'react';
 import LoginModal from './LoginModal';
 import RegisterForm from './RegisterForm';
 import RegisterModal from './RegisterModal';
+import SocialRegisterForm from './SocialRegisterForm';
 const AuthModal = ({ hideModal, authVisible, changeModal, onChange, registerSubmit, loginSubmit, state }) => {
-  console.log('authModal/registers', registerSubmit);
-  console.log('authModal/logins', loginSubmit);
-  console.log('authModal/state', state);
+  // console.log('authModal/registers', registerSubmit);
+  // console.log('authModal/logins', loginSubmit);
+  // console.log('authModal/state', state);
   return (
     <div
       onClick={hideModal}
@@ -17,7 +18,7 @@ const AuthModal = ({ hideModal, authVisible, changeModal, onChange, registerSubm
         {authVisible.type === 'login' && <LoginModal changeModal={changeModal} onChange={onChange} loginSubmit={loginSubmit} state={state}/>}
         {authVisible.type === 'register' && <RegisterModal changeModal={changeModal}/>}
         {authVisible.type === 'form' && <RegisterForm changeModal={changeModal} onChange={onChange} registerSubmit={registerSubmit} state={state}/>}
-        {/* {authVisible.type === 'socialForm' && <SocialRegisterForm changeModal={changeModal} />} */}
+        {/* {authVisible.type === 'socialForm' && <SocialRegisterForm />} */}
       </div>
     </div>
   );

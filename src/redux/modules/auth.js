@@ -3,6 +3,7 @@ import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga, { createRequestActionTypes } from '../lib/createRequestSaga';
 import *as authAPI from '../lib/api/auth'
 import { takeLatest } from 'redux-saga/effects';
+import { createRef } from 'react';
 
 // Action type
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
@@ -20,6 +21,9 @@ const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes(
   'auth/REGISTER',
 );
+// const { SOCIAL_REGISTER, SOCIAL_REGISTER_SUCCESS, SOCIAL_REGISTER_FAILURE } = createRequestActionTypes(
+//   'auth/SOCIAL_REGISTER',
+// );
 const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
   'auth/LOGIN',
 );
@@ -60,7 +64,14 @@ export const authLogin = createAction(LOGIN, ({ email, password }) => ({
   password,
 }));
 
-// export const authLogin = createAction(LOGIN);
+// export const socialRegister = createAction(SOCIAL_REGISTER, ({ name, email, contact, birthDate, socialId }) => ({
+//   name,
+//   email,
+//   contact,
+//   birthDate,
+//   socialId,
+// }));
+
 
 
 export const startLoading = createAction(
@@ -117,7 +128,9 @@ const initialState = {
 // 1. saga 생성
 // REGISTER가 발생하면 authAPI.register 함수(비동기)를 실행하겠다. 즉, 곧 registerSaga함수가 제너레이트 함수가 된다.
 const registerSaga = createRequestSaga(REGISTER, authAPI.register);
-const loginSaga = createRequestSaga(LOGIN, authAPI.login);
+// const loginSaga = createRequestSaga(LOGIN, authAPI.login);
+const loginSaga = createRequestSaga(LOGIN, authAPI.getToken);
+// const socialRegisterSaga = createRef(SOCIAL_REGISTER, authAPI.socialRegister);
 export function* authSaga() {
   // 사가 로직
   // takeLates - 코드를 진행하는 중간에 타입에 맞는 디스패치가 추가로 들어와도 가장 마지막에 들어온 것만 실행한다.
@@ -125,6 +138,7 @@ export function* authSaga() {
   // 만약 발생을 했다면 registerSaga generator 함수를 실행
   yield takeLatest(REGISTER, registerSaga);
   yield takeLatest(LOGIN, loginSaga);
+  // yield takeLatest(SOCIAL_REGISTER, socialRegisterSaga)
 }
 // 2. 만든 사가 함수를 모듈의 인덱스 파일에서 합쳐주기.
 const auth = handleActions(
@@ -168,6 +182,15 @@ const auth = handleActions(
       ...state,
       [action.payload]: false,
     }),
+    // [SOCIAL_REGISTER_SUCCESS]: (state, { payload: auth }) => ({
+    //   ...state,
+    //   authError: null,
+    //   auth,
+    // }),
+    // [SOCIAL_REGISTER_FAILURE]: (state, { payload: error }) => ({
+    //   ...state,
+    //   authError: error,
+    // }),
 },
   initialState,
 );
