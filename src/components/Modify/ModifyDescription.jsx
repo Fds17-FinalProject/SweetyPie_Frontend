@@ -1,5 +1,5 @@
 import React from 'react';
-import SVG from '../../assets/svg';
+import SVG from '../../assets/Svg';
 
 const ModifyDescription = () => {
   return (

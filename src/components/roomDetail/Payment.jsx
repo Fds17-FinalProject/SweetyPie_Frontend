@@ -1,18 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { HiStar } from 'react-icons/hi';
 import { GrDown } from 'react-icons/gr';
 import Button from '../common/Button';
 
-// mt-10
-
-const Payment = () => {
-  const ratingAvg = 4.58;
-  const reviewNum = 24;
-  const price = 106000;
+const Payment = ({ rating, reviewNum, price }) => {
   const day = 4; // day 계산해서 넣기
   const pricewithDay = price * day;
   const fees = Math.round(price * 0.07);
   const totalPrice = +price * +day + +fees + 10000;
+  const ratingRoundUp = rating.toFixed(2);
 
   function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -30,7 +27,7 @@ const Payment = () => {
             <span className="inline-flex items-center flex-start mr-1 mb-1">
               <HiStar className="inline-block text-airbnb" />
             </span>
-            <span className="font-bold mr-2">{ratingAvg}</span>
+            <span className="font-bold mr-2">{ratingRoundUp}</span>
             <span className="text-#717171">({reviewNum})</span>
           </div>
         </div>
@@ -65,9 +62,11 @@ const Payment = () => {
             </button>
           </div>
         </div>
-        <Button size="lg" color="pink">
-          예약하기
-        </Button>
+        <Link to="/booking">
+          <Button size="lg" color="pink">
+            예약하기
+          </Button>
+        </Link>
       </div>
       <p className="my-5 text-1.4rem text-center">
         예약 확정 전에는 요금이 청구되지 않습니다.

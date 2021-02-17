@@ -8,8 +8,8 @@ const TripTemplate = ({
   loading,
   pastReservations,
   upcomingReservations,
-  reviewComment,
-  setReviewComment,
+  reviewStatus,
+  setReviewStatus,
 }) => {
   // 쿼리 스트링으로 어떤 tab인지 확인
   const location = useLocation();
@@ -23,10 +23,19 @@ const TripTemplate = ({
         <div className="max-w-screen-2xl mx-6 h-0.5 border-t"></div>
 
         {/* 예정된 예약이 없다면 보여줄 화면 */}
-        {upcomingReservations.length === 0 && tab !== 'past' && (
+        {!upcomingReservations.length && tab !== 'past' && loading === false && (
           <div className="py-96">
             <p className="text-2.4rem text-center font-semibold">
               예정된 여행이 없습니다.
+            </p>
+          </div>
+        )}
+
+        {/* 이전 예약이 없다면 보여줄 화면 */}
+        {!pastReservations.length && tab === 'past' && loading === false && (
+          <div className="py-96">
+            <p className="text-2.4rem text-center font-semibold">
+              이전 여행이 없습니다.
             </p>
           </div>
         )}
@@ -51,8 +60,8 @@ const TripTemplate = ({
                 key={pastReservation.reservationId}
                 tab={tab}
                 reservations={{ ...pastReservation }}
-                reviewComment={reviewComment}
-                setReviewComment={setReviewComment}
+                setReviewStatus={setReviewStatus}
+                reviewStatus={reviewStatus}
               />
             ))}
         </ul>

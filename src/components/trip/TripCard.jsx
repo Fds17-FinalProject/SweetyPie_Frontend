@@ -1,11 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Modal from '../common/Modal';
 import TripReviewPostModal from './TripReviewPostModal';
 import TripReviewGetModal from './TripReviewGetModal';
-import { readReview, postReview } from '../../redux/lib/api/review';
+import {
+  readReview,
+  postReview,
+  deleteReview,
+} from '../../redux/lib/api/review';
 
-const TripCard = ({ reservations, tab, reviewComment, setReviewComment }) => {
+const TripCard = ({ reservations, tab, reviewStatus, setReviewStatus }) => {
   // 예약 숙소 정보
   const {
     memberId,
@@ -19,6 +23,12 @@ const TripCard = ({ reservations, tab, reviewComment, setReviewComment }) => {
     gu,
     title,
     accommodationPicture,
+    totalGuestNum,
+    adultNum,
+    childNum,
+    infantNum,
+    totalPrice,
+    pricePerDay,
   } = reservations;
 
   // 작성된 리뷰 GET 한 상태
@@ -47,11 +57,17 @@ const TripCard = ({ reservations, tab, reviewComment, setReviewComment }) => {
     setRevVisible(true);
     const response = await readReview(reservationId);
     const reviewData = await response.data;
+    console.log(reviewData);
     setReview({
       ...review,
       ratings: reviewData.rating,
       content: reviewData.content,
     });
+  };
+
+  // 리뷰 삭제용
+  const removeReview = () => {
+    deleteReview();
   };
 
   // 리뷰 작성 모달 숨기기
@@ -96,7 +112,7 @@ const TripCard = ({ reservations, tab, reviewComment, setReviewComment }) => {
     if (e.target.dataset.name) {
       setVisible(false);
     }
-    setReviewComment('내 리뷰 보기');
+    setReviewStatus(!reviewStatus);
   };
 
   return (
@@ -139,7 +155,7 @@ const TripCard = ({ reservations, tab, reviewComment, setReviewComment }) => {
               {`${checkInDate} - ${checkoutDate}`}
             </div>
             <p className="text-2.2rem font-semibold my-2 px-10 truncate">
-              {gu && `${gu}`} {city && `,${city}`}
+              {gu && `${gu}`} {city && `, ${city}`}
             </p>
             <div className="mt-2 flex flex-col flex-1">
               <div className="flex flex-row items-center h-24 px-10">
@@ -152,6 +168,8 @@ const TripCard = ({ reservations, tab, reviewComment, setReviewComment }) => {
               </div>
               {tab === 'past' && isWrittenReview ? (
                 <div
+                  // 리뷰 삭제용
+                  // onClick={removeReview}
                   onClick={() => showRevModal(reservationId)}
                   className="text-1.4rem h-24 flex flex-row items-center rounded-b-2xl justify-center border-t border-gray-300 font-semibold cursor-pointer hover:transition-all hover:bg-#f7f7f7"
                 >
@@ -162,12 +180,14 @@ const TripCard = ({ reservations, tab, reviewComment, setReviewComment }) => {
                   onClick={showModal}
                   className="text-1.4rem h-24 flex flex-row items-center rounded-b-2xl justify-center border-t border-gray-300 font-semibold cursor-pointer hover:transition-all hover:bg-#f7f7f7"
                 >
-                  {reviewComment}
+                  리뷰 쓰기
                 </div>
               ) : (
-                <Link to="/booking">
+                <Link
+                  to={`/booking?reservationId=${reservationId}&checkInDate=${checkInDate}&checkoutDate=${checkoutDate}&totalGuestNum=${totalGuestNum}&adultNum=${adultNum}&childNum=${childNum}&infantNum=${infantNum}&totalPrice=${totalPrice}&pricePerDay=${pricePerDay}`}
+                >
                   <div className="text-1.4rem h-24 flex flex-row items-center rounded-b-2xl justify-center border-t border-gray-300 font-semibold cursor-pointer hover:transition-all hover:bg-#f7f7f7">
-                    예약 내역 수정하기
+                    예약 변경 또는 취소
                   </div>
                 </Link>
               )}
