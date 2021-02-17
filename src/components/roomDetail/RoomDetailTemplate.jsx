@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../assets/output.css';
 import Photos from './Photos';
 import Introduction from './Introduction';
@@ -13,6 +13,10 @@ import Map from './Map';
 import Host from './Host';
 import ThingsToKnow from './ThingsToKnow';
 import RoomDetailHeader from './RoomDetailHeader';
+import Modal from '../common/Modal';
+import RoomDetailSafetyModal from './RoomDetailSafetyModal';
+import RoomDetailGuestEditModal from './RoomDetailGuestEditModal';
+import qs from 'qs';
 
 const RoomDetailTemplate = ({ accommodation, loading }) => {
   const {
@@ -42,10 +46,56 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
     bookedDates,
     accommodationPictures,
   } = accommodation;
-  // const ratingRoundUp = rating.toFixed(2);
+
+  const [visible, setVisible] = useState({
+    state: false,
+    type: null,
+  });
+
+  // 타입에 맞는 모달창을 보여줌
+  const onShowModal = type =>
+    setVisible({
+      ...visible,
+      state: true,
+      type,
+    });
+
+  // 타입에 맞는 모달창을 닫음
+  const onCloseModal = ({ target }) => {
+    if (target.dataset.name) {
+      setVisible({
+        ...visible,
+        state: false,
+      });
+    }
+  };
+
+  // 모달창 팝업시 body 스크롤 방지
+  useEffect(() => {
+    if (visible.state) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [visible.state]);
 
   return (
     <>
+      {visible.type === 'safety' && visible.state && (
+        <RoomDetailSafetyModal onCloseModal={onCloseModal} />
+      )}
+      {/* {visible.type === 'refund' && visible.state && (
+        <RoomDetailRefundModal onCloseModal={onCloseModal} />
+      )} */}
+      {/* {visible.type === 'review' && visible.state && (
+        <RoomDetailReviewModal onCloseModal={onCloseModal} />
+      )} */}
+      {/* {visible.type === 'date' && visible.state && (
+          <RoomDetailDateEditModal onCloseModal={onCloseModal} />
+      )} */}
+      {visible.type === 'guest' && visible.state && (
+        <RoomDetailGuestEditModal onCloseModal={onCloseModal} />
+      )}
       <RoomDetailHeader />
       {loading === false && (
         <div className="max-w-screen-2xl mt-32">
@@ -93,7 +143,7 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
               hostDesc={hostDesc}
               hostReviewNum={hostReviewNum}
             />
-            <ThingsToKnow />
+            <ThingsToKnow onShowModal={onShowModal} />
           </div>
         </div>
       )}

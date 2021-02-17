@@ -3,12 +3,18 @@ import BookingRoomInfo from './BookingRoomInfo';
 import BookingPaymentInfo from './BookingPaymentInfo';
 import BookingBorder from './BookingBorder';
 
-const BookingDetailTemplate = () => {
+const BookingDetailTemplate = ({ reservationInfo, query, nights }) => {
+  const { totalPrice, pricePerDay } = query;
+
   return (
-    <section className="sticky top-20 w-1/3 h-full p-10 border rounded-2xl">
-      <BookingRoomInfo />
+    <section className="sticky top-20 w-2/5 ml-10% h-full p-10 border rounded-2xl">
+      <BookingRoomInfo reservationInfo={reservationInfo} />
       <BookingBorder />
-      <BookingPaymentInfo />
+      <BookingPaymentInfo
+        totalPrice={totalPrice}
+        pricePerDay={pricePerDay}
+        nights={nights}
+      />
     </section>
   );
 };

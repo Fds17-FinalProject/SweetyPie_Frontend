@@ -8,6 +8,9 @@ import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
 import Pagination from './Pagination';
 import ChargeMenu from './ChargeMenu';
 import MultipleCarousel from '../common/MultipleCarousel';
+import SearchMap from './SearchMap';
+import { useLocation } from 'react-router-dom';
+
 const StyledButton = styled.button`
     cursor: pointer;
     text-align: center;
@@ -38,32 +41,70 @@ const ButtonWrapper = styled.div`
     padding-bottom: 4px;
     margin-bottom: 10px;
 `;
-const MapContainer = styled.div`
+const MapWrapper = styled.div`
   width: calc(100vw - 86.4rem);
 `;
-const SearchTemplate = ({ accommodations }) => {
+const SearchTemplate = ({ accommodations, loading }) => {
   const [filter, setFilter] = useState({
     accommType: false,
     chargeMenu: false,
   })
+  const [isHovering, setIsHovering] = useState({
+    id: null,
+    isHovering: false,
+  });
+
+  const location = useLocation();
+
+  const onMouseEnter = (id) => () => {
+    setIsHovering({
+      id,
+      isHovering: true,
+    })
+  }
+  const onMouseLeave = (id) => () => {
+    setIsHovering({
+      id,
+      isHovering: false,
+    })
+  }
+
   const menu = useRef();
   const clickFilter = ({target}) => {
     if (target.name === 'accommType') setFilter({ accommType: !filter.accommType, chargeMenu: false });
     if (target.name === 'chargeMenu') setFilter({ chargeMenu: !filter.chargeMenu, accommType: false });
   };
-  const getRecentSearch = JSON.parse(localStorage.getItem('bookMark')).map(JSON.parse);
+  const getRecentSearch = localStorage.getItem('recentSearch') && JSON.parse(localStorage.getItem('recentSearch')).map(JSON.parse);
 
   return (
     <div className="w-full flex flex-row flex-nowrap pt-32" >
       <div className="w-86.4rem border pr-8 pl-8 pt-32">
         <span className="text-1.4rem pb-4">300개 이상의 숙소</span>
-        <h1 className="text-5xl mb-12 font-bold">강릉시의 숙소</h1>
+        <h1 className="text-5xl mb-12 font-bold">
+          {
+            location.pathname === '/accommodations/mapSearch'
+              ? '지도에서 선택한 지역의 숙소'
+              : '마포구의 숙소'
+          }
+        </h1>
         <div className="mt-12 mb-12 relative">
           <ButtonWrapper>
-            <StyledButton onClick={clickFilter} name="accommType" style={{ border: `${filter.accommType ? '2px solid #222222': '1px solid #B0B0B0'}`}} filter={filter}>숙소 유형</StyledButton>
+            <StyledButton
+              onClick={clickFilter}
+              name="accommType"
+              style={{ border: `${filter.accommType ? '2px solid #222222' : '1px solid #B0B0B0'}` }}
+              filter={filter}>
+              숙소 유형
+            </StyledButton>
           </ButtonWrapper>
           <ButtonWrapper>
-            <StyledButton onClick={clickFilter} name="chargeMenu" style={{ border: `${filter.chargeMenu ? '2px solid #222222' : '1px solid #B0B0B0'}`}} filter={filter}>요금</StyledButton>
+            <StyledButton
+              onClick={clickFilter}
+              name="chargeMenu"
+              style={{ border: `${filter.chargeMenu ? '2px solid #222222' : '1px solid #B0B0B0'}` }}
+              filter={filter}>
+              요금
+            </StyledButton>
           </ButtonWrapper>
             {filter.accommType ? <AccommTypeMenu /> : ''}
             {filter.chargeMenu ? <ChargeMenu /> : ''}
@@ -75,34 +116,22 @@ const SearchTemplate = ({ accommodations }) => {
           예약하기 전에 코로나19 관련 여행 제한 사항을 확인하세요.
         </div>
         <ul>
-          {accommodations && accommodations.map(accommodation => <AccommList {...accommodation} />)}
+          {accommodations
+            &&
+           accommodations.map(accommodation => (
+              <AccommList
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+                {...accommodation} />
+            ))}
         </ul>
         <div className="pt-20 border-t border-#EBEBEB relative">
           <h2 className="text-2.2rem text-mainFont">최근 조회</h2>
           <p className="text-1.6rem text-mainFont">현재 검색 결과와 일치하도록 날짜와 가격이 업데이트되었습니다.</p>
-          {/* <div className="absolute top-24 right-0">
-            <button className="inline-flex items-center justify-center w-16 h-16 mr-4 text-black text-4xl border-2 border-gray-300 transition-colors duration-150 focus:outline-none bg-white  rounded-full focus:shadow-outline hover:bg-gray-100 transform hover:scale-110">
-              <HiChevronLeft />
-            </button>
-            <button className="inline-flex items-center justify-center w-16 h-16 mr-4 text-black text-4xl border-2 border-gray-300 transition-colors duration-150 focus:outline-none bg-white  rounded-full focus:shadow-outline hover:bg-gray-100 transform hover:scale-110">
-              <HiChevronRight />
-            </button>
-          </div>   */}
           <ul className="w-full h-18rem flex flex-row flex-wrap mb-4">
             <MultipleCarousel>
               {getRecentSearch}
             </MultipleCarousel>
-              {/* {getRecentSearch.map(recent => <RecentSearch {...recent} />)} */}
-            
-            {/* <RecentSearch />
-            <RecentSearch />
-            <RecentSearch />
-            <RecentSearch />
-            <RecentSearch />
-            <RecentSearch />
-            <RecentSearch />
-            <RecentSearch />
-            <RecentSearch /> */}
           </ul>
         </div>
         <div className="pt-40 flex flex-col flex-wrap items-center">
@@ -111,9 +140,9 @@ const SearchTemplate = ({ accommodations }) => {
           <div className="text-1.2rem text-#717171 py-14">전체 요금을 보려면 날짜를 입력하세요. 추가 요금이 적용되고 세금이 추가될 수 있습니다.</div>
         </div>  
       </div>
-      <MapContainer className=" border bg-red-400">
-        <MapPopup className="absolute z-index-10 left-10" />
-      </MapContainer>
+      <MapWrapper className="fixed w-full h-full top-0 right-0">
+        <SearchMap accommodations={accommodations} loading={loading} isHovering={isHovering} />
+      </MapWrapper>
     </div>
   );
 };

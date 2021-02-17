@@ -3,7 +3,6 @@ import TripTemplate from '../components/trip/TripTemplate';
 import { useDispatch, useSelector } from 'react-redux';
 import reservation, { readReservation } from '../redux/modules/reservation';
 import dayjs from 'dayjs';
-import axios from 'axios';
 
 const TripListContainer = () => {
   // dispatch 함수
@@ -18,7 +17,7 @@ const TripListContainer = () => {
     }),
   );
 
-  // 리뷰 테스트
+  // 리뷰 상태
   const [reviewStatus, setReviewStatus] = useState(false);
 
   // 오늘 날짜
