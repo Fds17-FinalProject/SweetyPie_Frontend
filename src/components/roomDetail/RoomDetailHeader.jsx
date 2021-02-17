@@ -15,32 +15,32 @@ const RoomDetailHeader = () => {
   };
 
   return (
-    <div className="w-full fixed top-0 left-0 h-8rem border-b bg-gray-100 px-19.4rem z-10">
+    <div className="w-full fixed top-0 left-0 h-8rem border-b-2 bg-white px-19.4rem z-10">
       <div className="flex text-1.4rem font-bold">
         <a
           href="#photos"
-          className="mr-2.4rem font-bold py-3rem bg-gray-100 border-gary-200 hover:border-black"
+          className="mr-2.4rem font-bold py-3rem border-b-4 border-white hover:border-b-4 hover:border-black"
           onClick={onScrollNav}
         >
           사진
         </a>
         <a
           href="#introduction"
-          className="mr-2.4rem font-bold py-3rem bg-gray-100 hover:border-b"
+          className="mr-2.4rem font-bold py-3rem hover:border-b-4 hover:border-black"
           onClick={onScrollNav}
         >
           숙소 소개
         </a>
         <a
           href="#reviews"
-          className="mr-2.4rem font-bold py-3rem bg-gray-100 hover:border-b"
+          className="mr-2.4rem font-bold py-3rem hover:border-b-4 hover:border-black"
           onClick={onScrollNav}
         >
           후기
         </a>
         <a
           href="#map"
-          className="mr-2.4rem font-bold py-3rem bg-gray-100 hover:border-b"
+          className="mr-2.4rem font-bold py-3rem hover:border-b-4 hover:border-black"
           onClick={onScrollNav}
         >
           위치

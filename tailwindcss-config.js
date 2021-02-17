@@ -5,6 +5,8 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      borderWidth: ['hover'],
+      borderColor: ['hover'],
       fontSize: {
         '1.2rem': '1.2rem',
         '1.4rem': '1.4rem',
@@ -938,7 +940,7 @@ module.exports = {
     ],
     borderRadius: ['responsive'],
     borderStyle: ['responsive'],
-    borderWidth: ['responsive'],
+    borderWidth: ['responsive', 'hover'],
     boxShadow: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
     boxSizing: ['responsive'],
     clear: ['responsive'],
