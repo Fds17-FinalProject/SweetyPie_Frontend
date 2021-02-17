@@ -19,3 +19,7 @@ export const postReview = ({
     rating,
     content,
   });
+
+// 임시 리뷰 삭제용 DELETE
+export const deleteReview = () =>
+  axios.delete(`http://3.34.50.91/api/review/96554`);

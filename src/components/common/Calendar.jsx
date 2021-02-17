@@ -6,8 +6,7 @@ import 'moment/locale/ko';
 import '../../assets/calendar.css';
 import SVG from '../../assets/svg';
 
-const Calendar = ({ dateRange, handleOnDateChange }) => {
-  const [focus, setFocus] = useState('startDate');
+const Calendar = ({ dateRange, handleOnDateChange, focus, setFocus }) => {
   const { startDate, endDate } = dateRange;
 
   return (

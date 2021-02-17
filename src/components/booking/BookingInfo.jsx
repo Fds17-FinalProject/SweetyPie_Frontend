@@ -1,12 +1,36 @@
 import React from 'react';
 
 const BookingInfo = ({
-  checkInDate,
-  checkoutDate,
-  guestNum,
   bookingEdit,
   showModal,
+  checkInDateArr,
+  checkoutDateArr,
+  query,
 }) => {
+  const { totalGuestNum } = query;
+
+  // 체크인 날짜
+  const checkinYear = checkInDateArr[0];
+
+  const checkinMonth =
+    checkInDateArr[1] < 10 ? checkInDateArr[1].slice(1, 2) : checkInDateArr[1];
+
+  const checkinDay =
+    checkInDateArr[2] < 10 ? checkInDateArr[2].slice(1, 2) : checkInDateArr[2];
+
+  // 체크아웃 날짜
+  const checkoutYear = checkoutDateArr[0];
+
+  const checkoutMonth =
+    checkoutDateArr[1] < 10
+      ? checkoutDateArr[1].slice(1, 2)
+      : checkoutDateArr[1];
+
+  const checkoutDay =
+    checkoutDateArr[2] < 10
+      ? checkoutDateArr[2].slice(1, 2)
+      : checkoutDateArr[2];
+
   return (
     <section className="mt-10">
       <div>
@@ -23,7 +47,7 @@ const BookingInfo = ({
           </button>
         )}
         <div className="text-1.6rem text-#717171 mt-3">
-          {`${checkInDate}-${checkoutDate}`}
+          {`${checkinYear}.${checkinMonth}.${checkinDay} - ${checkoutYear}.${checkoutMonth}.${checkoutDay}`}
         </div>
       </div>
       <div className="mt-10 relative">
@@ -37,7 +61,7 @@ const BookingInfo = ({
           </button>
         )}
         <div className="text-1.6rem text-#717171 mt-3">
-          {`게스트 ${guestNum}명`}
+          {`게스트 ${totalGuestNum}명`}
         </div>
       </div>
     </section>
