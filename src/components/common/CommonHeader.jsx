@@ -169,7 +169,8 @@ const SubmitButton = styled.button.attrs(() => ({ type: 'button' }))`
 `;
 
 const CommonHeader = (
-  { showModal,         // 유저메뉴(버거바) open
+  {
+    showModal,         // 유저메뉴(버거바) open
     hideModal,         // 모달 close
     changeModal,       // 유저메뉴 -> 로그인, 회원가입 모달 뷰 교체
     visible,           // 유저메뉴 open,close 상태
@@ -185,14 +186,18 @@ const CommonHeader = (
     showLocation,      // 위치 view open 
     showPersonnel ,    // 인원 수 view open
     searchOnclick,     // 헤더 검색 버튼 누를 시 위치로 focus가게 하면서 버튼 스타일 변경
+    onChange,          // 로그인 회원가입 모달 인풋 onChange
+    registerSubmit,    // 회원가입 모달 submit
+    loginSubmit,       // 로그인 모달 submit
+    state,
+    token,             // 로컬스토리지에 토큰이 있는지 없는지 유무(로그인 됐는지)
   }) => {
   // 버거바
 const HeaderUser = () => {
   return (
         <HeaderUserMenu
           className="flex bg-white p-2 rounded-3xl border-gray-300 border w-28	h-14"
-          onClick={showModal}
-        >
+          onClick={showModal}>
           <div className="flex-grow w-full h-full">
             <BiMenu className="w-full h-full text-gray-600" />
           </div>
@@ -212,7 +217,7 @@ const HeaderUser = () => {
   // 버거바 누르면 나오는 유저 메뉴 
 const MenuList = ({ children, showAuthModal, auth }) => {
   return (
-    // UserMenu에서 auth를 받아서 콜백함수로 showAuthModal에 전달 showAuthModal은 MainContainer.js에 정의
+    // UserMenu에서 auth를 받아서 콜백함수로 showAuthModal에 전달
     <li className="py-4 px-6 hover:bg-gray-100" onClick={() => showAuthModal(auth)}>
       {children}
     </li>
@@ -233,15 +238,19 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
           {/* 로그인 안했을 시  */}
           <ul>
           {/* MenuList에 auth props를 넣어서 로그인인지 회원가입인지 구분 */}
-
-            <MenuList auth='login' showAuthModal={showAuthModal} >로그인</MenuList>
-            <MenuList auth='register' showAuthModal={showAuthModal} >회원 가입</MenuList>
-            <MenuList>도움말</MenuList>
+            {token ?
+            <>
+              <MenuList>예약 내역</MenuList>
+              <MenuList>저장 목록</MenuList>
+              <MenuList>계정</MenuList>
+               <MenuList>로그아웃</MenuList>
+            </> : 
+            <>
+              <MenuList auth='login' showAuthModal={showAuthModal} >로그인</MenuList>
+              <MenuList auth='register' showAuthModal={showAuthModal} >회원 가입</MenuList>
+              <MenuList>도움말</MenuList>
+            </>}
             {/* 로그인 했을 시 */}
-            {/* <MenuList>예약 내역</MenuList>
-            <MenuList>저장 목록</MenuList>
-            <MenuList>계정</MenuList>
-            <MenuList>로그아웃</MenuList> */}
           </ul>
         </div>
       </div>
@@ -358,7 +367,7 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
       {/* 로그인 회원가입 Modal 렌더링 */}
       {authVisible.type === 'login' && (
         <Modal>
-          <AuthModal hideModal={hideModal} authVisible={authVisible} changeModal={changeModal}/>
+          <AuthModal hideModal={hideModal} authVisible={authVisible} changeModal={changeModal} onChange={onChange} loginSubmit={loginSubmit} state={state}/>
         </Modal>
       )}
       {authVisible.type === 'register' && (
@@ -367,6 +376,11 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
         </Modal>
       )}
       {authVisible.type === 'form' && (
+        <Modal>
+          <AuthModal hideModal={hideModal} authVisible={authVisible} onChange={onChange} registerSubmit={registerSubmit} state={state}/>
+        </Modal>
+      )}
+      {authVisible.type === 'socialRegister' && (
         <Modal>
           <AuthModal hideModal={hideModal} authVisible={authVisible}/>
         </Modal>
