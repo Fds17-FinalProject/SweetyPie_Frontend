@@ -103,7 +103,6 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
     adult: 0,
     child: 0,
     infant: 0,
-    totalGuest: 0,
     status: false,
   });
 
@@ -118,7 +117,6 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
   // console.log(qs.adult);
   // console.log(qs.child);
   // console.log(qs.infant);
-  // console.log(qs.totalGuest);
   // console.log(qs.totalPrice);
 
   return (
@@ -175,7 +173,6 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
                 onShowPopup={onShowPopup}
                 onCloseModal={onCloseModal}
                 count={count}
-                totalGuest={qs.totalGuest}
               />
               {/* {visible.type === 'date' && visible.state && (
           <RoomDetailDateEditModal onCloseModal={onCloseModal} />

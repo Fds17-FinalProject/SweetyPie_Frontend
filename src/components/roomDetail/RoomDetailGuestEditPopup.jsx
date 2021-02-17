@@ -24,35 +24,25 @@ const RoomDetailGuestEditPopup = ({
   const changeUrl = (key, value) => {
     const searchUrl = window.location.search;
     const prevValue = getParameterByName(key);
-    const prevTotal = getParameterByName('totalGuest');
     let urlQuery;
 
-    console.log('TOTAL', count.totalGuest);
     // 1. 쿼리가 존재하지 않으면 새로운 쿼리를 추가
     if (searchUrl.indexOf('?') === -1) {
       console.log(111);
-      urlQuery = `?${key}=${value}&totalGuest=${count.totalGuest}`;
+      urlQuery = `?${key}=${value}`;
     } else {
       // 2. 쿼리가 존재 but 현재 key가 존재하지 않을 때 새로 추가
       if (searchUrl.indexOf(key) === -1) {
         console.log(222);
         urlQuery = `${searchUrl}&${key}=${value}`;
-        urlQuery = searchUrl.replace(
-          `totalGuest=${prevTotal}`,
-          `totalGuest=${count.totalGuest}`,
-        );
       } else {
         // 3. 쿼리가 존재 and 현재 key와 value가 존재할 때 수정
         console.log(key, prevValue, value);
         console.log(333);
-        urlQuery = searchUrl
-          .replace(`totalGuest=${prevTotal}`, `totalGuest=${count.totalGuest}`)
-          .replace(`${key}=${prevValue}`, `${key}=${value}`);
+        urlQuery = searchUrl.replace(`${key}=${prevValue}`, `${key}=${value}`);
         // urlQuery = searchUrl.replace(`${key}=${prevValue}`, `${key}=${value}`);
       }
     }
-    console.log(prevTotal);
-    console.log(count.totalGuest);
     window.history.pushState(null, null, `${urlQuery}`);
   };
 
@@ -64,8 +54,6 @@ const RoomDetailGuestEditPopup = ({
     setCount({
       ...count,
       [type]: count[type] + 1,
-      totalGuest: count.adult + count.child + count.infant,
-      // totalGuest: count.totalGuest + 1,
     });
 
     changeUrl(type, count[type] + 1);
@@ -87,7 +75,6 @@ const RoomDetailGuestEditPopup = ({
     setCount({
       ...count,
       [type]: count[type] - 1,
-      totalGuest: count.adult + count.child + count.infant,
     });
     changeUrl(type, count[type] - 1);
   };

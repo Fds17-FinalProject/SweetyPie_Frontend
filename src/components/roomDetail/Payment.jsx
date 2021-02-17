@@ -9,22 +9,22 @@ const Payment = ({
   rating,
   reviewNum,
   price,
-  onShowPopup,
   visible,
+  onShowPopup,
   onCloseModal,
-  totalGuest,
+  count,
 }) => {
   const day = 2; // day 계산해서 넣기
   const pricewithDay = price * day;
   const fees = Math.round(price * 0.07);
   const totalPrice = +price * +day + +fees + 10000;
   const ratingRoundUp = rating.toFixed(2);
+  const totalGuest = count.adult + count.child + count.infant;
 
   // 금액 표기 시 세자리 수마다 콤마(,)찍어주기
   const numberWithCommas = x => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
-
   return (
     <div className="w-full px-2.4rem py-10 sticky border rounded-3xl shadow-xl bg-white">
       <div>
