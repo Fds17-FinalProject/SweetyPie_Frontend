@@ -19,8 +19,14 @@ const CalendarDetail = ({ gu }) => {
     });
   };
 
+  const onRemoveDate = ({ startDate, endDate }) => {
+    setDateRange({
+      startDate: null,
+      endDate: null,
+    });
+  };
   const { startDate, endDate } = dateRange;
-  console.log(startDate);
+  // console.log(startDate);
   // console.log(startDate || startDate.format('YYYY년 MM월 DD일'));
 
   return (
@@ -49,6 +55,14 @@ const CalendarDetail = ({ gu }) => {
           focus={focus}
           setFocus={setFocus}
         />
+        <div className="text-right mr-28">
+          <button
+            className="underline text-1.4rem p-0.8rem rounded-lg font-bold hover:bg-gray-100"
+            onClick={onRemoveDate}
+          >
+            날짜 지우기
+          </button>
+        </div>
       </div>
       <div className="mt-20 border-b"></div>
     </div>
