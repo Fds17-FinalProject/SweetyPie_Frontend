@@ -1,6 +1,17 @@
+import axios from 'axios';
 import React from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { removeReservation } from '../../redux/lib/api/reservations';
 
-const CommonChoiceModal = ({ hideModal, confirmModal, children }) => {
+const CommonChoiceModal = ({ hideModal, children, reservationId }) => {
+  const history = useHistory();
+
+  // 예약 취소
+  const cancleReservation = async () => {
+    await removeReservation(reservationId);
+    history.push('/reservation');
+  };
+
   return (
     <div
       data-name="modal"
@@ -17,7 +28,7 @@ const CommonChoiceModal = ({ hideModal, confirmModal, children }) => {
         <div className="flex items-center justify-center">
           <button
             data-name="post"
-            onClick={confirmModal}
+            onClick={cancleReservation}
             className="h-16 w-32 px-5 mr-7rem text-xl bg-black text-white font-bold rounded-2xl"
           >
             확인

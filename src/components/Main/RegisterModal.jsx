@@ -1,6 +1,8 @@
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import SVG from '../../assets/svg';
+// import axios from 'axios';
+
 
 const RegisterModal = ({ hideModal, changeModal }) => {
   return (
@@ -17,7 +19,7 @@ const RegisterModal = ({ hideModal, changeModal }) => {
         <img
           data-name="close"
           src="/img/close.png"
-          alt="#"
+          alt="close button"
           className="w-1.8rem h-1.8rem"
         />
       </button>
