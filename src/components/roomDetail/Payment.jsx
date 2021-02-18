@@ -25,6 +25,15 @@ const Payment = ({
   const numberWithCommas = x => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
+
+  // url에서 checkInDate와 checkOutDate 가져오기
+  let params = new URLSearchParams(window.location.search);
+  let checkInDate = params.get('checkInDate');
+  let checkoutDate = params.get('checkoutDate');
+  console.log(totalGuest !== 0);
+  console.log(!checkInDate);
+  console.log(totalGuest !== 0 && !checkInDate && !checkoutDate);
+
   return (
     <div className="w-full px-2.4rem py-10 sticky border rounded-3xl shadow-xl bg-white">
       <div>
@@ -93,12 +102,20 @@ const Payment = ({
               )}
             </button>
           </div>
-          {/* </div> */}
         </div>
-        <Link to="/booking">
-          <Button size="lg" color="pink">
-            예약하기
-          </Button>
+        <Link to="/">
+          {totalGuest !== 0 && checkInDate && checkoutDate ? (
+            <button className="bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none w-full h-20 px-6 m-2 text-2xl transform focus:scale-90">
+              예약하기
+            </button>
+          ) : (
+            <button
+              className="bg-gray-300 text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 cursor-default"
+              disabled="true"
+            >
+              예약하기
+            </button>
+          )}
         </Link>
       </div>
       <p className="my-5 text-1.4rem text-center">
