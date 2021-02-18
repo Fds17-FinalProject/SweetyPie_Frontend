@@ -13,10 +13,9 @@ import Map from './Map';
 import Host from './Host';
 import ThingsToKnow from './ThingsToKnow';
 import RoomDetailHeader from './RoomDetailHeader';
-import Modal from '../common/Modal';
 import RoomDetailSafetyModal from './RoomDetailSafetyModal';
 import RoomDetailGuestEditModal from './RoomDetailGuestEditModal';
-import qs from 'qs';
+import RoomDetailReviewModal from './RoomDetailReviewModal';
 
 const RoomDetailTemplate = ({ accommodation, loading }) => {
   const {
@@ -77,14 +76,19 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
 
   return (
     <>
+      {visible.type === 'review' && visible.state && (
+        <RoomDetailReviewModal
+          onCloseModal={onCloseModal}
+          rating={rating}
+          reviewNum={reviewNum}
+          reviews={reviews}
+        />
+      )}
       {visible.type === 'safety' && visible.state && (
         <RoomDetailSafetyModal onCloseModal={onCloseModal} />
       )}
       {/* {visible.type === 'refund' && visible.state && (
         <RoomDetailRefundModal onCloseModal={onCloseModal} />
-      )} */}
-      {/* {visible.type === 'review' && visible.state && (
-        <RoomDetailReviewModal onCloseModal={onCloseModal} />
       )} */}
       {/* {visible.type === 'date' && visible.state && (
           <RoomDetailDateEditModal onCloseModal={onCloseModal} />
@@ -127,7 +131,12 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
             </div>
           </div>
           <div className="mx-48 px-32">
-            <Reviews rating={rating} reviewNum={reviewNum} reviews={reviews} />
+            <Reviews
+              rating={rating}
+              reviewNum={reviewNum}
+              reviews={reviews}
+              onShowModal={onShowModal}
+            />
             <Map
               address={address}
               latitude={latitude}
