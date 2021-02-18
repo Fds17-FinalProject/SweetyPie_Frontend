@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import Calendar from '../common/Calendar';
-
 const CalendarDetail = ({ gu }) => {
   // 체크인, 체크아웃 날짜에 대한 상태
   const [dateRange, setDateRange] = useState({
     startDate: null,
     endDate: null,
   });
-
+  // 달력 날짜 포커스 상태
+  const [focus, setFocus] = useState('startDate');
   // 날짜 변경 함수
   const handleOnDateChange = ({ startDate, endDate }) => {
     setDateRange({
@@ -16,9 +16,8 @@ const CalendarDetail = ({ gu }) => {
     });
   };
   const { startDate, endDate } = dateRange;
-  // console.log(startDate);
+  console.log(startDate);
   // console.log(startDate || startDate.format('YYYY년 MM월 DD일'));
-
   return (
     <div className="">
       <div className="mb-8">
@@ -42,6 +41,8 @@ const CalendarDetail = ({ gu }) => {
         <Calendar
           dateRange={dateRange}
           handleOnDateChange={handleOnDateChange}
+          focus={focus}
+          setFocus={setFocus}
         />
       </div>
       <div className="mt-20 border-b"></div>

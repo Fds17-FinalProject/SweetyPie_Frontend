@@ -1,14 +1,15 @@
 import React from 'react';
 
-const BookingPaymentInfo = ({ totalPrice, nights, pricePerDay }) => {
-  // 서비스 수수료 계산
-  const fees = Math.round(pricePerDay * 0.07);
+const BookingPaymentInfo = ({ totalPrice, nights, pricePerDay, fees }) => {
+  // // 서비스 수수료 계산
+  // const fees = Math.round(pricePerDay * nights * 0.07);
 
   // 가격 3자 단위 콤마(,) 정규표현식
   const numberWithCommas = x => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
+  // 총 가격 계산
   totalPrice = pricePerDay * nights + 10000 + fees;
 
   return (
