@@ -1,5 +1,5 @@
 ---
-name: #123 메인 페이지 내 북마크 기능 api 요청 (GET) 
+name: '#123 메인 페이지 내 북마크 기능 api 요청 (GET)' 
 about:  메인 페이지 내 북마크 기능 api 요청 (GET)
 title: ''
 labels: 'feature'
