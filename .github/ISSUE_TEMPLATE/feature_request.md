@@ -1,20 +1,16 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
+name: #123 메인 페이지 내 북마크 기능 api 요청 (GET) 
+about:  메인 페이지 내 북마크 기능 api 요청 (GET)
 title: ''
-labels: ''
+labels: 'feature'
 assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## 설명
+> 설명을 입력해 주세요.
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## 작업 사항
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
-
-**Additional context**
-Add any other context or screenshots about the feature request here.
+- [ ] 작업1
+- [ ] 작업2
