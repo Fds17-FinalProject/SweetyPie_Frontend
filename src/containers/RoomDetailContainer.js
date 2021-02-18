@@ -2,10 +2,9 @@ import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import RoomDetailTemplate from '../components/roomDetail/RoomDetailTemplate';
-import qs from 'qs';
 import { readRoomDetail } from '../redux/modules/roomDetail';
 
-const RoomDetailContainer = ({ location }) => {
+const RoomDetailContainer = () => {
   // const accommodation2 = useSelector(state => console.log(state));
   const { accommodation, roomDetailError, loading } = useSelector(
     ({ roomDetail, loading }) => ({
@@ -14,7 +13,7 @@ const RoomDetailContainer = ({ location }) => {
       loading: loading['roomDetail/READ_ROOMDETAIL'],
     }),
   );
-  console.log(accommodation);
+  // console.log(accommodation);
 
   const dispatch = useDispatch();
   // url의 room_id 가져오기
