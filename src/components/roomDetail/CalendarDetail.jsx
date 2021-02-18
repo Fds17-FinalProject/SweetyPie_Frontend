@@ -8,6 +8,9 @@ const CalendarDetail = ({ gu }) => {
     endDate: null,
   });
 
+  // 달력 날짜 포커스 상태
+  const [focus, setFocus] = useState('startDate');
+
   // 날짜 변경 함수
   const handleOnDateChange = ({ startDate, endDate }) => {
     setDateRange({
@@ -15,8 +18,9 @@ const CalendarDetail = ({ gu }) => {
       endDate: endDate,
     });
   };
+
   const { startDate, endDate } = dateRange;
-  // console.log(startDate);
+  console.log(startDate);
   // console.log(startDate || startDate.format('YYYY년 MM월 DD일'));
 
   return (
@@ -42,6 +46,8 @@ const CalendarDetail = ({ gu }) => {
         <Calendar
           dateRange={dateRange}
           handleOnDateChange={handleOnDateChange}
+          focus={focus}
+          setFocus={setFocus}
         />
       </div>
       <div className="mt-20 border-b"></div>
