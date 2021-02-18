@@ -7,7 +7,7 @@ const Reviews = ({ rating, reviewNum, reviews, onShowModal }) => {
   const ratingRoundUp = rating.toFixed(2);
   const names = [
     '동찬 킴',
-    'YoungSeo Lim',
+    'YoungSeo Im',
     '한슬',
     'Forever Na',
     'BokBok',
