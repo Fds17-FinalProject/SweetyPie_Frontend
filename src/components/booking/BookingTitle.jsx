@@ -4,7 +4,7 @@ import { MdNavigateBefore } from 'react-icons/md';
 
 const BookingTitle = ({ bookingEdit }) => {
   return (
-    <div className="flex items-center pb-7 px-32 pt-6.4rem mx-48">
+    <div className="flex items-center pb-7 px-32 pt-6.4rem xl:mx-48 md:mx-0">
       <div className="w-20 h-20 -ml-8 flex items-center justify-center rounded-50% hover:bg-#f7f7f7">
         <Link
           to="/reservation?tab=upcoming"
