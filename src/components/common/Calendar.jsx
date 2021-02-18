@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DayPickerRangeController } from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';

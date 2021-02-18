@@ -127,7 +127,6 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
               <CalendarDetail gu={gu} />
             </div>
             <div className="w-1/3 h-full sticky top-44">
-              me
               <Payment rating={rating} reviewNum={reviewNum} price={price} />
             </div>
           </div>
