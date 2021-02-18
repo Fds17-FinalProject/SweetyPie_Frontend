@@ -3,7 +3,7 @@ import BookingRoomInfo from './BookingRoomInfo';
 import BookingPaymentInfo from './BookingPaymentInfo';
 import BookingBorder from './BookingBorder';
 
-const BookingDetailTemplate = ({ reservationInfo, query, nights }) => {
+const BookingDetailTemplate = ({ reservationInfo, query, nights, fees }) => {
   const { totalPrice, pricePerDay } = query;
 
   return (
@@ -14,6 +14,7 @@ const BookingDetailTemplate = ({ reservationInfo, query, nights }) => {
         totalPrice={totalPrice}
         pricePerDay={pricePerDay}
         nights={nights}
+        fees={fees}
       />
     </section>
   );

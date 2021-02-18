@@ -27,12 +27,18 @@ const BookingTemplate = ({
   // url 쿼리 정보
   const query = queryStirng.parse(location.search);
 
-  const { checkInDate, checkoutDate } = query;
+  const { checkInDate, checkoutDate, pricePerDay } = query;
 
   // 숙박일수 계산
   const nights =
     (new Date(checkoutDate).getTime() - new Date(checkInDate).getTime()) /
     86400000;
+
+  // 서비스 수수료 계산
+  const fees = Math.round(pricePerDay * nights * 0.07);
+
+  // 총 가격 계산
+  const totalPrice = pricePerDay * nights + 10000 + fees;
 
   // 체크인과 체크아웃 날짜형태에서 '-' 제거
   const checkInDateArr = checkInDate.split('-');
@@ -42,7 +48,13 @@ const BookingTemplate = ({
     <>
       {visible.type === 'date' && visible.state && (
         <Modal>
-          <BookingDateEditModal hideModal={hideModal} setVisible={setVisible} />
+          <BookingDateEditModal
+            hideModal={hideModal}
+            setVisible={setVisible}
+            checkInDate={checkInDate}
+            checkoutDate={checkoutDate}
+            totalPrice={totalPrice}
+          />
         </Modal>
       )}
       {visible.type === 'guest' && visible.state && (
@@ -110,6 +122,7 @@ const BookingTemplate = ({
             reservationInfo={reservationInfo}
             query={query}
             nights={nights}
+            fees={fees}
           />
         </div>
       </main>
