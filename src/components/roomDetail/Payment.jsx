@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { HiStar } from 'react-icons/hi';
 import { GrDown, GrUp } from 'react-icons/gr';
-import Button from '../common/Button';
 import classNames from 'classnames';
 
 const Payment = ({
@@ -30,7 +29,10 @@ const Payment = ({
   let url = new URL(window.location.href);
   let checkInDate = url.searchParams.get('checkInDate');
   let checkoutDate = url.searchParams.get('checkoutDate');
-  url.searchParams.delete('checkInDate');
+  let adultNum = url.searchParams.get('adultNum');
+  let childNum = url.searchParams.get('childNum');
+  let infantNum = url.searchParams.get('infantNum');
+  let accommodationId = window.location.pathname.split('/')[2];
 
   return (
     <div className="w-full px-2.4rem py-10 sticky border rounded-3xl shadow-xl bg-white">
@@ -101,7 +103,9 @@ const Payment = ({
             </button>
           </div>
         </div>
-        <Link to="/">
+        <Link
+          to={`/booking/payment/${accommodationId}?checkInDate=${checkInDate}&checkoutDate=${checkoutDate}&adultNum=${adultNum}&childNum=${childNum}&infantNum=${infantNum}`}
+        >
           {totalGuest !== 0 && checkInDate && checkoutDate ? (
             <button className="bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none w-full h-20 px-6 m-2 text-2xl transform focus:scale-90">
               예약하기
