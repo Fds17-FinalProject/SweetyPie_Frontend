@@ -27,12 +27,10 @@ const Payment = ({
   };
 
   // url에서 checkInDate와 checkOutDate 가져오기
-  let params = new URLSearchParams(window.location.search);
-  let checkInDate = params.get('checkInDate');
-  let checkoutDate = params.get('checkoutDate');
-  console.log(totalGuest !== 0);
-  console.log(!checkInDate);
-  console.log(totalGuest !== 0 && !checkInDate && !checkoutDate);
+  let url = new URL(window.location.href);
+  let checkInDate = url.searchParams.get('checkInDate');
+  let checkoutDate = url.searchParams.get('checkoutDate');
+  url.searchParams.delete('checkInDate');
 
   return (
     <div className="w-full px-2.4rem py-10 sticky border rounded-3xl shadow-xl bg-white">
