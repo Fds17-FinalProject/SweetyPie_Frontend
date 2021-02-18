@@ -16,7 +16,7 @@ import Host from './Host';
 import ThingsToKnow from './ThingsToKnow';
 import RoomDetailHeader from './RoomDetailHeader';
 import RoomDetailSafetyModal from './RoomDetailSafetyModal';
-import RoomDetailGuestEditModal from './RoomDetailGuestEditModal';
+import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 import RoomDetailReviewModal from './RoomDetailReviewModal';
 
 const RoomDetailTemplate = ({ accommodation, loading }) => {
@@ -101,10 +101,9 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
 
   // 인원수 상태관리
   const [count, setCount] = useState({
-    adult: 0,
-    child: 0,
-    infant: 0,
-    status: false,
+    adultNum: 0,
+    childNum: 0,
+    infantNum: 0,
   });
 
   // URL query 가져오기
@@ -142,9 +141,6 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
       {/* {visible.type === 'date' && visible.state && (
           <RoomDetailDateEditModal onCloseModal={onCloseModal} />
       )} */}
-      {visible.type === 'guest' && visible.state && (
-        <RoomDetailGuestEditModal onCloseModal={onCloseModal} />
-      )}
       <RoomDetailHeader />
       {loading === false && (
         <div className="max-w-screen-2xl mt-32" id="photos">
@@ -219,7 +215,7 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

@@ -40,7 +40,8 @@ const Calendar = ({ dateRange, handleOnDateChange, focus, setFocus }) => {
 
     return blocked;
   };
-
+  console.log('startDate', startDate);
+  console.log('endDate', endDate);
   return (
     <>
       <DayPickerRangeController

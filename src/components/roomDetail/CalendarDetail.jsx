@@ -54,8 +54,9 @@ const CalendarDetail = ({ gu }) => {
       endDate: endDate,
     });
     // 변경된 날짜에 따라 url 변경(checkInDate, checkOut)
-    changeUrl('checkInDate', startDate.format('YYYY-MM-DD'));
-    endDate && changeUrl('checkoutDate', endDate.format('YYYY-MM-DD'));
+    startDate && changeUrl('checkInDate', startDate.format('YYYY-MM-DD'));
+    endDate !== null && changeUrl('checkoutDate', endDate.format('YYYY-MM-DD'));
+    console.log(endDate);
   };
 
   // 날짜 지우기
