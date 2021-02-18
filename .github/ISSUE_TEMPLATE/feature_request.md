@@ -1,20 +1,15 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
+name: #123 숙소 상세검색 페이지 데이터 api 요청(GET)
+about: 숙소 상세검색 페이지 데이터 api 요청(GET)
 title: ''
-labels: ''
+labels: 'feature'
 assignees: ''
 
 ---
+## 설명
+> 설명을 입력해 주세요.
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## 작업 사항
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
-
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
-
-**Additional context**
-Add any other context or screenshots about the feature request here.
+- [ ] 작업1
+- [ ] 작업2
