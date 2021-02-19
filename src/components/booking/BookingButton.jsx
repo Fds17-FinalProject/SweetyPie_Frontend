@@ -1,16 +1,39 @@
+// BookingButton
 import React from 'react';
 import SVG from '../../assets/svg';
-import { modifyReservation } from '../../redux/lib/api/reservations';
+import {
+  modifyReservation,
+  paymentReservation,
+} from '../../redux/lib/api/reservations';
 
 const BookingButton = ({
-  bookingEdit,
   showModal,
   reservationId,
   checkInDate,
   checkoutDate,
   query,
+  subPage,
+  accommodationInfo,
+  nights,
 }) => {
-  const { totalGuestNum, adultNum, childNum, infantNum, totalPrice } = query;
+  // 쿼리에서 가져올 정보들
+  const { totalGuestNum, adultNum, childNum, infantNum } = query;
+  // url에서 accommodationId 가져오기
+  const accommodationId = window.location.pathname.split('/')[3];
+
+  const { pricePerDay } = subPage === 'modify' && query;
+  const { price } = subPage === 'payment' && accommodationInfo;
+
+  // 서비스 수수료 계산
+  const fees = Math.round(
+    subPage === 'modify' ? pricePerDay * nights * 0.07 : price * nights * 0.07,
+  );
+
+  // 총 가격 계산
+  const totalPrice =
+    subPage === 'modify'
+      ? pricePerDay * nights + 10000 + fees
+      : price * nights + 10000 + fees;
 
   // 수정 완료 버튼 클릭 시 patch 요청 및 확인 모달창 show
   const patchReservation = async type => {
@@ -25,6 +48,26 @@ const BookingButton = ({
       infantNum,
       totalPrice,
     });
+
+    // 확인 버튼 모달 open
+    showModal(type);
+  };
+
+  // 결제 완료 버튼 클릭 시 post 요청 및 확인 모달창 show
+  const postReservation = async type => {
+    // 예약 하기 post 요청
+    const res = await paymentReservation({
+      // memberId,
+      accommodationId,
+      checkInDate,
+      checkoutDate,
+      totalGuestNum: +adultNum + +childNum + +infantNum,
+      adultNum,
+      infantNum,
+      childNum,
+      totalPrice,
+    });
+
     console.log(res);
 
     // 확인 버튼 모달 open
@@ -34,8 +77,11 @@ const BookingButton = ({
   return (
     <div className="mt-10 flex">
       <button
-        // bookingEdit ? () => showModal('edit') : () => showModal('payment')
-        onClick={() => patchReservation('edit')}
+        onClick={
+          subPage === 'modify'
+            ? () => patchReservation('edit')
+            : () => postReservation('edit')
+        }
         className="flex items-center justify-center w-60 h-20 mr-10 bg-#D70466 text-white font-bold rounded-2xl relative"
       >
         <SVG
@@ -45,13 +91,11 @@ const BookingButton = ({
           viewBox="0 0 24 24"
           color="#fff"
         />
-        {bookingEdit ? (
-          <span className="m-2 text-2xl">수정 완료</span>
-        ) : (
-          <span className="m-2 text-2xl">결제 완료</span>
-        )}
+        <span className="m-2 text-2xl">
+          {subPage === 'modify' ? '수정 완료' : '결제 완료'}
+        </span>
       </button>
-      {bookingEdit && (
+      {subPage === 'modify' && (
         <button
           onClick={() => showModal('delete')}
           className="flex items-center justify-center w-60 h-20 bg-gray-400 text-black font-bold rounded-2xl"
@@ -62,5 +106,4 @@ const BookingButton = ({
     </div>
   );
 };
-
 export default BookingButton;

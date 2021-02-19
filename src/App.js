@@ -12,7 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/booking" component={BookingContainer} />
+        <Route path="/booking/:subPage" component={BookingContainer} />
         <Route path="/accommodation/:room_id" component={RoomDetailPage} />
         <Route path="/reservation" component={TripListPage} />
         <Route path="/accommodations" component={SearchContainer} />
