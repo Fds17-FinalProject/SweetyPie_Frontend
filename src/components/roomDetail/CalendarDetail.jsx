@@ -15,7 +15,6 @@ const CalendarDetail = ({ gu }) => {
   const changeUrl = (key, value) => {
     url.searchParams.set(key, value);
     history.push(url.search);
-    console.log(url.search);
   };
 
   // 체크인, 체크아웃 날짜에 대한 상태

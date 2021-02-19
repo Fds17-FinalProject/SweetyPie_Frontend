@@ -18,14 +18,14 @@ const Payment = ({
   const fees = Math.round(price * 0.07 * day);
   const totalPrice = +price * +day + +fees + 10000;
   const ratingRoundUp = rating.toFixed(2);
-  const totalGuest = count.adult + count.child + count.infant;
+  const totalGuest = count.adultNum + count.childNum + count.infantNum;
 
   // 금액 표기 시 세자리 수마다 콤마(,)찍어주기
   const numberWithCommas = x => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  // url에서 checkInDate와 checkOutDate 가져오기
+  // url에서 정보 가져오기
   let url = new URL(window.location.href);
   let checkInDate = url.searchParams.get('checkInDate');
   let checkoutDate = url.searchParams.get('checkoutDate');
