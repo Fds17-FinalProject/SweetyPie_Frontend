@@ -139,7 +139,7 @@ const TripCard = ({ reservations, tab, reviewStatus, setReviewStatus }) => {
       )}
       <li className="px-6 w-1/3">
         <div className="mt-6 mb-8 rounded-2xl shadow-before hover:transition-shadow hover:shadow-after">
-          <Link to="/room">
+          <Link to={`/accommodation/${accommodationId}`}>
             <div>
               <img
                 src={accommodationPicture.url}
