@@ -1,42 +1,49 @@
 import React from 'react';
 import SVG from '../../assets/svg';
 
-const BookingRoomInfo = ({ reservationInfo }) => {
-  const {
-    accommodationPicture,
-    city,
-    gu,
-    title,
-    bedroomNum,
-    bedNum,
-    bathNum,
-    ratingAvg,
-    reviewNum,
-  } = reservationInfo;
+const BookingRoomInfo = ({ reservationInfo, accommodationInfo, subPage }) => {
+  // 예약 수정 페이지, 예약 하기 페이지 조건부 할당
+  const { city, gu, title, bedroomNum, bedNum, bathNum, reviewNum } =
+    subPage === 'modify' ? reservationInfo : accommodationInfo;
+
+  const { bathroomNum } = subPage === 'payment' && accommodationInfo;
 
   // 평균 평점 소수점 2째자리 까지 반올림
-  const roundedRating = ratingAvg.toFixed(2);
+  const roundedRating =
+    subPage === 'modify'
+      ? reservationInfo.ratingAvg.toFixed(2)
+      : accommodationInfo.rating.toFixed(2);
 
   return (
     <div className="flex pb-5">
       <div className="w-48 h-40 rounded-2xl flex-grow-0 flex-shrink-0 overflow-hidden">
         <div className="inline-block w-full h-full">
           <img
-            src={accommodationPicture.url}
+            src={
+              subPage === 'modify'
+                ? reservationInfo.accommodationPicture.url
+                : accommodationInfo.accommodationPictures[0].url
+            }
             alt="#"
             className="w-full h-full object-cover"
           />
         </div>
       </div>
-      {/* overflow-hidden overflow-ellipsis */}
-      {/* <div className="pl-6 flex-row flex-wrap content-between"> */}
       <div className="pl-6 flex flex-col justify-between min-w-0">
         <p className="text-1.2rem truncate">
           {gu && `${gu}`} {city && `${city}`}
         </p>
         <p className="text-1.4rem truncate">{title}</p>
         <p className="text-1.2rem text-#717171  truncate">
-          침실{bedroomNum}개 · 침대 {bedNum}개 · 욕실 {bathNum ? bathNum : 0}개
+          침실{bedroomNum}개 · 침대 {bedNum}개 · 욕실{' '}
+          {subPage === 'modify'
+            ? bathNum
+              ? bathNum
+              : 0
+            : bathroomNum
+            ? bathroomNum
+            : 0}
+          개
         </p>
         <span className="flex items-center">
           <span className="flex items-center">

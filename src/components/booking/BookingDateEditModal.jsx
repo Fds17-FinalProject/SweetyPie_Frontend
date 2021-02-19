@@ -8,12 +8,14 @@ const BookingDateEditModal = ({
   setVisible,
   checkInDate,
   checkoutDate,
-  totalPrice,
+  accommodationInfo,
 }) => {
   // 현재 url
   const url = new URL(window.location.href);
-
   const history = useHistory();
+
+  // 해당 숙소 금액
+  const { price } = accommodationInfo;
 
   // 체크인, 체크아웃 날짜에 대한 상태
   const [dateRange, setDateRange] = useState({
@@ -39,6 +41,16 @@ const BookingDateEditModal = ({
     if (!dateRange.startDate || !dateRange.endDate) {
       return;
     }
+    // 숙박 일수
+    const nights = dateRange.endDate.diff(dateRange.startDate, 'days');
+
+    // 서비스 수수료 계산
+    const fees = Math.round(price * nights * 0.07);
+
+    // 총 가격 계산
+    const totalPrice = price * nights + 10000 + fees;
+
+    // url 쿼리에 담기
     url.searchParams.set(
       'checkInDate',
       dateRange.startDate.format('YYYY-MM-DD'),
@@ -49,6 +61,7 @@ const BookingDateEditModal = ({
     );
     url.searchParams.set('totalPrice', totalPrice);
     history.push(url.search);
+    // 모달 닫기
     setVisible(false);
   };
 
@@ -109,7 +122,6 @@ const BookingDateEditModal = ({
                 readOnly
               />
             </div>
-
             <div>
               <div className="font-semibold">체크아웃</div>
               <input
@@ -166,5 +178,4 @@ const BookingDateEditModal = ({
     </div>
   );
 };
-
 export default BookingDateEditModal;
