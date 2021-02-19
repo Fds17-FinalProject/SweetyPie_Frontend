@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import query from 'qs';
 import '../../assets/output.css';
 import Photos from './Photos';
 import Introduction from './Introduction';
@@ -70,7 +68,6 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
   // 타입에 맞는 모달창을 닫음
   const onCloseModal = ({ target }) => {
     if (target.dataset.name === 'close') {
-      console.log(1);
       setVisible({
         ...visible,
         state: false,
@@ -101,24 +98,10 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
 
   // 인원수 상태관리
   const [count, setCount] = useState({
-    adult: 0,
-    child: 0,
-    infant: 0,
-    status: false,
+    adultNum: 0,
+    childNum: 0,
+    infantNum: 0,
   });
-
-  // URL query 가져오기
-  // http://localhost:3000/accommodation/101?checkIn=2021-03-08&checkOut=2021-03-12&totalNights=4&adult=3&child=2&infant=1&totalGuest=6&totalPrice=294900
-  const location = useLocation();
-  const qs = query.parse(location.search, {
-    ignoreQueryPrefix: true,
-  });
-  // console.log(qs.checkIn);
-  // console.log(qs.checkOut);
-  // console.log(qs.adult);
-  // console.log(qs.child);
-  // console.log(qs.infant);
-  // console.log(qs.totalPrice);
 
   return (
     <>
