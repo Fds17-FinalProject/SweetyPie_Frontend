@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
 import SVG from '../../assets/svg';
 
 const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
-  // URL query 추가 및 변경하기
   const history = useHistory();
+  const url = new URL(window.location.href);
+
+  // URL query 추가 및 변경하기
   const changeUrl = (key, value) => {
-    let url = new URL(window.location.href);
     url.searchParams.set(key, value);
     history.push(url.search);
   };
@@ -23,15 +24,6 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
     changeUrl(type, count[type] + 1);
   };
 
-  console.log(
-    'adult',
-    count.adultNum,
-    'child',
-    count.childNum,
-    'infant',
-    count.infantNum,
-  );
-
   // 게스트 감소 함수
   const decreaseGuestNum = type => {
     if (count[type] === 0) return;
@@ -40,18 +32,29 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
       [type]: count[type] - 1,
     });
     changeUrl(type, count[type] - 1);
-    resetGuestNum();
+    // 어른이 0명이 되면 어린이와 아이 인원 초기화
+    if (count.adultNum === 1) resetGuestNum();
   };
 
   const resetGuestNum = () => {
-    if (count.adultNum === 0) {
-      setCount({
-        adultNum: 0,
-        childNum: 0,
-        infantNum: 0,
-      });
-    }
+    url.searchParams.set('childNum', 0);
+    url.searchParams.set('infantNum', 0);
+    history.push(url.search);
+    setCount({
+      adultNum: 0,
+      childNum: 0,
+      infantNum: 0,
+    });
   };
+
+  console.log(
+    'adult',
+    count.adultNum,
+    'child',
+    count.childNum,
+    'infant',
+    count.infantNum,
+  );
 
   return (
     <div
@@ -187,10 +190,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
                     </div>
                   </button>
                 )}
-                <span className="text-1.6rem">
-                  {/* {count.childNum} */}
-                  {count.adultNum === 0 ? 0 : count.childNum}
-                </span>
+                <span className="text-1.6rem">{count.childNum}</span>
                 {count.childNum === 5 || count.adultNum === 0 ? (
                   <button
                     onClick={() => increaseGuestNum('childNum')}
@@ -273,9 +273,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
                     </div>
                   </button>
                 )}
-                <span className="text-1.6rem">
-                  {count.adultNum === 0 ? 0 : count.infantNum}
-                </span>
+                <span className="text-1.6rem">{count.infantNum}</span>
                 {count.infantNum === 5 || count.adultNum === 0 ? (
                   <button
                     onClick={() => increaseGuestNum('infantNum')}
