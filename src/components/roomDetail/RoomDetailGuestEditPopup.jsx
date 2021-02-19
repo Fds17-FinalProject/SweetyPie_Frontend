@@ -2,43 +2,13 @@ import React, { useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import SVG from '../../assets/svg';
 
-const RoomDetailGuestEditPopup = ({
-  onCloseModal,
-  onClosePopup,
-  count,
-  setCount,
-}) => {
-  // URL query parameter 가져오기
-  const getParameterByName = name => {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    const regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
-      results = regex.exec(window.location.search);
-    console.log(results);
-    return results === null
-      ? ''
-      : decodeURIComponent(results[1].replace(/\+/g, ' '));
-  };
-
+const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
   // URL query 추가 및 변경하기
+  const history = useHistory();
   const changeUrl = (key, value) => {
-    const searchUrl = window.location.search;
-    const prevValue = getParameterByName(key);
-    let urlQuery;
-
-    // 1. 쿼리가 존재하지 않으면 새로운 쿼리를 추가
-    if (searchUrl.indexOf('?') === -1) {
-      urlQuery = `?${key}=${value}`;
-    } else {
-      // 2. 쿼리가 존재 but 현재 key가 존재하지 않을 때 새로 추가
-      if (searchUrl.indexOf(key) === -1) {
-        urlQuery = `${searchUrl}&${key}=${value}`;
-      } else {
-        // 3. 쿼리가 존재 and 현재 key와 value가 존재할 때 수정
-        console.log(key, prevValue, value);
-        urlQuery = searchUrl.replace(`${key}=${prevValue}`, `${key}=${value}`);
-      }
-    }
-    window.history.pushState(null, null, `${urlQuery}`);
+    let url = new URL(window.location.href);
+    url.searchParams.set(key, value);
+    history.push(url.search);
   };
 
   // 게스트 증가 함수
@@ -87,7 +57,6 @@ const RoomDetailGuestEditPopup = ({
     <div
       className="w-full h-full bg-transparent"
       onClick={onCloseModal}
-      // onClick={onClosePopup}
       data-name="popup"
     >
       <div
@@ -219,6 +188,7 @@ const RoomDetailGuestEditPopup = ({
                   </button>
                 )}
                 <span className="text-1.6rem">
+                  {/* {count.childNum} */}
                   {count.adultNum === 0 ? 0 : count.childNum}
                 </span>
                 {count.childNum === 5 || count.adultNum === 0 ? (
