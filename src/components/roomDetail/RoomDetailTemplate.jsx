@@ -17,7 +17,12 @@ import RoomDetailSafetyModal from './RoomDetailSafetyModal';
 import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 import RoomDetailReviewModal from './RoomDetailReviewModal';
 
-const RoomDetailTemplate = ({ accommodation, loading }) => {
+const RoomDetailTemplate = ({
+  accommodation,
+  loading,
+  postBookmark,
+  deleteBookmark,
+}) => {
   const {
     gu,
     address,
@@ -40,6 +45,7 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
     hostReviewNum,
     reviews,
     accommodationPictures,
+    bookmarked,
   } = accommodation;
 
   const [visible, setVisible] = useState({
@@ -134,6 +140,9 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
               rating={rating}
               reviewNum={reviewNum}
               address={address}
+              bookmarked={bookmarked}
+              postBookmark={postBookmark}
+              deleteBookmark={deleteBookmark}
             />
             <Photos id="photos" accommodationPictures={accommodationPictures} />
           </div>
