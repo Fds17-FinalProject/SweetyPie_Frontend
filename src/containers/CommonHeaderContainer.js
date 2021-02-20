@@ -16,12 +16,13 @@ const CommonHeaderContainer = (
     setSearchStartState
   }) => {
     // 로컬스토리지 토큰 유무 
-    const [token, setToken] = useState(false);
+    const [checkedToken, setCheckedToken] = useState(false);
     // 스크롤 위치
     const [scrollY, setScrollY] = useState(false);
     const [socialModal, setSocialModal] = useState(false);
     // 유저 메뉴 모달 초기 상태
-    const [ visible, setVisible ] = useState(false);
+  const [visible, setVisible] = useState(false);
+  
     // // 검색 시작 하기 눌렀을 시 모달 초기 상태
     // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
     // 하나의 모달 회원가입 폼 모달 띄우는것 때문에 생각정리안된게있어서 일단 객체 상태로 냅둠!
@@ -136,16 +137,10 @@ const CommonHeaderContainer = (
       setLocation(true);
     }
   };
-
-  // const { user } = useSelector(user => user.user);
-  // console.log('user', user);
 //  로그인, 회원가입
   const dispatch = useDispatch();
   const state = useSelector(state => state.auth);
   const { register, login, socialRegister, authError } = state;
-  
-  // console.log('authError', authError);
-  // console.log('state', state);
   // 인풋 변경 이벤트 핸들러
   // 디스트럭처링으로 받기위해서 onChange에서 이벤트 객체와 form을 인자로 넘겨준다
   // 현재 onChange의 form이 누구인지 구분하기 위해서
@@ -164,29 +159,13 @@ const CommonHeaderContainer = (
     e.preventDefault();
     const { name, email, contact, birthDate, password, passwordConfirm } = register;
     dispatch(authRegister({ name, email, contact, birthDate, password, passwordConfirm }));
-      if (authError !== null) {
-        setAuthVisible(false);
-      }
   };
-
-  // const socialRegisterSubmit = e => {
-  //   console.log('event 잘 받았니', e);
-  //   console.log('잘 들어오니?');
-  //   e.preventDefault();
-  //   console.log(socialRegister);
-  //   const { email, name, contact, birthDate, socialId } = socialRegister;
-  //   dispatch(socialRegisterSubmitAction({ email, name, contact, birthDate, socialId }));
-  // };
   
-  const socialRegisterSubmit = async e => {
+  const socialRegisterSubmit = e => {
     e.preventDefault();
     console.log(socialRegister);
     const { email, name, contact, birthDate, socialId } = socialRegister;
     dispatch(socialRegisterSubmitAction({ email, name, contact, birthDate, socialId }));
-    console.log('authError', authError);
-    if (authError !== null) {
-      setSocialModal(false);
-    }
   };
 
   
@@ -201,10 +180,8 @@ const CommonHeaderContainer = (
     // error객체가 오면 에러메세지 띄워주고(서버에서 준 에러메세지 띄워주는거 아직 미구현)
     // 성공하면 history.push('/)
     if (token) {
-      console.log('123');
       localStorage.setItem('token', token);
-      // history.push('/');
-      setToken(true);
+      setCheckedToken(true);
       setAuthVisible(false);
     }
     else {
@@ -217,28 +194,33 @@ const CommonHeaderContainer = (
     console.log('e', e);
     logout();
     localStorage.removeItem('token');
-    // setAuthVisible(false);
-    setToken(false);
+    setCheckedToken(false);
   };
+
+  console.log();
   
 
   useEffect(() => {
-    // socialRegister에 socialID가 있다면 setSocialModal(true);
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   console.log('234');
-    //   localStorage.setItem('token', token);
-    //   // history.push('/');
-    //   setToken(true);
-    // } else {
-    //   setToken(false);
-    // }
-
+    // 로그인이나 회원가입 성공 시 모달창 Close
+    // useEffect에서 하는 이유는 dispatch가 비동기라서 에러객체가 담기는 시점을 알 수 없기 때문에
+    if (authError === null) {
+      setAuthVisible(false);
+    }
+    // 구글로 회원가입 시 서버에서 받아온 유저정보에 socialId가 있다면 회원가입 모달창 open
     console.log('socialRegister', socialRegister.socialId);
     if (socialRegister.socialId) {
       setSocialModal(true);
     }
-
+      // 토큰이 없디면 유저메뉴 view 변경(비 로그인 시)
+    if (localStorage.getItem('token') === null) {
+      setVisible(false);
+      setCheckedToken(false);
+    }
+    // 토큰이 있다면 유저메뉴 view 변경(로그인 시)
+    if (localStorage.getItem('token') !== null) {
+      setVisible(false);
+      setCheckedToken(true);
+    }
     function watchScroll() {
     window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
     }; 
@@ -249,7 +231,7 @@ const CommonHeaderContainer = (
   return () => {
     window.removeEventListener('scroll', watchScroll);
   };
-}, [dispatch, socialRegister.socialId]);
+}, [authError, socialRegister.socialId, checkedToken]);
 // }, [auth, authError, dispatch]);
 
 
@@ -280,7 +262,7 @@ const CommonHeaderContainer = (
         socialRegisterSubmit={socialRegisterSubmit}
         userLogout={userLogout}
         state={state}
-        token={token}
+        checkedToken={checkedToken}
         // form={form}
       />  
     </>
