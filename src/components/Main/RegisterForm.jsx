@@ -65,7 +65,7 @@ const RegisterForm = ({ hideModal, onChange, registerSubmit, state}) => {
         <span className="block py-2 px-4 h-3rem text-airbnb text-1.2rem">{register.password !== register.passwordConfirm && register.passwordConfirm.length > 0 && '비밀번호가 일치하지 않습니다.'}</span>
         {/* <Button color='pink' size='lg' className="mt-8" disabled>회원가입</Button> */}
 
-        <span className="block py-2 px-4 h-3rem text-airbnb text-1.2rem">{authError && '중복된 이메일입니다.'}</span>
+        <span className="block py-2 px-4 w-full h-3rem text-airbnb text-center text-1.4rem">{authError && '중복된 이메일입니다.'}</span>
         <button className="mt-8 w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none"  disabled={emptyInput || invalidValue}>회원가입</button>
       </form>
     </>
