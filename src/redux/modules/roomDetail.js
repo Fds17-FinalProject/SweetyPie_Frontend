@@ -13,7 +13,7 @@ const [
 ] = createRequestActionTypes('roomDetail/READ_ROOMDETAIL');
 
 // action creators
-// payload로 room_id를 보낸다. 왜냐하면 url room_id에 따라 DB를 보내주기 때문!
+// payload로 accommodation_id를 보낸다. 왜냐하면 url accommodation_id에 따라 DB를 보내주기 때문!
 export const readRoomDetail = createAction(READ_ROOMDETAIL);
 
 // saga
