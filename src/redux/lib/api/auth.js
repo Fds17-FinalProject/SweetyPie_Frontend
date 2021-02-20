@@ -1,17 +1,34 @@
 import axios from 'axios';
 
-// 로그인
-// export const login = ({ email, password }) =>
-//   axios.post('http://3.34.122.155/api/login', { email, password });
-
-export const getToken = async ({ email, password }) => 
-  await axios.post('http://3.34.122.155/api/login', { email, password });
+export const getToken = async ({ email, password }) => {
+  return await axios.post('http://3.34.122.155/api/login', { email, password });
+}
   // await localStorage.setItem('token', response.data.token);
-
+// 로그인 시 회원정보 GET
+export const getUser = async () => {
+  // console.log(localStorage.getItem('token'));
+  // console.log('123');
+   const res = await axios.get('http://3.34.122.155/api/member', {
+    headers: {
+      'Authorization': `Bearer ${localStorage.getItem('token')}`,
+     }
+    });
+    console.log('res', res);
+  return res;
+}
 // 회원가입
+// { headers: {"Authorization" : `Bearer ${token}`} }
   
-export const register = async ({ name, email, contact, birthDate, password }) => 
-  await axios.post('http://3.34.122.155/api/member', { name, email, contact, birthDate, password });
+export const register = async ({ name, email, contact, birthDate, password, passwordConfirm }) => 
+  await axios.post('http://3.34.122.155/api/member', { name, email, contact, birthDate, password, passwordConfirm });
+
+export const socialRegister = async ({ email, name, contact, birthDate, socialId }) => {
+  const res = await axios.post('http://3.34.122.155/api/login/google', { email, name, contact, birthDate, socialId });
+  await console.log('socialRes', res);
+  return res;
+}
+
+
 
 // export const register = async (payload) => {
 //   console.log(payload);
@@ -23,15 +40,18 @@ export const register = async ({ name, email, contact, birthDate, password }) =>
 //     password: payload.password
 //   })
 // }
+export const logout = async () => {
+  const res = await axios.get('http://3.34.122.155/api/logout', {
+    headers: { "Authorization": `Bearer ${localStorage.getItem('token')}`}
+  });
+  console.log('res', res);
+  return res;
+};
 
-
-  // REGISTER action이 발생하면 감시하고있다가 비동기 처리를 한다.
-  // dispatch가 날라오면 여기로 흐름이 이동한다
-  // 얘의 처리에 따라 success, failure
-
-export const socialRegister = ({ name, email, contact, birthDate, socialId }) =>
-  // social도 똑같이 ? 
-  axios.post('http://3.34.122.155/api/member', {  name, email, contact, birthDate, socialId });
-
-// 로그인 상태 확인 ??? 
-// export const check = () => axios.get()
+export const withdrawal = async () => {
+  const res = await axios.get('http://3.34.122.155/api/member', {
+    headers: { "Authorization": `Bearer ${localStorage.getItem('token')}` }
+  });
+  console.log('auth.js(res)', res);
+  return res;
+};
