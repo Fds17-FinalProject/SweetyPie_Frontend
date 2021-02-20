@@ -2,15 +2,22 @@ import React from 'react';
 import { HiStar } from 'react-icons/hi';
 import ReviewProfile from './ReviewProfile';
 
-const Reviews = ({ rating, reviewNum, reviews }) => {
+const Reviews = ({ rating, reviewNum, reviews, onShowModal }) => {
+  const img = window.location.origin;
   const ratingRoundUp = rating.toFixed(2);
   const names = [
     '동찬 킴',
-    'YoungSeo Lim',
+    'YoungSeo Im',
     '한슬',
     'Forever Na',
     'BokBok',
     '준철',
+  ];
+  const profileImages = [
+    img + '/img/avatar.png',
+    img + '/img/profile_01.jpg',
+    img + '/img/profile_02.jpg',
+    img + '/img/profile_03.jpg',
   ];
 
   return (
@@ -83,37 +90,53 @@ const Reviews = ({ rating, reviewNum, reviews }) => {
         </ul>
       </div>
       <div className="">
-        {reviews
-          .map(review => (
-            <div className="inline-block mr-8% w-5/12">
-              <ReviewProfile
-                name={names[review.id % 6]}
-                photo
-                reviews={review}
-              />
-            </div>
-          ))
-          .slice(0, 6)}
-        {/* <div className="inline-block mr-8% w-5/12">
-          <ReviewProfile name="YoungSeo" reviews={reviews[0]} />
+        <div className="flex">
+          {reviews
+            .map(review => (
+              <div className="inline-block mr-8% w-5/12">
+                <ReviewProfile
+                  name={names[review.id % 6]}
+                  profileImage={profileImages[review.id % 4]}
+                  reviews={review}
+                />
+              </div>
+            ))
+            .slice(0, 2)}
         </div>
-        <div className="inline-block mr-8% w-5/12">
-          <ReviewProfile name="영원" reviews={reviews[1]} />
+        <div className="flex">
+          {reviews
+            .map(review => (
+              <div className="inline-block mr-8% w-5/12">
+                <ReviewProfile
+                  name={names[review.id % 6]}
+                  profileImage={profileImages[review.id % 4]}
+                  reviews={review}
+                />
+              </div>
+            ))
+            .slice(2, 4)}
         </div>
-        <div className="inline-block mr-8% w-5/12">
-          <ReviewProfile name="한슬" reviews={reviews[2]} />
+        <div className="flex">
+          {reviews
+            .map(review => (
+              <div className="inline-block mr-8% w-5/12">
+                <ReviewProfile
+                  name={names[review.id % 6]}
+                  profileImage={profileImages[review.id % 4]}
+                  reviews={review}
+                />
+              </div>
+            ))
+            .slice(4, 6)}
         </div>
-        <div className="inline-block mr-8% w-5/12">
-          <ReviewProfile name="DongChan" reviews={reviews[3]} />
-        </div>
-        <div className="inline-block mr-8% w-5/12">
-          <ReviewProfile name="Jaebok" reviews={reviews[4]} />
-        </div>
-        <div className="inline-block mr-8% w-5/12">
-          <ReviewProfile name="준철" reviews={reviews[5]} />
-        </div> */}
       </div>
-      <div className="mb-20 border-b"></div>
+      <button
+        className="text-1.6rem px-2.4rem py-1.3rem bg-white font-bold border border-black rounded-2xl transform focus:scale-90 shadow-md hover:bg-gray-100 transition-all duration-150 "
+        onClick={() => onShowModal('review')}
+      >
+        후기 {reviewNum}개 모두 보기
+      </button>
+      <div className="my-20 border-b"></div>
     </div>
   );
 };

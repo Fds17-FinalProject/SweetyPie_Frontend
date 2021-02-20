@@ -1,19 +1,38 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { HiStar } from 'react-icons/hi';
-import { GrDown } from 'react-icons/gr';
-import Button from '../common/Button';
+import { GrDown, GrUp } from 'react-icons/gr';
+import classNames from 'classnames';
 
-const Payment = ({ rating, reviewNum, price }) => {
-  const day = 4; // day 계산해서 넣기
+const Payment = ({
+  rating,
+  reviewNum,
+  price,
+  visible,
+  onShowPopup,
+  onCloseModal,
+  count,
+}) => {
+  const day = 2; // day 계산해서 넣기
   const pricewithDay = price * day;
-  const fees = Math.round(price * 0.07);
+  const fees = Math.round(price * 0.07 * day);
   const totalPrice = +price * +day + +fees + 10000;
   const ratingRoundUp = rating.toFixed(2);
+  const totalGuest = count.adultNum + count.childNum + count.infantNum;
 
-  function numberWithCommas(x) {
+  // 금액 표기 시 세자리 수마다 콤마(,)찍어주기
+  const numberWithCommas = x => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  }
+  };
+
+  // url에서 정보 가져오기
+  let url = new URL(window.location.href);
+  let checkInDate = url.searchParams.get('checkInDate');
+  let checkoutDate = url.searchParams.get('checkoutDate');
+  let adultNum = url.searchParams.get('adultNum');
+  let childNum = url.searchParams.get('childNum');
+  let infantNum = url.searchParams.get('infantNum');
+  let accommodationId = window.location.pathname.split('/')[2];
 
   return (
     <div className="w-full px-2.4rem py-10 sticky border rounded-3xl shadow-xl bg-white">
@@ -23,7 +42,7 @@ const Payment = ({ rating, reviewNum, price }) => {
             ₩{numberWithCommas(price)}원
           </span>
           <span className="text-#717171 text-1.6rem"> / 박</span>
-          <div className="inline-flex text-1.4rem ml-36">
+          <div className="inline-flex text-1.4rem ml-40">
             <span className="inline-flex items-center flex-start mr-1 mb-1">
               <HiStar className="inline-block text-airbnb" />
             </span>
@@ -31,7 +50,7 @@ const Payment = ({ rating, reviewNum, price }) => {
             <span className="text-#717171">({reviewNum})</span>
           </div>
         </div>
-        <div className="h-11.2rem justify-items-center mt-8 mb-4 border rounded-2xl border-gray-400 overflow-hidden">
+        <div className="h-11.2rem justify-items-center mt-8 mb-4 border rounded-2xl border-gray-400 ">
           <div className="flex justify-content">
             <div className="w-64 h-5.6rem pt-2 pl-5 border-r border-gray-400">
               <b>체크인</b>
@@ -50,22 +69,55 @@ const Payment = ({ rating, reviewNum, price }) => {
                 id="checkOut"
                 name="checkOut"
                 placeholder="날짜추가"
-                className="block text-1.4rem pt-2 focus:border-2 focus:rounded-2xl border-gray-400 bg-transparent"
+                className="block text-1.4rem pt-2 rounded-2xl focus:border-2 focus:rounded-2xl border-gray-400 bg-transparent"
               />
             </div>
           </div>
-          <div className="w-full h-5.6rem border-t border-gray-400 pt-2 pl-5">
-            <p className="font-bold">인원</p>
-            <button className="inline-flex justify-between text-1.4rem text-gray-400 text-left pt-1 w-full bg-transparent">
-              게스트 1명
-              <GrDown className="mr-4 text-black text-3xl text-center" />
+          <div
+            class={classNames(
+              'w-full h-5.6rem pt-1 border-t-2 border-gray-400 spt-2 pl-5 relative',
+              {
+                'border-2 border-gray-800 rounded-2xl': visible.state,
+              },
+            )}
+            data-name="close"
+          >
+            <p className="font-bold pt-1" data-name="close">
+              인원
+            </p>
+            <button
+              className="inline-flex justify-between text-left pt-1 w-full h-full bg-transparent"
+              onClick={
+                visible.state ? onCloseModal : () => onShowPopup('guest')
+              }
+              data-name="close"
+            >
+              <span className="text-gray-400 text-1.4rem " data-name="close">
+                게스트 {totalGuest}명
+              </span>
+              {visible.state ? (
+                <GrUp className="mr-4 text-black text-3xl text-center" />
+              ) : (
+                <GrDown className="mr-4 text-black text-3xl text-center" />
+              )}
             </button>
           </div>
         </div>
-        <Link to="/booking">
-          <Button size="lg" color="pink">
-            예약하기
-          </Button>
+        <Link
+          to={`/booking/payment/${accommodationId}?checkInDate=${checkInDate}&checkoutDate=${checkoutDate}&adultNum=${adultNum}&childNum=${childNum}&infantNum=${infantNum}`}
+        >
+          {totalGuest !== 0 && checkInDate && checkoutDate ? (
+            <button className="bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none w-full h-20 px-6 m-2 text-2xl transform focus:scale-90">
+              예약하기
+            </button>
+          ) : (
+            <button
+              className="bg-gray-300 text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 cursor-default"
+              disabled="true"
+            >
+              예약하기
+            </button>
+          )}
         </Link>
       </div>
       <p className="my-5 text-1.4rem text-center">

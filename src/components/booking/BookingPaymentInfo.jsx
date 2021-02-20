@@ -1,15 +1,24 @@
 import React from 'react';
 
-const BookingPaymentInfo = ({ totalPrice, nights, pricePerDay }) => {
-  // 서비스 수수료 계산
-  const fees = Math.round(pricePerDay * 0.07);
+const BookingPaymentInfo = ({ nights, subPage, query, accommodationInfo }) => {
+  const { pricePerDay } = subPage === 'modify' && query;
+  const { price } = subPage === 'payment' && accommodationInfo;
 
   // 가격 3자 단위 콤마(,) 정규표현식
   const numberWithCommas = x => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
 
-  totalPrice = pricePerDay * nights + 10000 + fees;
+  // 서비스 수수료 계산
+  const fees = Math.round(
+    subPage === 'modify' ? pricePerDay * nights * 0.07 : price * nights * 0.07,
+  );
+
+  // 총 가격 계산
+  const totalPrice =
+    subPage === 'modify'
+      ? pricePerDay * nights + 10000 + fees
+      : price * nights + 10000 + fees;
 
   return (
     <section className="mt-10">
@@ -17,9 +26,16 @@ const BookingPaymentInfo = ({ totalPrice, nights, pricePerDay }) => {
       <ul className="mt-10 text-1.6rem">
         <li className="flex mb-3 ">
           <div className="flex-grow underline">
-            ₩{numberWithCommas(pricePerDay)} x {nights}박
+            ₩{numberWithCommas(subPage === 'modify' ? pricePerDay : price)} x{' '}
+            {nights}박
           </div>
-          <div>₩{numberWithCommas(pricePerDay * nights)}원</div>
+          <div>
+            ₩
+            {numberWithCommas(
+              subPage === 'modify' ? pricePerDay * nights : price * nights,
+            )}
+            원
+          </div>
         </li>
         <li className="flex mb-3">
           <div className="flex-grow underline">청소비</div>
@@ -40,5 +56,4 @@ const BookingPaymentInfo = ({ totalPrice, nights, pricePerDay }) => {
     </section>
   );
 };
-
 export default BookingPaymentInfo;
