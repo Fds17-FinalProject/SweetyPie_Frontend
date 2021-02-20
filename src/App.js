@@ -7,6 +7,7 @@ import SearchContainer from './containers/SearchContainer';
 import MainPage from './pages/MainPage';
 import ModifyAccountPage from './pages/ModifyAccountPage';
 import RedirectPage from './pages/RedirectPage';
+import WishListPage from './pages/WishListPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/booking/:subPage" component={BookingContainer} />
         <Route path="/accommodation/:room_id" component={RoomDetailPage} />
         <Route path="/reservation" component={TripListPage} />
+        <Route path="/wishlist" component={WishListPage} />
         <Route path="/accommodations" component={SearchContainer} />
         <Route path="/ " component={ModifyAccountPage} />
         <Route path="/" exact component={MainPage} />
