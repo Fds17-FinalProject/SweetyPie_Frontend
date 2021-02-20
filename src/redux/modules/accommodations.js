@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import { takeLatest } from 'redux-saga/effects';
-import * as api from '../lib/api';
+import * as api from '../lib/api/search';
 import createRequestSaga from '../lib/createRequestSaga';
 
 // 액션 타입 선언
@@ -30,7 +30,7 @@ const initialState = { accommodations: [], error: null, pageable: {} };
 const accommodations = handleActions(
   {
     [GET_ACCOMM_LIST_SUCCESS]: (state, action) => {
-      console.log(state, action);
+      console.log(action);
       return {
         ...state,
         accommodations: action.payload.content,

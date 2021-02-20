@@ -16,7 +16,7 @@ function App() {
         <Route path="/accommodation/:room_id" component={RoomDetailPage} />
         <Route path="/reservation" component={TripListPage} />
         <Route path="/accommodations" component={SearchContainer} />
-        <Route path="/ " component={ModifyAccountPage} />
+        <Route path="/modify" component={ModifyAccountPage} />
         <Route path="/" exact component={MainPage} />
         <Route path="/redirect" component={RedirectPage} />
       </Switch>

@@ -10,6 +10,7 @@ import ChargeMenu from './ChargeMenu';
 import MultipleCarousel from '../common/MultipleCarousel';
 import SearchMap from './SearchMap';
 import { useLocation } from 'react-router-dom';
+import Price from './Price';
 
 const StyledButton = styled.button`
     cursor: pointer;
@@ -48,11 +49,14 @@ const SearchTemplate = ({ accommodations, loading }) => {
   const [filter, setFilter] = useState({
     accommType: false,
     chargeMenu: false,
-  })
+  });
+
   const [isHovering, setIsHovering] = useState({
     id: null,
     isHovering: false,
   });
+
+  const [id, setId] = useState(0);
 
   const location = useLocation();
 
@@ -61,23 +65,24 @@ const SearchTemplate = ({ accommodations, loading }) => {
       id,
       isHovering: true,
     })
-  }
+  };
+
   const onMouseLeave = (id) => () => {
     setIsHovering({
       id,
       isHovering: false,
     })
-  }
+  };
 
   const menu = useRef();
-  const clickFilter = ({target}) => {
+  const clickFilter = ({ target }) => {
     if (target.name === 'accommType') setFilter({ accommType: !filter.accommType, chargeMenu: false });
     if (target.name === 'chargeMenu') setFilter({ chargeMenu: !filter.chargeMenu, accommType: false });
   };
   const getRecentSearch = localStorage.getItem('recentSearch') && JSON.parse(localStorage.getItem('recentSearch')).map(JSON.parse);
 
   return (
-    <div className="w-full flex flex-row flex-nowrap pt-32" >
+    <div className="w-full flex flex-row flex-nowrap pt-32 absolute z-20" >
       <div className="w-86.4rem border pr-8 pl-8 pt-32">
         <span className="text-1.4rem pb-4">300개 이상의 숙소</span>
         <h1 className="text-5xl mb-12 font-bold">
@@ -106,8 +111,8 @@ const SearchTemplate = ({ accommodations, loading }) => {
               요금
             </StyledButton>
           </ButtonWrapper>
-            {filter.accommType ? <AccommTypeMenu /> : ''}
-            {filter.chargeMenu ? <ChargeMenu /> : ''}
+            {filter.accommType ? <AccommTypeMenu setFilter={setFilter} /> : ''}
+            {filter.chargeMenu ? <ChargeMenu prices={accommodations.map(accomm => accomm.price)} /> : ''}
         </div>
         <div className="text-1.6rem text-#717171 border-b border-searchBorder pb-10">
           여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수 있습니다.
@@ -140,10 +145,19 @@ const SearchTemplate = ({ accommodations, loading }) => {
           <div className="text-1.2rem text-#717171 py-14">전체 요금을 보려면 날짜를 입력하세요. 추가 요금이 적용되고 세금이 추가될 수 있습니다.</div>
         </div>  
       </div>
-      <MapWrapper className="fixed w-full h-full top-0 right-0">
-        <SearchMap accommodations={accommodations} loading={loading} isHovering={isHovering} />
+      <MapWrapper className="fixed w-full h-full top-0 right-0" onClick={(e) => {
+        if (!e.target.dataset.name) setId(0);
+      }}>
+        <SearchMap
+          data-name="marker"
+          accommodations={accommodations}
+          loading={loading}
+          isHovering={isHovering}
+          id={id}
+          setId={setId}
+        />
       </MapWrapper>
     </div>
   );
 };
-export default SearchTemplate;
+export default React.memo(SearchTemplate);

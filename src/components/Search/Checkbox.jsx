@@ -13,6 +13,19 @@ const Div = styled.div`
     background-color: black;
   }
 
+  ${({ checkBox }) => (
+    checkBox &&
+    `
+      input[type=checkbox] + label
+    {
+      background: url('https://png.pngtree.com/png-clipart/20190516/original/pngtree-tick-vector-icon-png-image_4236552.jpg') no-repeat;
+      background-size: 100%;
+      background-position: center;
+      display:inline-block;
+    }
+      `
+    )}
+
   input[type=checkbox] + label
   {
     border: 1px solid;
@@ -25,26 +38,21 @@ const Div = styled.div`
     line-height: 60px;
     display:inline-block;
   }
-  input[type=checkbox]:checked + label
+  /* input[type=checkbox]:checked + label
   {
     background: url('https://png.pngtree.com/png-clipart/20190516/original/pngtree-tick-vector-icon-png-image_4236552.jpg') no-repeat;
     background-size: 100%;
     background-position: center;
     display:inline-block;
-  }
+  } */
 `;
 
-
-
-const Checkbox = ({ name, top }) => {
-  const onClick = e => {
-    console.log(e.target.htmlFor);
-  }
+const Checkbox = ({ name, top, onClick, checkBox }) => {
   return (
     <>
-      <Div name={name} top={top}>
+      <Div name={name} top={top} checkBox={checkBox[name]} >
         <input type='checkbox' name={name} id={name} />
-        <label htmlFor={name} top={top} onClick={onClick}></label>
+        <label htmlFor={name} top={top} onClick={onClick(name)}></label>
       </Div>
     </>
   );
