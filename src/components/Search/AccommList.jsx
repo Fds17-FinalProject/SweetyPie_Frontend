@@ -4,7 +4,7 @@ import Carousel from '../common/Carousel';
 import { FiHeart } from 'react-icons/fi';
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
-import { deleteBookMark, postBookMark } from '../../redux/lib/api/search';
+import { deleteBookMark, postBookMark } from '../../redux/lib/api/bookmark';
 
 const HoverSvg = styled.button`
   transition: all 0.2s ease-in-out;
@@ -37,24 +37,18 @@ const AccommList = props => {
     title,
     onMouseEnter,
     onMouseLeave,
-    bookMarked
+    bookmarked
   } = props;
   const cost = price && price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-  localStorage.setItem('token', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkdWR0ajEyM0BnbWFpbC5jb20iLCJhdXRoIjoiUk9MRV9NRU1CRVIiLCJtZW1iZXJJZCI6MiwiZXhwIjoxNjEzODE1ODcxfQ.eDByYrnfSwCS6fOQz6RnffruKoYlNhIZqQLSQFygoiBrSSQiy0t_FBxEAkDdaz9yw2ek_L99kNfmgH2EXkdJmg');
-
-  const [bookMark, setBookMark] = useState(bookMarked);
+  const [bookMark, setBookMark] = useState(bookmarked);
   const bookMarkClick = id => () => {
     setBookMark(!bookMark);
     if (!bookMark) {
       console.log(bookMark);
-      postBookMark({
-        "accommodationId": `${id}`
-      }) 
+      postBookMark(id) 
     } else {
-      deleteBookMark({
-        "accommodationId": `${id}`
-      })
+      deleteBookMark(id)
     }
   };
   const img = accommodationPictures && accommodationPictures.map(picture => picture.url);
