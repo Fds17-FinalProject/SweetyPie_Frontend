@@ -1,8 +1,9 @@
 import React from 'react';
 import { DiRuby } from 'react-icons/di';
 
-const BookingBanner = ({ reservationInfo }) => {
-  const { hostName } = reservationInfo;
+const BookingBanner = ({ reservationInfo, accommodationInfo, subPage }) => {
+  const { hostName } =
+    subPage === 'modify' ? reservationInfo : accommodationInfo;
 
   return (
     <section className="flex items-center p-10 border rounded-2xl">
