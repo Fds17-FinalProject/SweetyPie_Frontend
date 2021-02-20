@@ -21,7 +21,7 @@ const CommonHeaderContainer = (
     const [scrollY, setScrollY] = useState(false);
     const [socialModal, setSocialModal] = useState(false);
     // 유저 메뉴 모달 초기 상태
-  const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(false);
   
     // // 검색 시작 하기 눌렀을 시 모달 초기 상태
     // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
@@ -92,51 +92,51 @@ const CommonHeaderContainer = (
       if (target.dataset.name) {
         setVisible(false);
         setAuthVisible(false);
-        setPersonnel(false);
+        // setPersonnel(false);
         setSocialModal(false);
       }
     };
   
-// 검색 시작하기 onClick시 헤더 스타일 변경
-  const showSearchHeader = ({ target }) => {
-    if (target.dataset.name === 'open') {
-      // 상태 true로 바뀌면서 스타일 변경
-      setSearchStartState(true);
-      // 위치 open
-      setLocation(true);
-    }
-  };
+// // 검색 시작하기 onClick시 헤더 스타일 변경
+//   const showSearchHeader = ({ target }) => {
+//     if (target.dataset.name === 'open') {
+//       // 상태 true로 바뀌면서 스타일 변경
+//       setSearchStartState(true);
+//       // 위치 open
+//       setLocation(true);
+//     }
+//   };
 
-  // 헤더 위치 (어디로 여행가세요?)
-  const showLocation = ({ target }) => {
-    if (target.dataset.name === 'location') {
-      setLocation(true);
-      setCalendar(false);
-      setPersonnel(false);
-    }
-  };
-  // 헤더 켈린더 ( 체크인, 체크아웃 )
-  const showCalendar = ({ target }) => {
-    if (target.dataset.name === 'calendar') {
-      setCalendar(true);
-      setLocation(false);
-      setPersonnel(false);
-    }
-  };
-  // 헤더 인원 수
-  const showPersonnel = ({ target }) => {
-    if (target.dataset.name === 'personnel') {
-      setPersonnel(true);
-      setLocation(false);
-      setCalendar(true);
-    }
-  };
-  // 헤더에 검색 버튼 누를 시 location: true 하면서 검색 버튼 스타일 변경
-  const searchOnclick = ({ target }) => {
-    if (target.dataset.name === 'search') {
-      setLocation(true);
-    }
-  };
+//   // 헤더 위치 (어디로 여행가세요?)
+//   const showLocation = ({ target }) => {
+//     if (target.dataset.name === 'location') {
+//       setLocation(true);
+//       setCalendar(false);
+//       setPersonnel(false);
+//     }
+//   };
+//   // 헤더 켈린더 ( 체크인, 체크아웃 )
+//   const showCalendar = ({ target }) => {
+//     if (target.dataset.name === 'calendar') {
+//       setCalendar(true);
+//       setLocation(false);
+//       setPersonnel(false);
+//     }
+//   };
+//   // 헤더 인원 수
+//   const showPersonnel = ({ target }) => {
+//     if (target.dataset.name === 'personnel') {
+//       setPersonnel(true);
+//       setLocation(false);
+//       setCalendar(false);
+//     }
+//   };
+//   // 헤더에 검색 버튼 누를 시 location: true 하면서 검색 버튼 스타일 변경
+//   const searchOnclick = ({ target }) => {
+//     if (target.dataset.name === 'search') {
+//       setLocation(true);
+//     }
+//   };
 //  로그인, 회원가입
   const dispatch = useDispatch();
   const state = useSelector(state => state.auth);
@@ -244,16 +244,12 @@ const CommonHeaderContainer = (
         authVisible={authVisible}
         visible={visible}
         showAuthModal={showAuthModal}
-        showSearchHeader={showSearchHeader}
         searchStartState={searchStartState}
-        showCalendar={showCalendar}
-        showLocation={showLocation}
-        showPersonnel={showPersonnel}
         location={location}
         calendar={calendar}
         personnel={personnel}
         scrollY={scrollY}
-        searchOnclick={searchOnclick}
+        setScrollY={setScrollY}
 
         socialModal={socialModal}
         onChange={onChange}
@@ -263,7 +259,6 @@ const CommonHeaderContainer = (
         userLogout={userLogout}
         state={state}
         checkedToken={checkedToken}
-        // form={form}
       />  
     </>
   )
