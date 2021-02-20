@@ -63,8 +63,9 @@ const SVG = props => {
       width={props.width}
       height={props.height}
       className={props.className}
+      data-name={props.dataName}
     >
-      <path d={svg[props.name]} />
+      <path d={svg[props.name]} data-name={props.dataName} />
     </svg>
   );
 };

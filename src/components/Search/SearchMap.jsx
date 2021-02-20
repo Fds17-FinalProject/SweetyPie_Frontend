@@ -23,9 +23,8 @@ import MapPopup from './MapPopup';
 
 
 const Marker = ({ isHovering, accommId, id, setId, img, accomm, coord, hoverId, setHoverId }) => {
-  console.log(isHovering);
   
-  const onClick = () => {
+  const onClick = (e) => {
     setId(accommId)
   };
 
@@ -36,9 +35,16 @@ const Marker = ({ isHovering, accommId, id, setId, img, accomm, coord, hoverId, 
       className="relative "
       >
       {accommId === id 
-        ? (<MapPopup accomm={accomm} img={image} coord={coord} />)
+        ? (
+          <>
+            {/* <span>{coord.clientX} {coord.clientY}</span> */}
+            <MapPopup accomm={accomm} img={image} coord={coord} />
+            </>
+        )
       : ''}
-      <div className="hover:scale-125 duration-200 transform"
+      <div
+        data-name="marker"
+        className="hover:scale-125 duration-200 transform"
           style={{
         backgroundColor: `${isHovering.id === accommId && isHovering.isHovering ? 'rgb(34, 34, 34)' : 'rgb(255, 255, 255)'}`,
         boxShadow: 'rgb(0 0 0 / 8%) 0px 0px 0px 1px, rgb(0 0 0 / 18%) 0px 1px 2px',
@@ -51,7 +57,8 @@ const Marker = ({ isHovering, accommId, id, setId, img, accomm, coord, hoverId, 
         display: 'flex',
         position: 'relative',
           }}>
-      <SVG
+        <SVG
+          dataName="marker"
         name="house"
         width="2rem"
         height="2rem"
@@ -63,8 +70,7 @@ const Marker = ({ isHovering, accommId, id, setId, img, accomm, coord, hoverId, 
   )
 };
  
-const SearchMap = ({ accommodations, loading, isHovering }) => {
-  const [id, setId] = useState(0);
+const SearchMap = ({ accommodations, loading, isHovering, id, setId }) => {
   const [hoverId, setHoverId] = useState(0);
   const [coord, setCoord] = useState({
     clientX: null,
@@ -78,7 +84,7 @@ const SearchMap = ({ accommodations, loading, isHovering }) => {
       lat: 37.556708,
       lng: 126.910326
     },
-    zoom: 12
+    zoom: 14
   };
  
   let boundaryCoordinate = {};
@@ -86,15 +92,16 @@ const SearchMap = ({ accommodations, loading, isHovering }) => {
     console.log(x, y, lat, lng, event);
     setCoord({
       clientX: event.clientX,
+      // clientX: event.offsetX,
       clientY: event.clientY,
+      // clientY: event.offsetY,
     })
   }
-  console.log(coord.clientX, coord.clientY);
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          // onClick={_onClick}
+          onClick={_onClick}
           bootstrapURLKeys={{ key: 'AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU' }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
@@ -112,17 +119,18 @@ const SearchMap = ({ accommodations, loading, isHovering }) => {
               '&maxLongitude='
               + boundaryCoordinate.maxLongitude)
           }}
-          onZoomAnimationEnd={() => {
-            history.push(
-              'mapSearch?minLatitude='
-              + boundaryCoordinate.minLatitude +
-              '&maxLatitude='
-              + boundaryCoordinate.maxLatitude +
-              '&minLongitude='
-              + boundaryCoordinate.minLongitude +
-              '&maxLongitude='
-              + boundaryCoordinate.maxLongitude)
-          }}
+          // onZoomAnimationEnd={() => {
+          //   console.log(boundaryCoordinate.minLatitude);
+          //   history.push(
+          //     'mapSearch?minLatitude='
+          //     + boundaryCoordinate.minLatitude +
+          //     '&maxLatitude='
+          //     + boundaryCoordinate.maxLatitude +
+          //     '&minLongitude='
+          //     + boundaryCoordinate.minLongitude +
+          //     '&maxLongitude='
+          //     + boundaryCoordinate.maxLongitude)
+          // }}
           onChange={({ center, zoom, bounds, marginBounds }) => {
               boundaryCoordinate = {
                 minLatitude: marginBounds.sw.lat,
@@ -135,19 +143,18 @@ const SearchMap = ({ accommodations, loading, isHovering }) => {
           {loading === false && accommodations.map(accomm => {
             return (
               <Marker
-                
-                  lat={accomm.latitude}
-                  lng={accomm.longitude}
-                  isHovering={isHovering}
-                  hoverId={hoverId}
-                  setHoverId={setHoverId}
-                  accommId={accomm.id}
-                  id={id}
-                  setId={setId}
-                  img={accomm.accommodationPictures}
-                  accomm={accomm}
-                  coord={coord}
-                />
+                lat={accomm.latitude}
+                lng={accomm.longitude}
+                isHovering={isHovering}
+                hoverId={hoverId}
+                setHoverId={setHoverId}
+                accommId={accomm.id}
+                id={id}
+                setId={setId}
+                img={accomm.accommodationPictures}
+                accomm={accomm}
+                coord={coord}
+              />
               )
             }
               )}
