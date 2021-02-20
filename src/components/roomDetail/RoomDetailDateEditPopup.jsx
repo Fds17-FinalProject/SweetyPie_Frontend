@@ -2,22 +2,21 @@ import { useState } from 'react';
 import Calendar from '../common/Calendar';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
-import { BugReportTwoTone } from '@material-ui/icons';
 
 const RoomDetailDateEditPopup = ({ onCloseModal, visible, setVisible }) => {
-  // 현재 url
+  const history = useHistory();
+
+  // URL query parameter 가져오기
   const url = new URL(window.location.href);
   const checkInDate = url.searchParams.get('checkInDate');
   const checkoutDate = url.searchParams.get('checkoutDate');
 
-  const history = useHistory();
-
   // 체크인, 체크아웃 날짜에 대한 상태
   const [dateRange, setDateRange] = useState({
     // 체크인 날짜의 초기값을 쿼리에서 받아온 날짜를 moment 객체로 변환하여 지정
-    startDate: moment(`${checkInDate}`),
+    startDate: moment(checkInDate),
     // 체크아웃 날짜의 초기값을 쿼리에서 받아온 날짜를 moment 객체로 변환하여 지정
-    endDate: moment(`${checkoutDate}`),
+    endDate: moment(checkoutDate),
   });
   const { startDate, endDate } = dateRange;
 

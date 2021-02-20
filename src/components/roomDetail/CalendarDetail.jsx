@@ -19,19 +19,26 @@ const CalendarDetail = ({ gu }) => {
 
   // 체크인, 체크아웃 날짜에 대한 상태
   const [dateRange, setDateRange] = useState({
-    startDate: null,
-    endDate: null,
+    startDate: moment(checkInDate),
+    // startDate: startDate,
+    endDate: moment(checkoutDate),
   });
 
   // 달력 날짜 포커스 상태
   const [focus, setFocus] = useState('startDate');
 
-  // 날짜 변경
+  // 날짜 변경 -> 여기서 문제가 있군ㅜㅜ
   const handleOnDateChange = ({ startDate, endDate }) => {
     setDateRange({
-      startDate: startDate,
-      endDate: endDate,
+      startDate: moment(checkInDate),
+      // startDate: startDate,
+      endDate: moment(checkoutDate),
+      // endDate: endDate,
     });
+    console.log(startDate);
+    console.log(endDate);
+    console.log(moment(checkInDate));
+    console.log(moment(checkoutDate));
     // 변경된 날짜에 따라 url 변경(checkInDate, checkOut)
     // 만약, checkoutDate가 checkInDate보다 이전일 때, 음수로 숙박일수 지정되지 않도록 조절
     startDate && changeUrl('checkInDate', startDate.format('YYYY-MM-DD'));
