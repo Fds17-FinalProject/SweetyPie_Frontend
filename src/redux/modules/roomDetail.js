@@ -21,7 +21,7 @@ const readRoomDetailSaga = createRequestSaga(
   READ_ROOMDETAIL,
   roomDetailAPI.readRoomDetail,
 );
-console.log(roomDetailAPI.readRoomDetail);
+// console.log(roomDetailAPI.readRoomDetail);
 
 export function* RoomDetailSaga() {
   yield takeLatest(READ_ROOMDETAIL, readRoomDetailSaga);
@@ -30,7 +30,7 @@ export function* RoomDetailSaga() {
 // initialState
 const initialState = {
   accommodation: {},
-  roomDetailError: null,
+  accommodationError: null,
 };
 
 // reducer
@@ -47,7 +47,7 @@ const roomDetail = handleActions(
       // console.log(state, error);
       return {
         ...state,
-        roomDeatilError: error,
+        accommodationError: error,
       };
     },
   },
