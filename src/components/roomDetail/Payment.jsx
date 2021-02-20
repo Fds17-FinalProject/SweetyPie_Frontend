@@ -124,7 +124,9 @@ const Payment = ({
           </div>
         </div>
         <Link
-          to={`/booking/payment/${accommodationId}?checkInDate=${checkInDate}&checkoutDate=${checkoutDate}&adultNum=${adultNum}&childNum=${childNum}&infantNum=${infantNum}`}
+          to={`/booking/payment/${accommodationId}?checkInDate=${checkInDate}&checkoutDate=${checkoutDate}&adultNum=${adultNum}&childNum=${
+            childNum ? childNum : 0
+          }&infantNum=${infantNum ? infantNum : 0}`}
         >
           {totalGuest !== 0 && checkInDate && checkoutDate ? (
             <button className="bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none w-full h-20 px-6 m-2 text-2xl transform focus:scale-90">
