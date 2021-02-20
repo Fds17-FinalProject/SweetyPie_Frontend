@@ -40,3 +40,10 @@ export const socialRegister = async ({ email, name, contact, birthDate, socialId
 //     password: payload.password
 //   })
 // }
+export const logout = async () => {
+  const res = await axios.get('http://3.34.122.155/api/logout', {
+    headers: { "Authorization": `Bearer ${localStorage.getItem('token')}`}
+  });
+  console.log('res', res);
+  return res;
+};

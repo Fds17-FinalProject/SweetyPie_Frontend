@@ -3,7 +3,7 @@ import CommonHeader from '../components/common/CommonHeader';
 import { throttle } from 'lodash';
 import { changeField, initializeForm, authRegister, socialRegisterSubmitAction} from "../redux/modules/auth";
 import { useDispatch, useSelector } from 'react-redux';
-import { getToken, getUser } from '../redux/lib/api/auth';
+import { getToken, getUser, logout } from '../redux/lib/api/auth';
 
 const CommonHeaderContainer = (
   { location,
@@ -213,7 +213,13 @@ const CommonHeaderContainer = (
     const resUser = await getUser();
     console.log(resUser);
   };
-
+  const userLogout = e => {
+    console.log('e', e);
+    logout();
+    localStorage.removeItem('token');
+    // setAuthVisible(false);
+    setToken(false);
+  };
   
 
   useEffect(() => {
@@ -272,7 +278,7 @@ const CommonHeaderContainer = (
         registerSubmit={registerSubmit}
         loginSubmit={loginSubmit}
         socialRegisterSubmit={socialRegisterSubmit}
-       
+        userLogout={userLogout}
         state={state}
         token={token}
         // form={form}
