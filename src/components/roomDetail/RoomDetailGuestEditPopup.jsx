@@ -57,11 +57,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
   );
 
   return (
-    <div
-      className="w-full h-full bg-transparent"
-      onClick={onCloseModal}
-      data-name="popup"
-    >
+    <div className="w-full h-full bg-transparent" onClick={onCloseModal}>
       <div
         className="w-32rem absolute top-19.2rem left-11 bg-searchBackground
         overflow-y-auto flex flex-col text-black rounded-xl border border-#b0b0b0 z-20"
@@ -314,9 +310,8 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
             </li>
           </ul>
         </div>
-        <div className="text-1.4rem px-2.4rem">
-          <div className="mb-1">숙박에 필요한 인원을 선택해 주세요.</div>
-          <div>어린이, 유아는 1명 이상의 성인을 동반해야 합니다.</div>
+        <div className="text-1.2rem px-2.2rem">
+          어린이 및 유아는 숙박 시, 1명 이상의 성인을 동반해야 합니다.
         </div>
         <div className="my-1.6rem border-b"></div>
         <div className="text-right px-1.8rem pb-1.6rem">

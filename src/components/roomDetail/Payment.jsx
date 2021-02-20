@@ -54,23 +54,43 @@ const Payment = ({
           <div className="flex justify-content">
             <div className="w-64 h-5.6rem pt-2 pl-5 border-r border-gray-400">
               <b>체크인</b>
-              <label htmlFor="checkIn" />
-              <input
-                id="checkIn"
-                name="checkIn"
-                placeholder="날짜추가"
-                className="block text-1.4rem pt-2 leading-normal bg-transparent"
-              />
+              <button
+                // className="inline-flex justify-between text-left pt-1 w-full h-full bg-transparent"
+                onClick={
+                  visible.state ? onCloseModal : () => onShowPopup('calendar')
+                }
+                data-name="close"
+              >
+                <label htmlFor="checkIn" />
+                <input
+                  id="checkIn"
+                  name="checkIn"
+                  placeholder="날짜추가"
+                  value={checkInDate ? checkInDate : ''}
+                  className="block text-1.4rem pt-2 leading-normal bg-transparent cursor-pointer"
+                  disabled
+                />
+              </button>
             </div>
             <div className="w-64 h-5.6rem pl-5 pt-2 ">
               <b>체크아웃</b>
-              <label htmlFor="checkOut" />
-              <input
-                id="checkOut"
-                name="checkOut"
-                placeholder="날짜추가"
-                className="block text-1.4rem pt-2 rounded-2xl focus:border-2 focus:rounded-2xl border-gray-400 bg-transparent"
-              />
+              <button
+                // className="inline-flex justify-between text-left pt-1 w-full h-full bg-transparent"
+                onClick={
+                  visible.state ? onCloseModal : () => onShowPopup('calendar')
+                }
+                data-name="close"
+              >
+                <label htmlFor="checkOut" />
+                <input
+                  id="checkOut"
+                  name="checkOut"
+                  placeholder="날짜추가"
+                  value={checkoutDate ? checkoutDate : ''}
+                  className="block text-1.4rem pt-2 leading-normal bg-transparent cursor-pointer"
+                  disabled
+                />
+              </button>
             </div>
           </div>
           <div
