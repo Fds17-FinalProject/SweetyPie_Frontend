@@ -124,24 +124,24 @@ const Main = () => {
 
             <div className="flex w-full">
               <div className="w-1/4 mr-8">
-                <MapPopup
+                {/* <MapPopup
                   style={{ paddingRight: '10px', borderRadius: '10px' }}
-                />
+                /> */}
               </div>
               <div className="w-1/4 mr-8">
-                <MapPopup
+                {/* <MapPopup
                   style={{ paddingRight: '10px', borderRadius: '10px' }}
-                />
+                /> */}
               </div>
               <div className="w-1/4 mr-8">
-                <MapPopup
+                {/* <MapPopup
                   style={{ paddingRight: '10px', borderRadius: '10px' }}
-                />
+                /> */}
               </div>
               <div className="w-1/4 mr-8">
-                <MapPopup
+                {/* <MapPopup
                   style={{ paddingRight: '10px', borderRadius: '10px' }}
-                />
+                /> */}
               </div>
               {/* <Link className="w-1/4 pr-3.5" to="#">
                 <figure>
