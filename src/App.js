@@ -18,7 +18,7 @@ function App() {
         <Route path="/reservation" component={TripListPage} />
         <Route path="/wishlist" component={WishListPage} />
         <Route path="/accommodations" component={SearchContainer} />
-        <Route path="/ " component={ModifyAccountPage} />
+        <Route path="/modify" component={ModifyAccountPage} />
         <Route path="/" exact component={MainPage} />
         <Route path="/redirect" component={RedirectPage} />
       </Switch>
