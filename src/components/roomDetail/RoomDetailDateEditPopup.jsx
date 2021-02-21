@@ -3,7 +3,12 @@ import Calendar from '../common/Calendar';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 
-const RoomDetailDateEditPopup = ({ onCloseModal, visible, setVisible }) => {
+const RoomDetailDateEditPopup = ({
+  onCloseModal,
+  visible,
+  setVisible,
+  setHello,
+}) => {
   const history = useHistory();
 
   // URL query parameter 가져오기

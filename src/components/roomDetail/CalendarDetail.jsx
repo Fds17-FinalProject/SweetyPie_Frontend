@@ -16,7 +16,6 @@ const CalendarDetail = ({ gu }) => {
     url.searchParams.set(key, value);
     history.push(url.search);
   };
-
   // 체크인, 체크아웃 날짜에 대한 상태
   const [dateRange, setDateRange] = useState({
     startDate: moment(checkInDate),
@@ -24,16 +23,25 @@ const CalendarDetail = ({ gu }) => {
     endDate: moment(checkoutDate),
   });
 
+  useEffect(
+    () =>
+      setDateRange({
+        startDate: moment(checkInDate),
+        // startDate: startDate,
+        endDate: moment(checkoutDate),
+        // endDate: endDate,
+      }),
+    [checkInDate, checkoutDate],
+  );
+
   // 달력 날짜 포커스 상태
   const [focus, setFocus] = useState('startDate');
 
-  // 날짜 변경 -> 여기서 문제가 있군ㅜㅜ
+  // 날짜 변경
   const handleOnDateChange = ({ startDate, endDate }) => {
     setDateRange({
-      startDate: moment(checkInDate),
-      // startDate: startDate,
-      endDate: moment(checkoutDate),
-      // endDate: endDate,
+      startDate: startDate,
+      endDate: endDate,
     });
     console.log(startDate);
     console.log(endDate);

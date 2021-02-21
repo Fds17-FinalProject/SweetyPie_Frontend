@@ -94,6 +94,8 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
     infantNum: 0,
   });
 
+  const [hello, setHello] = useState(false);
+
   return (
     <>
       {visible.type === 'review' && visible.state && (
@@ -138,7 +140,7 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
               />
               <Description accommodationDesc={accommodationDesc} />
               <Beds bedroomNum={bedroomNum} bedNum={bedNum} />
-              <CalendarDetail gu={gu} />
+              <CalendarDetail gu={gu} hello={hello} />
             </div>
             <div className="w-1/3 h-full sticky top-44">
               <Payment
@@ -154,6 +156,7 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
                 <RoomDetailDateEditPopup
                   onCloseModal={onCloseModal}
                   setVisible={setVisible}
+                  setHello={setHello}
                 />
               )}
               {visible.type === 'guest' && visible.state && (
