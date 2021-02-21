@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import RoomDetailTemplate from '../components/roomDetail/RoomDetailTemplate';
@@ -20,18 +20,22 @@ const RoomDetailContainer = () => {
   // url의 accommodation_id 가져오기
   const { accommodation_id } = useParams();
 
+  const [mark, setMark] = useState(false);
+
   useEffect(() => {
     dispatch(readRoomDetail(accommodation_id));
-  }, [dispatch, accommodation_id]);
+  }, [dispatch, accommodation_id, mark]);
 
   // 북마크 등록 (POST)
-  const postBookmarkRoom = accommodation_id => {
-    postBookmark(accommodation_id);
+  const postBookmarkRoom = async accommodation_id => {
+    await postBookmark(accommodation_id);
+    setMark(true);
   };
 
   // 북마크 제거 (DELETE)
-  const deleteBookmarkedRoom = accommodation_id => {
-    deleteBookmark(accommodation_id);
+  const deleteBookmarkedRoom = async accommodation_id => {
+    await deleteBookmark(accommodation_id);
+    setMark(false);
   };
 
   return (
