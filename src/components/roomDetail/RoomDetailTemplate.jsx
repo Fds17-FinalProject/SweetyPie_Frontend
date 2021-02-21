@@ -13,9 +13,10 @@ import Map from './Map';
 import Host from './Host';
 import ThingsToKnow from './ThingsToKnow';
 import RoomDetailHeader from './RoomDetailHeader';
-import RoomDetailSafetyModal from './RoomDetailSafetyModal';
-import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 import RoomDetailReviewModal from './RoomDetailReviewModal';
+import RoomDetailSafetyModal from './RoomDetailSafetyModal';
+import RoomDetailRefundModal from './RoomDetailRefundModal';
+import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 
 const RoomDetailTemplate = ({ accommodation, loading }) => {
   const {
@@ -114,14 +115,11 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
         />
       )}
       {visible.type === 'safety' && visible.state && (
-        <RoomDetailSafetyModal
-          onCloseModal={onCloseModal}
-          onClosePopup={onClosePopup}
-        />
+        <RoomDetailSafetyModal onCloseModal={onCloseModal} />
       )}
-      {/* {visible.type === 'refund' && visible.state && (
+      {visible.type === 'refund' && visible.state && (
         <RoomDetailRefundModal onCloseModal={onCloseModal} />
-      )} */}
+      )}
       {/* {visible.type === 'date' && visible.state && (
           <RoomDetailDateEditModal onCloseModal={onCloseModal} />
       )} */}
