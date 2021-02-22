@@ -12,7 +12,6 @@ const Payment = ({
   visible,
   onShowPopup,
   onCloseModal,
-  count,
 }) => {
   // url에서 정보 가져오기
   let url = new URL(window.location.href);
