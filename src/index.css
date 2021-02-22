@@ -169,3 +169,13 @@ legend {
     transform 0.25s ease;
   outline: none;
 }
+
+/* range slider */
+.chartjs-render-monitor {
+  height: 100px !important;
+}
+
+.MuiInputLabel-root {
+  font-size: 18px !important;
+  margin: 0.5rem 0;
+}

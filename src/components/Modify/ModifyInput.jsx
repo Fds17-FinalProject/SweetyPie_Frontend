@@ -1,4 +1,3 @@
-
 const ModifyInput = ({ children, content, name, onClick, htmlFor, id}) => {
   return (
     <form className=" flex relative flex-wrap border-b border-#rgb235 pt-0.8rem pb-2.4rem">

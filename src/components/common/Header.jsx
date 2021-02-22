@@ -6,6 +6,7 @@ import { BiMenu, BiSearch } from 'react-icons/bi';
 import Modal from './Modal';
 import AuthModal from '../main/AuthModal';
 import Calendar from './Calendar';
+import SocialRegisterModal from './SocialRegisterModal';
 const img = window.location.origin;
 
 const scrollUp = keyframes`
@@ -190,7 +191,10 @@ const CommonHeader = (
     registerSubmit,    // 회원가입 모달 submit
     loginSubmit,       // 로그인 모달 submit
     state,
-    token,             // 로컬스토리지에 토큰이 있는지 없는지 유무(로그인 됐는지)
+    checkedToken,             // 로컬스토리지에 토큰이 있는지 없는지 유무(로그인 됐는지)
+    socialModal,
+    socialRegisterSubmit,
+    userLogout
   }) => {
   // 버거바
 const HeaderUser = () => {
@@ -218,7 +222,7 @@ const HeaderUser = () => {
 const MenuList = ({ children, showAuthModal, auth }) => {
   return (
     // UserMenu에서 auth를 받아서 콜백함수로 showAuthModal에 전달
-    <li className="py-4 px-6 hover:bg-gray-100" onClick={() => showAuthModal(auth)}>
+    <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100" onClick={() => showAuthModal(auth)}>
       {children}
     </li>
   );
@@ -238,12 +242,15 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
           {/* 로그인 안했을 시  */}
           <ul>
           {/* MenuList에 auth props를 넣어서 로그인인지 회원가입인지 구분 */}
-            {token ?
+            {checkedToken ?
             <>
               <MenuList>예약 내역</MenuList>
               <MenuList>저장 목록</MenuList>
-              <MenuList>계정</MenuList>
-               <MenuList>로그아웃</MenuList>
+                <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
+                  <Link className="block w-full" to="/modify">계정</Link>
+                </li>
+                {/* <MenuList auth='null' onClick={userLogout}>로그아웃</MenuList> */}
+              <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100" onClick={userLogout}>로그아웃</li>
             </> : 
             <>
               <MenuList auth='login' showAuthModal={showAuthModal} >로그인</MenuList>
@@ -380,10 +387,8 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
           <AuthModal hideModal={hideModal} authVisible={authVisible} onChange={onChange} registerSubmit={registerSubmit} state={state}/>
         </Modal>
       )}
-      {authVisible.type === 'socialRegister' && (
-        <Modal>
-          <AuthModal hideModal={hideModal} authVisible={authVisible}/>
-        </Modal>
+      {socialModal && (
+        <SocialRegisterModal hideModal={hideModal} onChange={onChange} socialRegisterSubmit={socialRegisterSubmit} state={state}/>
       )}
 
     

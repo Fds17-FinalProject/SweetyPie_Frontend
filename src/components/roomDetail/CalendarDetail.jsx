@@ -4,45 +4,35 @@ import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 
 const CalendarDetail = ({ gu }) => {
+  const history = useHistory();
+
   // URL query parameter 가져오기
-  const getParameterByName = name => {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    const regex = new RegExp('[\\?&]' + name + '=([^&#]*)'),
-      results = regex.exec(window.location.search);
-    console.log(results);
-    return results === null
-      ? ''
-      : decodeURIComponent(results[1].replace(/\+/g, ' '));
-  };
-  const checkInDate = getParameterByName('checkInDate');
-  const checkoutDate = getParameterByName('checkoutDate');
+  const url = new URL(window.location.href);
+  const checkInDate = url.searchParams.get('checkInDate');
+  const checkoutDate = url.searchParams.get('checkoutDate');
 
   // URL query 추가 및 변경하기
   const changeUrl = (key, value) => {
-    const searchUrl = window.location.search;
-    const prevValue = getParameterByName(key);
-    let urlQuery;
-
-    // 1. 쿼리가 존재하지 않으면 새로운 쿼리를 추가
-    if (searchUrl.indexOf('?') === -1) {
-      urlQuery = `?${key}=${value}`;
-    } else {
-      // 2. 쿼리가 존재 but 현재 key가 존재하지 않을 때 새로 추가
-      if (searchUrl.indexOf(key) === -1) {
-        urlQuery = `${searchUrl}&${key}=${value}`;
-      } else {
-        // 3. 쿼리가 존재 and 현재 key와 value가 존재할 때 수정
-        urlQuery = searchUrl.replace(`${key}=${prevValue}`, `${key}=${value}`);
-      }
-    }
-    window.history.pushState(null, null, `${urlQuery}`);
+    url.searchParams.set(key, value);
+    history.push(url.search);
   };
-
   // 체크인, 체크아웃 날짜에 대한 상태
   const [dateRange, setDateRange] = useState({
-    startDate: null,
-    endDate: null,
+    startDate: moment(checkInDate),
+    // startDate: startDate,
+    endDate: moment(checkoutDate),
   });
+
+  useEffect(
+    () =>
+      setDateRange({
+        startDate: moment(checkInDate),
+        // startDate: startDate,
+        endDate: moment(checkoutDate),
+        // endDate: endDate,
+      }),
+    [checkInDate, checkoutDate],
+  );
 
   // 달력 날짜 포커스 상태
   const [focus, setFocus] = useState('startDate');
@@ -53,19 +43,25 @@ const CalendarDetail = ({ gu }) => {
       startDate: startDate,
       endDate: endDate,
     });
+    console.log(startDate);
+    console.log(endDate);
+    console.log(moment(checkInDate));
+    console.log(moment(checkoutDate));
     // 변경된 날짜에 따라 url 변경(checkInDate, checkOut)
-    changeUrl('checkInDate', startDate.format('YYYY-MM-DD'));
-    endDate && changeUrl('checkoutDate', endDate.format('YYYY-MM-DD'));
+    // 만약, checkoutDate가 checkInDate보다 이전일 때, 음수로 숙박일수 지정되지 않도록 조절
+    startDate && changeUrl('checkInDate', startDate.format('YYYY-MM-DD'));
+    endDate
+      ? changeUrl('checkoutDate', endDate.format('YYYY-MM-DD'))
+      : url.searchParams.delete('checkoutDate');
+    history.push(url.search);
   };
 
   // 날짜 지우기
-  const history = useHistory();
   const onRemoveDate = () => {
     setDateRange({
       startDate: null,
       endDate: null,
     });
-    let url = new URL(window.location.href);
     url.searchParams.delete('checkInDate');
     url.searchParams.delete('checkoutDate');
     history.push(url.search);

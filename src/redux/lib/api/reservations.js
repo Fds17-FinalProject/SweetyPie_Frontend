@@ -1,8 +1,35 @@
 import axios from 'axios';
-
 // 예약 내역 GET 요청
-export const readReservation = () =>
-  axios.get(`http://3.34.50.91/api/reservation/1`);
+export const readReservation = memberId =>
+  axios.get(`http://3.34.50.91/api/reservation`, {
+    headers: {
+      Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX01FTUJFUiIsIm1lbWJlcklkIjoxLCJleHAiOjE2NDUyNjUzOTR9.v84KuW7pEJvr7-Ff848gNY2hNL8KNYv7gNYnymL56BPgiCRnzWVe0HPSoQpCyb-c4yJYHRUPlowJqNKU4HiWXA`,
+    },
+  });
+
+// 예약 하기 POST 요청
+export const paymentReservation = ({
+  // memberId,
+  accommodationId,
+  checkInDate,
+  checkoutDate,
+  totalGuestNum,
+  adultNum,
+  infantNum,
+  childNum,
+  totalPrice,
+}) =>
+  axios.post(`http://3.34.50.91/api/reservation`, {
+    memberId: 1,
+    accommodationId,
+    checkInDate,
+    checkoutDate,
+    totalGuestNum,
+    adultNum,
+    infantNum,
+    childNum,
+    totalPrice,
+  });
 
 // 예약 수정 PATCH 요청
 export const modifyReservation = ({
