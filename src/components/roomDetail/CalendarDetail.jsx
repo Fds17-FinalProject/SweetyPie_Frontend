@@ -16,12 +16,23 @@ const CalendarDetail = ({ gu }) => {
     url.searchParams.set(key, value);
     history.push(url.search);
   };
-
   // 체크인, 체크아웃 날짜에 대한 상태
   const [dateRange, setDateRange] = useState({
-    startDate: null,
-    endDate: null,
+    startDate: moment(checkInDate),
+    // startDate: startDate,
+    endDate: moment(checkoutDate),
   });
+
+  useEffect(
+    () =>
+      setDateRange({
+        startDate: moment(checkInDate),
+        // startDate: startDate,
+        endDate: moment(checkoutDate),
+        // endDate: endDate,
+      }),
+    [checkInDate, checkoutDate],
+  );
 
   // 달력 날짜 포커스 상태
   const [focus, setFocus] = useState('startDate');
@@ -32,6 +43,10 @@ const CalendarDetail = ({ gu }) => {
       startDate: startDate,
       endDate: endDate,
     });
+    console.log(startDate);
+    console.log(endDate);
+    console.log(moment(checkInDate));
+    console.log(moment(checkoutDate));
     // 변경된 날짜에 따라 url 변경(checkInDate, checkOut)
     // 만약, checkoutDate가 checkInDate보다 이전일 때, 음수로 숙박일수 지정되지 않도록 조절
     startDate && changeUrl('checkInDate', startDate.format('YYYY-MM-DD'));
