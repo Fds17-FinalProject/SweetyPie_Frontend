@@ -1,6 +1,6 @@
 import './assets/output.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import RoomDetailPage from './pages/RoomDetailPage';
+import RoomDetailPage from './pages/roomDetailPage';
 import TripListPage from './pages/TripListPage';
 import BookingContainer from './containers/BookingContainer';
 import SearchContainer from './containers/SearchContainer';

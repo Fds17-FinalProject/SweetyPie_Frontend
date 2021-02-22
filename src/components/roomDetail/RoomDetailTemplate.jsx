@@ -16,6 +16,7 @@ import RoomDetailHeader from './RoomDetailHeader';
 import RoomDetailSafetyModal from './RoomDetailSafetyModal';
 import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 import RoomDetailReviewModal from './RoomDetailReviewModal';
+import RoomDetailDateEditPopup from './RoomDetailDateEditPopup';
 
 const RoomDetailTemplate = ({ accommodation, loading }) => {
   const {
@@ -40,6 +41,7 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
     hostReviewNum,
     reviews,
     accommodationPictures,
+    bookmarked,
   } = accommodation;
 
   const [visible, setVisible] = useState({
@@ -76,17 +78,6 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
     }
   };
 
-  const onClosePopup = ({ target }) => {
-    // console.log(target.dataset.name);
-    if (!target.dataset.name === 'popup') {
-      setVisible({
-        ...visible,
-        state: false,
-        scroll: true,
-      });
-    }
-  };
-
   // 모달창 팝업시 body 스크롤 방지
   useEffect(() => {
     if (!visible.scroll) {
@@ -96,12 +87,14 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
     }
   }, [visible.scroll]);
 
-  // 인원수 상태관리
+  // 숙박 인원 수 상태관리
   const [count, setCount] = useState({
     adultNum: 0,
     childNum: 0,
     infantNum: 0,
   });
+
+  const [hello, setHello] = useState(false);
 
   return (
     <>
@@ -114,16 +107,10 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
         />
       )}
       {visible.type === 'safety' && visible.state && (
-        <RoomDetailSafetyModal
-          onCloseModal={onCloseModal}
-          onClosePopup={onClosePopup}
-        />
+        <RoomDetailSafetyModal onCloseModal={onCloseModal} />
       )}
       {/* {visible.type === 'refund' && visible.state && (
         <RoomDetailRefundModal onCloseModal={onCloseModal} />
-      )} */}
-      {/* {visible.type === 'date' && visible.state && (
-          <RoomDetailDateEditModal onCloseModal={onCloseModal} />
       )} */}
       <RoomDetailHeader />
       {loading === false && (
@@ -135,7 +122,7 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
               reviewNum={reviewNum}
               address={address}
             />
-            <Photos id="photos" accommodationPictures={accommodationPictures} />
+            <Photos accommodationPictures={accommodationPictures} />
           </div>
           <div className="mx-48 px-32 mt-4.8rem flex justify-between">
             <div className="w-3/5">
@@ -153,7 +140,7 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
               />
               <Description accommodationDesc={accommodationDesc} />
               <Beds bedroomNum={bedroomNum} bedNum={bedNum} />
-              <CalendarDetail gu={gu} />
+              <CalendarDetail gu={gu} hello={hello} />
             </div>
             <div className="w-1/3 h-full sticky top-44">
               <Payment
@@ -165,9 +152,13 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
                 onCloseModal={onCloseModal}
                 count={count}
               />
-              {/* {visible.type === 'date' && visible.state && (
-          <RoomDetailDateEditModal onCloseModal={onCloseModal} />
-      )} */}
+              {visible.type === 'calendar' && visible.state && (
+                <RoomDetailDateEditPopup
+                  onCloseModal={onCloseModal}
+                  setVisible={setVisible}
+                  setHello={setHello}
+                />
+              )}
               {visible.type === 'guest' && visible.state && (
                 <RoomDetailGuestEditPopup
                   onCloseModal={onCloseModal}
