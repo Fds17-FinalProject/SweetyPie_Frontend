@@ -1,7 +1,7 @@
 const colors = require('tailwindcss/colors');
 
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,html}', './public/index.html'],
+  purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -901,6 +901,12 @@ module.exports = {
     'disabled',
   ],
   variants: {
+<<<<<<< HEAD
+    extend: {},
+  },
+  plugins: [],
+}
+=======
     accessibility: ['responsive', 'focus-within', 'focus'],
     alignContent: ['responsive'],
     alignItems: ['responsive'],
@@ -1226,3 +1232,4 @@ module.exports = {
     plugins: [],
   },
 };
+>>>>>>> release/0.1.0
