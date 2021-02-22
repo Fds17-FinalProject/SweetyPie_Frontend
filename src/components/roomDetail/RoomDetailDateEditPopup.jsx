@@ -7,7 +7,7 @@ const RoomDetailDateEditPopup = ({
   onCloseModal,
   visible,
   setVisible,
-  setHello,
+  bookedDateDtos,
 }) => {
   const history = useHistory();
 
@@ -107,8 +107,7 @@ const RoomDetailDateEditPopup = ({
             handleOnDateChange={handleOnDateChange}
             focus={focus}
             setFocus={setFocus}
-            className="bg-searchBackground"
-            // bookedDate={bookedDate}
+            bookedDateDtos={bookedDateDtos}
           />
         </div>
         <div className="flex items-center text-1.4rem justify-end pr-1.6rem">
