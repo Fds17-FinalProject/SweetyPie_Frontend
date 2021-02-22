@@ -57,7 +57,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
   );
 
   return (
-    <div className="w-full h-full bg-transparent" onClick={onCloseModal}>
+    <div className="w-full h-full" onClick={onCloseModal}>
       <div
         className="w-32rem absolute top-19.2rem left-11 bg-searchBackground
         overflow-y-auto flex flex-col text-black rounded-xl border border-#b0b0b0 z-20"
@@ -70,7 +70,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
                 {count.adultNum === 0 ? (
                   <button
                     onClick={() => decreaseGuestNum('adultNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                   >
                     <div className="w-2.2rem h-2.2rem p-2">
@@ -107,7 +107,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
                 {count.adultNum === 5 ? (
                   <button
                     onClick={() => increaseGuestNum('adultNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                   >
                     <div className="w-2.2rem h-2.2rem p-2">
@@ -153,7 +153,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
                 {count.childNum === 0 || count.adultNum === 0 ? (
                   <button
                     onClick={() => decreaseGuestNum('childNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                   >
                     <div className="w-2.2rem h-2.2rem p-2">
@@ -190,7 +190,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
                 {count.childNum === 5 || count.adultNum === 0 ? (
                   <button
                     onClick={() => increaseGuestNum('childNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                   >
                     <div className="w-2.2rem h-2.2rem p-2">
@@ -236,7 +236,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
                 {count.infantNum === 0 || count.adultNum === 0 ? (
                   <button
                     onClick={() => decreaseGuestNum('infantNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                   >
                     <div className="w-2.2rem h-2.2rem p-2">
@@ -273,7 +273,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
                 {count.infantNum === 5 || count.adultNum === 0 ? (
                   <button
                     onClick={() => increaseGuestNum('infantNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                   >
                     <div className="w-2.2rem h-2.2rem p-2">
