@@ -3,7 +3,7 @@ import Calendar from '../common/Calendar';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 
-const CalendarDetail = ({ gu }) => {
+const CalendarDetail = ({ gu, bookedDateDtos }) => {
   const history = useHistory();
 
   // URL query parameter 가져오기
@@ -43,10 +43,6 @@ const CalendarDetail = ({ gu }) => {
       startDate: startDate,
       endDate: endDate,
     });
-    console.log(startDate);
-    console.log(endDate);
-    console.log(moment(checkInDate));
-    console.log(moment(checkoutDate));
     // 변경된 날짜에 따라 url 변경(checkInDate, checkOut)
     // 만약, checkoutDate가 checkInDate보다 이전일 때, 음수로 숙박일수 지정되지 않도록 조절
     startDate && changeUrl('checkInDate', startDate.format('YYYY-MM-DD'));
@@ -103,6 +99,7 @@ const CalendarDetail = ({ gu }) => {
           handleOnDateChange={handleOnDateChange}
           focus={focus}
           setFocus={setFocus}
+          bookedDateDtos={bookedDateDtos}
         />
         <div className="text-right mr-28">
           <button
