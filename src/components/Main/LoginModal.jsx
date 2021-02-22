@@ -2,8 +2,8 @@ import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 
 
-const LoginModal = ({ hideModal, changeModal }) => {
-
+const LoginModal = ({ hideModal, changeModal, onChange, loginSubmit, state }) => {
+  const { login } = state;
   return (
     <>
           <h1 className="a11y-hidden">로그인 팝업창</h1>
@@ -21,7 +21,6 @@ const LoginModal = ({ hideModal, changeModal }) => {
             />
           </button>
           <button className="flex items-center rounded-lg	border border-#e5e7eb py-4 px-1.2rem hover:border-#727272">
-            {/* <SVG></SVG> */}
             <FcGoogle className="w-2.4rem h-2rem"/>
             <span className="flex-grow">구글 계정으로 로그인</span>
           </button>
@@ -32,21 +31,18 @@ const LoginModal = ({ hideModal, changeModal }) => {
             <span className="text-#717171 text-1.2rem bg-white w-3.5rem absolute my-0 mx-auto text-center">또는</span>
           </div>
 
-          <form>
+       <form onSubmit={loginSubmit}>
             <div className="flex items-center mb-8">
               <label className="a11y-hidden" htmlFor="email-input">이메일</label>
-              <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="text" id="email-input" placeholder="이메일" />
-              {/* sgv */}
+              <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="text" id="email-input" name="email" placeholder="이메일" onChange={(e) => onChange({ e, form: 'login' })} value={login.email}/>
             </div>
 
             <div className="flex items-center mb-8">
               <label className="a11y-hidden" htmlFor="password-input">비밀번호</label>
-              <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="password" id="password-input" placeholder="비밀번호"/>
-              {/* sgv */}
+              <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="password" id="password-input" name="password" placeholder="비밀번호" onChange={(e) => onChange({ e, form: 'login' })} value={login.password}/>
             </div>
 
             <button className="flex items-center w-full rounded-lg	 py-4 px-1.2rem text-#fff bg-airbnb">
-              {/* <SVG name="letter" width="2rem" height="2rem" viewBox="0 0 24 24" color="#fff"/> */}
               <span className="flex-grow w-full h-full">로그인</span>
             </button>
           </form>

@@ -1,13 +1,16 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import SVG from '../../assets/svg';
 import { IconButton } from '../common/Button';
 
-const BookingGuestEditModal = ({ hideModal }) => {
-  // 게스트
+const BookingGuestEditModal = ({ hideModal, setVisible, query }) => {
+  const { adultNum, childNum, infantNum } = query;
+
+  // 게스트 상태
   const [count, setCount] = useState({
-    adult: 0,
-    child: 0,
-    infant: 0,
+    adult: +adultNum,
+    child: +childNum,
+    infant: +infantNum,
     status: false,
   });
 
@@ -17,13 +20,31 @@ const BookingGuestEditModal = ({ hideModal }) => {
     else if (type === 'child' && count.child === 5) return;
     else if (type === 'infant' && count.infant === 5) return;
 
-    setCount({ ...count, [type]: count[type] + 1 });
+    setCount({ ...count, [type]: count[type] + 1, status: true });
   };
 
   // 게스트 감소 함수
   const guestNumDecrease = type => {
     if (count[type] === 0) return;
     setCount({ ...count, [type]: count[type] - 1 });
+  };
+
+  // 현재 url
+  const url = new URL(window.location.href);
+
+  const history = useHistory();
+
+  // 게스트 모달창 저장하기 클릭 시 쿼리 변경 및 모달 끄기
+  const modifyGuest = () => {
+    url.searchParams.set(
+      'totalGuestNum',
+      count.adult + count.child + count.infant,
+    );
+    url.searchParams.set('adultNum', count.adult);
+    url.searchParams.set('childNum', count.child);
+    url.searchParams.set('infantNum', count.infant);
+    history.push(url.search);
+    setVisible(false);
   };
 
   return (
@@ -179,8 +200,17 @@ const BookingGuestEditModal = ({ hideModal }) => {
         </div>
         <div className="my-1.6rem border-b"></div>
         <div className="flex justify-between items-center px-2.4rem pb-1.6rem">
-          <button className="text-1.6rem font-semibold underline">취소</button>
-          <button className="text-1.6rem text-#fff font-semibold py-1.4rem px-2.4rem bg-black rounded-xl">
+          <button
+            data-name="close"
+            onClick={hideModal}
+            className="text-1.6rem font-semibold underline"
+          >
+            취소
+          </button>
+          <button
+            onClick={modifyGuest}
+            className="text-1.6rem text-#fff font-semibold py-1.4rem px-2.4rem bg-black rounded-xl"
+          >
             저장하기
           </button>
         </div>

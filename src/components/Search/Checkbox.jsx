@@ -37,11 +37,14 @@ const Div = styled.div`
 
 
 const Checkbox = ({ name, top }) => {
+  const onClick = e => {
+    console.log(e.target.htmlFor);
+  }
   return (
     <>
       <Div name={name} top={top}>
         <input type='checkbox' name={name} id={name} />
-        <label htmlFor={name} top={top}></label>
+        <label htmlFor={name} top={top} onClick={onClick}></label>
       </Div>
     </>
   );
