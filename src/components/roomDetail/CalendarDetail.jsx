@@ -16,28 +16,18 @@ const CalendarDetail = ({ gu, bookedDateDtos }) => {
     url.searchParams.set(key, value);
     history.push(url.search);
   };
-  // 체크인, 체크아웃 날짜에 대한 상태
-  const [dateRange, setDateRange] = useState({
-    startDate: moment(checkInDate),
-    // startDate: startDate,
-    endDate: moment(checkoutDate),
-  });
 
-  useEffect(
-    () =>
-      setDateRange({
-        startDate: moment(checkInDate),
-        // startDate: startDate,
-        endDate: moment(checkoutDate),
-        // endDate: endDate,
-      }),
-    [checkInDate, checkoutDate],
-  );
+  // 체크인, 체크아웃 날짜에 대한 상태
+  // url에 checkInDate,checkoutDate 존재 유무에 따라 달력 컴포넌트에 적용
+  const [dateRange, setDateRange] = useState({
+    startDate: checkInDate ? moment(checkInDate) : null,
+    endDate: checkoutDate ? moment(checkoutDate) : null,
+  });
 
   // 달력 날짜 포커스 상태
   const [focus, setFocus] = useState('startDate');
 
-  // 날짜 변경
+  // 달력 날짜 변경 함수
   const handleOnDateChange = ({ startDate, endDate }) => {
     setDateRange({
       startDate: startDate,
@@ -63,13 +53,13 @@ const CalendarDetail = ({ gu, bookedDateDtos }) => {
     history.push(url.search);
   };
 
-  // 처음 렌더링 될 때, url의 checkInDate과 checkOut 날짜를 가져와 달력 컴포넌트에 적용
+  // checkInDate와 chcekoutDate가 변경될 때마다 url에서 받아와 달력 컴포넌트에 적용
   useEffect(() => {
     setDateRange({
       startDate: moment(checkInDate),
       endDate: moment(checkoutDate),
     });
-  }, []);
+  }, [checkInDate, checkoutDate]);
 
   return (
     <div className="">
