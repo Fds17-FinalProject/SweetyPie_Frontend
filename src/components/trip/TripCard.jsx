@@ -8,7 +8,6 @@ import {
   postReview,
   deleteReview,
 } from '../../redux/lib/api/review';
-
 const TripCard = ({ reservations, tab, reviewStatus, setReviewStatus }) => {
   // 예약 숙소 정보
   const {
@@ -114,7 +113,6 @@ const TripCard = ({ reservations, tab, reviewStatus, setReviewStatus }) => {
     }
     setReviewStatus(!reviewStatus);
   };
-
   return (
     <>
       {visible && (
@@ -141,7 +139,7 @@ const TripCard = ({ reservations, tab, reviewStatus, setReviewStatus }) => {
       )}
       <li className="px-6 w-1/3">
         <div className="mt-6 mb-8 rounded-2xl shadow-before hover:transition-shadow hover:shadow-after">
-          <Link to="/room">
+          <Link to={`/accommodation/${accommodationId}`}>
             <div>
               <img
                 src={accommodationPicture.url}
@@ -184,7 +182,7 @@ const TripCard = ({ reservations, tab, reviewStatus, setReviewStatus }) => {
                 </div>
               ) : (
                 <Link
-                  to={`/booking?reservationId=${reservationId}&checkInDate=${checkInDate}&checkoutDate=${checkoutDate}&totalGuestNum=${totalGuestNum}&adultNum=${adultNum}&childNum=${childNum}&infantNum=${infantNum}&totalPrice=${totalPrice}&pricePerDay=${pricePerDay}`}
+                  to={`/booking/modify?reservationId=${reservationId}&checkInDate=${checkInDate}&checkoutDate=${checkoutDate}&totalGuestNum=${totalGuestNum}&adultNum=${adultNum}&childNum=${childNum}&infantNum=${infantNum}&totalPrice=${totalPrice}&pricePerDay=${pricePerDay}`}
                 >
                   <div className="text-1.4rem h-24 flex flex-row items-center rounded-b-2xl justify-center border-t border-gray-300 font-semibold cursor-pointer hover:transition-all hover:bg-#f7f7f7">
                     예약 변경 또는 취소
@@ -198,5 +196,4 @@ const TripCard = ({ reservations, tab, reviewStatus, setReviewStatus }) => {
     </>
   );
 };
-
 export default TripCard;

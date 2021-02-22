@@ -14,7 +14,7 @@ const res = {
   contact: '+82 10 6525 2914',
 };
 
-const ModifyAccount = ({ onClick, modify }) => {
+const ModifyAccount = ({ onClick, modify, onWithdrawal }) => {
   return (
     <div>
       <header className="max-w-screen-2xl px-32 bg-white w-full h-32 flex items-center justify-between	fixed z-10">
@@ -120,7 +120,7 @@ const ModifyAccount = ({ onClick, modify }) => {
           <h2 className="text-#717171 text-1.6rem">
             계정을 비활성화 하셔야 하나요?
           </h2>
-          <button className="text-#008489 text-1.4rem font-semibold">
+          <button onClick={onWithdrawal} className="text-#008489 text-1.4rem font-semibold">
             지금 처리하기
           </button>
         </div>
