@@ -1,7 +1,7 @@
 import React from 'react';
 import RoomCharge from './RoomCharge';
 
-const ChargeMenu = () => {
+const ChargeMenu = ({ prices }) => {
   return (
     <>
       {/* <div className="w-34rem h-11rem border text-1.6rem text-#484848 p-8 rounded-xl border-1 border-searchBorder shadow-xl absolute left-40 z-20 bg-#fff">
@@ -11,7 +11,7 @@ const ChargeMenu = () => {
       <div className="border border-searchBorder shadow-xl rounded-lg p-8 w-44rem h-33rem absolute left-40 z-20 bg-#fff">
         <div className="border-b border-black mb-8">
           <p className="text-1.6rem">평균 1박 요금은 ₩105,512입니다</p>
-          <RoomCharge />
+          <RoomCharge prices={prices} />
         </div>
         <button className="w-6rem h-3rem bg-#222 text-#fff text-1.4rem rounded-lg absolte right-0">저장</button>
       </div>
@@ -19,4 +19,4 @@ const ChargeMenu = () => {
   );
 };
 
-export default ChargeMenu;
+export default React.memo(ChargeMenu);

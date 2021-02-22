@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import CommonHeader from '../components/common/CommonHeader';
 import { throttle } from 'lodash';
-import { changeField, initializeForm, authRegister, authLogin, socialRegister } from "../redux/modules/auth";
+import { changeField, initializeForm, authRegister, socialRegisterSubmitAction} from "../redux/modules/auth";
 import { useDispatch, useSelector } from 'react-redux';
-import { getToken } from '../redux/lib/api/auth';
-import { useHistory } from 'react-router-dom';
+import { getToken, getUser, logout } from '../redux/lib/api/auth';
 
 const CommonHeaderContainer = (
   { location,
@@ -16,41 +15,15 @@ const CommonHeaderContainer = (
     searchStartState,
     setSearchStartState
   }) => {
-   const history = useHistory();
     // 로컬스토리지 토큰 유무 
-    const [token, setToken] = useState(false);
+    const [checkedToken, setCheckedToken] = useState(false);
     // 스크롤 위치
     const [scrollY, setScrollY] = useState(false);
-  // 3번째 헤더에서 스크롤 발생시 상태 false로 만들어서 애니메이션 되돌리기 위해서 초기값 할당
-  // let currentScroll = window.scrollY;
-  // const [currentScrollY, setCurrentScrollY] = useState(0);
-  // // x = 현재 스크롤 값 + 150 , y = 현재 스크롤 값 -150 로직이 잘 돌아가면 이름바꿀게요 ..
-  // const [x, setX] = useState(0);
-  // const [y, setY] = useState(0);
-  // useEffect(() => {
-
-  //   function watchScroll() {
-  //     window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
-  //     // console.log('현재 스크롤 +- 150', x, y);
-  //     // console.log('현재 스크롤', window.scrollY);
-  //     // if (x < window.scrollY || y > window.scrollY) {
-  //     //   setSearchStartState(false);
-  //     //   setLocation(false);
-  //     //   setCalendar(false);
-  //     //   setPersonnel(false);
-  //     // }
-  //   }; 
-  //   window.addEventListener('scroll', throttle(watchScroll, 150));
-  //   window.addEventListener('scroll', scrollClose)
-  //   return () => {
-  //     window.removeEventListener('scroll', watchScroll);
-  //   };
-  // }, []);
-
+    const [socialModal, setSocialModal] = useState(false);
     // 유저 메뉴 모달 초기 상태
-    const [ visible, setVisible ] = useState(false);
+  const [visible, setVisible] = useState(false);
+  
     // // 검색 시작 하기 눌렀을 시 모달 초기 상태
-    // const [searchStartState, setSearchStartState] = useState(false);
     // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
     // 하나의 모달 회원가입 폼 모달 띄우는것 때문에 생각정리안된게있어서 일단 객체 상태로 냅둠!
     const [ authVisible, setAuthVisible ] = useState({
@@ -82,13 +55,6 @@ const CommonHeaderContainer = (
           type: 'register',
         });
       }
-      // socialRegister form
-      else if (auth === 'socialRegister') {
-        setAuthVisible({
-          ...authVisible,
-          type: 'socialRegister',
-        });
-      }
     };
   
     // 회원가입 모달에서 아이디가 있으세요? -> 로그인 버튼
@@ -118,13 +84,6 @@ const CommonHeaderContainer = (
         // open 시 회원가입 폼 초기화 
         dispatch(initializeForm('register'));
       }
-      // socialRegister form
-      // else if (auth === 'socialRegister') {
-      //   setAuthVisible({
-      //     ...authVisible,
-      //     type: 'socialRegister',
-      //   });
-      // }
     };
 
   
@@ -134,6 +93,7 @@ const CommonHeaderContainer = (
         setVisible(false);
         setAuthVisible(false);
         setPersonnel(false);
+        setSocialModal(false);
       }
     };
   
@@ -144,25 +104,8 @@ const CommonHeaderContainer = (
       setSearchStartState(true);
       // 위치 open
       setLocation(true);
-      // // onClick시 현재 스크롤 값 저장
-      // currentScroll = scrollY;
-      // let currentScroll = window.scrollY;
-      // setCurrentScrollY(currentScroll);
-      // // 현재 스크롤 값에서 +-150을 벗어날 시 스타일 다시 되돌리기 
-      // setX((currentScroll + 500));
-      // setY((currentScroll - 500));
     }
   };
-  // const scrollClose1 = () => {
-  //   // console.log('현재 스크롤 +- 150', x, y);
-  //   // console.log('현재 스크롤', window.scrollY);
-  //   if (x < currentScrollY|| y > currentScrollY) {
-  //     setSearchStartState(false);
-  //     setLocation(false);
-  //     setCalendar(false);
-  //     setPersonnel(false);
-  //   }
-  // }
 
   // 헤더 위치 (어디로 여행가세요?)
   const showLocation = ({ target }) => {
@@ -194,14 +137,10 @@ const CommonHeaderContainer = (
       setLocation(true);
     }
   };
-
-  // const { user } = useSelector(user => user.user);
-  // console.log('user', user);
 //  로그인, 회원가입
   const dispatch = useDispatch();
   const state = useSelector(state => state.auth);
-  const { register, login } = state;
-  console.log('state', state);
+  const { register, login, socialRegister, authError } = state;
   // 인풋 변경 이벤트 핸들러
   // 디스트럭처링으로 받기위해서 onChange에서 이벤트 객체와 form을 인자로 넘겨준다
   // 현재 onChange의 form이 누구인지 구분하기 위해서
@@ -219,11 +158,16 @@ const CommonHeaderContainer = (
   const registerSubmit = e => {
     e.preventDefault();
     const { name, email, contact, birthDate, password, passwordConfirm } = register;
-    // if (password !== passwordConfirm) {
-      // 오류 처리
-    // }
     dispatch(authRegister({ name, email, contact, birthDate, password, passwordConfirm }));
   };
+  
+  const socialRegisterSubmit = e => {
+    e.preventDefault();
+    console.log(socialRegister);
+    const { email, name, contact, birthDate, socialId } = socialRegister;
+    dispatch(socialRegisterSubmitAction({ email, name, contact, birthDate, socialId }));
+  };
+
   
   const loginSubmit = async e => {
     e.preventDefault();
@@ -235,52 +179,49 @@ const CommonHeaderContainer = (
     console.log('token', token);
     // error객체가 오면 에러메세지 띄워주고(서버에서 준 에러메세지 띄워주는거 아직 미구현)
     // 성공하면 history.push('/)
-    console.log('history', history);
     if (token) {
-      console.log('123');
       localStorage.setItem('token', token);
-      // history.push('/');
-      setToken(true);
+      setCheckedToken(true);
       setAuthVisible(false);
     }
     else {
       console.log('error');
     }
+    const resUser = await getUser();
+    console.log(resUser);
   };
-  
-  // const socialRegisterSubmit = e => {
-  //   e.preventDefault();
-  //   const { name, email, contact, birthDate, socialId } = socialRegister;
-  //   dispatch(socialRegister({ name, email, contact, birthDate, socialId }));
-  // };
+  const userLogout = e => {
+    console.log('e', e);
+    logout();
+    localStorage.removeItem('token');
+    setCheckedToken(false);
+  };
 
- 
-  // state에 social 아이디가 있다면 회원가입 모달창 Open 
+  console.log();
+  
 
   useEffect(() => {
-    // const scrollClose = () => {
-    // console.log('현재 스크롤 +- 150', x, y);
-    // console.log('현재 스크롤', window.scrollY);
-    // if (x < window.scrollY || y > window.scrollY) {
-    //   setSearchStartState(false);
-    //   setLocation(false);
-    //   setCalendar(false);
-    //   setPersonnel(false);
-    //   setX((window.scrollY + 500));
-    //   setY((window.scrollY - 500));
-    //   scrollClose1();
-    // }
-
-    // if (authError) {
-    //   console.log('에러');
-    //   console.log(authError);
-    //   return;
-    // }
-    // else if (auth) {
-    //   console.log('회원가입 성공');
-    //   console.log(auth);
-    // }
-  function watchScroll() {
+    // 로그인이나 회원가입 성공 시 모달창 Close
+    // useEffect에서 하는 이유는 dispatch가 비동기라서 에러객체가 담기는 시점을 알 수 없기 때문에
+    if (authError === null) {
+      setAuthVisible(false);
+    }
+    // 구글로 회원가입 시 서버에서 받아온 유저정보에 socialId가 있다면 회원가입 모달창 open
+    console.log('socialRegister', socialRegister.socialId);
+    if (socialRegister.socialId) {
+      setSocialModal(true);
+    }
+      // 토큰이 없디면 유저메뉴 view 변경(비 로그인 시)
+    if (localStorage.getItem('token') === null) {
+      setVisible(false);
+      setCheckedToken(false);
+    }
+    // 토큰이 있다면 유저메뉴 view 변경(로그인 시)
+    if (localStorage.getItem('token') !== null) {
+      setVisible(false);
+      setCheckedToken(true);
+    }
+    function watchScroll() {
     window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
     }; 
     
@@ -290,7 +231,7 @@ const CommonHeaderContainer = (
   return () => {
     window.removeEventListener('scroll', watchScroll);
   };
-}, [dispatch]);
+}, [authError, socialRegister.socialId, checkedToken]);
 // }, [auth, authError, dispatch]);
 
 
@@ -314,11 +255,14 @@ const CommonHeaderContainer = (
         scrollY={scrollY}
         searchOnclick={searchOnclick}
 
+        socialModal={socialModal}
         onChange={onChange}
         registerSubmit={registerSubmit}
         loginSubmit={loginSubmit}
+        socialRegisterSubmit={socialRegisterSubmit}
+        userLogout={userLogout}
         state={state}
-        token={token}
+        checkedToken={checkedToken}
         // form={form}
       />  
     </>

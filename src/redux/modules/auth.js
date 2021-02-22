@@ -1,13 +1,13 @@
-import axios from 'axios';
 import { createAction, handleActions } from 'redux-actions';
 import createRequestSaga, { createRequestActionTypes } from '../lib/createRequestSaga';
 import *as authAPI from '../lib/api/auth'
 import { takeLatest } from 'redux-saga/effects';
-import { createRef } from 'react';
 
 // Action type
 const CHANGE_FIELD = 'auth/CHANGE_FIELD';
 const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
+// social register
+const SOCIAL = 'auth/SOCIAL';
 
 // const REGISTER = 'auth/REGISTER';
 // const REGISTER_SUCCESS = 'auth/REGISTER_SUCCESS';
@@ -18,12 +18,13 @@ const INITIALIZE_FORM = 'auth/INITIALIZE_FORM';
 // const LOGIN_FAILURE = 'auth/LOGIN_FAILURE';
 
 // 위의 반복되는 코드를 아래처럼 작성
+
+const [SOCIAL_REGISTER, SOCIAL_REGISTER_SUCCESS, SOCIAL_REGISTER_FAILURE] = createRequestActionTypes(
+  'auth/SOCIAL_REGISTER',
+);
 const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes(
   'auth/REGISTER',
 );
-// const { SOCIAL_REGISTER, SOCIAL_REGISTER_SUCCESS, SOCIAL_REGISTER_FAILURE } = createRequestActionTypes(
-//   'auth/SOCIAL_REGISTER',
-// );
 const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
   'auth/LOGIN',
 );
@@ -44,12 +45,22 @@ const FINISH_LOADING = 'loading/FINISH_LOADING';
   //  }),
 // );
 
+// social 
+export const socialRegister = createAction(SOCIAL);
+// export const social = createAction()
+
 export const changeField = createAction(CHANGE_FIELD);
 
 export const initializeForm = createAction(INITIALIZE_FORM, form => form);
 // initializeForm의 결과 { type: INITIALIZE_FORM, payload: form}
 // 함수가 어떤 파라미터를 필요로 하는지 파악 할 수 있다( 선택 사항 )
-
+export const socialRegisterSubmitAction = createAction(SOCIAL_REGISTER, ({ email, name, contact, birthDate, socialId }) => ({
+  email,
+  name,
+  contact,
+  birthDate,
+  socialId,
+}));
 export const authRegister = createAction(REGISTER, ({ name, email, contact, birthDate, password, passwordConfirm }) => ({
   name,
   email,
@@ -63,15 +74,6 @@ export const authLogin = createAction(LOGIN, ({ email, password }) => ({
   email,
   password,
 }));
-
-// export const socialRegister = createAction(SOCIAL_REGISTER, ({ name, email, contact, birthDate, socialId }) => ({
-//   name,
-//   email,
-//   contact,
-//   birthDate,
-//   socialId,
-// }));
-
 
 
 export const startLoading = createAction(
@@ -130,7 +132,8 @@ const initialState = {
 const registerSaga = createRequestSaga(REGISTER, authAPI.register);
 // const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 const loginSaga = createRequestSaga(LOGIN, authAPI.getToken);
-// const socialRegisterSaga = createRef(SOCIAL_REGISTER, authAPI.socialRegister);
+const socialRegisterSaga = createRequestSaga(SOCIAL_REGISTER, authAPI.socialRegister);
+
 export function* authSaga() {
   // 사가 로직
   // takeLates - 코드를 진행하는 중간에 타입에 맞는 디스패치가 추가로 들어와도 가장 마지막에 들어온 것만 실행한다.
@@ -138,7 +141,7 @@ export function* authSaga() {
   // 만약 발생을 했다면 registerSaga generator 함수를 실행
   yield takeLatest(REGISTER, registerSaga);
   yield takeLatest(LOGIN, loginSaga);
-  // yield takeLatest(SOCIAL_REGISTER, socialRegisterSaga)
+  yield takeLatest(SOCIAL_REGISTER, socialRegisterSaga)
 }
 // 2. 만든 사가 함수를 모듈의 인덱스 파일에서 합쳐주기.
 const auth = handleActions(
@@ -146,6 +149,7 @@ const auth = handleActions(
     [CHANGE_FIELD]: (state, { payload: {form, key, value}}) => {
       // console.log(form, key, value)
       return ({
+        ...state,
       [form]: {
         ...state[form],
           [key]: value,
@@ -182,15 +186,29 @@ const auth = handleActions(
       ...state,
       [action.payload]: false,
     }),
-    // [SOCIAL_REGISTER_SUCCESS]: (state, { payload: auth }) => ({
-    //   ...state,
-    //   authError: null,
-    //   auth,
-    // }),
-    // [SOCIAL_REGISTER_FAILURE]: (state, { payload: error }) => ({
-    //   ...state,
-    //   authError: error,
-    // }),
+    [SOCIAL]: (state, action) => {
+      console.log('STATE', state);
+      console.log('ACTION', action);
+      return {
+        ...state,
+        socialRegister: {
+          ...state.socialRegister,
+          email: action.payload.email,
+          name: action.payload.name,
+          socialId: action.payload.socialId,
+        }
+      }
+    },
+
+    [SOCIAL_REGISTER_SUCCESS]: (state, { payload: auth }) => ({
+      ...state,
+      authError: null,
+      auth,
+    }),
+    [SOCIAL_REGISTER_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      authError: error,
+    }),
 },
   initialState,
 );

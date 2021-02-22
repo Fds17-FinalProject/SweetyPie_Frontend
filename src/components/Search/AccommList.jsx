@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import SVG from '../../assets/svg';
 import Carousel from '../common/Carousel';
 import { FiHeart } from 'react-icons/fi';
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
-import { IoMdHeartEmpty } from 'react-icons/io';
-// import { deleteBookMark, postBookMark } from '../../redux/lib/api';
+import { deleteBookMark, postBookMark } from '../../redux/lib/api/bookmark';
+
 const HoverSvg = styled.button`
   transition: all 0.2s ease-in-out;
   width: 4rem;
@@ -38,21 +37,21 @@ const AccommList = props => {
     title,
     onMouseEnter,
     onMouseLeave,
+    bookmarked
   } = props;
   const cost = price && price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-  const [bookMark, setBookMark] = useState(false);
+  const [bookMark, setBookMark] = useState(bookmarked);
   const bookMarkClick = id => () => {
     setBookMark(!bookMark);
-    // if (!bookMark) {
-    //   console.log(bookMark);
-    //   postBookMark({
-    //     "memberId": "1",
-    //     "accommodationId": `${id}`
-    //   })
-    // }
+    if (!bookMark) {
+      console.log(bookMark);
+      postBookMark(id) 
+    } else {
+      deleteBookMark(id)
+    }
   };
-  const img = accommodationPictures.map(picture => picture.url);
+  const img = accommodationPictures && accommodationPictures.map(picture => picture.url);
   const setLocal = id => () => {
     recentSearch.unshift({
       id,
@@ -67,7 +66,6 @@ const AccommList = props => {
     const uniqueSet = new Set(jsonObject);
     localStorage.setItem('recentSearch', JSON.stringify([...uniqueSet]));
   };
-  const prevent = e => e.preventDefault();
 
   return (
     <li
@@ -90,9 +88,8 @@ const AccommList = props => {
           />
         </HoverSvg>
         <Link
-          to={`/room/${id}`}
+          to={`/accommodation/${id}`}
           className="flex focus:outline-none"
-          onClick={prevent}
         >
           <Carousel size="Large" img={img} />
           <div className="relative w-54rem truncate ml-5">
