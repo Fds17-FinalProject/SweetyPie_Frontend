@@ -27,31 +27,31 @@ const Textarea = styled.span`
 `;
 
 const Main = () => {
-  // const [location, setLocation] = useState(false);
-  // const [calendar, setCalendar] = useState(false);
-  // const [personnel, setPersonnel] = useState(false);
-  // // 검색 시작 하기 눌렀을 시 모달 초기 상태
-  // const [searchStartState, setSearchStartState] = useState(false);
-  // const hideSearchModal = ({ target }) => {
-  //   if (!target.dataset.name) {
-  //     setLocation(false);
-  //     setCalendar(false);
-  //     setPersonnel(false);
-  //     setSearchStartState(false);
-  //   }
-  // };
+  const [location, setLocation] = useState(false);
+  const [calendar, setCalendar] = useState(false);
+  const [personnel, setPersonnel] = useState(false);
+  // 검색 시작 하기 눌렀을 시 모달 초기 상태
+  const [searchStartState, setSearchStartState] = useState(false);
+  const hideSearchModal = ({ target }) => {
+    if (!target.dataset.name) {
+      setLocation(false);
+      setCalendar(false);
+      setPersonnel(false);
+      setSearchStartState(false);
+    }
+  };
 
   return (
-    <div>
+    <div onClick={hideSearchModal}>
       <CommonHeaderContainer
-        // location={location}
-        // setLocation={setLocation}
-        // calendar={calendar}
-        // setCalendar={setCalendar}
-        // personnel={personnel}
-        // setPersonnel={setPersonnel}
-        // searchStartState={searchStartState}
-        // setSearchStartState={setSearchStartState}
+        location={location}
+        setLocation={setLocation}
+        calendar={calendar}
+        setCalendar={setCalendar}
+        personnel={personnel}
+        setPersonnel={setPersonnel}
+        searchStartState={searchStartState}
+        setSearchStartState={setSearchStartState}
       />
       <MainContainer>
         <section className="w-full pt-72 pb-16 px-32">

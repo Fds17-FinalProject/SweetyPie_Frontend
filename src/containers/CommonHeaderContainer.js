@@ -13,7 +13,8 @@ const CommonHeaderContainer = (
     setCalendar,
     setPersonnel,
     searchStartState,
-    setSearchStartState
+    setSearchStartState,
+    
   }) => {
     // 로컬스토리지 토큰 유무 
     const [checkedToken, setCheckedToken] = useState(false);
@@ -97,46 +98,46 @@ const CommonHeaderContainer = (
       }
     };
   
-// // 검색 시작하기 onClick시 헤더 스타일 변경
-//   const showSearchHeader = ({ target }) => {
-//     if (target.dataset.name === 'open') {
-//       // 상태 true로 바뀌면서 스타일 변경
-//       setSearchStartState(true);
-//       // 위치 open
-//       setLocation(true);
-//     }
-//   };
+// 검색 시작하기 onClick시 헤더 스타일 변경
+  const showSearchHeader = ({ target }) => {
+    if (target.dataset.name === 'open') {
+      // 상태 true로 바뀌면서 스타일 변경
+      setSearchStartState(true);
+      // 위치 open
+      setLocation(true);
+    }
+  };
 
-//   // 헤더 위치 (어디로 여행가세요?)
-//   const showLocation = ({ target }) => {
-//     if (target.dataset.name === 'location') {
-//       setLocation(true);
-//       setCalendar(false);
-//       setPersonnel(false);
-//     }
-//   };
-//   // 헤더 켈린더 ( 체크인, 체크아웃 )
-//   const showCalendar = ({ target }) => {
-//     if (target.dataset.name === 'calendar') {
-//       setCalendar(true);
-//       setLocation(false);
-//       setPersonnel(false);
-//     }
-//   };
-//   // 헤더 인원 수
-//   const showPersonnel = ({ target }) => {
-//     if (target.dataset.name === 'personnel') {
-//       setPersonnel(true);
-//       setLocation(false);
-//       setCalendar(false);
-//     }
-//   };
-//   // 헤더에 검색 버튼 누를 시 location: true 하면서 검색 버튼 스타일 변경
-//   const searchOnclick = ({ target }) => {
-//     if (target.dataset.name === 'search') {
-//       setLocation(true);
-//     }
-//   };
+  // 헤더 위치 (어디로 여행가세요?)
+  const showLocation = ({ target }) => {
+    if (target.dataset.name === 'location') {
+      setLocation(true);
+      setCalendar(false);
+      setPersonnel(false);
+    }
+  };
+  // 헤더 켈린더 ( 체크인, 체크아웃 )
+  const showCalendar = ({ target }) => {
+    if (target.dataset.name === 'calendar') {
+      setCalendar(true);
+      setLocation(false);
+      setPersonnel(false);
+    }
+  };
+  // 헤더 인원 수
+  const showPersonnel = ({ target }) => {
+    if (target.dataset.name === 'personnel') {
+      setPersonnel(true);
+      setLocation(false);
+      setCalendar(false);
+    }
+  };
+  // 헤더에 검색 버튼 누를 시 location: true 하면서 검색 버튼 스타일 변경
+  const searchOnclick = ({ target }) => {
+    if (target.dataset.name === 'search') {
+      setLocation(true);
+    }
+  };
 //  로그인, 회원가입
   const dispatch = useDispatch();
   const state = useSelector(state => state.auth);
@@ -259,6 +260,12 @@ const CommonHeaderContainer = (
         userLogout={userLogout}
         state={state}
         checkedToken={checkedToken}
+
+        showSearchHeader={showSearchHeader}
+        showLocation={showLocation}
+        showCalendar={showCalendar}
+        showPersonnel={showPersonnel}
+        searchOnclick={searchOnclick}
       />  
     </>
   )

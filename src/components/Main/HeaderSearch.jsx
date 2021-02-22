@@ -1,9 +1,12 @@
-import styled, { keyframes } from 'styled-components';
-import Calendar from '../common/Calendar';
+import styled, { css, keyframes } from 'styled-components';
 import HeaderGuestEditModal from '../common/HeaderGuestEditModal';
 import { BiSearch } from 'react-icons/bi';
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 import axios from 'axios';
+import { useHistory } from 'react-router';
+import HeaderCalendar from './HeaderCalendar';
+import Moment from 'moment';
+import { extendMoment } from 'moment-range';
 
 const scrollUp = keyframes`
 from {
@@ -42,8 +45,8 @@ animation-name: ${({scrollY, searchStartState}) => !scrollY ? scrollUp : searchS
 `;
 
 
-const Button = styled.button.attrs(() => ({type: 'button'}))`
-display: ${({scrollY, searchStartState}) => !scrollY ? 'block' : searchStartState ? 'block' : 'none' };
+const Button = styled.button`
+display: ${({ scrollY, searchStartState }) => !scrollY ? 'block' : searchStartState ? 'block' : 'none'};
 :hover {
 background: #ebebeb;
 border-radius: 999rem;
@@ -55,7 +58,32 @@ border-radius: 999rem;
 box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px !important;
 transform: scale(1.03);
 }
+${props => props.test && css`
+&:focus{
+  background: #fff;
+  border-radius: 999rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px !important;
+  transform: scale(1.03);
+}
+`}
+/* ${props => props.startDate !== null && css`
+&:focus {
+  background: #fff;
+  border-radius: 999rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px !important;
+  transform: scale(1.03);
+}
+`}
+${props => props.endDate !== null && css`
+&:focus {
+  background: #fff;
+  border-radius: 999rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px !important;
+  transform: scale(1.03);
+}
+`} */
 `;
+
 
 // 서치 헤더 (위치 어디로 여행가세요?)
 const SearchLocation = styled.div`
@@ -77,6 +105,7 @@ const SearchCalendar = styled.div`
   background: #fff;
   display: flex;
   align-items: center;
+  justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
 
 `;
@@ -142,15 +171,42 @@ const SubmitButton = styled.button.attrs(() => ({ type: 'button' }))`
   }
 `;
 
-
-const HeaderSearch = ({scrollY, setScrollY}) => {
-  const [location, setLocation] = useState(false);
-  const [calendar, setCalendar] = useState(false);
-  const [personnel, setPersonnel] = useState(false);
+const HeaderSearch = forwardRef(({ scrollY, setScrollY, searchStartState, calendar, location, personnel, showSearchHeader, showCalendar, showLocation, showPersonnel, searchOnclick }, ref) => {
+  // const [location, setLocation] = useState(false);
+  // const [calendar, setCalendar] = useState(false);
+  // const [personnel, setPersonnel] = useState(false);
   // 검색 시작 하기 눌렀을 시 모달 초기 상태
-  const [searchStartState, setSearchStartState] = useState(false);
-  const [gu, setGu] = useState('');
-  console.log('gu', gu);
+  // const [searchStartState, setSearchStartState] = useState(false);
+  const [gu, setGu] = useState(null);
+  console.log(gu);
+  const [currentLocation, setCurrentLocation] = useState({
+    lat: null,
+    lng: null,
+  });
+  const [count, setCount] = useState({
+    adultNum: 0,
+    childNum: 0,
+    infantNum: 0,
+    status: false,
+  });
+  console.log('count', count);
+  const url = new URL(window.location.href);
+  const history = useHistory();
+
+
+  // moment-range를 통해 moment 생성 함수를 받아온다 -> moment() 호출 시 moment객체 생성
+  const moment = extendMoment(Moment);
+
+  // url 쿼리에 담기
+  // url.searchParams.set('currentLocation ', gu);
+  // url.searchParams.set(
+  //   'checkInDate',
+  //   dateRange.startDate.format('YYYY-MM-DD'),
+  // );
+  // url.searchParams.set(
+  //   'checkoutDate',
+  //   dateRange.endDate.format('YYYY-MM-DD'),
+  // );
 
   // const hideSearchModal = ({ target }) => {
   //   if (!target.dataset.name) {
@@ -160,54 +216,51 @@ const HeaderSearch = ({scrollY, setScrollY}) => {
   //     setSearchStartState(false);
   //   }
   // };
-  // 검색 시작하기 onClick시 헤더 스타일 변경
-  const showSearchHeader = ({ target }) => {
-    if (target.dataset.name === 'open') {
-      // 상태 true로 바뀌면서 스타일 변경
-      setSearchStartState(true);
-      // 위치 open
-      setLocation(true);
-    }
-  };
+  // // 검색 시작하기 onClick시 헤더 스타일 변경
+  // const showSearchHeader = ({ target }) => {
+  //   if (target.dataset.name === 'open') {
+  //     // 상태 true로 바뀌면서 스타일 변경
+  //     setSearchStartState(true);
+  //     // 위치 open
+  //     setLocation(true);
+  //   }
+  // };
 
-  // 헤더 위치 (어디로 여행가세요?)
-  const showLocation = ({ target }) => {
-    if (target.dataset.name === 'location') {
-      setLocation(true);
-      setCalendar(false);
-      setPersonnel(false);
-    }
-  };
-  // 헤더 켈린더 ( 체크인, 체크아웃 )
-  const showCalendar = ({ target }) => {
-    if (target.dataset.name === 'calendar') {
-      setCalendar(true);
-      setLocation(false);
-      setPersonnel(false);
-    }
-  };
-  // 헤더 인원 수
-  const showPersonnel = ({ target }) => {
-    if (target.dataset.name === 'personnel') {
-      setPersonnel(true);
-      setLocation(false);
-      setCalendar(false);
-    }
-  };
-  // 헤더에 검색 버튼 누를 시 location: true 하면서 검색 버튼 스타일 변경
-  const searchOnclick = ({ target }) => {
-    if (target.dataset.name === 'search') {
-      setLocation(true);
-    }
-  };
+  // // 헤더 위치 (어디로 여행가세요?)
+  // const showLocation = ({ target }) => {
+  //   if (target.dataset.name === 'location') {
+  //     setLocation(true);
+  //     setCalendar(false);
+  //     setPersonnel(false);
+  //   }
+  // };
+  // // 헤더 켈린더 ( 체크인, 체크아웃 )
+  // const showCalendar = ({ target }) => {
+  //   if (target.dataset.name === 'calendar') {
+  //     setCalendar(true);
+  //     setLocation(false);
+  //     setPersonnel(false);
+  //   }
+  // };
+  // // 헤더 인원 수
+  // const showPersonnel = ({ target }) => {
+  //   if (target.dataset.name === 'personnel') {
+  //     setPersonnel(true);
+  //     setLocation(false);
+  //     setCalendar(false);
+  //   }
+  // };
+  // // 헤더에 검색 버튼 누를 시 location: true 하면서 검색 버튼 스타일 변경
+  // const searchOnclick = ({ target }) => {
+  //   if (target.dataset.name === 'search') {
+  //     setLocation(true);
+  //   }
+  // };
 
   const onSubmit = e => {
     e.preventDefault();
   }
-  const [currentLocation, setCurrentLocation] = useState({
-    lat: null,
-    lng: null,
-  });
+ 
   const getCurrentLocation = async e => {
     navigator.geolocation.getCurrentPosition((position) => {
       setCurrentLocation({
@@ -215,15 +268,82 @@ const HeaderSearch = ({scrollY, setScrollY}) => {
         lng: position.coords.longitude,
       });
     });
+
   }
-  console.log('lat', currentLocation.lat);
-  console.log('lng', currentLocation.lng);
+
+  const [dateRange, setDateRange] = useState({
+    // 체크인 날짜의 초기값 지정
+    startDate: null,
+    // 체크아웃 날짜의 초기값 지정
+    endDate: null,
+  });
+  console.log('startDate', dateRange.startDate);
+  console.log('endDate', dateRange.endDate);
+    // 달력 날짜 포커스 상태
+  const [focus, setFocus] = useState('startDate');
+  // 달력 날짜 변경 함수
+  const handleOnDateChange = ({ startDate, endDate }) => {
+    setDateRange({
+      startDate: startDate,
+      endDate: endDate,
+    });
+    // if (startDate) {
+    //   console.log('startDate');
+    //   setCalendar(true);
+    // }
+    // else if (endDate) {
+    //   console.log('endDate');
+    //   setCalendar(true);
+    // }
+  };
+
+    // 게스트 증가 함수
+    const increaseGuestNum = type => {
+      if (type === 'adultNum' && count.adultNum === 5) return;
+      else if (type === 'childNum' && count.childNum === 5) return;
+      else if (type === 'infantNum' && count.infantNum === 5) return;
+  
+      setCount({ ...count, [type]: count[type] + 1, status: true });
+    };
+  
+    // 게스트 감소 함수
+    const decreaseGuestNum = type => {
+      if (count[type] === 0) return;
+      setCount({ ...count, [type]: count[type] - 1 });
+      // 어른이 0명이 되면 어린이와 아이 인원 초기화
+      if (count.adultNum === 1) {
+        setCount({
+          adultNum: 0,
+          childNum: 0,
+          infantNum: 0,
+        });
+      }
+    };
+  const searchResult = () => {
+    // 전부 다 입력했을 경우
+    if (gu !== null && dateRange.startDate !== null && dateRange.endDate !== null && count.adultNum !== 0) {
+      history.push(`/accommodations/search?searchKeyword=${gu}&ckeckIn=${dateRange.startDate.format('YYYY-MM-DD')}&checkout=${dateRange.endDate.format('YYYY-MM-DD')}&guestNum=${count.adultNum+count.childNum}`);
+    }
+    // 위치만 입력 했을경우
+    else if (gu !== null && dateRange.startDate === null && dateRange.endDate === null && count.adultNum === 0) {
+      history.push(`/accommodations/search?searchKeyword=${gu}`);
+    }
+    // 위치, 체크인, 체크아웃 입력했을 경우
+    else if (gu !== null && dateRange.startDate !== null && dateRange.endDate !== null && count.adultNum === 0) {
+      history.push(`/accommodations/search?searchKeyword=${gu}&ckeckIn=${dateRange.startDate.format('YYYY-MM-DD')}&checkout=${dateRange.endDate.format('YYYY-MM-DD')}`);
+    } 
+    // 위치, 게스트 수 입력했을 경우
+    else if (gu !== null && dateRange.startDate === null && dateRange.endDate === null && count.adultNum !== 0) {
+      history.push(`/accommodations/search?searchKeyword=${gu}&guestNum=${count.adultNum+count.childNum}`);
+    }
+  };
+
   useEffect(() => {
     if (currentLocation.lat !== null && currentLocation.lng !== null) { 
       async function getAddress() {
         const res = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation.lat},${currentLocation.lng}&key=AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU`);      
         if (res) {
-          setGu(res.data.results[4].formatted_address.substr(10));
+          setGu(res.data.results[4].formatted_address.substr(11));
         }
       }
       getAddress();
@@ -241,33 +361,39 @@ const HeaderSearch = ({scrollY, setScrollY}) => {
               id="search-input"
               type="text"
               placeholder="어디로 여행가세요?"
-              className="block text-1.4rem text-#717171 bg-transparent"
+              className="block text-1.6rem text-#717171 bg-transparent"
             data-name="location"
             defaultValue={gu && gu}
             ></input>
           </div>
         </Button>
 
-        <Button className="w-18rem text-left" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showCalendar} data-name="calendar">
+      <Button ref={ref} test={true} startDate={dateRange.startDate} className="w-18rem text-left" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showCalendar} data-name="calendar">
           <div className="border-r px-6" data-name="calendar" >
             <b className="block text-1.2rem" data-name="calendar">체크인</b>
-            <span className="block text-1.4rem text-#717171"data-name="calendar" >날짜 추가</span>
+          <span className="block text-1.4rem text-#717171" data-name="calendar">{dateRange.startDate
+                    ? dateRange.startDate.format('YYYY-MM-DD')
+                    : '날짜 추가'}</span>
           </div>
         </Button>
 
-        <Button className="w-18rem text-left" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showCalendar} data-name="calendar">
+        <Button ref={ref} endDate={dateRange.endDate} className="w-18rem text-left" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showCalendar} data-name="calendar">
           <div className="border-r px-6" data-name="calendar">
             <b className="block text-1.2rem" data-name="calendar">체크아웃</b>
-            <span className="block text-1.4rem text-#717171" data-name="calendar">날짜 추가</span>
+            <span className="block text-1.4rem text-#717171" data-name="calendar">{
+                  dateRange.endDate
+                    ? dateRange.endDate.format('YYYY-MM-DD')
+                    : '날짜 추가'
+                }</span>
           </div>
         </Button>
 
         <Button className="w-22rem text-left px-6" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showPersonnel} data-name="personnel">
           <div className="relative" data-name="personnel"> 
             <b className="block text-1.2rem" data-name="personnel">인원</b>
-          <span className="block text-1.4rem text-#717171" data-name="personnel">게스트 추가</span>
+          <span className="block text-1.4rem text-#717171" data-name="personnel">{count.adultNum !== 0 ? `게스트 ${count.adultNum+count.childNum+count.infantNum}명` : '게스트 추가'}</span>
           {location || calendar || personnel ?
-            <SubmitButton>
+            <SubmitButton onClick={searchResult}>
             <BiSearch size={20} className=" text-white" />
             <span className="text-white text-1.6rem ml-0.4rem">검색</span>
           </SubmitButton> :
@@ -286,32 +412,31 @@ const HeaderSearch = ({scrollY, setScrollY}) => {
           <BiSearch className=" w-6 h-6 text-white" />
         </button>
         </div>}
-
         {location && (
           <SearchLocation >
-            <LocationButton>
+            <LocationButton onClick={getCurrentLocation}>
               <figure>
                 <img className="w-4.5rem h-4.5rem rounded-xl " src={'/img/mapIcon.jpg'} alt="어디로 여행가세요 아이콘"/>
                 <figcaption className="a11y-hidden">어디로 여행가세요?</figcaption>
               </figure>
-            <button onClick={getCurrentLocation}className="text-1.6rem ml-1.8rem text-#727272">가까운 여행지 둘러보기</button>
+            <span className="text-1.6rem ml-1.8rem text-#727272">가까운 여행지 둘러보기</span>
             </LocationButton>
           </SearchLocation>
         )}
-        
       {calendar && (
         <SearchCalendar>
-          <Calendar />
+          <HeaderCalendar handleOnDateChange={handleOnDateChange} dateRange={dateRange} focus={focus} setFocus={setFocus}/>
         </SearchCalendar>
         )}
 {/* 동찬이 형이 인원수 뷰 만들어주면 여기에 달아주세요 */}
       {personnel && (
         <SearchPersonnel >
-          <HeaderGuestEditModal />
+          <HeaderGuestEditModal count={count} setCount={setCount} increaseGuestNum={increaseGuestNum} decreaseGuestNum={decreaseGuestNum}/>
         </SearchPersonnel>
       )}
     </SearchHeader>
   );
-};
+});
+
 
 export default HeaderSearch;

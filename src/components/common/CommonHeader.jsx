@@ -399,7 +399,18 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
     
       <MainHeader scrollY={ scrollY } searchStartState={searchStartState}>
         <HeaderLogo color="#fff" scrollY={ scrollY }/>
-        <HeaderSearch scrollY={scrollY} setScroll={setScrollY} searchStartState={searchStartState} />
+        <HeaderSearch
+          scrollY={scrollY}
+          setScroll={setScrollY}
+          searchStartState={searchStartState}
+          calendar={calendar}
+          location={location}
+          personnel={personnel}
+          showSearchHeader={showSearchHeader}
+          showCalendar={showCalendar}
+          showLocation={showLocation}
+          showPersonnel={showPersonnel}
+          searchOnclick={searchOnclick}/>
         <HeaderUser />
       </MainHeader>
       </>
