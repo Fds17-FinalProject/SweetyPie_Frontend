@@ -55,7 +55,6 @@ const Payment = ({
             <div className="w-64 h-5.6rem pt-2 pl-5 border-r border-gray-400">
               <b>체크인</b>
               <button
-                // className="inline-flex justify-between text-left pt-1 w-full h-full bg-transparent"
                 onClick={
                   visible.state ? onCloseModal : () => onShowPopup('calendar')
                 }
@@ -75,7 +74,6 @@ const Payment = ({
             <div className="w-64 h-5.6rem pl-5 pt-2 ">
               <b>체크아웃</b>
               <button
-                // className="inline-flex justify-between text-left pt-1 w-full h-full bg-transparent"
                 onClick={
                   visible.state ? onCloseModal : () => onShowPopup('calendar')
                 }

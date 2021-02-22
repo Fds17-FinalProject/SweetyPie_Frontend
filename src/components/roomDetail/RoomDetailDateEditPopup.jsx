@@ -60,22 +60,11 @@ const RoomDetailDateEditPopup = ({
   };
 
   return (
-    <div className="w-full h-full bg-transparent" onClick={onCloseModal}>
+    <div className="w-full h-full z-20" onClick={onCloseModal}>
       <div
         className="w-64rem absolute top-5.5rem right-1.6rem bg-searchBackground
         flex flex-col text-black rounded-3xl shadow-2xl p-4 border z-20"
       >
-        <button
-          data-name="close"
-          className="flex w-3.6rem h-3.6rem absolute top-8 left-8 justify-center items-center rounded-50% hover:bg-#f7f7f7"
-        >
-          <img
-            data-name="close"
-            src="/img/close.png"
-            alt="#"
-            className="w-1.8rem h-1.8rem"
-          />
-        </button>
         <div className="flex px-2rem mb-10">
           <div className="w-5/12 pt-2rem">
             <h3 className="text-2.2rem font-semibold">
@@ -87,8 +76,7 @@ const RoomDetailDateEditPopup = ({
               여행 날짜를 입력하여 정확한 요금을 확인하세요.
             </p>
           </div>
-          {/* <div className="w-5/12 ml-10% flex"> */}
-          <div className="absolute  right-2.4rem flex h-5.6rem items-center mt-8 mb-4 border-2 rounded-2xl border-black">
+          <div className="absolute right-0.8rem flex h-5.8rem items-center mt-5 mb-4 border-2 rounded-2xl border-black">
             <div className="w-64 h-5.6rem pt-2 pl-5 border-r border-gray-400">
               <b>체크인</b>
               <input
@@ -96,7 +84,6 @@ const RoomDetailDateEditPopup = ({
                 className="block text-1.4rem pt-2 leading-normal bg-transparent cursor-text"
                 // 체크인 입력창 조건부 처리
                 defaultValue={checkInDate}
-                // value={startDate ? startDate.format('YYYY-MM-DD') : ''}
                 value={checkInDate ? checkInDate : ''}
               />
             </div>
@@ -108,7 +95,6 @@ const RoomDetailDateEditPopup = ({
                 className="block text-1.4rem pt-2 leading-normal bg-transparent cursor-text"
                 // 체크아웃 입력창 조건부 처리
                 defaultValue={checkoutDate}
-                // value={endDate ? endDate.format('YYYY-MM-DD') : ''}
                 value={checkoutDate ? checkoutDate : ''}
               />
             </div>
@@ -121,6 +107,7 @@ const RoomDetailDateEditPopup = ({
             handleOnDateChange={handleOnDateChange}
             focus={focus}
             setFocus={setFocus}
+            className="bg-searchBackground"
             // bookedDate={bookedDate}
           />
         </div>
