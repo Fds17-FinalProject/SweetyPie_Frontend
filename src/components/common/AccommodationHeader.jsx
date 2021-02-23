@@ -9,20 +9,19 @@ import SocialRegisterModal from './SocialRegisterModal';
 import AccommodationSearchHeader from '../common/AccommodationSearchHeader';
 
 const MainHeader = styled.header`
-  position: fixed;
-  top: 0;
-  display: flex;
-  width: 100%;
-  height: ${({ searchStartState }) => (searchStartState ? '18rem' : '8rem')};
-  justify-content: space-between;
-  padding-left: 8rem;
-  padding-right: 8rem;
-  padding-top: 2rem;
-  background: #fff;
-  /* background: palevioletred; */
-  z-index: 10;
-  box-sizing: border-box;
-  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
+position: fixed;
+top: 0;
+display: flex;
+width: 100%;
+height: ${({searchStartState}) => searchStartState ? '18rem' : '8rem'};
+justify-content: space-between;
+padding-left: 8rem;
+padding-right: 8rem;
+padding-top: 2rem;
+background:#fff;
+z-index: 10;
+box-sizing: border-box;
+box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
 `;
 
 const HeaderUserMenu = styled.button`

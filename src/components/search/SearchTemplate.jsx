@@ -7,7 +7,6 @@ import ChargeMenu from './ChargeMenu';
 import MultipleCarousel from '../common/MultipleCarousel';
 import SearchMap from './SearchMap';
 import { useLocation } from 'react-router-dom';
-import Price from './Price';
 import AccommodationHeaderContainer from '../../containers/AccommodationContainer';
 
 const StyledButton = styled.button`
@@ -44,6 +43,9 @@ const MapWrapper = styled.div`
   width: calc(100vw - 86.4rem);
 `;
 const SearchTemplate = ({ accommodations, loading }) => {
+  const location = useLocation();
+  const [id, setId] = useState(0);
+
   const [filter, setFilter] = useState({
     accommType: false,
     chargeMenu: false,
@@ -53,10 +55,6 @@ const SearchTemplate = ({ accommodations, loading }) => {
     id: null,
     isHovering: false,
   });
-
-  const [id, setId] = useState(0);
-
-  const location = useLocation();
 
   const onMouseEnter = (id) => () => {
     setIsHovering({
@@ -73,12 +71,13 @@ const SearchTemplate = ({ accommodations, loading }) => {
   };
 
   const clickFilter = ({ target }) => {
-    console.log(target.name);
     if (target.name === 'accommType') setFilter(state => ({ accommType: !state.accommType, chargeMenu: false }));
     if (target.name === 'chargeMenu') setFilter(state => ({ chargeMenu: !state.chargeMenu, accommType: false }));
   };
 
   const getRecentSearch = localStorage.getItem('recentSearch') && JSON.parse(localStorage.getItem('recentSearch')).map(JSON.parse);
+
+  const url = new URL(window.location.href);
 
   return (
     <div className="w-full flex flex-row flex-nowrap pt-32 absolute z-20">
@@ -89,7 +88,7 @@ const SearchTemplate = ({ accommodations, loading }) => {
           {
             location.pathname === '/accommodations/mapSearch'
               ? '지도에서 선택한 지역의 숙소'
-              : '마포구의 숙소'
+              : `${url.searchParams.get('searchKeyword') || '서울'}의 숙소`
           }
         </h1>
         <div className="mt-12 mb-12 relative">
