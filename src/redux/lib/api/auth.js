@@ -49,7 +49,7 @@ export const logout = async () => {
 };
 
 export const withdrawal = async () => {
-  const res = await axios.get('http://3.34.122.155/api/member', {
+  const res = await axios.delete('http://3.34.122.155/api/member', {
     headers: { "Authorization": `Bearer ${localStorage.getItem('token')}` }
   });
   console.log('auth.js(res)', res);
