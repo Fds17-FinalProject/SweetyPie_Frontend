@@ -5,6 +5,7 @@ import ModifyContent from './ModifyContent';
 import HeaderLogo from '../main/HeaderLogo';
 import HeaderUser from '../main/HeaderUser';
 import ModifyDescription from './ModifyDescription';
+import ModifyHeader from './ModifyHeader';
 
 const res = {
   email: 'gg2922914@gmail.com',
@@ -14,13 +15,43 @@ const res = {
   contact: '+82 10 6525 2914',
 };
 
-const ModifyAccount = ({ onClick, modify, onWithdrawal }) => {
+const ModifyAccount = ({
+  onClick,
+  modify,
+  onWithdrawal,
+  showModal,
+  hideModal,
+  changeModal,
+  authVisible,
+  visible,
+  showAuthModal,
+  socialModal,
+  onChange,
+  registerSubmit,
+  loginSubmit,
+  socialRegisterSubmit,
+  userLogout,
+  state,
+  checkedToken,
+}) => {
   return (
     <div>
-      <header className="max-w-screen-2xl px-32 bg-white w-full h-32 flex items-center justify-between	fixed z-10">
-        <HeaderLogo color="#FF385C" />
-        <HeaderUser />
-      </header>
+      <ModifyHeader
+        showModal={showModal}
+        hideModal={hideModal}
+        changeModal={changeModal}
+        authVisible={authVisible}
+        visible={visible}
+        showAuthModal={showAuthModal}
+        socialModal={socialModal}
+        onChange={onChange}
+        registerSubmit={registerSubmit}
+        loginSubmit={loginSubmit}
+        socialRegisterSubmit={socialRegisterSubmit}
+        userLogout={userLogout}
+        state={state}
+        checkedToken={checkedToken}
+      />
       <div className="max-w-screen-2xl w-full flex-grow-1 px-72 pt-32 min-h-75rem">
         <h1 className="a11y-hidden">개인정보 수정</h1>
         <h2 className="text-3.2rem font-extrabold text-#727272 py-16">
