@@ -85,7 +85,7 @@ const BookingGuestEditModal = ({ hideModal, setVisible, query }) => {
                 {count.adultNum === 0 ? (
                   <button
                     onClick={() => decreaseGuestNum('adultNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                   >
                     <div className="w-2.2rem h-2.2rem p-2">
@@ -122,7 +122,7 @@ const BookingGuestEditModal = ({ hideModal, setVisible, query }) => {
                 {count.adultNum === 5 ? (
                   <button
                     onClick={() => increaseGuestNum('adultNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                   >
                     <div className="w-2.2rem h-2.2rem p-2">
@@ -168,7 +168,7 @@ const BookingGuestEditModal = ({ hideModal, setVisible, query }) => {
                 {count.childNum === 0 || count.adultNum === 0 ? (
                   <button
                     onClick={() => decreaseGuestNum('childNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                   >
                     <div className="w-2.2rem h-2.2rem p-2">
@@ -205,7 +205,7 @@ const BookingGuestEditModal = ({ hideModal, setVisible, query }) => {
                 {count.childNum === 5 || count.adultNum === 0 ? (
                   <button
                     onClick={() => increaseGuestNum('childNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                   >
                     <div className="w-2.2rem h-2.2rem p-2">
@@ -251,7 +251,7 @@ const BookingGuestEditModal = ({ hideModal, setVisible, query }) => {
                 {count.infantNum === 0 || count.adultNum === 0 ? (
                   <button
                     onClick={() => decreaseGuestNum('infantNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                   >
                     <div className="w-2.2rem h-2.2rem p-2">
@@ -288,7 +288,7 @@ const BookingGuestEditModal = ({ hideModal, setVisible, query }) => {
                 {count.infantNum === 5 || count.adultNum === 0 ? (
                   <button
                     onClick={() => increaseGuestNum('infantNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                   >
                     <div className="w-2.2rem h-2.2rem p-2">
