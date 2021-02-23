@@ -312,10 +312,8 @@ const HeaderSearch = forwardRef((
       if (type === 'adultNum' && count.adultNum === 5) return;
       else if (type === 'childNum' && count.childNum === 5) return;
       else if (type === 'infantNum' && count.infantNum === 5) return;
-  
       setCount({ ...count, [type]: count[type] + 1, status: true });
     };
-  
     // 게스트 감소 함수
     const decreaseGuestNum = type => {
       if (count[type] === 0) return;
@@ -332,22 +330,22 @@ const HeaderSearch = forwardRef((
   const searchResult = () => {
     // 전부 다 입력했을 경우
     if (gu !== null && dateRange.startDate !== null && dateRange.endDate !== null && count.adultNum !== 0) {
-      history.push(`/accommodations/search?searchKeyword=${gu}&ckeckIn=${dateRange.startDate.format('YYYY-MM-DD')}&checkout=${dateRange.endDate.format('YYYY-MM-DD')}&guestNum=${count.adultNum+count.childNum}`);
+      history.push(`/accommodations/search?searchKeyword=${gu}&checkInDate=${dateRange.startDate.format('YYYY-MM-DD')}&checkoutDate=${dateRange.endDate.format('YYYY-MM-DD')}&guestNum=${count.adultNum+count.childNum}&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${count.infantNum}`);
     }
     // 위치만 입력 했을경우
     else if (gu !== null && dateRange.startDate === null && dateRange.endDate === null && count.adultNum === 0) {
-      history.push(`/accommodations/search?searchKeyword=${gu}`);
+      history.push(`/accommodations/search?searchKeyword=${gu}&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${count.infantNum}`);
     }
     // 위치, 체크인, 체크아웃 입력했을 경우
     else if (gu !== null && dateRange.startDate !== null && dateRange.endDate !== null && count.adultNum === 0) {
-      history.push(`/accommodations/search?searchKeyword=${gu}&ckeckIn=${dateRange.startDate.format('YYYY-MM-DD')}&checkout=${dateRange.endDate.format('YYYY-MM-DD')}`);
+      history.push(`/accommodations/search?searchKeyword=${gu}&checkInDate=${dateRange.startDate.format('YYYY-MM-DD')}&checkoutDate=${dateRange.endDate.format('YYYY-MM-DD')}&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${count.infantNum}`);
     } 
     // 위치, 게스트 수 입력했을 경우
     else if (gu !== null && dateRange.startDate === null && dateRange.endDate === null && count.adultNum !== 0) {
-      history.push(`/accommodations/search?searchKeyword=${gu}&guestNum=${count.adultNum+count.childNum}`);
+      history.push(`/accommodations/search?searchKeyword=${gu}&guestNum=${count.adultNum+count.childNum}&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${count.infantNum}`);
     }
   };
-
+  // 101?adultNum=3&checkInDate=2021-02-24&checkoutDate=2021-02-26&infantNum=2&childNum=1
   useEffect(() => {
     if (currentLocation.lat !== null && currentLocation.lng !== null) { 
       async function getAddress() {

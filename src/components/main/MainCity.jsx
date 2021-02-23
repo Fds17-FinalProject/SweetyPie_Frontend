@@ -4,7 +4,6 @@ const img = window.location.origin;
 
 const MainCity = ({ src, alt, children }) => {
   return (
-    <Link className="w-1/4" to="#">
       <figure className="flex">
         <img
           className="w-24 h-24 mr-6 rounded-lg"
@@ -15,7 +14,6 @@ const MainCity = ({ src, alt, children }) => {
           {children}
         </figcaption>
       </figure>
-    </Link>
   );
 };
 
