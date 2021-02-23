@@ -7,6 +7,7 @@ import roomDetail, { RoomDetailSaga } from './roomDetail';
 import accommodations, { searchSaga } from './accommodations';
 import auth, { authSaga } from './auth';
 import bookmark, { bookmarkSaga } from './bookmark';
+import payment, { pricesSaga } from './payment';
 
 const rootReducer = combineReducers({
   loading,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   accommodations,
   auth,
   bookmark,
+  payment,
 });
 
 export function* rootSaga() {
@@ -26,6 +28,7 @@ export function* rootSaga() {
     RoomDetailSaga(),
     authSaga(),
     bookmarkSaga(),
+    pricesSaga(),
   ]);
 }
 

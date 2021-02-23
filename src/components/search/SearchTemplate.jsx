@@ -2,15 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import AccommTypeMenu from './AccommTypeMenu';
 import styled from 'styled-components';
 import AccommList from './AccommList';
-import RecentSearch from './RecentSearch';
-import MapPopup from './MapPopup';
-import { HiChevronRight, HiChevronLeft } from 'react-icons/hi';
 import Pagination from './Pagination';
 import ChargeMenu from './ChargeMenu';
 import MultipleCarousel from '../common/MultipleCarousel';
 import SearchMap from './SearchMap';
 import { useLocation } from 'react-router-dom';
-import Price from './Price';
 import AccommodationHeaderContainer from '../../containers/AccommodationContainer';
 
 const StyledButton = styled.button`
@@ -47,6 +43,9 @@ const MapWrapper = styled.div`
   width: calc(100vw - 86.4rem);
 `;
 const SearchTemplate = ({ accommodations, loading }) => {
+  const location = useLocation();
+  const [id, setId] = useState(0);
+
   const [filter, setFilter] = useState({
     accommType: false,
     chargeMenu: false,
@@ -56,10 +55,6 @@ const SearchTemplate = ({ accommodations, loading }) => {
     id: null,
     isHovering: false,
   });
-
-  const [id, setId] = useState(0);
-
-  const location = useLocation();
 
   const onMouseEnter = (id) => () => {
     setIsHovering({
@@ -75,15 +70,17 @@ const SearchTemplate = ({ accommodations, loading }) => {
     })
   };
 
-  const menu = useRef();
   const clickFilter = ({ target }) => {
-    if (target.name === 'accommType') setFilter({ accommType: !filter.accommType, chargeMenu: false });
-    if (target.name === 'chargeMenu') setFilter({ chargeMenu: !filter.chargeMenu, accommType: false });
+    if (target.name === 'accommType') setFilter(state => ({ accommType: !state.accommType, chargeMenu: false }));
+    if (target.name === 'chargeMenu') setFilter(state => ({ chargeMenu: !state.chargeMenu, accommType: false }));
   };
+
   const getRecentSearch = localStorage.getItem('recentSearch') && JSON.parse(localStorage.getItem('recentSearch')).map(JSON.parse);
 
+  const url = new URL(window.location.href);
+
   return (
-    <div className="w-full flex flex-row flex-nowrap absolute z-20" >
+    <div className="w-full flex flex-row flex-nowrap pt-32 absolute z-20">
        <AccommodationHeaderContainer />
       <div className="w-86.4rem border pr-8 pl-8 pt-32">
         <span className="text-1.4rem pb-4">300개 이상의 숙소</span>
@@ -91,7 +88,7 @@ const SearchTemplate = ({ accommodations, loading }) => {
           {
             location.pathname === '/accommodations/mapSearch'
               ? '지도에서 선택한 지역의 숙소'
-              : '마포구의 숙소'
+              : `${url.searchParams.get('searchKeyword') || '서울'}의 숙소`
           }
         </h1>
         <div className="mt-12 mb-12 relative">
@@ -100,7 +97,8 @@ const SearchTemplate = ({ accommodations, loading }) => {
               onClick={clickFilter}
               name="accommType"
               style={{ border: `${filter.accommType ? '2px solid #222222' : '1px solid #B0B0B0'}` }}
-              filter={filter}>
+              filter={filter}
+            >
               숙소 유형
             </StyledButton>
           </ButtonWrapper>
@@ -113,8 +111,8 @@ const SearchTemplate = ({ accommodations, loading }) => {
               요금
             </StyledButton>
           </ButtonWrapper>
-            {filter.accommType ? <AccommTypeMenu setFilter={setFilter} /> : ''}
-            {filter.chargeMenu ? <ChargeMenu prices={accommodations.map(accomm => accomm.price)} /> : ''}
+            {filter.accommType && <AccommTypeMenu setFilter={setFilter} />}
+            {filter.chargeMenu && <ChargeMenu setFilter={setFilter} />}
         </div>
         <div className="text-1.6rem text-#717171 border-b border-searchBorder pb-10">
           여행 날짜와 게스트 인원수를 입력하면 1박당 총 요금을 확인할 수 있습니다.
