@@ -17,6 +17,8 @@ import RoomDetailSafetyModal from './RoomDetailSafetyModal';
 import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 import RoomDetailReviewModal from './RoomDetailReviewModal';
 import RoomDetailDateEditPopup from './RoomDetailDateEditPopup';
+import AccommodationHeaderContainer from '../../containers/AccommodationContainer';
+import Footer from '../main/Footer';
 
 const RoomDetailTemplate = ({
   accommodation,
@@ -126,6 +128,7 @@ const RoomDetailTemplate = ({
       {/* {visible.type === 'refund' && visible.state && (
         <RoomDetailRefundModal onCloseModal={onCloseModal} />
       )} */}
+      {scrollHeader === false && <AccommodationHeaderContainer />}
       {scrollHeader && <RoomDetailHeader />}
       {loading === false && (
         <div className="max-w-screen-2xl mt-32" id="photos">
@@ -207,6 +210,7 @@ const RoomDetailTemplate = ({
           </div>
         </div>
       )}
+      <Footer />
     </>
   );
 };
