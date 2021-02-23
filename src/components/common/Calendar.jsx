@@ -39,7 +39,6 @@ const Calendar = ({
     bookedRanges = bookedDateDtos.map(booked =>
       moment.range(booked.startDate, booked.endDate),
     );
-
     blocked = bookedRanges.find(bookedRange =>
       bookedRange.contains(date, { excludeEnd: true }),
     );

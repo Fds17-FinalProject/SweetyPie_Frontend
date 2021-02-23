@@ -3,7 +3,7 @@ import Calendar from '../common/Calendar';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 
-const CalendarDetail = ({ gu }) => {
+const CalendarDetail = ({ gu, bookedDateDtos }) => {
   const history = useHistory();
 
   // URL query parameter 가져오기
@@ -18,15 +18,16 @@ const CalendarDetail = ({ gu }) => {
   };
 
   // 체크인, 체크아웃 날짜에 대한 상태
+  // url에 checkInDate,checkoutDate 존재 유무에 따라 달력 컴포넌트에 적용
   const [dateRange, setDateRange] = useState({
-    startDate: null,
-    endDate: null,
+    startDate: checkInDate ? moment(checkInDate) : null,
+    endDate: checkoutDate ? moment(checkoutDate) : null,
   });
 
   // 달력 날짜 포커스 상태
   const [focus, setFocus] = useState('startDate');
 
-  // 날짜 변경
+  // 달력 날짜 변경 함수
   const handleOnDateChange = ({ startDate, endDate }) => {
     setDateRange({
       startDate: startDate,
@@ -52,13 +53,13 @@ const CalendarDetail = ({ gu }) => {
     history.push(url.search);
   };
 
-  // 처음 렌더링 될 때, url의 checkInDate과 checkOut 날짜를 가져와 달력 컴포넌트에 적용
+  // checkInDate와 chcekoutDate가 변경될 때마다 url에서 받아와 달력 컴포넌트에 적용
   useEffect(() => {
     setDateRange({
       startDate: moment(checkInDate),
       endDate: moment(checkoutDate),
     });
-  }, []);
+  }, [checkInDate, checkoutDate]);
 
   return (
     <div className="">
@@ -88,6 +89,7 @@ const CalendarDetail = ({ gu }) => {
           handleOnDateChange={handleOnDateChange}
           focus={focus}
           setFocus={setFocus}
+          bookedDateDtos={bookedDateDtos}
         />
         <div className="text-right mr-28">
           <button

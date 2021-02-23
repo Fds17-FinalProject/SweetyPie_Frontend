@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { HiStar } from 'react-icons/hi';
 import { GrDown, GrUp } from 'react-icons/gr';
 import classNames from 'classnames';
+import moment from 'moment';
 
 const Payment = ({
   rating,
@@ -11,20 +12,7 @@ const Payment = ({
   visible,
   onShowPopup,
   onCloseModal,
-  count,
 }) => {
-  const day = 2; // day 계산해서 넣기
-  const pricewithDay = price * day;
-  const fees = Math.round(price * 0.07 * day);
-  const totalPrice = +price * +day + +fees + 10000;
-  const ratingRoundUp = rating.toFixed(2);
-  const totalGuest = count.adultNum + count.childNum + count.infantNum;
-
-  // 금액 표기 시 세자리 수마다 콤마(,)찍어주기
-  const numberWithCommas = x => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  };
-
   // url에서 정보 가져오기
   let url = new URL(window.location.href);
   let checkInDate = url.searchParams.get('checkInDate');
@@ -33,6 +21,18 @@ const Payment = ({
   let childNum = url.searchParams.get('childNum');
   let infantNum = url.searchParams.get('infantNum');
   let accommodationId = window.location.pathname.split('/')[2];
+
+  const day = moment(checkoutDate).diff(moment(checkInDate), 'day') || 0;
+  const pricewithDay = price * day;
+  const fees = Math.round(price * 0.07 * day);
+  const totalPrice = +price * +day + +fees + 10000;
+  const ratingRoundUp = rating.toFixed(2);
+  const totalGuest = +adultNum + +childNum + +infantNum;
+
+  // 금액 표기 시 세자리 수마다 콤마(,)찍어주기
+  const numberWithCommas = x => {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
 
   return (
     <div className="w-full px-2.4rem py-10 sticky border rounded-3xl shadow-xl bg-white">
@@ -54,23 +54,41 @@ const Payment = ({
           <div className="flex justify-content">
             <div className="w-64 h-5.6rem pt-2 pl-5 border-r border-gray-400">
               <b>체크인</b>
-              <label htmlFor="checkIn" />
-              <input
-                id="checkIn"
-                name="checkIn"
-                placeholder="날짜추가"
-                className="block text-1.4rem pt-2 leading-normal bg-transparent"
-              />
+              <button
+                onClick={
+                  visible.state ? onCloseModal : () => onShowPopup('calendar')
+                }
+                data-name="close"
+              >
+                <label htmlFor="checkIn" />
+                <input
+                  id="checkIn"
+                  name="checkIn"
+                  placeholder="날짜추가"
+                  value={checkInDate ? checkInDate : ''}
+                  className="block text-1.4rem pt-2 leading-normal bg-transparent cursor-pointer"
+                  disabled
+                />
+              </button>
             </div>
             <div className="w-64 h-5.6rem pl-5 pt-2 ">
               <b>체크아웃</b>
-              <label htmlFor="checkOut" />
-              <input
-                id="checkOut"
-                name="checkOut"
-                placeholder="날짜추가"
-                className="block text-1.4rem pt-2 rounded-2xl focus:border-2 focus:rounded-2xl border-gray-400 bg-transparent"
-              />
+              <button
+                onClick={
+                  visible.state ? onCloseModal : () => onShowPopup('calendar')
+                }
+                data-name="close"
+              >
+                <label htmlFor="checkOut" />
+                <input
+                  id="checkOut"
+                  name="checkOut"
+                  placeholder="날짜추가"
+                  value={checkoutDate ? checkoutDate : ''}
+                  className="block text-1.4rem pt-2 leading-normal bg-transparent cursor-pointer"
+                  disabled
+                />
+              </button>
             </div>
           </div>
           <div
@@ -104,7 +122,9 @@ const Payment = ({
           </div>
         </div>
         <Link
-          to={`/booking/payment/${accommodationId}?checkInDate=${checkInDate}&checkoutDate=${checkoutDate}&adultNum=${adultNum}&childNum=${childNum}&infantNum=${infantNum}`}
+          to={`/booking/payment/${accommodationId}?checkInDate=${checkInDate}&checkoutDate=${checkoutDate}&adultNum=${adultNum}&childNum=${
+            childNum ? childNum : 0
+          }&infantNum=${infantNum ? infantNum : 0}`}
         >
           {totalGuest !== 0 && checkInDate && checkoutDate ? (
             <button className="bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none w-full h-20 px-6 m-2 text-2xl transform focus:scale-90">

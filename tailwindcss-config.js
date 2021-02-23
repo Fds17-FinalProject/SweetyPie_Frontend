@@ -1,7 +1,7 @@
 const colors = require('tailwindcss/colors');
 
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,html}', './public/index.html'],
+  purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -9,6 +9,7 @@ module.exports = {
       borderColor: ['hover'],
       fontSize: {
         '1.2rem': '1.2rem',
+        '1.3rem': '1.3rem',
         '1.4rem': '1.4rem',
         '1.6rem': '1.6rem',
         '1.75rem': '1.75rem',
@@ -46,7 +47,6 @@ module.exports = {
         '#b0b0b0': '#b0b0b0',
         '#D70466': '#D70466',
         '#e5e7eb': '#e5e7eb',
-        '#fff': '#ffffff',
         modal: 'rgba(62, 60, 70, 0.5)',
       },
       boxShadow: {
@@ -63,8 +63,13 @@ module.exports = {
         '45%': '45%',
         '80%': '80%',
         '0.05rem': '0.05rem',
+        '0.3rem': '0.3rem',
         '0.4rem': '0.4rem',
+        '0.5rem': '0.5rem',
+        '0.6rem': '0.6rem',
+        '0.7rem': '0.7rem',
         '0.8rem': '0.8rem',
+        '0.9rem': '0.9rem',
         '1.2rem': '1.2rem',
         '1.3rem': '1.3rem',
         '1.4rem': '1.4rem',
@@ -85,17 +90,21 @@ module.exports = {
         '5rem': '5rem',
         '5.5rem': '5.5rem',
         '5.6rem': '5.6rem',
+        '5.8rem': '5.8rem',
         '6rem': '6rem',
         '6.4rem': '6.4rem',
         '6.5rem': '6.5rem',
         '7rem': '7rem',
         '7.2rem': '7.2rem',
+        '7.8rem': '7.8rem',
         '8.5rem': '8.5rem',
         '9rem': '9rem',
         '9.5rem': '9.5rem',
         '10.4rem': '10.4rem',
         '11rem': '11rem',
         '11.2rem': '11.2rem',
+        '12rem': '12rem',
+        '13rem': '13rem',
         '14rem': '14rem',
         '14.2rem': '14.2rem',
         '14.5rem': '14.5rem',
@@ -901,6 +910,12 @@ module.exports = {
     'disabled',
   ],
   variants: {
+<<<<<<< HEAD
+    extend: {},
+  },
+  plugins: [],
+}
+=======
     accessibility: ['responsive', 'focus-within', 'focus'],
     alignContent: ['responsive'],
     alignItems: ['responsive'],
@@ -1226,3 +1241,4 @@ module.exports = {
     plugins: [],
   },
 };
+>>>>>>> release/0.1.0
