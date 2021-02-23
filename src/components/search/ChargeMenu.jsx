@@ -19,8 +19,6 @@ const ChargeMenu = ({ setFilter }) => {
     chargeMenu: false,
   });
 
-  console.log('inputValues', inputValues);
-
   const onPriceSave = () => {
     const url = new URL(window.location.href);
     url.searchParams.set('minPrice', inputValues[0]);
@@ -32,8 +30,6 @@ const ChargeMenu = ({ setFilter }) => {
       chargeMenu: false,
     });
   };
-
-
 
   return (
     <>
