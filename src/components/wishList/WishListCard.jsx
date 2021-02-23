@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HiHeart, HiOutlineHeart } from 'react-icons/hi';
-import { postBookMark, deleteBookMark } from '../../redux/lib/api/bookmark';
+import { postBookmark, deleteBookmark } from '../../redux/lib/api/bookmark';
 
 const WishListCard = ({ bookmark }) => {
   const { accommodationId, title, city, gu, accommodationPicture } = bookmark;
@@ -12,7 +12,7 @@ const WishListCard = ({ bookmark }) => {
   // 북마크 삭제
   const removeBookmark = async accommodationId => {
     try {
-      await deleteBookMark(accommodationId);
+      await deleteBookmark(accommodationId);
       setMark(false);
     } catch (e) {
       console.log(e);
@@ -22,7 +22,7 @@ const WishListCard = ({ bookmark }) => {
   // 북마크 추가
   const updateBookmark = async accommodationId => {
     try {
-      await postBookMark(accommodationId);
+      await postBookmark(accommodationId);
       setMark(true);
     } catch (e) {
       console.log(e);

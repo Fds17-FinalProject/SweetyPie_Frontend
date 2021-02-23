@@ -4,7 +4,7 @@ import Carousel from '../common/Carousel';
 import { FiHeart } from 'react-icons/fi';
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
-import { deleteBookMark, postBookMark } from '../../redux/lib/api/bookmark';
+import { deleteBookmark, postBookmark } from '../../redux/lib/api/bookmark';
 
 const HoverSvg = styled.button`
   transition: all 0.2s ease-in-out;
@@ -37,7 +37,7 @@ const AccommList = props => {
     title,
     onMouseEnter,
     onMouseLeave,
-    bookmarked
+    bookmarked,
   } = props;
   const cost = price && price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
@@ -46,12 +46,13 @@ const AccommList = props => {
     setBookMark(!bookMark);
     if (!bookMark) {
       console.log(bookMark);
-      postBookMark(id) 
+      postBookmark(id);
     } else {
-      deleteBookMark(id)
+      deleteBookmark(id);
     }
   };
-  const img = accommodationPictures && accommodationPictures.map(picture => picture.url);
+  const img =
+    accommodationPictures && accommodationPictures.map(picture => picture.url);
   const setLocal = id => () => {
     recentSearch.unshift({
       id,
@@ -87,10 +88,7 @@ const AccommList = props => {
             className="absolute top-2 left-2"
           />
         </HoverSvg>
-        <Link
-          to={`/accommodation/${id}`}
-          className="flex focus:outline-none"
-        >
+        <Link to={`/accommodation/${id}`} className="flex focus:outline-none">
           <Carousel size="Large" img={img} />
           <div className="relative w-54rem truncate ml-5">
             <span className="text-#717171 text-1.4rem inline-block">
