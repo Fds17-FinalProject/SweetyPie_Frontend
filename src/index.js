@@ -8,6 +8,7 @@ import rootReducer, { rootSaga } from './redux/modules';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import createSagaMiddleware from 'redux-saga';
+// import { HelmetProvider } from 'react-helmet-async';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -22,7 +23,9 @@ sagaMiddleware.run(rootSaga);
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      {/* <HelmetProvider> */}
       <App />
+      {/* </HelmetProvider> */}
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

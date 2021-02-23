@@ -13,7 +13,7 @@ const [
 ] = createRequestActionTypes('roomDetail/READ_ROOMDETAIL');
 
 // action creators
-// payload로 room_id를 보낸다. 왜냐하면 url room_id에 따라 DB를 보내주기 때문!
+// payload로 accommodation_id를 보낸다. 왜냐하면 url accommodation_id에 따라 DB를 보내주기 때문!
 export const readRoomDetail = createAction(READ_ROOMDETAIL);
 
 // saga
@@ -21,7 +21,7 @@ const readRoomDetailSaga = createRequestSaga(
   READ_ROOMDETAIL,
   roomDetailAPI.readRoomDetail,
 );
-console.log(roomDetailAPI.readRoomDetail);
+// console.log(roomDetailAPI.readRoomDetail);
 
 export function* RoomDetailSaga() {
   yield takeLatest(READ_ROOMDETAIL, readRoomDetailSaga);
@@ -30,7 +30,7 @@ export function* RoomDetailSaga() {
 // initialState
 const initialState = {
   accommodation: {},
-  roomDetailError: null,
+  accommodationError: null,
 };
 
 // reducer
@@ -47,7 +47,7 @@ const roomDetail = handleActions(
       // console.log(state, error);
       return {
         ...state,
-        roomDeatilError: error,
+        accommodationError: error,
       };
     },
   },

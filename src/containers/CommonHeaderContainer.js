@@ -13,15 +13,23 @@ const CommonHeaderContainer = (
     setCalendar,
     setPersonnel,
     searchStartState,
-    setSearchStartState
+    setSearchStartState,
+    
   }) => {
+  const [flexibleScroll, setFlexibleScroll] = useState({
+    currentScroll: 0,
+    scrollPlus: 0,
+    scrollMinus: 0,
+    scrollStatus: false,
+  });
+    
     // 로컬스토리지 토큰 유무 
     const [checkedToken, setCheckedToken] = useState(false);
     // 스크롤 위치
     const [scrollY, setScrollY] = useState(false);
     const [socialModal, setSocialModal] = useState(false);
     // 유저 메뉴 모달 초기 상태
-  const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(false);
   
     // // 검색 시작 하기 눌렀을 시 모달 초기 상태
     // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
@@ -92,7 +100,7 @@ const CommonHeaderContainer = (
       if (target.dataset.name) {
         setVisible(false);
         setAuthVisible(false);
-        setPersonnel(false);
+        // setPersonnel(false);
         setSocialModal(false);
       }
     };
@@ -104,9 +112,16 @@ const CommonHeaderContainer = (
       setSearchStartState(true);
       // 위치 open
       setLocation(true);
+      setFlexibleScroll({
+        ...flexibleScroll,
+        currentScroll: window.scrollY,
+        scrollPlus: window.scrollY + 150,
+        scrollMinus: window.scrollY > 150 ? window.scrollY - 150 : 1,
+      })
+      console.log('비교비교비교', flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus);
     }
   };
-
+  console.log(flexibleScroll);
   // 헤더 위치 (어디로 여행가세요?)
   const showLocation = ({ target }) => {
     if (target.dataset.name === 'location') {
@@ -128,7 +143,7 @@ const CommonHeaderContainer = (
     if (target.dataset.name === 'personnel') {
       setPersonnel(true);
       setLocation(false);
-      setCalendar(true);
+      setCalendar(false);
     }
   };
   // 헤더에 검색 버튼 누를 시 location: true 하면서 검색 버튼 스타일 변경
@@ -185,7 +200,7 @@ const CommonHeaderContainer = (
       setAuthVisible(false);
     }
     else {
-      console.log('error');
+      console.log('authError',authError);
     }
     const resUser = await getUser();
     console.log(resUser);
@@ -197,8 +212,7 @@ const CommonHeaderContainer = (
     setCheckedToken(false);
   };
 
-  console.log();
-  
+  console.log('searchStateState', searchStartState);
 
   useEffect(() => {
     // 로그인이나 회원가입 성공 시 모달창 Close
@@ -224,14 +238,34 @@ const CommonHeaderContainer = (
     function watchScroll() {
     window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
     }; 
-    
+    function wathchFlexibleScroll() {
+      console.log('scrollPlus', flexibleScroll.scrollPlus);
+      // console.log('scrollMinus', flexibleScroll.scrollMinus);
+      // console.log('Scroll', window.scrollY);
+      // console.log('currentScroll', flexibleScroll.currentScroll);
+      // console.log('비교', flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus);
+      if (flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus) {
+        // console.log('if문');
+        setSearchStartState(false);
+        setLocation(false);
+        setCalendar(false);
+        setPersonnel(false);
+        setFlexibleScroll({
+          ...flexibleScroll,
+          currentScroll: 0,
+          scrollPlus: 0,
+          scrollMinus: 0,
+        })
+      }
+    }
+    wathchFlexibleScroll();
+    window.addEventListener('scroll', throttle(watchScroll, 150));
+    window.addEventListener('scroll', wathchFlexibleScroll);
 
-  window.addEventListener('scroll', throttle(watchScroll, 150));
-  // window.addEventListener('scroll', scrollClose)
   return () => {
     window.removeEventListener('scroll', watchScroll);
   };
-}, [authError, socialRegister.socialId, checkedToken]);
+}, [authError, socialRegister.socialId, checkedToken, setSearchStartState]);
 // }, [auth, authError, dispatch]);
 
 
@@ -244,16 +278,13 @@ const CommonHeaderContainer = (
         authVisible={authVisible}
         visible={visible}
         showAuthModal={showAuthModal}
-        showSearchHeader={showSearchHeader}
         searchStartState={searchStartState}
-        showCalendar={showCalendar}
-        showLocation={showLocation}
-        showPersonnel={showPersonnel}
         location={location}
         calendar={calendar}
         personnel={personnel}
         scrollY={scrollY}
-        searchOnclick={searchOnclick}
+        setScrollY={setScrollY}
+        scrollStatus={flexibleScroll.srollStatus}
 
         socialModal={socialModal}
         onChange={onChange}
@@ -263,7 +294,13 @@ const CommonHeaderContainer = (
         userLogout={userLogout}
         state={state}
         checkedToken={checkedToken}
-        // form={form}
+
+        showSearchHeader={showSearchHeader}
+        showLocation={showLocation}
+        showCalendar={showCalendar}
+        showPersonnel={showPersonnel}
+        searchOnclick={searchOnclick}
+        
       />  
     </>
   )

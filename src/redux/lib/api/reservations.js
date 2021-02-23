@@ -3,7 +3,7 @@ import axios from 'axios';
 export const readReservation = memberId =>
   axios.get(`http://3.34.50.91/api/reservation`, {
     headers: {
-      Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX01FTUJFUiIsIm1lbWJlcklkIjoxLCJleHAiOjE2NDUyNjUzOTR9.v84KuW7pEJvr7-Ff848gNY2hNL8KNYv7gNYnymL56BPgiCRnzWVe0HPSoQpCyb-c4yJYHRUPlowJqNKU4HiWXA`,
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   });
 
@@ -19,17 +19,25 @@ export const paymentReservation = ({
   childNum,
   totalPrice,
 }) =>
-  axios.post(`http://3.34.50.91/api/reservation`, {
-    memberId: 1,
-    accommodationId,
-    checkInDate,
-    checkoutDate,
-    totalGuestNum,
-    adultNum,
-    infantNum,
-    childNum,
-    totalPrice,
-  });
+  axios.post(
+    `http://3.34.50.91/api/reservation`,
+    {
+      memberId: 1,
+      accommodationId,
+      checkInDate,
+      checkoutDate,
+      totalGuestNum,
+      adultNum,
+      infantNum,
+      childNum,
+      totalPrice,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    },
+  );
 
 // 예약 수정 PATCH 요청
 export const modifyReservation = ({
@@ -42,17 +50,29 @@ export const modifyReservation = ({
   infantNum,
   totalPrice,
 }) =>
-  axios.patch(`http://3.34.50.91/api/reservation/${reservationId}`, {
-    checkInDate,
-    checkoutDate,
-    totalGuestNum,
-    adultNum,
-    childNum,
-    infantNum,
-    totalPrice,
-  });
+  axios.patch(
+    `http://3.34.50.91/api/reservation/${reservationId}`,
+    {
+      checkInDate,
+      checkoutDate,
+      totalGuestNum,
+      adultNum,
+      childNum,
+      infantNum,
+      totalPrice,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    },
+  );
 
 // 예약 취소 DELETE 요청
 export const removeReservation = reservationId => {
-  axios.delete(`http://3.34.50.91/api/reservation/${reservationId}`);
+  axios.delete(`http://3.34.50.91/api/reservation/${reservationId}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  });
 };

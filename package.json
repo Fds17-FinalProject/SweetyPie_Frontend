@@ -17,7 +17,7 @@
     "http-proxy-middleware": "^1.0.6",
     "jquery": "^3.5.1",
     "lodash.chunk": "^4.2.0",
-    "material-ui": "^0.20.2",
+    "material-ui": "^0.15.0",
     "moment": "^2.29.1",
     "moment-range": "^4.0.2",
     "qs": "^6.9.6",
@@ -28,6 +28,7 @@
     "react-dates": "^21.8.0",
     "react-dom": "^17.0.1",
     "react-error-boundary": "^3.1.0",
+    "react-helmet-async": "^1.0.7",
     "react-hooks-paginator": "^0.4.4",
     "react-icons": "^4.1.0",
     "react-paginate": "^7.0.0",
@@ -60,6 +61,10 @@
       "react-app",
       "react-app/jest"
     ]
+  },
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
   },
   "browserslist": {
     "production": [
