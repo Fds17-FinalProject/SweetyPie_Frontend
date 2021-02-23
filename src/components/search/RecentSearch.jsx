@@ -20,8 +20,8 @@ const RecentSearch = (props) => {
             <span >{rating}</span>
           <span className="text-#717171">({reviewNum})</span>
           <div className="ml-2">
-              <div>{buildingType} {accommodationType}</div>
-              <div className="w-14rem truncate">{title}</div>
+            <div>{buildingType} {accommodationType}</div>
+            <div className="w-14rem truncate">{title}</div>
           </div>
         </div>
     </div>
