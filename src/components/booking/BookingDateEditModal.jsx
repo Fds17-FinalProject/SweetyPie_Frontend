@@ -15,7 +15,7 @@ const BookingDateEditModal = ({
   const history = useHistory();
 
   // 해당 숙소 금액
-  const { price } = accommodationInfo;
+  const { price, bookedDateDtos } = accommodationInfo;
 
   // 체크인, 체크아웃 날짜에 대한 상태
   const [dateRange, setDateRange] = useState({
@@ -30,10 +30,12 @@ const BookingDateEditModal = ({
 
   // 달력 날짜 변경 함수
   const handleOnDateChange = ({ startDate, endDate }) => {
-    setDateRange({
-      startDate: startDate,
-      endDate: endDate,
-    });
+    if (startDate !== endDate) {
+      setDateRange({
+        startDate: startDate,
+        endDate: endDate,
+      });
+    }
   };
 
   // 달력 모달창 저장하기 클릭 시 쿼리 변경 및 모달 끄기
@@ -146,7 +148,7 @@ const BookingDateEditModal = ({
             handleOnDateChange={handleOnDateChange}
             focus={focus}
             setFocus={setFocus}
-            // bookedDate={bookedDate}
+            bookedDateDtos={bookedDateDtos}
           />
         </div>
         <div className="flex items-center text-1.4rem justify-end pr-1.6rem">
@@ -168,7 +170,7 @@ const BookingDateEditModal = ({
             <button
               disabled
               onClick={modifyDate}
-              className="py-0.8rem px-1.6rem ml-1.6rem font-semibold text-#fff bg-#b0b0b0 rounded-2xl"
+              className="py-0.8rem px-1.6rem ml-1.6rem font-semibold text-#fff bg-#b0b0b0 rounded-2xl cursor-not-allowed"
             >
               저장하기
             </button>

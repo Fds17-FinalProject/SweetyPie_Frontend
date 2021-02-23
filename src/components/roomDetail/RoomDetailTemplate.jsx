@@ -18,7 +18,12 @@ import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 import RoomDetailReviewModal from './RoomDetailReviewModal';
 import RoomDetailDateEditPopup from './RoomDetailDateEditPopup';
 
-const RoomDetailTemplate = ({ accommodation, loading }) => {
+const RoomDetailTemplate = ({
+  accommodation,
+  loading,
+  postBookmark,
+  deleteBookmark,
+}) => {
   const {
     gu,
     address,
@@ -130,6 +135,9 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
               rating={rating}
               reviewNum={reviewNum}
               address={address}
+              bookmarked={bookmarked}
+              postBookmark={postBookmark}
+              deleteBookmark={deleteBookmark}
             />
             <Photos accommodationPictures={accommodationPictures} />
           </div>

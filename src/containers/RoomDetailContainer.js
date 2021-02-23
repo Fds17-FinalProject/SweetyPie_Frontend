@@ -1,31 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import RoomDetailTemplate from '../components/roomDetail/RoomDetailTemplate';
 import { readRoomDetail } from '../redux/modules/roomDetail';
+import { postBookmark, deleteBookmark } from '../redux/lib/api/bookmark';
 
 const RoomDetailContainer = () => {
   // const accommodation2 = useSelector(state => console.log(state));
-  const { accommodation, roomDetailError, loading } = useSelector(
+  const { accommodation, accommodationError, loading } = useSelector(
     ({ roomDetail, loading }) => ({
       accommodation: roomDetail.accommodation,
-      roomDetailError: roomDetail.roomDetailError,
+      accommodationError: roomDetail.accommodationError,
       loading: loading['roomDetail/READ_ROOMDETAIL'],
     }),
   );
   // console.log(accommodation);
 
   const dispatch = useDispatch();
-  // url의 room_id 가져오기
-  const { room_id } = useParams();
+  // url의 accommodation_id 가져오기
+  const { accommodation_id } = useParams();
+
+  const [mark, setMark] = useState(false);
 
   useEffect(() => {
-    dispatch(readRoomDetail(room_id));
-  }, [dispatch, room_id]);
+    dispatch(readRoomDetail(accommodation_id));
+  }, [dispatch, accommodation_id, mark]);
+
+  // 북마크 등록 (POST)
+  const postBookmarkRoom = async accommodation_id => {
+    await postBookmark(accommodation_id);
+    setMark(true);
+  };
+
+  // 북마크 제거 (DELETE)
+  const deleteBookmarkedRoom = async accommodation_id => {
+    await deleteBookmark(accommodation_id);
+    setMark(false);
+  };
 
   return (
     <div>
-      <RoomDetailTemplate accommodation={accommodation} loading={loading} />
+      <RoomDetailTemplate
+        accommodation={accommodation}
+        loading={loading}
+        postBookmark={postBookmarkRoom}
+        deleteBookmark={deleteBookmarkedRoom}
+      />
     </div>
   );
 };

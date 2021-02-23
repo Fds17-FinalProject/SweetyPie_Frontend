@@ -20,7 +20,7 @@ const readBookmarkSaga = createRequestSaga(
   // 액션 타입
   READ_BOOKMARK,
   // 요청 API
-  bookmarkAPI.getBookMark,
+  bookmarkAPI.getBookmark,
 );
 
 // 사가 함수
