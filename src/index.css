@@ -115,21 +115,6 @@ legend {
   background: #222222;
   color: #ffffff;
 }
-.pagination > .active {
-  /* border: none ;
-  border-radius: 50% ;
-  width: 32px ;
-  height: 32px ;
-  margin: 0px ;
-  margin-left: 8px ;
-  margin-right: 8px ;
-  padding: 0px ;
-  transition: -ms-transform 0.25s ease, -webkit-transform 0.25s ease,
-    transform 0.25s ease ;
-  outline: none ;
-  background: #222222 ;
-  color: #ffffff ; */
-}
 .pagination > li > a {
   padding: 5px 10px;
   outline: none;
@@ -175,7 +160,20 @@ legend {
   height: 100px !important;
 }
 
+.MuiInputBase-root {
+  width: 100px;
+  /* height: 56px; */
+}
+
+.MuiOutlinedInput-adornedStart {
+  /* margin-right: 20px; */
+}
+
 .MuiInputLabel-root {
-  font-size: 18px !important;
+  font-size: 16px !important;
   margin: 0.5rem 0;
+}
+
+.MuiInputBase-input {
+  font-size: 16px !important;
 }

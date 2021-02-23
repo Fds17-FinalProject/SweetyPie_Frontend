@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Carousel from '../common/Carousel';
 import { FiHeart } from 'react-icons/fi';
@@ -42,6 +42,7 @@ const AccommList = props => {
   const cost = price && price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   const [bookMark, setBookMark] = useState(bookmarked);
+  
   const bookMarkClick = id => () => {
     setBookMark(!bookMark);
     if (!bookMark) {
@@ -68,6 +69,16 @@ const AccommList = props => {
     localStorage.setItem('recentSearch', JSON.stringify([...uniqueSet]));
   };
 
+  useEffect(() => { 
+    
+  }, []);
+  
+  // const checkIn = url.searchParams.get('checkIn');
+  // const checkout = url.searchParams.get('checkout');
+  // const adultNum = url.searchParams.get('adultNum');
+  // const childNum = url.searchParams.get('childNum');
+  // const infantNum = url.searchParams.get('infantNum');
+
   return (
     <li
       key={id}
@@ -88,7 +99,12 @@ const AccommList = props => {
             className="absolute top-2 left-2"
           />
         </HoverSvg>
-        <Link to={`/accommodation/${id}`} className="flex focus:outline-none">
+        <Link
+          // to={
+            // `/accommodation/${id}?${checkIn && `checkInDate=${checkIn}&`}${checkout && `checkoutDate=${checkout}&`}${adultNum && `adultNum=${adultNum}&`}${childNum && `childNum=${childNum}&`}${infantNum && `infantNum=${infantNum}`}`
+          // }
+          className="flex focus:outline-none"
+        >
           <Carousel size="Large" img={img} />
           <div className="relative w-54rem truncate ml-5">
             <span className="text-#717171 text-1.4rem inline-block">
