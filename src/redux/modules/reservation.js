@@ -50,7 +50,7 @@ export function* reservationSaga() {
 
 // 초기 상태
 const initialState = {
-  reservations: null,
+  reservations: [],
   error: null,
 };
 
