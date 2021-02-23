@@ -83,7 +83,7 @@ background-color: #fff;
 padding: 0.5rem;
 border: 1px solid rgba(209, 213, 219);
 border-radius: 1.5rem;
-width: 7rem;
+min-width: 7rem;
 height: 3.5rem;
 `;
 
@@ -198,7 +198,8 @@ const CommonHeader = (
     checkedToken,       // 로컬스토리지에 토큰이 있는지 없는지 유무(로그인 됐는지)
     socialModal,        // 소셜로 회원가입 모달
     socialRegisterSubmit, // 소셜로 회원가입 submit
-    userLogout            // 로그아웃 api콜 함수 
+    userLogout,            // 로그아웃 api콜 함수 
+    scrollStatus,
   }) => {
   // 버거바
 const HeaderUser = () => {
@@ -410,7 +411,9 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
           showCalendar={showCalendar}
           showLocation={showLocation}
           showPersonnel={showPersonnel}
-          searchOnclick={searchOnclick}/>
+          searchOnclick={searchOnclick}
+          scrollStatus={scrollStatus}
+        />
         <HeaderUser />
       </MainHeader>
       </>

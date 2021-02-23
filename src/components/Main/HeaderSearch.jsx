@@ -37,7 +37,7 @@ border: 1px solid #ccc;
 border-radius: 999rem;
 background: #fff;
 width: ${({scrollY, searchStartState}) => !scrollY ? '85rem' : searchStartState ? '85rem' : '32rem'};
-height: ${({scrollY, searchStartState}) => !scrollY ? '7rem' : searchStartState? '7rem' : '4.8rem'};
+height: ${({scrollY, searchStartState}) => !scrollY ? '7rem' : searchStartState ? '7rem' : '4.8rem'};
 margin-top: ${({scrollY, searchStartState}) => !scrollY ? '5rem' : searchStartState ? '5rem' : '0'};
 animation-duration: 0.1s;
 animation-timing-function: ease-out;
@@ -171,14 +171,27 @@ const SubmitButton = styled.button.attrs(() => ({ type: 'button' }))`
   }
 `;
 
-const HeaderSearch = forwardRef(({ scrollY, setScrollY, searchStartState, calendar, location, personnel, showSearchHeader, showCalendar, showLocation, showPersonnel, searchOnclick }, ref) => {
+const HeaderSearch = forwardRef((
+  {
+    scrollY,
+    setScrollY,
+    searchStartState,
+    calendar,
+    location,
+    personnel,
+    showSearchHeader,
+    showCalendar,
+    showLocation,
+    showPersonnel,
+    searchOnclick,
+    scrollStatus
+  }, ref) => {
   // const [location, setLocation] = useState(false);
   // const [calendar, setCalendar] = useState(false);
   // const [personnel, setPersonnel] = useState(false);
   // 검색 시작 하기 눌렀을 시 모달 초기 상태
   // const [searchStartState, setSearchStartState] = useState(false);
   const [gu, setGu] = useState(null);
-  console.log(gu);
   const [currentLocation, setCurrentLocation] = useState({
     lat: null,
     lng: null,
@@ -189,7 +202,6 @@ const HeaderSearch = forwardRef(({ scrollY, setScrollY, searchStartState, calend
     infantNum: 0,
     status: false,
   });
-  console.log('count', count);
   const url = new URL(window.location.href);
   const history = useHistory();
 
@@ -277,8 +289,6 @@ const HeaderSearch = forwardRef(({ scrollY, setScrollY, searchStartState, calend
     // 체크아웃 날짜의 초기값 지정
     endDate: null,
   });
-  console.log('startDate', dateRange.startDate);
-  console.log('endDate', dateRange.endDate);
     // 달력 날짜 포커스 상태
   const [focus, setFocus] = useState('startDate');
   // 달력 날짜 변경 함수
@@ -350,8 +360,8 @@ const HeaderSearch = forwardRef(({ scrollY, setScrollY, searchStartState, calend
     }
   }, [currentLocation, gu])
   return (
-    <SearchHeader onSubmit={onSubmit} scrollY={ scrollY } searchStartState = {searchStartState} id='test'>
-      <Button className="w-27rem text-left" scrollY={scrollY} searchStartState={searchStartState} onClick={showLocation}  data-name="location">
+    <SearchHeader onSubmit={onSubmit} scrollY={scrollY} searchStartState={searchStartState} scrollStatus={scrollStatus} id='test'>
+      <Button className="w-27rem text-left" scrollY={scrollY} searchStartState={searchStartState} onClick={showLocation} scrollStatus={scrollStatus}  data-name="location">
           <div className="border-r px-14" data-name="location">
             <b className="block text-1.2rem" data-name="location">위치</b>
             <label className="a11y-hidden" htmlFor="search-input" data-name="location">
@@ -368,7 +378,7 @@ const HeaderSearch = forwardRef(({ scrollY, setScrollY, searchStartState, calend
           </div>
         </Button>
 
-      <Button ref={ref} test={true} startDate={dateRange.startDate} className="w-18rem text-left" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showCalendar} data-name="calendar">
+      <Button ref={ref} test={true} startDate={dateRange.startDate} className="w-18rem text-left" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showCalendar} scrollStatus={scrollStatus} data-name="calendar">
           <div className="border-r px-6" data-name="calendar" >
             <b className="block text-1.2rem" data-name="calendar">체크인</b>
           <span className="block text-1.4rem text-#717171" data-name="calendar">{dateRange.startDate
@@ -377,7 +387,7 @@ const HeaderSearch = forwardRef(({ scrollY, setScrollY, searchStartState, calend
           </div>
         </Button>
 
-        <Button ref={ref} endDate={dateRange.endDate} className="w-18rem text-left" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showCalendar} data-name="calendar">
+        <Button ref={ref} endDate={dateRange.endDate} className="w-18rem text-left" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showCalendar} scrollStatus={scrollStatus} data-name="calendar">
           <div className="border-r px-6" data-name="calendar">
             <b className="block text-1.2rem" data-name="calendar">체크아웃</b>
             <span className="block text-1.4rem text-#717171" data-name="calendar">{
@@ -388,14 +398,14 @@ const HeaderSearch = forwardRef(({ scrollY, setScrollY, searchStartState, calend
           </div>
         </Button>
 
-        <Button className="w-22rem text-left px-6" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showPersonnel} data-name="personnel">
+        <Button className="w-22rem text-left px-6" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showPersonnel} scrollStatus={scrollStatus} data-name="personnel">
           <div className="relative" data-name="personnel"> 
             <b className="block text-1.2rem" data-name="personnel">인원</b>
           <span className="block text-1.4rem text-#717171" data-name="personnel">{count.adultNum !== 0 ? `게스트 ${count.adultNum+count.childNum+count.infantNum}명` : '게스트 추가'}</span>
           {location || calendar || personnel ?
-            <SubmitButton onClick={searchResult}>
-            <BiSearch size={20} className=" text-white" />
-            <span className="text-white text-1.6rem ml-0.4rem">검색</span>
+            <SubmitButton onClick={searchResult} data-name="no-hide">
+            <BiSearch size={20} className=" text-white" data-name="no-hide"/>
+            <span className="text-white text-1.6rem ml-0.4rem" data-name="no-hide">검색</span>
           </SubmitButton> :
             <SearchButton data-name="open" location={location} calendar={calendar} personnel={personnel} onClick={searchOnclick}>
             <BiSearch size={ 20 } className=" text-white"  data-name="search"/>
@@ -414,12 +424,12 @@ const HeaderSearch = forwardRef(({ scrollY, setScrollY, searchStartState, calend
         </div>}
         {location && (
           <SearchLocation >
-            <LocationButton onClick={getCurrentLocation}>
-              <figure>
-                <img className="w-4.5rem h-4.5rem rounded-xl " src={'/img/mapIcon.jpg'} alt="어디로 여행가세요 아이콘"/>
-                <figcaption className="a11y-hidden">어디로 여행가세요?</figcaption>
+            <LocationButton onClick={getCurrentLocation} data-name="no-hide">
+              <figure data-name="no-hide">
+                <img data-name="no-hide" className="w-4.5rem h-4.5rem rounded-xl " src={'/img/mapIcon.jpg'} alt="어디로 여행가세요 아이콘"/>
+                <figcaption data-name="no-hide" className="a11y-hidden">어디로 여행가세요?</figcaption>
               </figure>
-            <span className="text-1.6rem ml-1.8rem text-#727272">가까운 여행지 둘러보기</span>
+            <span className="text-1.6rem ml-1.8rem text-#727272" data-name="no-hide">가까운 여행지 둘러보기</span>
             </LocationButton>
           </SearchLocation>
         )}

@@ -16,6 +16,13 @@ const CommonHeaderContainer = (
     setSearchStartState,
     
   }) => {
+  const [flexibleScroll, setFlexibleScroll] = useState({
+    currentScroll: 0,
+    scrollPlus: 0,
+    scrollMinus: 0,
+    scrollStatus: false,
+  });
+    
     // 로컬스토리지 토큰 유무 
     const [checkedToken, setCheckedToken] = useState(false);
     // 스크롤 위치
@@ -105,9 +112,16 @@ const CommonHeaderContainer = (
       setSearchStartState(true);
       // 위치 open
       setLocation(true);
+      setFlexibleScroll({
+        ...flexibleScroll,
+        currentScroll: window.scrollY,
+        scrollPlus: window.scrollY + 150,
+        scrollMinus: window.scrollY > 150 ? window.scrollY - 150 : 1,
+      })
+      console.log('비교비교비교', flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus);
     }
   };
-
+  console.log(flexibleScroll);
   // 헤더 위치 (어디로 여행가세요?)
   const showLocation = ({ target }) => {
     if (target.dataset.name === 'location') {
@@ -186,7 +200,7 @@ const CommonHeaderContainer = (
       setAuthVisible(false);
     }
     else {
-      console.log('error');
+      console.log('authError',authError);
     }
     const resUser = await getUser();
     console.log(resUser);
@@ -198,8 +212,7 @@ const CommonHeaderContainer = (
     setCheckedToken(false);
   };
 
-  console.log();
-  
+  console.log('searchStateState', searchStartState);
 
   useEffect(() => {
     // 로그인이나 회원가입 성공 시 모달창 Close
@@ -225,14 +238,34 @@ const CommonHeaderContainer = (
     function watchScroll() {
     window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
     }; 
-    
+    function wathchFlexibleScroll() {
+      console.log('scrollPlus', flexibleScroll.scrollPlus);
+      // console.log('scrollMinus', flexibleScroll.scrollMinus);
+      // console.log('Scroll', window.scrollY);
+      // console.log('currentScroll', flexibleScroll.currentScroll);
+      // console.log('비교', flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus);
+      if (flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus) {
+        // console.log('if문');
+        setSearchStartState(false);
+        setLocation(false);
+        setCalendar(false);
+        setPersonnel(false);
+        setFlexibleScroll({
+          ...flexibleScroll,
+          currentScroll: 0,
+          scrollPlus: 0,
+          scrollMinus: 0,
+        })
+      }
+    }
+    wathchFlexibleScroll();
+    window.addEventListener('scroll', throttle(watchScroll, 150));
+    window.addEventListener('scroll', wathchFlexibleScroll);
 
-  window.addEventListener('scroll', throttle(watchScroll, 150));
-  // window.addEventListener('scroll', scrollClose)
   return () => {
     window.removeEventListener('scroll', watchScroll);
   };
-}, [authError, socialRegister.socialId, checkedToken]);
+}, [authError, socialRegister.socialId, checkedToken, setSearchStartState]);
 // }, [auth, authError, dispatch]);
 
 
@@ -251,6 +284,7 @@ const CommonHeaderContainer = (
         personnel={personnel}
         scrollY={scrollY}
         setScrollY={setScrollY}
+        scrollStatus={flexibleScroll.srollStatus}
 
         socialModal={socialModal}
         onChange={onChange}
@@ -266,6 +300,7 @@ const CommonHeaderContainer = (
         showCalendar={showCalendar}
         showPersonnel={showPersonnel}
         searchOnclick={searchOnclick}
+        
       />  
     </>
   )

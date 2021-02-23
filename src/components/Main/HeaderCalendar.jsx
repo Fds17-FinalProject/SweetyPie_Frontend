@@ -3,7 +3,6 @@ import { DayPickerRangeController } from 'react-dates';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import 'moment/locale/ko';
-import '../../assets/headerCalendar.css';
 import SVG from '../../assets/svg';
 import Moment from 'moment';
 import { extendMoment } from 'moment-range';
