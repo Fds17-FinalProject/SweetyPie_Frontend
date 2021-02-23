@@ -41,14 +41,26 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
     hostReviewNum,
     reviews,
     accommodationPictures,
+    bookedDateDtos,
     bookmarked,
   } = accommodation;
 
+  // 숙박 인원 수 상태관리
+  const [count, setCount] = useState({
+    adultNum: 0,
+    childNum: 0,
+    infantNum: 0,
+  });
+
+  // 모달, 팝업창 상태관리
   const [visible, setVisible] = useState({
     state: false,
     scroll: true,
     type: null,
   });
+
+  // 스크롤 헤더 상태관리
+  const [scrollHeader, setScrollHeader] = useState(false);
 
   // 타입에 맞는 모달창을 보여줌
   const onShowModal = type =>
@@ -78,6 +90,12 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
     }
   };
 
+  // 스크롤 시 Photos 컴포넌트를 지나면 navigation header 보이기
+  window.onscroll = () => {
+    const pageY = window.pageYOffset;
+    pageY >= 600 ? setScrollHeader(true) : setScrollHeader(false);
+  };
+
   // 모달창 팝업시 body 스크롤 방지
   useEffect(() => {
     if (!visible.scroll) {
@@ -86,15 +104,6 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
       document.body.style.overflow = 'unset';
     }
   }, [visible.scroll]);
-
-  // 숙박 인원 수 상태관리
-  const [count, setCount] = useState({
-    adultNum: 0,
-    childNum: 0,
-    infantNum: 0,
-  });
-
-  const [hello, setHello] = useState(false);
 
   return (
     <>
@@ -112,7 +121,7 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
       {/* {visible.type === 'refund' && visible.state && (
         <RoomDetailRefundModal onCloseModal={onCloseModal} />
       )} */}
-      <RoomDetailHeader />
+      {scrollHeader && <RoomDetailHeader />}
       {loading === false && (
         <div className="max-w-screen-2xl mt-32" id="photos">
           <div className="mx-48 px-32">
@@ -140,7 +149,7 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
               />
               <Description accommodationDesc={accommodationDesc} />
               <Beds bedroomNum={bedroomNum} bedNum={bedNum} />
-              <CalendarDetail gu={gu} hello={hello} />
+              <CalendarDetail gu={gu} bookedDateDtos={bookedDateDtos} />
             </div>
             <div className="w-1/3 h-full sticky top-44">
               <Payment
@@ -156,7 +165,7 @@ const RoomDetailTemplate = ({ accommodation, loading }) => {
                 <RoomDetailDateEditPopup
                   onCloseModal={onCloseModal}
                   setVisible={setVisible}
-                  setHello={setHello}
+                  bookedDateDtos={bookedDateDtos}
                 />
               )}
               {visible.type === 'guest' && visible.state && (

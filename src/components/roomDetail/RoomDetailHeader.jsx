@@ -6,10 +6,9 @@ const RoomDetailHeader = () => {
     e.preventDefault();
     const id = e.target.href.split('#')[1];
     const scrollTargetId = document.getElementById(id);
-    const x = scrollTargetId.offsetTop;
     window.scrollTo({
       left: 0,
-      top: x - 85,
+      top: scrollTargetId.offsetTop - 85,
       behavior: 'smooth',
     });
   };
