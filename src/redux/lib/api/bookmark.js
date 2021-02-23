@@ -23,6 +23,7 @@ export const postBookmark = async id => {
 };
 
 export const deleteBookmark = async id => {
+  console.log(id);
   await axios.delete(`http://3.34.50.91/api/bookmark/${id}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
