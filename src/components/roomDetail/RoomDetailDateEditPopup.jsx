@@ -7,7 +7,7 @@ const RoomDetailDateEditPopup = ({
   onCloseModal,
   visible,
   setVisible,
-  setHello,
+  bookedDateDtos,
 }) => {
   const history = useHistory();
 
@@ -17,11 +17,10 @@ const RoomDetailDateEditPopup = ({
   const checkoutDate = url.searchParams.get('checkoutDate');
 
   // 체크인, 체크아웃 날짜에 대한 상태
+  // url에 checkInDate,checkoutDate 존재 유무에 따라 달력 컴포넌트에 적용
   const [dateRange, setDateRange] = useState({
-    // 체크인 날짜의 초기값을 쿼리에서 받아온 날짜를 moment 객체로 변환하여 지정
-    startDate: moment(checkInDate),
-    // 체크아웃 날짜의 초기값을 쿼리에서 받아온 날짜를 moment 객체로 변환하여 지정
-    endDate: moment(checkoutDate),
+    startDate: checkInDate ? moment(checkInDate) : null,
+    endDate: checkoutDate ? moment(checkoutDate) : null,
   });
   const { startDate, endDate } = dateRange;
 
@@ -107,8 +106,7 @@ const RoomDetailDateEditPopup = ({
             handleOnDateChange={handleOnDateChange}
             focus={focus}
             setFocus={setFocus}
-            className="bg-searchBackground"
-            // bookedDate={bookedDate}
+            bookedDateDtos={bookedDateDtos}
           />
         </div>
         <div className="flex items-center text-1.4rem justify-end pr-1.6rem">
