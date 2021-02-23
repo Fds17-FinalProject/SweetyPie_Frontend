@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Carousel from '../common/Carousel';
 import { FiHeart } from 'react-icons/fi';
 import styled from 'styled-components';
 import { AiFillStar } from 'react-icons/ai';
 import { deleteBookMark, postBookMark } from '../../redux/lib/api/bookmark';
+import { getPrice } from '../../redux/lib/api/search';
+
 
 const HoverSvg = styled.button`
   transition: all 0.2s ease-in-out;
@@ -42,6 +44,7 @@ const AccommList = props => {
   const cost = price && price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   const [bookMark, setBookMark] = useState(bookmarked);
+  
   const bookMarkClick = id => () => {
     setBookMark(!bookMark);
     if (!bookMark) {
@@ -67,6 +70,16 @@ const AccommList = props => {
     localStorage.setItem('recentSearch', JSON.stringify([...uniqueSet]));
   };
 
+  useEffect(() => { 
+    
+  }, []);
+  
+  // const checkIn = url.searchParams.get('checkIn');
+  // const checkout = url.searchParams.get('checkout');
+  // const adultNum = url.searchParams.get('adultNum');
+  // const childNum = url.searchParams.get('childNum');
+  // const infantNum = url.searchParams.get('infantNum');
+
   return (
     <li
       key={id}
@@ -88,7 +101,9 @@ const AccommList = props => {
           />
         </HoverSvg>
         <Link
-          to={`/accommodation/${id}`}
+          // to={
+            // `/accommodation/${id}?${checkIn && `checkInDate=${checkIn}&`}${checkout && `checkoutDate=${checkout}&`}${adultNum && `adultNum=${adultNum}&`}${childNum && `childNum=${childNum}&`}${infantNum && `infantNum=${infantNum}`}`
+          // }
           className="flex focus:outline-none"
         >
           <Carousel size="Large" img={img} />

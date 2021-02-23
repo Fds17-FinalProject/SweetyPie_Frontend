@@ -59,11 +59,11 @@ const Marker = ({ isHovering, accommId, id, setId, img, accomm, coord, hoverId, 
           }}>
         <SVG
           dataName="marker"
-        name="house"
-        width="2rem"
-        height="2rem"
-        viewBox="0 0 24 24"
-        color={`${isHovering.id === accommId && isHovering.isHovering ? 'rgb(255, 255, 255)' : 'rgb(34, 34, 34)'}`}
+          name="house"
+          width="2rem"
+          height="2rem"
+          viewBox="0 0 24 24"
+          color={`${isHovering.id === accommId && isHovering.isHovering ? 'rgb(255, 255, 255)' : 'rgb(34, 34, 34)'}`}
         />
         </div>
     </div>
@@ -89,7 +89,6 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId }) => {
  
   let boundaryCoordinate = {};
   const _onClick = ({ x, y, lat, lng, event }) => {
-    console.log(x, y, lat, lng, event);
     setCoord({
       clientX: event.clientX,
       // clientX: event.offsetX,
