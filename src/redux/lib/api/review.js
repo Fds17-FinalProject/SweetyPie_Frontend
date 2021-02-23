@@ -2,7 +2,11 @@ import axios from 'axios';
 
 // 작성된 리뷰 GET 요청
 export const readReview = reservationId =>
-  axios.get(`http://3.34.50.91/api/review/${reservationId}`);
+  axios.get(`http://3.34.50.91/api/review/${reservationId}`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    },
+  });
 
 // 작성한 리뷰 POST 요청
 export const postReview = ({
@@ -21,7 +25,6 @@ export const postReview = ({
     },
     {
       headers: {
-        // Authorization: `Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ0ZXN0MTIzQGdtYWlsLmNvbSIsImF1dGgiOiJST0xFX01FTUJFUiIsIm1lbWJlcklkIjoxLCJleHAiOjE2NDUyNjUzOTR9.v84KuW7pEJvr7-Ff848gNY2hNL8KNYv7gNYnymL56BPgiCRnzWVe0HPSoQpCyb-c4yJYHRUPlowJqNKU4HiWXA`,
         Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     },
