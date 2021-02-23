@@ -63,7 +63,7 @@ module.exports = {
       72: '18rem',
       80: '20rem',
       96: '24rem',
-      '10%':'10%',
+      '10%': '10%',
     },
     animation: {
       none: 'none',
@@ -924,5 +924,10 @@ module.exports = {
     wordBreak: ['responsive'],
     zIndex: ['responsive', 'focus-within', 'focus'],
   },
-  plugins: [],
+  plugins: [
+    require('@fullhuman/postcss-purgecss')({
+      content: ['./src/**/*.jsx', './src/**/*.js', './src/**/*.html'],
+      defaultExtractor: content => content.match(/[A-Za-z0-9_:/]+/g) || [],
+    }),
+  ],
 };
