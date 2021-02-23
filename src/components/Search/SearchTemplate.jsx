@@ -11,6 +11,7 @@ import MultipleCarousel from '../common/MultipleCarousel';
 import SearchMap from './SearchMap';
 import { useLocation } from 'react-router-dom';
 import Price from './Price';
+import AccommodationHeaderContainer from '../../containers/AccommodationContainer';
 
 const StyledButton = styled.button`
     cursor: pointer;
@@ -82,7 +83,8 @@ const SearchTemplate = ({ accommodations, loading }) => {
   const getRecentSearch = localStorage.getItem('recentSearch') && JSON.parse(localStorage.getItem('recentSearch')).map(JSON.parse);
 
   return (
-    <div className="w-full flex flex-row flex-nowrap pt-32 absolute z-20" >
+    <div className="w-full flex flex-row flex-nowrap absolute z-20" >
+       <AccommodationHeaderContainer />
       <div className="w-86.4rem border pr-8 pl-8 pt-32">
         <span className="text-1.4rem pb-4">300개 이상의 숙소</span>
         <h1 className="text-5xl mb-12 font-bold">
