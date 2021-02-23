@@ -910,12 +910,6 @@ module.exports = {
     'disabled',
   ],
   variants: {
-<<<<<<< HEAD
-    extend: {},
-  },
-  plugins: [],
-}
-=======
     accessibility: ['responsive', 'focus-within', 'focus'],
     alignContent: ['responsive'],
     alignItems: ['responsive'],
@@ -1241,4 +1235,3 @@ module.exports = {
     plugins: [],
   },
 };
->>>>>>> release/0.1.0
