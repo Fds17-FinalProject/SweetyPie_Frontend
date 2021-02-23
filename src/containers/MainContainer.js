@@ -11,9 +11,12 @@ const MainContainer = () => {
     history.push(`/accommodations/search?searchKeyword=${props}`);
   };
 
+  const searchAccommType = (props) => {
+    history.push(`/accommodations/search?types=${props}`);
+  }
   return (
     <>
-      <Main searchMainCity={searchMainCity}/>
+      <Main searchMainCity={searchMainCity} searchAccommType={searchAccommType}/>
      </>
   );
 };

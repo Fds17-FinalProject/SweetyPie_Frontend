@@ -25,7 +25,7 @@ const Textarea = styled.span`
 `;
 
 
-const Main = ({ searchMainCity }) => {
+const Main = ({ searchMainCity, searchAccommType }) => {
   const [location, setLocation] = useState(false);
   const [calendar, setCalendar] = useState(false);
   const [personnel, setPersonnel] = useState(false);
@@ -122,19 +122,32 @@ const Main = ({ searchMainCity }) => {
               어디에서나, 여행은 살아보는 거야!
             </div>
 
-            <div className="flex w-full font-extrabold">
+            <div className="flex w-full">
+            <button className="w-1/4 pr-3.5" onClick={() => searchAccommType('전체')}>
               <MainRecommendation src={'/img/housing.jpg'} alt={'단독 주택'}>
-                단톡 주택
+                단독 주택
               </MainRecommendation>
-              <MainRecommendation src={'/img/apartment.jpg'} alt={'게스트 하우스'}>
-                게스트 하우스
-              </MainRecommendation>
-              <MainRecommendation src={'/img/subhouse.jpg'} alt={'별채'}>
-                별채
-              </MainRecommendation>
-              <MainRecommendation src={'/img/hotel.jpg'} alt={'호텔'}>
-                호텔
-              </MainRecommendation>
+            </button>
+
+              <button className="w-1/4 pr-3.5" onClick={() => searchAccommType('다인실')}>
+                <MainRecommendation src={'/img/apartment.jpg'} alt={'게스트 하우스'} >
+                  게스트 하우스
+                </MainRecommendation>
+                
+              </button>
+              
+              <button className="w-1/4 pr-3.5" onClick={() => searchAccommType('개인실')}>
+                <MainRecommendation src={'/img/subhouse.jpg'} alt={'별채'} >
+                  별채
+                </MainRecommendation>
+              </button>
+
+              <button className="w-1/4 pr-3.5" onClick={() => searchAccommType('객실')}>
+                <MainRecommendation src={'/img/hotel.jpg'} alt={'호텔'}>
+                  호텔
+                </MainRecommendation>
+              </button>
+
             </div>
           </section>
 
