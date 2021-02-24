@@ -1,19 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Footer from '../main/Footer';
 import ModifyInput from './ModifyInput';
 import ModifyContent from './ModifyContent';
-import HeaderLogo from '../main/HeaderLogo';
-import HeaderUser from '../main/HeaderUser';
 import ModifyDescription from './ModifyDescription';
 import ModifyHeader from './ModifyHeader';
-
-const res = {
-  email: 'gg2922914@gmail.com',
-  name: '영서 임',
-  birthDate: '1995년 10월 28일',
-  password: '*******',
-  contact: '+82 10 6525 2914',
-};
 
 const ModifyAccount = ({
   onClick,
@@ -33,7 +23,80 @@ const ModifyAccount = ({
   userLogout,
   state,
   checkedToken,
+  userInfo,
+  modifyMemberInfo,
+  dispatch,
+  setModify,
 }) => {
+  // auth 리듀서에서 유저 정보들을 받아온다
+  const { email, name, contact, birthDate, socialMember, password } = userInfo;
+
+  // 정규 표현식
+  const nameReg = /^[가-힇]{2,30}$/;
+  const contactReg = /^\d{3}\d{4}\d{4}$/;
+  const passwordReg = /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*[#?!@$%^&*-]).{8,30}$/;
+
+  const [inputValue, setInputValue] = useState({
+    email: '',
+    name: '',
+    birthDate: '',
+    contact: '',
+    password: '',
+  });
+
+  const changeInputValue = (e, name) => {
+    console.log(e.target.value);
+    setInputValue({ [name]: e.target.value });
+  };
+
+  // 비밀번호 default 값
+  const defaultPassword = '********';
+
+  // 개인정보 변경
+  const patchMemberInfo = async (e, name, value) => {
+    if (name === 'name' && value.match(nameReg)) {
+      await dispatch(
+        modifyMemberInfo({
+          name: value,
+          birthDate: birthDate,
+          contact: contact,
+          password: password,
+        }),
+      );
+      setModify({ ...modify, [e.target.name]: !modify[e.target.name] });
+    } else if (name === 'birthDate') {
+      await dispatch(
+        modifyMemberInfo({
+          name: userInfo.name,
+          birthDate: value,
+          contact: contact,
+          password: password,
+        }),
+      );
+      setModify({ ...modify, [e.target.name]: !modify[e.target.name] });
+    } else if (name === 'contact' && value.match(contactReg)) {
+      await dispatch(
+        modifyMemberInfo({
+          name: userInfo.name,
+          birthDate: birthDate,
+          contact: value,
+          password: password,
+        }),
+      );
+      setModify({ ...modify, [e.target.name]: !modify[e.target.name] });
+    } else if (name === 'password' && value.match(passwordReg)) {
+      await dispatch(
+        modifyMemberInfo({
+          name: userInfo.name,
+          birthDate: birthDate,
+          contact: contact,
+          password: value,
+        }),
+      );
+      setModify({ ...modify, [e.target.name]: !modify[e.target.name] });
+    }
+  };
+
   return (
     <div>
       <ModifyHeader
@@ -65,11 +128,21 @@ const ModifyAccount = ({
                 이메일
               </span>
               <span className="w-full pt-2 text-1.6rem font-normal text-#717171">
-                {res.email}
+                {email}
               </span>
             </div>
             {modify.name ? (
-              <ModifyInput name="name" onClick={onClick} content={res.name}>
+              <ModifyInput
+                name="name"
+                onClick={onClick}
+                content={name}
+                patchMemberInfo={patchMemberInfo}
+                modifyMemberInfo={modifyMemberInfo}
+                value={inputValue.name}
+                changeInputValue={changeInputValue}
+                nameReg={nameReg}
+                modify={modify}
+              >
                 이름 수정
               </ModifyInput>
             ) : (
@@ -78,17 +151,20 @@ const ModifyAccount = ({
                 id="name-input"
                 name="name"
                 onClick={onClick}
-                content={res.name}
+                content={name}
               >
                 이름
               </ModifyContent>
             )}
-
             {modify.birthDate ? (
               <ModifyInput
                 name="birthDate"
                 onClick={onClick}
-                content={res.birthDate}
+                content={birthDate}
+                patchMemberInfo={patchMemberInfo}
+                modifyMemberInfo={modifyMemberInfo}
+                value={inputValue.birthDate}
+                changeInputValue={changeInputValue}
               >
                 생년월일 수정
               </ModifyInput>
@@ -98,17 +174,23 @@ const ModifyAccount = ({
                 id="birthDate-input"
                 name="birthDate"
                 onClick={onClick}
-                content={res.birthDate}
+                content={birthDate}
               >
                 생년월일
               </ModifyContent>
             )}
-
-            {modify.password ? (
+            {socialMember ? (
+              <></>
+            ) : modify.password ? (
               <ModifyInput
                 name="password"
                 onClick={onClick}
-                content={res.password}
+                content={defaultPassword}
+                patchMemberInfo={patchMemberInfo}
+                modifyMemberInfo={modifyMemberInfo}
+                value={inputValue.password}
+                changeInputValue={changeInputValue}
+                passwordReg={passwordReg}
               >
                 비밀번호 수정
               </ModifyInput>
@@ -118,17 +200,21 @@ const ModifyAccount = ({
                 id="password-input"
                 name="password"
                 onClick={onClick}
-                content={res.password}
+                content={defaultPassword}
               >
                 비밀번호
               </ModifyContent>
             )}
-
             {modify.contact ? (
               <ModifyInput
                 name="contact"
                 onClick={onClick}
-                content={res.contact}
+                content={contact}
+                patchMemberInfo={patchMemberInfo}
+                modifyMemberInfo={modifyMemberInfo}
+                value={inputValue.contact}
+                changeInputValue={changeInputValue}
+                contactReg={contactReg}
               >
                 전화번호 수정
               </ModifyInput>
@@ -138,7 +224,7 @@ const ModifyAccount = ({
                 id="contact-input"
                 name="contact"
                 onClick={onClick}
-                content={res.contact}
+                content={contact}
               >
                 전화번호
               </ModifyContent>
@@ -151,7 +237,10 @@ const ModifyAccount = ({
           <h2 className="text-#717171 text-1.6rem">
             계정을 비활성화 하셔야 하나요?
           </h2>
-          <button onClick={onWithdrawal} className="text-#008489 text-1.4rem font-semibold">
+          <button
+            onClick={onWithdrawal}
+            className="text-#008489 text-1.4rem font-semibold"
+          >
             지금 처리하기
           </button>
         </div>
@@ -160,5 +249,4 @@ const ModifyAccount = ({
     </div>
   );
 };
-
 export default ModifyAccount;
