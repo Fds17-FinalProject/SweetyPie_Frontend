@@ -1,12 +1,17 @@
 import React from 'react';
 import ModifyAccountContainer from '../containers/ModifyAccountContainer';
+import { Helmet } from 'react-helmet-async';
 
-const ModifyAccountPage = props => {
-  console.log(props);
+const ModifyAccountPage = () => {
   return (
-    <div>
-      <ModifyAccountContainer />
-    </div>
+    <>
+      <Helmet>
+        <title>개인정보 | SweetyPie💛</title>
+      </Helmet>
+      <div>
+        <ModifyAccountContainer />
+      </div>
+    </>
   );
 };
 
