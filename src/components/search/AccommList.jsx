@@ -46,12 +46,6 @@ const AccommList = props => {
   const bookMarkClick = id => () => {
     setBookMark(!bookMark);
     !bookMark ? postBookmark(id) : deleteBookmark(id);
-    // if (!bookMark) {
-    //   console.log(bookMark);
-    //   postBookmark(id);
-    // } else {
-    //   deleteBookmark(id);
-    // }
   };
   const img =
     accommodationPictures && accommodationPictures.map(picture => picture.url);
@@ -100,7 +94,7 @@ const AccommList = props => {
         </HoverSvg>
         <Link
           to={
-            `/accommodation/${id}?${checkIn && `checkInDate=${checkIn}&`}${checkout && `checkoutDate=${checkout}`}${adultNum ? `&adultNum=${adultNum}&` : ''}${childNum ? `childNum=${childNum}&` : '' }${infantNum ? `infantNum=${infantNum}` : ''}`
+            `/accommodation/${id}?${checkIn ? `checkInDate=${checkIn}&` : ''}${checkout ? `checkoutDate=${checkout}` : ''}${adultNum ? `&adultNum=${adultNum}&` : ''}${childNum ? `childNum=${childNum}&` : '' }${infantNum ? `infantNum=${infantNum}` : ''}`
           }
           className="flex focus:outline-none"
         >

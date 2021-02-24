@@ -12,9 +12,10 @@ import Map from './Map';
 import Host from './Host';
 import ThingsToKnow from './ThingsToKnow';
 import RoomDetailHeader from './RoomDetailHeader';
-import RoomDetailSafetyModal from './RoomDetailSafetyModal';
-import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 import RoomDetailReviewModal from './RoomDetailReviewModal';
+import RoomDetailSafetyModal from './RoomDetailSafetyModal';
+import RoomDetailRefundModal from './RoomDetailRefundModal';
+import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 import RoomDetailDateEditPopup from './RoomDetailDateEditPopup';
 import AccommodationHeaderContainer from '../../containers/AccommodationContainer';
 import Footer from '../main/Footer';
@@ -124,9 +125,9 @@ const RoomDetailTemplate = ({
       {visible.type === 'safety' && visible.state && (
         <RoomDetailSafetyModal onCloseModal={onCloseModal} />
       )}
-      {/* {visible.type === 'refund' && visible.state && (
+      {visible.type === 'refund' && visible.state && (
         <RoomDetailRefundModal onCloseModal={onCloseModal} />
-      )} */}
+      )}
       {scrollHeader === false && <AccommodationHeaderContainer />}
       {scrollHeader && <RoomDetailHeader />}
       {loading === false && (
