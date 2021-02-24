@@ -222,7 +222,7 @@ const HeaderSearch = forwardRef((
     lng: null,
   });
 
-  console.log(gu);
+  // console.log(gu);
 
   const [count, setCount] = useState({
     adultNum: 0,
@@ -245,10 +245,10 @@ const HeaderSearch = forwardRef((
         lng: position.coords.longitude,
       });
     });
-    console.log('gu', gu);
-    console.log('currentLocation', currentLocation.lat, currentLocation.lng);
+    // console.log('gu', gu);
+    // console.log('currentLocation', currentLocation.lat, currentLocation.lng);
   }
-  console.log('currentLocation', currentLocation);
+  // console.log('currentLocation', currentLocation);
 
   const [dateRange, setDateRange] = useState({
     // 체크인 날짜의 초기값 지정

@@ -3,7 +3,7 @@ import CommonHeader from '../components/common/CommonHeader';
 import { throttle } from 'lodash';
 import { changeField, initializeForm, authRegister, socialRegisterSubmitAction} from "../redux/modules/auth";
 import { useDispatch, useSelector } from 'react-redux';
-import { getToken, getUser, logout } from '../redux/lib/api/auth';
+import { getToken, logout } from '../redux/lib/api/auth';
 
 const CommonHeaderContainer = (
   { location,
@@ -37,10 +37,11 @@ const CommonHeaderContainer = (
     // // 검색 시작 하기 눌렀을 시 모달 초기 상태
     // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
     // 하나의 모달 회원가입 폼 모달 띄우는것 때문에 생각정리안된게있어서 일단 객체 상태로 냅둠!
-    const [ authVisible, setAuthVisible ] = useState({
+  const [authVisible, setAuthVisible] = useState({
       // 'login' or 'register'
       type: null,
-    });
+  });
+  const [checkedLogin, setCheckedLogin] = useState(false);
     // 유저 메뉴 모달 open
     const showModal = () => {
       setVisible(true);
@@ -120,10 +121,8 @@ const CommonHeaderContainer = (
         scrollPlus: window.scrollY + 150,
         scrollMinus: window.scrollY > 150 ? window.scrollY - 150 : 1,
       })
-      console.log('비교비교비교', flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus);
     }
   };
-  console.log(flexibleScroll);
   // 헤더 위치 (어디로 여행가세요?)
   const showLocation = ({ target }) => {
     if (target.dataset.name === 'location') {
@@ -180,41 +179,33 @@ const CommonHeaderContainer = (
   
   const socialRegisterSubmit = e => {
     e.preventDefault();
-    console.log(socialRegister);
     const { email, name, contact, birthDate, socialId } = socialRegister;
     dispatch(socialRegisterSubmitAction({ email, name, contact, birthDate, socialId }));
   };
 
-  
   const loginSubmit = async e => {
     e.preventDefault();
     const { email, password } = login;
-    // const res = await dispatch(authLogin({ email, password }));
-    const res = await getToken({ email, password });
-    const token = res.data.token;
-    console.log('RES', res);
-    console.log('token', token);
-    // error객체가 오면 에러메세지 띄워주고(서버에서 준 에러메세지 띄워주는거 아직 미구현)
-    // 성공하면 history.push('/)
-    if (token) {
-      localStorage.setItem('token', token);
-      setCheckedToken(true);
-      setAuthVisible(false);
+    try {
+      const res = await getToken({ email, password });
+      const token = await res.data.token;
+
+      if (token) {
+        localStorage.setItem('token', token);
+        setCheckedToken(true);
+        setAuthVisible(false);
+        setCheckedLogin(false);
+      }
+    } catch (e) {
+      setCheckedLogin(true);
     }
-    else {
-      console.log('authError',authError);
-    }
-    const resUser = await getUser();
-    console.log(resUser);
   };
   const userLogout = e => {
-    console.log('e', e);
     logout();
     localStorage.removeItem('token');
     setCheckedToken(false);
   };
 
-  console.log('searchStateState', searchStartState);
 
   useEffect(() => {
     // 로그인이나 회원가입 성공 시 모달창 Close
@@ -223,7 +214,6 @@ const CommonHeaderContainer = (
       setAuthVisible(false);
     }
     // 구글로 회원가입 시 서버에서 받아온 유저정보에 socialId가 있다면 회원가입 모달창 open
-    console.log('socialRegister', socialRegister.socialId);
     if (socialRegister.socialId) {
       setSocialModal(true);
     }
@@ -241,7 +231,7 @@ const CommonHeaderContainer = (
     window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
     }; 
     function wathchFlexibleScroll() {
-      console.log('scrollPlus', flexibleScroll.scrollPlus);
+      // console.log('scrollPlus', flexibleScroll.scrollPlus);
       if (flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus) {
         setSearchStartState(false);
         setLocation(false);
@@ -300,7 +290,7 @@ const CommonHeaderContainer = (
 
         address={address}
         setAddress={setAddress}
-        
+        checkedLogin={checkedLogin}
       />  
     </>
   )

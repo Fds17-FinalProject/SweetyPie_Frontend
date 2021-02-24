@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { changeField, initializeForm, authRegister, socialRegisterSubmitAction} from "../redux/modules/auth";
 import { useDispatch, useSelector } from 'react-redux';
-import { getToken, getUser, logout } from '../redux/lib/api/auth';
+import { getToken, logout } from '../redux/lib/api/auth';
 import AccommodationHeader from '../components/common/AccommodationHeader';
 
 const AccommodationHeaderContainer = () => {
@@ -13,7 +13,7 @@ const AccommodationHeaderContainer = () => {
     const [visible, setVisible] = useState(false);
     // 검색 시작 하기 눌렀을 시 모달 초기 상태
   const [searchStartState, setSearchStartState] = useState(false);
-  
+  const [checkedLogin, setCheckedLogin] = useState(false);
 
 
     // // 검색 시작 하기 눌렀을 시 모달 초기 상태
@@ -105,7 +105,6 @@ const AccommodationHeaderContainer = () => {
       if (target.dataset.name) {
         setVisible(false);
         setAuthVisible(false);
-        // setPersonnel(false);
         setSocialModal(false);
       }
     };
@@ -145,32 +144,27 @@ const AccommodationHeaderContainer = () => {
   const loginSubmit = async e => {
     e.preventDefault();
     const { email, password } = login;
-    // const res = await dispatch(authLogin({ email, password }));
-    const res = await getToken({ email, password });
-    const token = res.data.token;
-    console.log('RES', res);
-    console.log('token', token);
-    // error객체가 오면 에러메세지 띄워주고(서버에서 준 에러메세지 띄워주는거 아직 미구현)
-    // 성공하면 history.push('/)
-    if (token) {
-      localStorage.setItem('token', token);
-      setCheckedToken(true);
-      setAuthVisible(false);
+    try {
+      const res = await getToken({ email, password });
+      const token = await res.data.token;
+
+      if (token) {
+        localStorage.setItem('token', token);
+        setCheckedToken(true);
+        setAuthVisible(false);
+        setCheckedLogin(false);
+      }
+    } catch (e) {
+      setCheckedLogin(true);
     }
-    else {
-      console.log('error');
-    }
-    const resUser = await getUser();
-    console.log(resUser);
   };
   const userLogout = e => {
-    console.log('e', e);
     logout();
     localStorage.removeItem('token');
     setCheckedToken(false);
   };
 
-  console.log();
+
   
 
   useEffect(() => {
@@ -197,12 +191,7 @@ const AccommodationHeaderContainer = () => {
 
     function wathchFlexibleScroll() {
       console.log('scrollPlus', flexibleScroll.scrollPlus);
-      // console.log('scrollMinus', flexibleScroll.scrollMinus);
-      // console.log('Scroll', window.scrollY);
-      // console.log('currentScroll', flexibleScroll.currentScroll);
-      // console.log('비교', flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus);
       if (flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus) {
-        // console.log('if문');
         setSearchStartState(false);
         setLocation(false);
         setCalendar(false);
@@ -247,6 +236,7 @@ const AccommodationHeaderContainer = () => {
         userLogout={userLogout}
         state={state}
         checkedToken={checkedToken}
+        checkedLogin={checkedLogin}
       />  
     </>
   )
