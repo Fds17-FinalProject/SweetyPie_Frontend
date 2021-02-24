@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Calendar from '../common/Calendar';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
+import onClickOutside from 'react-onclickoutside';
 
 const RoomDetailDateEditPopup = ({
   onCloseModal,
@@ -9,6 +10,14 @@ const RoomDetailDateEditPopup = ({
   setVisible,
   bookedDateDtos,
 }) => {
+  // 팝업창 영역 외부 클릭 시 닫히게 하기
+  RoomDetailDateEditPopup.handleClickOutside = () =>
+    setVisible({
+      ...visible,
+      state: false,
+      type: 'calendar',
+    });
+
   const history = useHistory();
 
   // URL query parameter 가져오기
@@ -140,4 +149,10 @@ const RoomDetailDateEditPopup = ({
   );
 };
 
-export default RoomDetailDateEditPopup;
+RoomDetailDateEditPopup.prototype = {};
+
+const clickOutsideConfig = {
+  handleClickOutside: () => RoomDetailDateEditPopup.handleClickOutside,
+};
+
+export default onClickOutside(RoomDetailDateEditPopup, clickOutsideConfig);
