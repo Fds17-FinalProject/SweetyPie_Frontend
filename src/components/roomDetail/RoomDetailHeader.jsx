@@ -8,7 +8,7 @@ const RoomDetailHeader = ({ scrollHeader }) => {
     const scrollTargetId = document.getElementById(id);
     window.scrollTo({
       left: 0,
-      top: scrollTargetId.offsetTop - 85,
+      top: scrollTargetId.offsetTop - 89,
       behavior: 'smooth',
     });
   };
@@ -46,15 +46,16 @@ const RoomDetailHeader = ({ scrollHeader }) => {
         </a>
       </div>
       {scrollHeader.button ? (
-        <a href="#reservation"
+        <a
+          href="#reservation"
           onClick={onScrollNav}
-        // >
-        // <button
+          // >
+          // <button
           className="bg-airbnb hover:bg-airbnbHover text-white font-bold 
-          rounded-2xl transition-all duration-150 shadow-md px-10 mx-2 my-6 text-1.4rem h-20 mr-2.4rem "
+          rounded-2xl transition-all duration-150 shadow-md px-10 mx-2 my-6 py-6 text-1.4rem h-20"
         >
           숙소 예약하기
-        {/* // </button> */}
+          {/* // </button> */}
         </a>
       ) : (
         ''
