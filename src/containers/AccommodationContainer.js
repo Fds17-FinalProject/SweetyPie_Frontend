@@ -27,7 +27,12 @@ const AccommodationHeaderContainer = () => {
     const [location, setLocation] = useState(false);
     const [calendar, setCalendar] = useState(false);
     const [personnel, setPersonnel] = useState(false);
-  
+    const [flexibleScroll, setFlexibleScroll] = useState({
+      currentScroll: 0,
+      scrollPlus: 0,
+      scrollMinus: 0,
+      scrollStatus: false,
+    });
    // 검색 시작하기 onClick시 헤더 스타일 변경
    const showSearchHeader = ({ target }) => {
     if (target.dataset.name === 'open') {
@@ -189,6 +194,29 @@ const AccommodationHeaderContainer = () => {
       setVisible(false);
       setCheckedToken(true);
     }
+
+    function wathchFlexibleScroll() {
+      console.log('scrollPlus', flexibleScroll.scrollPlus);
+      // console.log('scrollMinus', flexibleScroll.scrollMinus);
+      // console.log('Scroll', window.scrollY);
+      // console.log('currentScroll', flexibleScroll.currentScroll);
+      // console.log('비교', flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus);
+      if (flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus) {
+        // console.log('if문');
+        setSearchStartState(false);
+        setLocation(false);
+        setCalendar(false);
+        setPersonnel(false);
+        setFlexibleScroll({
+          ...flexibleScroll,
+          currentScroll: 0,
+          scrollPlus: 0,
+          scrollMinus: 0,
+        })
+      }
+    }
+    wathchFlexibleScroll();
+    window.addEventListener('scroll', wathchFlexibleScroll);
 }, [authError, socialRegister.socialId, checkedToken]);
 // }, [auth, authError, dispatch]);
 

@@ -3,16 +3,9 @@ import React from 'react';
 
 const SocialRegisterModal = ({ hideModal, onChange, socialRegisterSubmit, state }) => {
   const { socialRegister, authError } = state;
-  console.log('modal autherror', authError);
   const emailReg = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
   const nameReg = /^[가-힇]{2,30}$/;
   const contactReg = /^\d{3}\d{3,4}\d{4}$/;
-  const passwordReg = /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*[#?!@$%^&*-]).{8,30}$/;
-  // 인풋이 하나라도 비어있는 경우 버튼 disabled
-  // const emptyInput = socialRegister.email.length === 0 || socialRegister.name.length === 0 || socialRegister.contact.length === 0 || socialRegister.birthDate.length === 0 || socialRegister.password.length === 0 || socialRegister.passwordConfirm.length === 0;
-  // 인풋을 제대로 작성하지 않은 경우 버튼 disabled
-  // const invalidValue = !socialRegister.email.match(emailReg) || !socialRegister.name.match(nameReg) || !socialRegister.contact.match(contactReg) || !socialRegister.password.match(passwordReg) || socialRegister.password !== socialRegister.passwordConfirm;
-
   // 오늘 날짜 Get (생년월일 오늘 날짜 이전만 선택 가능하게 하기 위해서)
   const date = new Date();
   // 년, 월, 일 (월, 일은 한자리 수 일 경우 앞에 + 0,  ex 1995-02-02)
@@ -28,7 +21,6 @@ const SocialRegisterModal = ({ hideModal, onChange, socialRegisterSubmit, state 
     <div
       onClick={hideModal}
       data-name="close"
-      // className="w-screen h-screen flex bg-modal justify-center items-center text-white fixed top-0"
       className="w-full h-full overflow-hidden flex bg-modal justify-center items-center text-white fixed top-0 z-50"
     >
       <div className="w-56rem z-50 bg-white border rounded-2xl flex flex-col overflow-y-auto text-#727272 text-center p-8 relative text-1.4rem">

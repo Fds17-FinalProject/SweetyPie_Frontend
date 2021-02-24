@@ -10,7 +10,6 @@ import { extendMoment } from 'moment-range';
 
 const scrollUp = keyframes`
 from {
-  /* translate3d는 GPU기반이기 때문에 성능이 더 좋다  */
   transform: scale(0.3, 0.75) translateY(-8rem);
 }
 to {
@@ -57,32 +56,7 @@ background: #fff;
 border-radius: 999rem;
 box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px !important;
 transform: scale(1.03);
-}
-${props => props.test && css`
-&:focus{
-  background: #fff;
-  border-radius: 999rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px !important;
-  transform: scale(1.03);
-}
-`}
-/* ${props => props.startDate !== null && css`
-&:focus {
-  background: #fff;
-  border-radius: 999rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px !important;
-  transform: scale(1.03);
-}
-`}
-${props => props.endDate !== null && css`
-&:focus {
-  background: #fff;
-  border-radius: 999rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px !important;
-  transform: scale(1.03);
-}
-`} */
-`;
+}`;
 
 
 // 서치 헤더 (위치 어디로 여행가세요?)
@@ -144,7 +118,6 @@ const SearchButton = styled.button.attrs(() => ({ type: 'button' }))`
   justify-content: center;
   align-items: center;
   width: 4.8rem;
-  /* width: ${({location, calendar, personnel}) => location || calendar || personnel ? '8.5rem' : '4.8rem'}; */
   height: 4.8rem;
   border-radius: 999rem;
   background: #ff385c;
@@ -161,7 +134,6 @@ const SubmitButton = styled.button.attrs(() => ({ type: 'button' }))`
   justify-content: center;
   align-items: center;
   width: 8.5rem;
-  /* width: ${({location, calendar, personnel}) => location || calendar || personnel ? '8.5rem' : '4.8rem'}; */
   height: 4.8rem;
   border-radius: 999rem;
   background: #ff385c;
@@ -172,11 +144,6 @@ const SubmitButton = styled.button.attrs(() => ({ type: 'button' }))`
 `;
 
 const AccommodationSearchHeader = ({showSearchHeader, searchStartState, setLocation, setCalendar, setPersonnel, location, calendar, personnel}) => {
-  // const [location, setLocation] = useState(false);
-  // const [calendar, setCalendar] = useState(false);
-  // const [personnel, setPersonnel] = useState(false);
-  // // 검색 시작 하기 눌렀을 시 모달 초기 상태
-  // const [searchStartState, setSearchStartState] = useState(false);
   const [gu, setGu] = useState(null);
   const [currentLocation, setCurrentLocation] = useState({
     lat: null,
@@ -189,41 +156,7 @@ const AccommodationSearchHeader = ({showSearchHeader, searchStartState, setLocat
     status: false,
   });
   console.log('count', count);
-  const url = new URL(window.location.href);
   const history = useHistory();
-
-
-  // moment-range를 통해 moment 생성 함수를 받아온다 -> moment() 호출 시 moment객체 생성
-  const moment = extendMoment(Moment);
-
-  // url 쿼리에 담기
-  // url.searchParams.set('currentLocation ', gu);
-  // url.searchParams.set(
-  //   'checkInDate',
-  //   dateRange.startDate.format('YYYY-MM-DD'),
-  // );
-  // url.searchParams.set(
-  //   'checkoutDate',
-  //   dateRange.endDate.format('YYYY-MM-DD'),
-  // );
-
-  // const hideSearchModal = ({ target }) => {
-  //   if (!target.dataset.name) {
-  //     setLocation(false);
-  //     setCalendar(false);
-  //     setPersonnel(false);
-  //     setSearchStartState(false);
-  //   }
-  // };
-  // // 검색 시작하기 onClick시 헤더 스타일 변경
-  // const showSearchHeader = ({ target }) => {
-  //   if (target.dataset.name === 'open') {
-  //     // 상태 true로 바뀌면서 스타일 변경
-  //     setSearchStartState(true);
-  //     // 위치 open
-  //     setLocation(true);
-  //   }
-  // };
 
   // 헤더 위치 (어디로 여행가세요?)
   const showLocation = ({ target }) => {
@@ -286,14 +219,6 @@ const AccommodationSearchHeader = ({showSearchHeader, searchStartState, setLocat
       startDate: startDate,
       endDate: endDate,
     });
-    // if (startDate) {
-    //   console.log('startDate');
-    //   setCalendar(true);
-    // }
-    // else if (endDate) {
-    //   console.log('endDate');
-    //   setCalendar(true);
-    // }
   };
 
     // 게스트 증가 함수
@@ -385,7 +310,6 @@ const AccommodationSearchHeader = ({showSearchHeader, searchStartState, setLocat
           </SubmitButton> :
             <SearchButton data-name="open" location={location} calendar={calendar} personnel={personnel} onClick={searchOnclick}>
             <BiSearch size={ 20 } className=" text-white"  data-name="search"/>
-            {/* {location || calendar || personnel ? <BiSearch size={20}/> <span> className="text-white text-1.6rem ml-0.4rem">검색</span>  : <BiSearch size={20}/> } */}
             </SearchButton>
           }
 
@@ -414,7 +338,6 @@ const AccommodationSearchHeader = ({showSearchHeader, searchStartState, setLocat
           <HeaderCalendar handleOnDateChange={handleOnDateChange} dateRange={dateRange} focus={focus} setFocus={setFocus}/>
         </SearchCalendar>
         )}
-{/* 동찬이 형이 인원수 뷰 만들어주면 여기에 달아주세요 */}
       {personnel && (
         <SearchPersonnel >
           <HeaderGuestEditModal count={count} setCount={setCount} increaseGuestNum={increaseGuestNum} decreaseGuestNum={decreaseGuestNum}/>
