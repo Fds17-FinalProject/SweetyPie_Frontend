@@ -176,12 +176,15 @@ const RoomDetailTemplate = ({
                 <RoomDetailDateEditPopup
                   onCloseModal={onCloseModal}
                   setVisible={setVisible}
+                  visible={visible}
                   bookedDateDtos={bookedDateDtos}
                 />
               )}
               {visible.type === 'guest' && visible.state && (
                 <RoomDetailGuestEditPopup
                   onCloseModal={onCloseModal}
+                  setVisible={setVisible}
+                  visible={visible}
                   count={count}
                   setCount={setCount}
                 />
