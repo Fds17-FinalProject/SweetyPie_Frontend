@@ -123,7 +123,7 @@ const RoomDetailRefundModal = ({ onCloseModal }) => {
                     height="24px"
                     width="24px"
                     color="rgb(91, 202, 206)"
-                    name="check"
+                    name="roomDetailChecked"
                   />
                 </div>
                 <GreenSubBar />
