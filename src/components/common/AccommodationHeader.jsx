@@ -11,8 +11,8 @@ import AccommodationSearchHeader from '../common/AccommodationSearchHeader';
 
 const MainHeader = styled.header`
 position: fixed;
+top: 0;
 display: flex;
-max-width: 144rem;
 width: 100%;
 height: ${({searchStartState}) => searchStartState ? '18rem' : '8rem'};
 justify-content: space-between;

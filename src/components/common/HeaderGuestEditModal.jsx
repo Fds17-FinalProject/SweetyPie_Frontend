@@ -1,12 +1,8 @@
-import SVG from '../../assets/svg';
-
-const HeaderGuestEditModal = ({ count, setCount, increaseGuestNum, decreaseGuestNum }) => {
+const HeaderGuestEditModal = ({ count, increaseGuestNum, decreaseGuestNum }) => {
 
   return (
 
-      // <div className="w-38rem bg-white relative top-0 overflow-y-auto flex flex-col text-black rounded-3xl border border-#b0b0b0">
         <div className="px-2.4rem py-0.8rem w-full" data-name="no-hide">
-          {/* <ul className="pt-0.8rem"> */}
           <ul className="pt-0.8rem" data-name="no-hide">
             <li className="py-1.2rem text-1.6rem flex justify-between border-b items-center" data-name="no-hide">
               <div className="text-1.6rem text-#484848 font-semibold" data-name="no-hide">성인</div>
@@ -289,7 +285,6 @@ const HeaderGuestEditModal = ({ count, setCount, increaseGuestNum, decreaseGuest
           </ul>
         </div>
        
-      // </div>
   );
 };
 
