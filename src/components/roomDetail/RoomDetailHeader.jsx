@@ -49,13 +49,10 @@ const RoomDetailHeader = ({ scrollHeader }) => {
         <a
           href="#reservation"
           onClick={onScrollNav}
-          // >
-          // <button
           className="bg-airbnb hover:bg-airbnbHover text-white font-bold 
           rounded-2xl transition-all duration-150 shadow-md px-10 mx-2 my-6 py-6 text-1.4rem h-20"
         >
           숙소 예약하기
-          {/* // </button> */}
         </a>
       ) : (
         ''

@@ -132,23 +132,6 @@ const RoomDetailTemplate = ({
           reviews={reviews}
         />
       )}
-      {visible.type === 'calendar' && visible.state && (
-        <RoomDetailDateEditPopup
-          onCloseModal={onCloseModal}
-          setVisible={setVisible}
-          visible={visible}
-          bookedDateDtos={bookedDateDtos}
-        />
-      )}
-      {visible.type === 'guest' && visible.state && (
-        <RoomDetailGuestEditPopup
-          onCloseModal={onCloseModal}
-          setVisible={setVisible}
-          visible={visible}
-          count={count}
-          setCount={setCount}
-        />
-      )}
       {visible.type === 'safety' && visible.state && (
         <RoomDetailSafetyModal onCloseModal={onCloseModal} />
       )}
@@ -158,7 +141,7 @@ const RoomDetailTemplate = ({
       {scrollHeader.visible === false && <AccommodationHeaderContainer />}
       {scrollHeader.visible && <RoomDetailHeader scrollHeader={scrollHeader} />}
       {loading === false && (
-        <div className="max-w-screen-2xl mt-32" id="photos">
+        <div className="max-w-full mt-32" id="photos">
           <div className="mx-48 px-32">
             <Title
               title={title}
@@ -199,6 +182,23 @@ const RoomDetailTemplate = ({
                 onCloseModal={onCloseModal}
                 count={count}
               />
+              {visible.type === 'calendar' && visible.state && (
+                <RoomDetailDateEditPopup
+                  onCloseModal={onCloseModal}
+                  setVisible={setVisible}
+                  visible={visible}
+                  bookedDateDtos={bookedDateDtos}
+                />
+              )}
+              {visible.type === 'guest' && visible.state && (
+                <RoomDetailGuestEditPopup
+                  onCloseModal={onCloseModal}
+                  setVisible={setVisible}
+                  visible={visible}
+                  count={count}
+                  setCount={setCount}
+                />
+              )}
             </div>
           </div>
           <div className="mx-48 px-32">
