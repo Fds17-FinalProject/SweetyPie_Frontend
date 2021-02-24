@@ -45,6 +45,7 @@ const ModifyAccount = ({
   });
 
   const changeInputValue = (e, name) => {
+    console.log(e.target.value);
     setInputValue({ [name]: e.target.value });
   };
 
@@ -140,6 +141,7 @@ const ModifyAccount = ({
                 value={inputValue.name}
                 changeInputValue={changeInputValue}
                 nameReg={nameReg}
+                modify={modify}
               >
                 이름 수정
               </ModifyInput>

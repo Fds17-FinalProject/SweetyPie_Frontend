@@ -16,15 +16,12 @@ export default function createRequestSaga(type, request) {
   const FAILURE = `${type}_FAILURE`;
 
   return function* (action) {
-    console.log('제너레이터 액션', action);
     // api 요청 날리기 전에 로딩을 true로 바꾼다.
     yield put(startLoading(type));
     // yield put(resetError(type));
     // put은 특정 액션을 디스패치 해준다.
     try {
       const response = yield call(request, action.payload);
-      console.log(request, action.payload);
-      console.log(response);
       yield put({
         type: SUCCESS,
         payload: response.data,

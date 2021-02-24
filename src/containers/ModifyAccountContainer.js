@@ -23,6 +23,7 @@ const ModifyAccountContainer = () => {
     password: false,
     contact: false,
   });
+
   // 로컬스토리지 토큰 유무
   const [checkedToken, setCheckedToken] = useState(false);
   // 스크롤 위치
@@ -31,6 +32,7 @@ const ModifyAccountContainer = () => {
   const [visible, setVisible] = useState(false);
   // 검색 시작 하기 눌렀을 시 모달 초기 상태
   const [searchStartState, setSearchStartState] = useState(false);
+
   // // 검색 시작 하기 눌렀을 시 모달 초기 상태
   // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
   // 하나의 모달 회원가입 폼 모달 띄우는것 때문에 생각정리안된게있어서 일단 객체 상태로 냅둠!
@@ -38,6 +40,7 @@ const ModifyAccountContainer = () => {
     // 'login' or 'register'
     type: null,
   });
+
   const [location, setLocation] = useState(false);
   const [calendar, setCalendar] = useState(false);
   const [personnel, setPersonnel] = useState(false);
@@ -56,6 +59,7 @@ const ModifyAccountContainer = () => {
       setLocation(true);
     }
   };
+
   // 유저 메뉴 모달 open
   const showModal = () => {
     setVisible(true);
@@ -81,6 +85,7 @@ const ModifyAccountContainer = () => {
       });
     }
   };
+
   // 회원가입 모달에서 아이디가 있으세요? -> 로그인 버튼
   // 온클릭 이벤트 만들어서 type:'login'
   // 로그인 모달에서 아이디가 없으세요? -> 회원가입 버튼
@@ -107,6 +112,7 @@ const ModifyAccountContainer = () => {
       dispatch(initializeForm('register'));
     }
   };
+
   // 모달 close
   const hideModal = ({ target }) => {
     if (target.dataset.name) {
@@ -116,6 +122,7 @@ const ModifyAccountContainer = () => {
       setSocialModal(false);
     }
   };
+
   //  로그인, 회원가입
   const dispatch = useDispatch();
   const state = useSelector(state => state.auth);
@@ -155,6 +162,7 @@ const ModifyAccountContainer = () => {
       }),
     );
   };
+
   const socialRegisterSubmit = e => {
     e.preventDefault();
     console.log(socialRegister);
@@ -163,6 +171,7 @@ const ModifyAccountContainer = () => {
       socialRegisterSubmitAction({ email, name, contact, birthDate, socialId }),
     );
   };
+
   const loginSubmit = async e => {
     e.preventDefault();
     const { email, password } = login;
@@ -189,9 +198,10 @@ const ModifyAccountContainer = () => {
     localStorage.removeItem('token');
     setCheckedToken(false);
   };
+
   console.log();
+
   useEffect(() => {
-    dispatch(readMemberInfo());
     // 로그인이나 회원가입 성공 시 모달창 Close
     // useEffect에서 하는 이유는 dispatch가 비동기라서 에러객체가 담기는 시점을 알 수 없기 때문에
     if (authError === null) {
@@ -212,6 +222,7 @@ const ModifyAccountContainer = () => {
       setVisible(false);
       setCheckedToken(true);
     }
+
     function wathchFlexibleScroll() {
       console.log('scrollPlus', flexibleScroll.scrollPlus);
       // console.log('scrollMinus', flexibleScroll.scrollMinus);
@@ -237,8 +248,9 @@ const ModifyAccountContainer = () => {
     }
     wathchFlexibleScroll();
     window.addEventListener('scroll', wathchFlexibleScroll);
-  }, [socialRegister.socialId, checkedToken, dispatch]);
+  }, [authError, socialRegister.socialId, checkedToken]);
   // }, [auth, authError, dispatch]);
+
   const onClick = e => {
     console.log(e.target.name);
     e.preventDefault();

@@ -85,14 +85,18 @@ const MultipleCarousel = ({children}) => {
       <Slider {...settings} >
           {children && children.map(recent => (
             <div>
-              <RecentSearch {...recent} />
+              <h3>
+                <RecentSearch {...recent} />
+                </h3>
             </div>
           ))}
         
     
         
         <div >
-            <h3></h3>
+          <h3>
+            
+            </h3>
           </div>
           <div>
             <h3></h3>

@@ -6,10 +6,10 @@ import { BiMenu } from 'react-icons/bi';
 import Modal from '../common/Modal';
 import AuthModal from '../main/AuthModal';
 import SocialRegisterModal from '../common/SocialRegisterModal';
+
 const MainHeader = styled.header`
   position: fixed;
   display: flex;
-  max-width: 144rem;
   width: 100%;
   height: ${({ searchStartState }) => (searchStartState ? '18rem' : '8rem')};
   justify-content: space-between;
@@ -21,6 +21,7 @@ const MainHeader = styled.header`
   box-sizing: border-box;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
 `;
+
 const HeaderUserMenu = styled.button`
   display: flex;
   background-color: #fff;
@@ -30,6 +31,7 @@ const HeaderUserMenu = styled.button`
   width: 7rem;
   height: 3.5rem;
 `;
+
 const ModifyHeader = ({
   showModal, // 유저메뉴(버거바) open
   hideModal, // 모달 close
@@ -45,7 +47,6 @@ const ModifyHeader = ({
   socialModal, // 소셜로 회원가입 모달
   socialRegisterSubmit, // 소셜로 회원가입 submit
   userLogout, // 로그아웃 api콜 함수
-  userInfo,
 }) => {
   // 버거바
   const HeaderUser = () => {
@@ -69,6 +70,7 @@ const ModifyHeader = ({
       </HeaderUserMenu>
     );
   };
+
   // 버거바 누르면 나오는 유저 메뉴
   const MenuList = ({ children, showAuthModal, auth }) => {
     return (
@@ -81,6 +83,7 @@ const ModifyHeader = ({
       </li>
     );
   };
+
   const UserMenu = ({ hideModal, showAuthModal }) => {
     return (
       <div
@@ -128,6 +131,7 @@ const ModifyHeader = ({
       </div>
     );
   };
+
   // 스크롤로 내려가서 2번째 헤더가 됐을때 검은색 -> 분홍색
   // 헤더 스크롤 이벤트 발생 시 애니메이션 추가를 위한 상태
   const HeaderLogo = () => {

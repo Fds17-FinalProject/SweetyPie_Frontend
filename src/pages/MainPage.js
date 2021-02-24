@@ -1,10 +1,16 @@
+import React from 'react';
 import MainContainer from '../containers/MainContainer';
-// import CommonHeaderContainer from '../containers/CommonHeaderContainer';
+import { Helmet } from 'react-helmet-async';
 
 const MainPage = () => {
   return (
     <>
-      <MainContainer />
+      <Helmet>
+        <title>홈 | SweetyPie💛</title>
+      </Helmet>
+      <div>
+        <MainContainer />
+      </div>
     </>
   );
 };

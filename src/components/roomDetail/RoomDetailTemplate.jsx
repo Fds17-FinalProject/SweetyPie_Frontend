@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../../assets/output.css';
 import Photos from './Photos';
 import Introduction from './Introduction';
 import Title from './Title';
@@ -13,10 +12,13 @@ import Map from './Map';
 import Host from './Host';
 import ThingsToKnow from './ThingsToKnow';
 import RoomDetailHeader from './RoomDetailHeader';
-import RoomDetailSafetyModal from './RoomDetailSafetyModal';
-import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 import RoomDetailReviewModal from './RoomDetailReviewModal';
+import RoomDetailSafetyModal from './RoomDetailSafetyModal';
+import RoomDetailRefundModal from './RoomDetailRefundModal';
+import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 import RoomDetailDateEditPopup from './RoomDetailDateEditPopup';
+import AccommodationHeaderContainer from '../../containers/AccommodationContainer';
+import Footer from '../main/Footer';
 
 const RoomDetailTemplate = ({
   accommodation,
@@ -65,7 +67,10 @@ const RoomDetailTemplate = ({
   });
 
   // 스크롤 헤더 상태관리
-  const [scrollHeader, setScrollHeader] = useState(false);
+  const [scrollHeader, setScrollHeader] = useState({
+    visible: false,
+    button: false,
+  });
 
   // 타입에 맞는 모달창을 보여줌
   const onShowModal = type =>
@@ -96,9 +101,16 @@ const RoomDetailTemplate = ({
   };
 
   // 스크롤 시 Photos 컴포넌트를 지나면 navigation header 보이기
+  // 스크롤 시 후기 컴포넌트를 지나면 navigation header에 예약하기 버튼 보이기
   window.onscroll = () => {
     const pageY = window.pageYOffset;
-    pageY >= 600 ? setScrollHeader(true) : setScrollHeader(false);
+    if (pageY < 600) {
+      setScrollHeader({ ...scrollHeader, visible: false });
+    } else if (600 < pageY && pageY < 2900) {
+      setScrollHeader({ ...scrollHeader, visible: true, button: false });
+    } else if (pageY > 2900) {
+      setScrollHeader({ ...scrollHeader, visible: true, button: true });
+    }
   };
 
   // 모달창 팝업시 body 스크롤 방지
@@ -120,13 +132,28 @@ const RoomDetailTemplate = ({
           reviews={reviews}
         />
       )}
+      {visible.type === 'calendar' && visible.state && (
+        <RoomDetailDateEditPopup
+          onCloseModal={onCloseModal}
+          setVisible={setVisible}
+          visible={visible}
+          bookedDateDtos={bookedDateDtos}
+        />
+      )}
+      {visible.type === 'guest' && visible.state && (
+        <RoomDetailGuestEditPopup
+          onCloseModal={onCloseModal}
+          setVisible={setVisible}
+          visible={visible}
+          count={count}
+          setCount={setCount}
+        />
+      )}
       {visible.type === 'safety' && visible.state && (
         <RoomDetailSafetyModal onCloseModal={onCloseModal} />
       )}
-      {/* {visible.type === 'refund' && visible.state && (
-        <RoomDetailRefundModal onCloseModal={onCloseModal} />
-      )} */}
-      {scrollHeader && <RoomDetailHeader />}
+      {scrollHeader.visible === false && <AccommodationHeaderContainer />}
+      {scrollHeader.visible && <RoomDetailHeader scrollHeader={scrollHeader} />}
       {loading === false && (
         <div className="max-w-screen-2xl mt-32" id="photos">
           <div className="mx-48 px-32">
@@ -169,20 +196,6 @@ const RoomDetailTemplate = ({
                 onCloseModal={onCloseModal}
                 count={count}
               />
-              {visible.type === 'calendar' && visible.state && (
-                <RoomDetailDateEditPopup
-                  onCloseModal={onCloseModal}
-                  setVisible={setVisible}
-                  bookedDateDtos={bookedDateDtos}
-                />
-              )}
-              {visible.type === 'guest' && visible.state && (
-                <RoomDetailGuestEditPopup
-                  onCloseModal={onCloseModal}
-                  count={count}
-                  setCount={setCount}
-                />
-              )}
             </div>
           </div>
           <div className="mx-48 px-32">
@@ -207,6 +220,7 @@ const RoomDetailTemplate = ({
           </div>
         </div>
       )}
+      <Footer />
     </>
   );
 };

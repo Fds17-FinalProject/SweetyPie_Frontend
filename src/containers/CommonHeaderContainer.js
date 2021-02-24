@@ -19,6 +19,8 @@ const CommonHeaderContainer = ({
   setPersonnel,
   searchStartState,
   setSearchStartState,
+  address,
+  setAddress,
 }) => {
   const [flexibleScroll, setFlexibleScroll] = useState({
     currentScroll: 0,
@@ -260,15 +262,10 @@ const CommonHeaderContainer = ({
     }
     function wathchFlexibleScroll() {
       console.log('scrollPlus', flexibleScroll.scrollPlus);
-      // console.log('scrollMinus', flexibleScroll.scrollMinus);
-      // console.log('Scroll', window.scrollY);
-      // console.log('currentScroll', flexibleScroll.currentScroll);
-      // console.log('비교', flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus);
       if (
         flexibleScroll.scrollPlus < window.scrollY ||
         window.scrollY < flexibleScroll.scrollMinus
       ) {
-        // console.log('if문');
         setSearchStartState(false);
         setLocation(false);
         setCalendar(false);
@@ -289,7 +286,6 @@ const CommonHeaderContainer = ({
       window.removeEventListener('scroll', watchScroll);
     };
   }, [authError, socialRegister.socialId, checkedToken, setSearchStartState]);
-  // }, [auth, authError, dispatch]);
 
   return (
     <>
@@ -307,6 +303,7 @@ const CommonHeaderContainer = ({
         scrollY={scrollY}
         setScrollY={setScrollY}
         scrollStatus={flexibleScroll.srollStatus}
+        setLocation={setLocation}
         socialModal={socialModal}
         onChange={onChange}
         registerSubmit={registerSubmit}
@@ -320,6 +317,8 @@ const CommonHeaderContainer = ({
         showCalendar={showCalendar}
         showPersonnel={showPersonnel}
         searchOnclick={searchOnclick}
+        address={address}
+        setAddress={setAddress}
       />
     </>
   );
