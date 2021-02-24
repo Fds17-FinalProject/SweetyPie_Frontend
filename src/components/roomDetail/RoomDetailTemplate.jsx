@@ -18,7 +18,7 @@ import RoomDetailRefundModal from './RoomDetailRefundModal';
 import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 import RoomDetailDateEditPopup from './RoomDetailDateEditPopup';
 import AccommodationHeaderContainer from '../../containers/AccommodationContainer';
-import Footer from '../main/Footer';
+import CommonFooter from '../common/CommonFooter';
 
 const RoomDetailTemplate = ({
   accommodation,
@@ -223,7 +223,7 @@ const RoomDetailTemplate = ({
           </div>
         </div>
       )}
-      <Footer />
+      <CommonFooter />
     </>
   );
 };
