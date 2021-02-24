@@ -22,10 +22,15 @@ import MapPopup from './MapPopup';
 // `;
 
 
-const Marker = ({ isHovering, accommId, id, setId, img, accomm, coord, hoverId, setHoverId }) => {
+const Marker = ({ isHovering, accommId, id, setId, img, accomm, hoverId, setHoverId }) => {
+  const [coord, setCoord] = useState({ clientX: null, clientY: null });
   
   const onClick = (e) => {
-    setId(accommId)
+    setId(accommId);
+    setCoord({
+      clientX: e.clientX,
+      clientY: e.clientY,
+    })
   };
 
   const image = img.map(img => img.url);
@@ -35,13 +40,7 @@ const Marker = ({ isHovering, accommId, id, setId, img, accomm, coord, hoverId, 
       className="relative "
       >
       {accommId === id 
-        ? (
-          <>
-            {/* <span>{coord.clientX} {coord.clientY}</span> */}
-            <MapPopup accomm={accomm} img={image} coord={coord} />
-            </>
-        )
-      : ''}
+        && <MapPopup accomm={accomm} img={image} coord={coord} accommId={accommId} />}
       <div
         data-name="marker"
         className="hover:scale-125 duration-200 transform"
@@ -88,19 +87,12 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId }) => {
   };
  
   let boundaryCoordinate = {};
-  const _onClick = ({ x, y, lat, lng, event }) => {
-    setCoord({
-      clientX: event.clientX,
-      // clientX: event.offsetX,
-      clientY: event.clientY,
-      // clientY: event.offsetY,
-    })
-  }
+ 
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          onClick={_onClick}
+          // onClick={_onClick}
           bootstrapURLKeys={{ key: 'AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU' }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
@@ -118,18 +110,6 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId }) => {
               '&maxLongitude='
               + boundaryCoordinate.maxLongitude)
           }}
-          // onZoomAnimationEnd={() => {
-          //   console.log(boundaryCoordinate.minLatitude);
-          //   history.push(
-          //     'mapSearch?minLatitude='
-          //     + boundaryCoordinate.minLatitude +
-          //     '&maxLatitude='
-          //     + boundaryCoordinate.maxLatitude +
-          //     '&minLongitude='
-          //     + boundaryCoordinate.minLongitude +
-          //     '&maxLongitude='
-          //     + boundaryCoordinate.maxLongitude)
-          // }}
           onChange={({ center, zoom, bounds, marginBounds }) => {
               boundaryCoordinate = {
                 minLatitude: marginBounds.sw.lat,
@@ -153,8 +133,7 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId }) => {
                 img={accomm.accommodationPictures}
                 accomm={accomm}
                 coord={coord}
-              />
-              )
+              />)
             }
               )}
         </GoogleMapReact>

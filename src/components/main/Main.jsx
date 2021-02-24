@@ -5,6 +5,7 @@ import MainRecommendation from './MainRecommendation';
 import CommonHeaderContainer from '../../containers/CommonHeaderContainer';
 import Footer from './Footer';
 import MapPopup from '../search/MapPopup';
+import RecommendPopup from './RecommendPopup';
 
 const MainContainer = styled.div`
   background-image: url('/img/main.jpg');
@@ -168,68 +169,81 @@ const Main = ({ searchMainCity, searchAccommType }) => {
 
             <div className="flex w-full">
               <div className="w-1/4 mr-8">
-                {/* <MapPopup
-                  style={{ paddingRight: '10px', borderRadius: '10px' }}
-                /> */}
+                <RecommendPopup
+                   img={[
+                    "https://a0.muscache.com/pictures/c305294e-84aa-4c5c-bdd6-2205d3dead08.jpg",
+                    "https://a0.muscache.com/pictures/700a645c-5ab4-437c-abd7-23ecf24d7505.jpg",
+                    "https://a0.muscache.com/pictures/2599f9ec-9351-4248-83ae-182e862a6d2f.jpg",
+                    "https://a0.muscache.com/pictures/9e369fe5-0d11-4351-81b8-31ec12aecb48.jpg",
+                    "https://a0.muscache.com/pictures/4bf5279d-b94a-4ae2-88c9-bcc405603043.jpg",
+                  ]}
+                  accomm={{
+                    rating: 4.79,
+                    reviewNum: 6,
+                    buildingType: '아파트',
+                    accommodationType: '전체',
+                    title: 'LIKE MY HOME 라이크마이홈 (Gangneung, Jumunjin)',
+                  }}
+                  className="rounded-xl"
+                />
               </div>
               <div className="w-1/4 mr-8">
-                {/* <MapPopup
-                  style={{ paddingRight: '10px', borderRadius: '10px' }}
-                /> */}
+                <RecommendPopup
+                  img={[
+                    "https://a0.muscache.com/pictures/424f6985-5fb9-439c-994a-11f5e958ac75.jpg",
+                    "https://a0.muscache.com/pictures/9eb5c97e-d29c-4a04-aea9-a6c5595da09f.jpg",
+                    "https://a0.muscache.com/pictures/2a9e6b39-fdb2-45b3-bbee-50e59b3a769b.jpg",
+                    "https://a0.muscache.com/pictures/743b2a1a-e62f-4451-b86c-835926a36371.jpg",
+                    "https://a0.muscache.com/pictures/47135fe4-0550-4b7d-a151-7ab539cf4c98.jpg",
+                  ]}
+                  accomm={{
+                    rating: 4.0,
+                    reviewNum: 6,
+                    buildingType: '펜션',
+                    accommodationType: '전체',
+                    title: '스파의 이완과 테라스의 풍경이 멋진 강릉의 301호 객실',
+                  }}
+                  className="rounded-xl"
+                />
               </div>
               <div className="w-1/4 mr-8">
-                {/* <MapPopup
-                  style={{ paddingRight: '10px', borderRadius: '10px' }}
-                /> */}
+                <RecommendPopup
+                  img={[
+                    "https://a0.muscache.com/pictures/22d2aa5d-333f-4179-b0c3-1c324da50f43.jpg",
+                    "https://a0.muscache.com/pictures/c3a2c021-9aa5-4e6b-9fa1-27380c9b16e9.jpg",
+                    "https://a0.muscache.com/pictures/b92e95b0-8be6-42b2-8e92-857ac5900dd4.jpg",
+                    "https://a0.muscache.com/pictures/92b790dc-a960-4541-8e1f-33893c29a1ff.jpg",
+                    "https://a0.muscache.com/pictures/945f8ab7-5e42-4c29-90c9-7996cdc63687.jpg",
+                  ]}
+                  accomm={{
+                    rating: 4.88,
+                    reviewNum: 6,
+                    buildingType: '호텔',
+                    accommodationType: '객실',
+                    title: '세인트존스 경포호텔 파노라마 오션뷰 코너스위트 9027호',
+                  }}
+                  className="rounded-xl"
+                />
               </div>
               <div className="w-1/4 mr-8">
-                {/* <MapPopup
-                  style={{ paddingRight: '10px', borderRadius: '10px' }}
-                /> */}
+                <RecommendPopup
+                  img={[
+                    "https://a0.muscache.com/pictures/0825d983-4ec8-41a5-9bc7-b0b56ed8f97c.jpg",
+                    "https://a0.muscache.com/pictures/00d00be3-aabd-4d7f-93bf-d170b3f6d6e5.jpg",
+                    "https://a0.muscache.com/pictures/420c229f-d481-4b7e-81fe-d5fba9416261.jpg",
+                    "https://a0.muscache.com/pictures/21c27e06-3a85-4ee7-8d9f-424933bea99e.jpg",
+                    "https://a0.muscache.com/pictures/df6e7448-80a9-4030-adaa-98e4dd4fbc28.jpg",
+                  ]}
+                  accomm={{
+                    rating: 4.33,
+                    reviewNum: 3,
+                    buildingType: '펜션',
+                    accommodationType: '전체',
+                    title: '우드와 화이트의 색상이 어우러진  강릉 폴카 객실',
+                  }}
+                  className="rounded-xl"
+                />
               </div>
-              {/* <Link className="w-1/4 pr-3.5" to="#">
-                <figure>
-                  <img
-                    className="rounded-lg"
-                    src={img + '/img/apartment.jpg'}
-                    alt="apartment"
-                  />
-                  <figcaption className="text-1.8rem p-4">아파트</figcaption>
-                </figure>
-              </Link>
-
-              <Link className="w-1/4 pr-3.5" to="#">
-                <figure>
-                  <img
-                    className="rounded-lg"
-                    src={img + '/img/apartment.jpg'}
-                    alt="apartment"
-                  />
-                  <figcaption className="text-1.8rem p-4	">아파트</figcaption>
-                </figure>
-              </Link>
-
-              <Link className="w-1/4 pr-3.5" to="#">
-                <figure>
-                  <img
-                    className="rounded-lg"
-                    src={img + '/img/subhouse.jpg'}
-                    alt="subhouse"
-                  />
-                  <figcaption className="text-1.8rem p-4	">별채</figcaption>
-                </figure>
-              </Link>
-
-              <Link className="w-1/4 pr-3.5" to="#">
-                <figure>
-                  <img
-                    className="rounded-lg"
-                    src={img + '/img/hotel.jpg'}
-                    alt="hotel"
-                  />
-                  <figcaption className="text-1.8rem p-4	">호텔</figcaption>
-                </figure>
-              </Link> */}
             </div>
           </section>
         </div>

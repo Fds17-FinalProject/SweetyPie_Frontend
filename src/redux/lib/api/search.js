@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getList = async query =>
-  await axios.get(`http://3.34.50.91/api${query}`, {
+  await axios.get(`https://sweetypie.ga/api${query}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
