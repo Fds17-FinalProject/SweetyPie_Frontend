@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import '../../assets/output.css';
 import styled from 'styled-components';
 import MainCity from './MainCity';
 import MainRecommendation from './MainRecommendation';
 import CommonHeaderContainer from '../../containers/CommonHeaderContainer';
 import Footer from './Footer';
 import MapPopup from '../search/MapPopup';
-
 
 const MainContainer = styled.div`
   background-image: url('/img/main.jpg');
@@ -23,7 +21,6 @@ const Textarea = styled.span`
   line-height: 5.8rem;
   font-weight: 800;
 `;
-
 
 const Main = ({ searchMainCity, searchAccommType }) => {
   const [location, setLocation] = useState(false);
@@ -69,50 +66,50 @@ const Main = ({ searchMainCity, searchAccommType }) => {
           <section>
             <div className="flex flex-wrap py-24">
               <div className="flex w-full pb-3">
-                <button className="w-1/4" onClick={(e) => searchMainCity('서울')}>
+                <button className="w-1/4" onClick={e => searchMainCity('서울')}>
                   <MainCity src={'/img/seoul.jpg'} alt={'seoul'}>
                     서울
                   </MainCity>
                 </button>
 
-                <button className="w-1/4" onClick={(e) => searchMainCity('인천')}>
+                <button className="w-1/4" onClick={e => searchMainCity('인천')}>
                   <MainCity src={'/img/incheon.jpg'} alt={'incheon'}>
                     인천
                   </MainCity>
                 </button>
 
-                <button className="w-1/4" onClick={(e) => searchMainCity('대구')}>
-                  <MainCity src={'/img/daegu.jpg'} alt={'daegu'} >
+                <button className="w-1/4" onClick={e => searchMainCity('대구')}>
+                  <MainCity src={'/img/daegu.jpg'} alt={'daegu'}>
                     대구
                   </MainCity>
                 </button>
 
-                <button className="w-1/4" onClick={(e) => searchMainCity('부산')}>
+                <button className="w-1/4" onClick={e => searchMainCity('부산')}>
                   <MainCity src={'/img/uijungbu.jpg'} alt={'uijungbu'}>
                     부산
                   </MainCity>
                 </button>
               </div>
               <div className="flex w-full pt-3">
-                <button className="w-1/4" onClick={(e) => searchMainCity('제주')}>
-                <MainCity src={'/img/bucheon.jpg'} alt={'bucheon'}>
-                  제주
-                </MainCity>
+                <button className="w-1/4" onClick={e => searchMainCity('제주')}>
+                  <MainCity src={'/img/bucheon.jpg'} alt={'bucheon'}>
+                    제주
+                  </MainCity>
                 </button>
-                
-                <button className="w-1/4" onClick={(e) => searchMainCity('수원')}>
+
+                <button className="w-1/4" onClick={e => searchMainCity('수원')}>
                   <MainCity src={'/img/suwon.jpg'} alt={'suwon'}>
                     수원
                   </MainCity>
                 </button>
 
-                <button className="w-1/4" onClick={(e) => searchMainCity('전주')}>
+                <button className="w-1/4" onClick={e => searchMainCity('전주')}>
                   <MainCity src={'/img/ansan.jpg'} alt={'ansan'}>
                     전주
                   </MainCity>
                 </button>
 
-                <button className="w-1/4" onClick={(e) => searchMainCity('대전')}>
+                <button className="w-1/4" onClick={e => searchMainCity('대전')}>
                   <MainCity src={'/img/daejeon.jpg'} alt={'daejeon'}>
                     대전
                   </MainCity>
@@ -127,31 +124,44 @@ const Main = ({ searchMainCity, searchAccommType }) => {
             </div>
 
             <div className="flex w-full">
-            <button className="w-1/4 pr-3.5" onClick={() => searchAccommType('전체')}>
-              <MainRecommendation src={'/img/housing.jpg'} alt={'단독 주택'}>
-                단독 주택
-              </MainRecommendation>
-            </button>
+              <button
+                className="w-1/4 pr-3.5"
+                onClick={() => searchAccommType('전체')}
+              >
+                <MainRecommendation src={'/img/housing.jpg'} alt={'단독 주택'}>
+                  단독 주택
+                </MainRecommendation>
+              </button>
 
-              <button className="w-1/4 pr-3.5" onClick={() => searchAccommType('다인실')}>
-                <MainRecommendation src={'/img/apartment.jpg'} alt={'게스트 하우스'} >
+              <button
+                className="w-1/4 pr-3.5"
+                onClick={() => searchAccommType('다인실')}
+              >
+                <MainRecommendation
+                  src={'/img/apartment.jpg'}
+                  alt={'게스트 하우스'}
+                >
                   게스트 하우스
                 </MainRecommendation>
-                
               </button>
-              
-              <button className="w-1/4 pr-3.5" onClick={() => searchAccommType('개인실')}>
-                <MainRecommendation src={'/img/subhouse.jpg'} alt={'별채'} >
+
+              <button
+                className="w-1/4 pr-3.5"
+                onClick={() => searchAccommType('개인실')}
+              >
+                <MainRecommendation src={'/img/subhouse.jpg'} alt={'별채'}>
                   별채
                 </MainRecommendation>
               </button>
 
-              <button className="w-1/4 pr-3.5" onClick={() => searchAccommType('객실')}>
+              <button
+                className="w-1/4 pr-3.5"
+                onClick={() => searchAccommType('객실')}
+              >
                 <MainRecommendation src={'/img/hotel.jpg'} alt={'호텔'}>
                   호텔
                 </MainRecommendation>
               </button>
-
             </div>
           </section>
 

@@ -45,12 +45,13 @@ const AccommList = props => {
   
   const bookMarkClick = id => () => {
     setBookMark(!bookMark);
-    if (!bookMark) {
-      console.log(bookMark);
-      postBookmark(id);
-    } else {
-      deleteBookmark(id);
-    }
+    !bookMark ? postBookmark(id) : deleteBookmark(id);
+    // if (!bookMark) {
+    //   console.log(bookMark);
+    //   postBookmark(id);
+    // } else {
+    //   deleteBookmark(id);
+    // }
   };
   const img =
     accommodationPictures && accommodationPictures.map(picture => picture.url);
@@ -69,15 +70,13 @@ const AccommList = props => {
     localStorage.setItem('recentSearch', JSON.stringify([...uniqueSet]));
   };
 
-  useEffect(() => { 
-    
-  }, []);
+  const url = new URL(window.location.href);
   
-  // const checkIn = url.searchParams.get('checkIn');
-  // const checkout = url.searchParams.get('checkout');
-  // const adultNum = url.searchParams.get('adultNum');
-  // const childNum = url.searchParams.get('childNum');
-  // const infantNum = url.searchParams.get('infantNum');
+  const checkIn = url.searchParams.get('checkIn');
+  const checkout = url.searchParams.get('checkout');
+  const adultNum = url.searchParams.get('adultNum');
+  const childNum = url.searchParams.get('childNum');
+  const infantNum = url.searchParams.get('infantNum');
 
   return (
     <li
@@ -100,9 +99,9 @@ const AccommList = props => {
           />
         </HoverSvg>
         <Link
-          // to={
-            // `/accommodation/${id}?${checkIn && `checkInDate=${checkIn}&`}${checkout && `checkoutDate=${checkout}&`}${adultNum && `adultNum=${adultNum}&`}${childNum && `childNum=${childNum}&`}${infantNum && `infantNum=${infantNum}`}`
-          // }
+          to={
+            `/accommodation/${id}?${checkIn && `checkInDate=${checkIn}&`}${checkout && `checkoutDate=${checkout}`}${adultNum ? `&adultNum=${adultNum}&` : ''}${childNum ? `childNum=${childNum}&` : '' }${infantNum ? `infantNum=${infantNum}` : ''}`
+          }
           className="flex focus:outline-none"
         >
           <Carousel size="Large" img={img} />

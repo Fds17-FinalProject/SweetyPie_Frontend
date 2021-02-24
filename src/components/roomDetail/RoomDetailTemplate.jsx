@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../../assets/output.css';
 import Photos from './Photos';
 import Introduction from './Introduction';
 import Title from './Title';
@@ -176,12 +175,15 @@ const RoomDetailTemplate = ({
                 <RoomDetailDateEditPopup
                   onCloseModal={onCloseModal}
                   setVisible={setVisible}
+                  visible={visible}
                   bookedDateDtos={bookedDateDtos}
                 />
               )}
               {visible.type === 'guest' && visible.state && (
                 <RoomDetailGuestEditPopup
                   onCloseModal={onCloseModal}
+                  setVisible={setVisible}
+                  visible={visible}
                   count={count}
                   setCount={setCount}
                 />
