@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../../assets/output.css';
 import Photos from './Photos';
 import Introduction from './Introduction';
 import Title from './Title';
