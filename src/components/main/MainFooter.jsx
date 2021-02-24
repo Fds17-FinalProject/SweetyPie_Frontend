@@ -9,7 +9,8 @@ const FooterWrap = styled.footer`
   padding-left: 8rem;
   padding-right: 8rem;
   transform: translateY(30rem);
-`;
+`
+
 const FooterContainer = () => {
   return (
     <div className="flex justify-between items-center w-full h-full border-t py-10 ">

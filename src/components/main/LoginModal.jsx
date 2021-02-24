@@ -2,7 +2,7 @@ import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 
 
-const LoginModal = ({ hideModal, changeModal, onChange, loginSubmit, state }) => {
+const LoginModal = ({ hideModal, changeModal, onChange, loginSubmit, state, checkedLogin }) => {
   const { login } = state;
   return (
     <>
@@ -38,15 +38,16 @@ const LoginModal = ({ hideModal, changeModal, onChange, loginSubmit, state }) =>
               <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="text" id="email-input" name="email" placeholder="이메일" onChange={(e) => onChange({ e, form: 'login' })} value={login.email}/>
             </div>
 
-            <div className="flex items-center mb-8">
+            <div className="flex items-center">
               <label className="a11y-hidden" htmlFor="password-input">비밀번호</label>
               <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="text" id="password-input" name="password" placeholder="비밀번호" onChange={(e) => onChange({ e, form: 'login' })} value={login.password}/>
             </div>
-
+            <span className="text-airbnb flex justify-center items-center h-1.2rem my-1.2rem">{checkedLogin && '이메일과 비밀번호를 확인해주세요.'}</span>
             <button className="flex items-center w-full rounded-lg	 py-4 px-1.2rem text-#fff bg-airbnb">
               <span className="flex-grow w-full h-full">로그인</span>
-            </button>
-          </form>
+        </button>
+      </form>
+      
 
           <div className="mt-8 mb-2">
             <span>이미 에어비앤비 계정이 있나요?</span>

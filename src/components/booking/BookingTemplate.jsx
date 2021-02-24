@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import BookingDetailTemplate from './BookingDetailTemplate';
 import Modal from '../common/Modal';
 import BookingTitle from './BookingTitle';
@@ -12,8 +12,10 @@ import BookingGuestEditModal from './BookingGuestEditModal';
 import CommonSuccessModal from '../common/CommonSuccessModal';
 import CommonChoiceModal from '../common/CommonChoiceModal';
 import queryStirng from 'query-string';
-import { useHistory, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { useLocation } from 'react-router-dom';
+import SimpleHeaderContainer from '../../containers/SimpleHeaderContainer';
+import CommonFooter from '../common/CommonFooter';
 
 const BookingTemplate = ({
   visible,
@@ -90,6 +92,7 @@ const BookingTemplate = ({
           </CommonChoiceModal>
         </Modal>
       )}
+      <SimpleHeaderContainer />
       <BookingTitle subPage={subPage} query={query} />
       <main className="max-w-screen-2xl px-32 xl:mx-48 md:mx-0 pb-4.8rem">
         <div className="flex justify-between">
@@ -133,6 +136,7 @@ const BookingTemplate = ({
           />
         </div>
       </main>
+      <CommonFooter />
     </>
   );
 };

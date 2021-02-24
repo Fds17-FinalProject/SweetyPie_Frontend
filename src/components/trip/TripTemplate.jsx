@@ -3,6 +3,8 @@ import TripReservation from './TripReservation';
 import TripCard from './TripCard';
 import { useLocation } from 'react-router-dom';
 import queryStirng from 'query-string';
+import SimpleHeaderContainer from '../../containers/SimpleHeaderContainer';
+import CommonFooter from '../common/CommonFooter';
 
 const TripTemplate = ({
   loading,
@@ -16,7 +18,9 @@ const TripTemplate = ({
   const { tab } = queryStirng.parse(location.search);
 
   return (
-    <div className="max-w-screen-2xl mt-3.6rem px-32 pb-6.5rem">
+    <>
+    <SimpleHeaderContainer />
+    <div className="pt-3.6rem px-32 pb-6.5rem">
       <section>
         <h1 className="text-3.2rem mb-10 pl-6 font-semibold">예약 내역</h1>
         <TripReservation />
@@ -66,7 +70,9 @@ const TripTemplate = ({
             ))}
         </ul>
       </section>
-    </div>
+      </div>
+      <CommonFooter />
+    </>
   );
 };
 

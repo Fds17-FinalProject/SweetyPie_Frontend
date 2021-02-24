@@ -1,22 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import {
-  changeField,
-  initializeForm,
-  authRegister,
-  socialRegisterSubmitAction,
-} from '../redux/modules/auth';
+import { changeField, initializeForm, authRegister, socialRegisterSubmitAction} from "../redux/modules/auth";
 import { useDispatch, useSelector } from 'react-redux';
 import { getToken, logout } from '../redux/lib/api/auth';
-import AccommodationHeader from '../components/common/AccommodationHeader';
-const AccommodationHeaderContainer = () => {
-  // 로컬스토리지 토큰 유무
-  const [checkedToken, setCheckedToken] = useState(false);
-  // 스크롤 위치
-  const [socialModal, setSocialModal] = useState(false);
-  // 유저 메뉴 모달 초기 상태
-  const [visible, setVisible] = useState(false);
-  // 검색 시작 하기 눌렀을 시 모달 초기 상태
-  const [searchStartState, setSearchStartState] = useState(false);
+import SimpleHeader from '../components/common/SimpleHeader';
+
+const SimpleHeaderContainer = () => {
+    // 로컬스토리지 토큰 유무 
+    const [checkedToken, setCheckedToken] = useState(false);
+    const [socialModal, setSocialModal] = useState(false);
+    // 유저 메뉴 모달 초기 상태
+    const [visible, setVisible] = useState(false);
   const [checkedLogin, setCheckedLogin] = useState(false);
 
 
@@ -27,25 +20,6 @@ const AccommodationHeaderContainer = () => {
       // 'login' or 'register'
       type: null,
     });
-  
-    const [location, setLocation] = useState(false);
-    const [calendar, setCalendar] = useState(false);
-    const [personnel, setPersonnel] = useState(false);
-    const [flexibleScroll, setFlexibleScroll] = useState({
-      currentScroll: 0,
-      scrollPlus: 0,
-      scrollMinus: 0,
-      scrollStatus: false,
-    });
-   // 검색 시작하기 onClick시 헤더 스타일 변경
-   const showSearchHeader = ({ target }) => {
-    if (target.dataset.name === 'open') {
-      // 상태 true로 바뀌면서 스타일 변경
-      setSearchStartState(true);
-      // 위치 open
-      setLocation(true);
-    }
-   };
   
     // 유저 메뉴 모달 open
     const showModal = () => {
@@ -120,46 +94,31 @@ const AccommodationHeaderContainer = () => {
   // 인풋 변경 이벤트 핸들러
   // 디스트럭처링으로 받기위해서 onChange에서 이벤트 객체와 form을 인자로 넘겨준다
   // 현재 onChange의 form이 누구인지 구분하기 위해서
-  const onChange = ({ e, form }) => {
+  const onChange = ({e, form}) => {
     const { value, name } = e.target;
     dispatch(
       changeField({
         form,
         key: name,
         value,
-      }),
+      })
     );
   };
   // 폼 등록 이벤트 핸들러
   const registerSubmit = e => {
     e.preventDefault();
-    const {
-      name,
-      email,
-      contact,
-      birthDate,
-      password,
-      passwordConfirm,
-    } = register;
-    dispatch(
-      authRegister({
-        name,
-        email,
-        contact,
-        birthDate,
-        password,
-        passwordConfirm,
-      }),
-    );
+    const { name, email, contact, birthDate, password, passwordConfirm } = register;
+    dispatch(authRegister({ name, email, contact, birthDate, password, passwordConfirm }));
   };
+  
   const socialRegisterSubmit = e => {
     e.preventDefault();
     console.log(socialRegister);
     const { email, name, contact, birthDate, socialId } = socialRegister;
-    dispatch(
-      socialRegisterSubmitAction({ email, name, contact, birthDate, socialId }),
-    );
+    dispatch(socialRegisterSubmitAction({ email, name, contact, birthDate, socialId }));
   };
+
+  
   const loginSubmit = async e => {
     e.preventDefault();
     const { email, password } = login;
@@ -183,6 +142,9 @@ const AccommodationHeaderContainer = () => {
     setCheckedToken(false);
   };
 
+
+  
+
   useEffect(() => {
     // 로그인이나 회원가입 성공 시 모달창 Close
     // useEffect에서 하는 이유는 dispatch가 비동기라서 에러객체가 담기는 시점을 알 수 없기 때문에
@@ -190,11 +152,11 @@ const AccommodationHeaderContainer = () => {
       setAuthVisible(false);
     }
     // 구글로 회원가입 시 서버에서 받아온 유저정보에 socialId가 있다면 회원가입 모달창 open
-    // console.log('socialRegister', socialRegister.socialId);
+    console.log('socialRegister', socialRegister.socialId);
     if (socialRegister.socialId) {
       setSocialModal(true);
     }
-    // 토큰이 없디면 유저메뉴 view 변경(비 로그인 시)
+      // 토큰이 없디면 유저메뉴 view 변경(비 로그인 시)
     if (localStorage.getItem('token') === null) {
       setVisible(false);
       setCheckedToken(false);
@@ -204,41 +166,19 @@ const AccommodationHeaderContainer = () => {
       setVisible(false);
       setCheckedToken(true);
     }
-    function wathchFlexibleScroll() {
-      if (flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus) {
-        setSearchStartState(false);
-        setLocation(false);
-        setCalendar(false);
-        setPersonnel(false);
-        setFlexibleScroll({
-          ...flexibleScroll,
-          currentScroll: 0,
-          scrollPlus: 0,
-          scrollMinus: 0,
-        });
-      }
-    }
-    wathchFlexibleScroll();
-    window.addEventListener('scroll', wathchFlexibleScroll);
-  }, [authError, socialRegister.socialId, checkedToken]);
-  // }, [auth, authError, dispatch]);
+}, [authError, socialRegister.socialId, checkedToken]);
+// }, [auth, authError, dispatch]);
+
+
   return (
     <>
-      <AccommodationHeader
+      <SimpleHeader
         showModal={showModal}
         hideModal={hideModal}
         changeModal={changeModal}
         authVisible={authVisible}
         visible={visible}
         showAuthModal={showAuthModal}
-        showSearchHeader={showSearchHeader}
-        searchStartState={searchStartState}
-        location={location}
-        calendar={calendar}
-        personnel={personnel}
-        setLocation={setLocation}
-        setPersonnel={setPersonnel}
-        setCalendar={setCalendar}
         socialModal={socialModal}
         onChange={onChange}
         registerSubmit={registerSubmit}
@@ -250,6 +190,7 @@ const AccommodationHeaderContainer = () => {
         checkedLogin={checkedLogin}
       />  
     </>
-  );
+  )
 };
-export default AccommodationHeaderContainer;
+
+export default SimpleHeaderContainer;

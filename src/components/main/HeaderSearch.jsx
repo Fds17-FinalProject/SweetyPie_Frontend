@@ -229,7 +229,6 @@ const HeaderSearch = forwardRef(
       lng: null,
     });
 
-    console.log(gu);
 
     const [count, setCount] = useState({
       adultNum: 0,
@@ -244,18 +243,13 @@ const HeaderSearch = forwardRef(
     };
 
     const getCurrentLocation = async e => {
-      console.log('getCurrent', e);
       await navigator.geolocation.getCurrentPosition(position => {
-        console.log(position);
         setCurrentLocation({
           lat: position.coords.latitude,
           lng: position.coords.longitude,
         });
       });
-      console.log('gu', gu);
-      console.log('currentLocation', currentLocation.lat, currentLocation.lng);
     };
-    console.log('currentLocation', currentLocation);
 
     const [dateRange, setDateRange] = useState({
       // 체크인 날짜의 초기값 지정
@@ -362,12 +356,10 @@ const HeaderSearch = forwardRef(
     useEffect(() => {
       if (currentLocation.lat !== null && currentLocation.lng !== null) {
         async function getAddress() {
-          console.log('들어와 ?');
           try {
             const res = await axios.get(
               `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation.lat},${currentLocation.lng}&key=AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU`,
             );
-            console.log('geolocation', res);
             if (res) {
               setGu(res.data.results[4].formatted_address.substr(11));
             }
@@ -457,14 +449,6 @@ const HeaderSearch = forwardRef(
                   </div>
                 );
               }}
-              {/* <input
-              id="search-input"
-              type="text"
-              placeholder="어디로 여행가세요?"
-              className="block text-1.6rem text-#717171 bg-transparent"
-            data-name="location"
-            defaultValue={gu && gu}
-            ></input> */}
             </PlacesAutocomplete>
           </div>
         </Button>

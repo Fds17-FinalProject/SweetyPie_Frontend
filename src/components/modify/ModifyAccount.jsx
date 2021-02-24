@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import Footer from '../main/Footer';
+import React from 'react';
+import CommonFooter from '../common/CommonFooter';
 import ModifyInput from './ModifyInput';
 import ModifyContent from './ModifyContent';
 import ModifyDescription from './ModifyDescription';
@@ -245,7 +245,7 @@ const ModifyAccount = ({
           </button>
         </div>
       </div>
-      <Footer />
+      <CommonFooter />
     </div>
   );
 };

@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import MainCity from './MainCity';
 import MainRecommendation from './MainRecommendation';
 import CommonHeaderContainer from '../../containers/CommonHeaderContainer';
-import Footer from './Footer';
-import MapPopup from '../search/MapPopup';
-import RecommendPopup from './RecommendPopup';
+import MainFooter from './MainFooter';
+import RecommendPopup from '../main/RecommendPopup';
 import { Link } from 'react-router-dom';
 
 const MainContainer = styled.div`
@@ -253,7 +252,7 @@ const Main = ({ searchMainCity, searchAccommType }) => {
           </section>
         </div>
       </div>
-      <Footer />
+      <MainFooter />
     </div>
   );
 };

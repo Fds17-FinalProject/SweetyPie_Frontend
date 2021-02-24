@@ -1,7 +1,6 @@
 import React from 'react';
 import { ImInstagram, ImFacebook } from 'react-icons/im';
 import { IoLogoTwitter } from 'react-icons/io';
-
 const FooterContainer = () => {
   return (
     <div className="flex justify-between items-center w-full h-full border-t py-10 ">
@@ -14,7 +13,6 @@ const FooterContainer = () => {
     </div>
   );
 };
-
 const FooterContent = () => {
   return (
     <>
@@ -34,7 +32,6 @@ const FooterContent = () => {
     </>
   );
 };
-
 const SnsContainer = () => {
   return (
     <ul className="flex">
@@ -56,7 +53,6 @@ const SnsContainer = () => {
     </ul>
   );
 };
-
 const CommonFooter = () => {
   return (
     <footer className="h-20 bg-gray-100 px-19.4rem">
@@ -64,5 +60,4 @@ const CommonFooter = () => {
     </footer>
   );
 };
-
 export default CommonFooter;

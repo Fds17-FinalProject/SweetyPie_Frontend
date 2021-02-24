@@ -8,7 +8,7 @@ import {
   socialRegisterSubmitAction,
 } from '../redux/modules/auth';
 import { useDispatch, useSelector } from 'react-redux';
-import { getToken, getUser, logout } from '../redux/lib/api/auth';
+import { getToken, logout } from '../redux/lib/api/auth';
 
 const CommonHeaderContainer = ({
   location,
@@ -36,6 +36,7 @@ const CommonHeaderContainer = ({
   const [socialModal, setSocialModal] = useState(false);
   // 유저 메뉴 모달 초기 상태
   const [visible, setVisible] = useState(false);
+  const [checkedLogin, setCheckedLogin] = useState(false);
 
   // // 검색 시작 하기 눌렀을 시 모달 초기 상태
   // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
@@ -119,15 +120,9 @@ const CommonHeaderContainer = ({
         currentScroll: window.scrollY,
         scrollPlus: window.scrollY + 150,
         scrollMinus: window.scrollY > 150 ? window.scrollY - 150 : 1,
-      });
-      console.log(
-        '비교비교비교',
-        flexibleScroll.scrollPlus < window.scrollY ||
-          window.scrollY < flexibleScroll.scrollMinus,
-      );
+      })
     }
   };
-  console.log(flexibleScroll);
   // 헤더 위치 (어디로 여행가세요?)
   const showLocation = ({ target }) => {
     if (target.dataset.name === 'location') {
@@ -200,7 +195,6 @@ const CommonHeaderContainer = ({
 
   const socialRegisterSubmit = e => {
     e.preventDefault();
-    console.log(socialRegister);
     const { email, name, contact, birthDate, socialId } = socialRegister;
     dispatch(
       socialRegisterSubmitAction({ email, name, contact, birthDate, socialId }),
@@ -210,31 +204,26 @@ const CommonHeaderContainer = ({
   const loginSubmit = async e => {
     e.preventDefault();
     const { email, password } = login;
-    // const res = await dispatch(authLogin({ email, password }));
-    const res = await getToken({ email, password });
-    const token = res.data.token;
-    console.log('RES', res);
-    console.log('token', token);
-    // error객체가 오면 에러메세지 띄워주고(서버에서 준 에러메세지 띄워주는거 아직 미구현)
-    // 성공하면 history.push('/)
-    if (token) {
-      localStorage.setItem('token', token);
-      setCheckedToken(true);
-      setAuthVisible(false);
-    } else {
-      console.log('authError', authError);
+    try {
+      const res = await getToken({ email, password });
+      const token = await res.data.token;
+
+      if (token) {
+        localStorage.setItem('token', token);
+        setCheckedToken(true);
+        setAuthVisible(false);
+        setCheckedLogin(false);
+      }
+    } catch (e) {
+      setCheckedLogin(true);
     }
-    // const resUser = await getUser();
-    // console.log(resUser);
   };
   const userLogout = e => {
-    console.log('e', e);
     logout();
     localStorage.removeItem('token');
     setCheckedToken(false);
   };
 
-  console.log('searchStateState', searchStartState);
 
   useEffect(() => {
     // 로그인이나 회원가입 성공 시 모달창 Close
@@ -243,7 +232,6 @@ const CommonHeaderContainer = ({
       setAuthVisible(false);
     }
     // 구글로 회원가입 시 서버에서 받아온 유저정보에 socialId가 있다면 회원가입 모달창 open
-    console.log('socialRegister', socialRegister.socialId);
     if (socialRegister.socialId) {
       setSocialModal(true);
     }
@@ -261,11 +249,8 @@ const CommonHeaderContainer = ({
       window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
     }
     function wathchFlexibleScroll() {
-      console.log('scrollPlus', flexibleScroll.scrollPlus);
-      if (
-        flexibleScroll.scrollPlus < window.scrollY ||
-        window.scrollY < flexibleScroll.scrollMinus
-      ) {
+      // console.log('scrollPlus', flexibleScroll.scrollPlus);
+      if (flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus) {
         setSearchStartState(false);
         setLocation(false);
         setCalendar(false);
@@ -319,7 +304,8 @@ const CommonHeaderContainer = ({
         searchOnclick={searchOnclick}
         address={address}
         setAddress={setAddress}
-      />
+        checkedLogin={checkedLogin}
+      />  
     </>
   );
 };

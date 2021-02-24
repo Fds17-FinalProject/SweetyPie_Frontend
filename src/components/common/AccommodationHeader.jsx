@@ -59,6 +59,7 @@ const AccommodationHeader = ({
   setLocation,
   setCalendar,
   setPersonnel,
+  checkedLogin,
 }) => {
   // 버거바
   const HeaderUser = () => {
@@ -109,23 +110,20 @@ const AccommodationHeader = ({
             {/* 로그인 안했을 시  */}
             <ul>
               {/* MenuList에 auth props를 넣어서 로그인인지 회원가입인지 구분 */}
-              {checkedToken ? (
-                <>
-                  <MenuList>예약 내역</MenuList>
-                  <MenuList>저장 목록</MenuList>
-                  <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
-                    <Link className="block w-full" to="/modify">
-                      계정
-                    </Link>
-                  </li>
-                  <li
-                    className="cursor-pointer	py-4 px-6 hover:bg-gray-100"
-                    onClick={userLogout}
-                  >
-                    로그아웃
-                  </li>
-                </>
-              ) : (
+              {checkedToken ? 
+                 <>
+                 <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
+                   <Link className="block w-full" to="/reservation">예약내역</Link>
+                 </li>
+                 <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
+                   <Link className="block w-full" to="/wishlist">저장목록</Link>
+                 </li>
+                 <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
+                   <Link className="block w-full" to="/modify">계정</Link>
+                 </li>
+               <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100" onClick={userLogout}>로그아웃</li>
+               </>
+               : 
                 // {/* 로그인 했을 시 */}
                 <>
                   <MenuList auth="login" showAuthModal={showAuthModal}>
@@ -136,7 +134,7 @@ const AccommodationHeader = ({
                   </MenuList>
                   <MenuList>도움말</MenuList>
                 </>
-              )}
+              }
             </ul>
           </div>
         </div>
@@ -178,6 +176,7 @@ const AccommodationHeader = ({
             onChange={onChange}
             loginSubmit={loginSubmit}
             state={state}
+            checkedLogin={checkedLogin}
           />
         </Modal>
       )}
