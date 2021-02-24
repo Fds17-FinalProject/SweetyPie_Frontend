@@ -89,7 +89,7 @@ const RoomDetailGuestEditPopup = ({
       childNum: childNum,
       infantNum: infantNum,
     });
-  }, []);
+  }, [setCount, adultNum, childNum, infantNum]);
 
   return (
     <div className="w-full h-full" onClick={onCloseModal}>
