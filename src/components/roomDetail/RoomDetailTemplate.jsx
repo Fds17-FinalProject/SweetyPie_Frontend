@@ -67,7 +67,10 @@ const RoomDetailTemplate = ({
   });
 
   // 스크롤 헤더 상태관리
-  const [scrollHeader, setScrollHeader] = useState(false);
+  const [scrollHeader, setScrollHeader] = useState({
+    visible: false,
+    button: false,
+  });
 
   // 타입에 맞는 모달창을 보여줌
   const onShowModal = type =>
@@ -98,9 +101,16 @@ const RoomDetailTemplate = ({
   };
 
   // 스크롤 시 Photos 컴포넌트를 지나면 navigation header 보이기
+  // 스크롤 시 후기 컴포넌트를 지나면 navigation header에 예약하기 버튼 보이기
   window.onscroll = () => {
     const pageY = window.pageYOffset;
-    pageY >= 600 ? setScrollHeader(true) : setScrollHeader(false);
+    if (pageY < 600) {
+      setScrollHeader({ ...scrollHeader, visible: false });
+    } else if (600 < pageY && pageY < 2900) {
+      setScrollHeader({ ...scrollHeader, visible: true, button: false });
+    } else if (pageY > 2900) {
+      setScrollHeader({ ...scrollHeader, visible: true, button: true });
+    }
   };
 
   // 모달창 팝업시 body 스크롤 방지
@@ -142,11 +152,8 @@ const RoomDetailTemplate = ({
       {visible.type === 'safety' && visible.state && (
         <RoomDetailSafetyModal onCloseModal={onCloseModal} />
       )}
-      {visible.type === 'refund' && visible.state && (
-        <RoomDetailRefundModal onCloseModal={onCloseModal} />
-      )}
-      {scrollHeader === false && <AccommodationHeaderContainer />}
-      {scrollHeader && <RoomDetailHeader />}
+      {scrollHeader.visible === false && <AccommodationHeaderContainer />}
+      {scrollHeader.visible && <RoomDetailHeader scrollHeader={scrollHeader} />}
       {loading === false && (
         <div className="max-w-screen-2xl mt-32" id="photos">
           <div className="mx-48 px-32">

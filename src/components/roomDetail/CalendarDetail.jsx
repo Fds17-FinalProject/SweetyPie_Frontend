@@ -62,7 +62,7 @@ const CalendarDetail = ({ gu, bookedDateDtos }) => {
   }, [checkInDate, checkoutDate]);
 
   return (
-    <div className="">
+    <div id="reservation">
       <div className="mb-8">
         <h1 className="text-2.2rem font-bold mb-0.8rem">
           {!checkInDate
