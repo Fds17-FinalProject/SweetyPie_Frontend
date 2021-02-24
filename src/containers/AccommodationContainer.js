@@ -155,8 +155,8 @@ const AccommodationHeaderContainer = () => {
     // const res = await dispatch(authLogin({ email, password }));
     const res = await getToken({ email, password });
     const token = res.data.token;
-    console.log('RES', res);
-    console.log('token', token);
+    // console.log('RES', res);
+    // console.log('token', token);
     // error객체가 오면 에러메세지 띄워주고(서버에서 준 에러메세지 띄워주는거 아직 미구현)
     // 성공하면 history.push('/)
     if (token) {
@@ -167,7 +167,7 @@ const AccommodationHeaderContainer = () => {
       console.log('error');
     }
     const resUser = await getUser();
-    console.log(resUser);
+    // console.log(resUser);
   };
   const userLogout = e => {
     console.log('e', e);
@@ -175,7 +175,7 @@ const AccommodationHeaderContainer = () => {
     localStorage.removeItem('token');
     setCheckedToken(false);
   };
-  console.log();
+  // console.log();
   useEffect(() => {
     // 로그인이나 회원가입 성공 시 모달창 Close
     // useEffect에서 하는 이유는 dispatch가 비동기라서 에러객체가 담기는 시점을 알 수 없기 때문에
@@ -183,7 +183,7 @@ const AccommodationHeaderContainer = () => {
       setAuthVisible(false);
     }
     // 구글로 회원가입 시 서버에서 받아온 유저정보에 socialId가 있다면 회원가입 모달창 open
-    console.log('socialRegister', socialRegister.socialId);
+    // console.log('socialRegister', socialRegister.socialId);
     if (socialRegister.socialId) {
       setSocialModal(true);
     }
@@ -198,7 +198,7 @@ const AccommodationHeaderContainer = () => {
       setCheckedToken(true);
     }
     function wathchFlexibleScroll() {
-      console.log('scrollPlus', flexibleScroll.scrollPlus);
+      // console.log('scrollPlus', flexibleScroll.scrollPlus);
       // console.log('scrollMinus', flexibleScroll.scrollMinus);
       // console.log('Scroll', window.scrollY);
       // console.log('currentScroll', flexibleScroll.currentScroll);
