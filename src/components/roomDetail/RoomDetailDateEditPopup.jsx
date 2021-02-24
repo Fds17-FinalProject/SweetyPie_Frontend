@@ -37,11 +37,14 @@ const RoomDetailDateEditPopup = ({
   const [focus, setFocus] = useState('startDate');
 
   // 달력 날짜 변경 함수
+  // 0박 방지
   const handleOnDateChange = ({ startDate, endDate }) => {
-    setDateRange({
-      startDate: startDate,
-      endDate: endDate,
-    });
+    if (startDate !== endDate) {
+      setDateRange({
+        startDate: startDate,
+        endDate: endDate,
+      });
+    }
   };
 
   // 달력 모달창 저장하기 클릭 시 쿼리 변경 및 모달 끄기

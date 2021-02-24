@@ -127,6 +127,7 @@ const SearchTemplate = ({ accommodations, loading }) => {
               <AccommList
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
+                loading={loading}
                 {...accommodation} />
             ))}
         </ul>
@@ -141,7 +142,7 @@ const SearchTemplate = ({ accommodations, loading }) => {
         </div>
         <div className="pt-40 flex flex-col flex-wrap items-center">
           <Pagination />
-          <div className="text-1.4rem text-#22222">숙소 300개 이상 중 1 - 10</div>
+          <div className="text-1.4rem text-#22222">숙소 300개 이상 중 1 - 20</div>
           <div className="text-1.2rem text-#717171 py-14">전체 요금을 보려면 날짜를 입력하세요. 추가 요금이 적용되고 세금이 추가될 수 있습니다.</div>
         </div>  
       </div>
@@ -155,6 +156,7 @@ const SearchTemplate = ({ accommodations, loading }) => {
           isHovering={isHovering}
           id={id}
           setId={setId}
+          address={url.searchParams.get('searchKeyword')}
         />
       </MapWrapper>
     </div>

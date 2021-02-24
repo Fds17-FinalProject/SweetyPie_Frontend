@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import HeaderGuestEditModal from '../common/HeaderGuestEditModal';
 import { BiSearch } from 'react-icons/bi';
 import { forwardRef, useEffect, useState } from 'react';
@@ -30,48 +30,53 @@ to {
   visibility: hidden;
 }
 `;
-  
 
 const SearchHeader = styled.form`
-position:relative;
-display: flex;
-cursor: pointer;
-border: 1px solid #ccc;
-border-radius: 999rem;
-background: #fff;
-width: ${({scrollY, searchStartState}) => !scrollY ? '85rem' : searchStartState ? '85rem' : '32rem'};
-height: ${({scrollY, searchStartState}) => !scrollY ? '7rem' : searchStartState ? '7rem' : '4.8rem'};
-margin-top: ${({scrollY, searchStartState}) => !scrollY ? '5rem' : searchStartState ? '5rem' : '0'};
-animation-duration: 0.1s;
-animation-timing-function: ease-out;
-animation-name: ${({scrollY, searchStartState}) => !scrollY ? scrollUp : searchStartState ? scrollUp : scrollDown};
+  position: relative;
+  display: flex;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 999rem;
+  background: #fff;
+  width: ${({ scrollY, searchStartState }) =>
+    !scrollY ? '85rem' : searchStartState ? '85rem' : '32rem'};
+  height: ${({ scrollY, searchStartState }) =>
+    !scrollY ? '7rem' : searchStartState ? '7rem' : '4.8rem'};
+  margin-top: ${({ scrollY, searchStartState }) =>
+    !scrollY ? '5rem' : searchStartState ? '5rem' : '0'};
+  animation-duration: 0.1s;
+  animation-timing-function: ease-out;
+  animation-name: ${({ scrollY, searchStartState }) =>
+    !scrollY ? scrollUp : searchStartState ? scrollUp : scrollDown};
 `;
 
-
 const Button = styled.button`
-display: ${({ scrollY, searchStartState }) => !scrollY ? 'block' : searchStartState ? 'block' : 'none'};
-:hover {
-background: #ebebeb;
-border-radius: 999rem;
-z-index: 1;
-}
-:focus {
-background: #fff;
-border-radius: 999rem;
-box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px !important;
-transform: scale(1.03);
-}
-&:focus{
-  background: #fff;
-  border-radius: 999rem;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px, rgba(0, 0, 0, 0.1) 0px 3px 8px !important;
-  transform: scale(1.03);
-}`;
-
+  display: ${({ scrollY, searchStartState }) =>
+    !scrollY ? 'block' : searchStartState ? 'block' : 'none'};
+  :hover {
+    background: #ebebeb;
+    border-radius: 999rem;
+    z-index: 1;
+  }
+  :focus {
+    background: #fff;
+    border-radius: 999rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px,
+      rgba(0, 0, 0, 0.1) 0px 3px 8px !important;
+    transform: scale(1.03);
+  }
+  &:focus {
+    background: #fff;
+    border-radius: 999rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 16px 32px,
+      rgba(0, 0, 0, 0.1) 0px 3px 8px !important;
+    transform: scale(1.03);
+  }
+`;
 
 // 서치 헤더 (위치 어디로 여행가세요?)
 const SearchLocation = styled.div`
-  position:absolute;
+  position: absolute;
   top: 8rem;
   width: 50.5rem;
   border-radius: 2.5rem;
@@ -82,7 +87,7 @@ const SearchLocation = styled.div`
 `;
 // 서치 헤더 (캘린더)
 const SearchCalendar = styled.div`
-  position:absolute;
+  position: absolute;
   top: 8rem;
   width: 100%;
   border-radius: 2.5rem;
@@ -91,11 +96,10 @@ const SearchCalendar = styled.div`
   align-items: center;
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
-
 `;
 // 서치 헤더 (인원 수)
 const SearchPersonnel = styled.div`
-  position:absolute;
+  position: absolute;
   top: 8rem;
   right: 0;
   width: 38rem;
@@ -106,8 +110,7 @@ const SearchPersonnel = styled.div`
   box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
 `;
 
-
-const LocationButton = styled.button.attrs(() => ({type: 'button'}))`
+const LocationButton = styled.button.attrs(() => ({ type: 'button' }))`
   width: 100%;
   /* height: 1rem; */
   margin-top: 1.5rem;
@@ -128,29 +131,31 @@ const SearchButton = styled.button.attrs(() => ({ type: 'button' }))`
   justify-content: center;
   align-items: center;
   width: 4.8rem;
-  /* width: ${({location, calendar, personnel}) => location || calendar || personnel ? '8.5rem' : '4.8rem'}; */
+  /* width: ${({ location, calendar, personnel }) =>
+    location || calendar || personnel ? '8.5rem' : '4.8rem'}; */
   height: 4.8rem;
   border-radius: 999rem;
   background: #ff385c;
   :hover {
-    background: #DE1661;
+    background: #de1661;
     transition: ease-in-out;
   }
 `;
 const SubmitButton = styled.button.attrs(() => ({ type: 'button' }))`
- position: absolute;
+  position: absolute;
   right: 0;
   top: -0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 8.5rem;
-  /* width: ${({location, calendar, personnel}) => location || calendar || personnel ? '8.5rem' : '4.8rem'}; */
+  /* width: ${({ location, calendar, personnel }) =>
+    location || calendar || personnel ? '8.5rem' : '4.8rem'}; */
   height: 4.8rem;
   border-radius: 999rem;
   background: #ff385c;
   :hover {
-    background: #DE1661;
+    background: #de1661;
     transition: ease-in-out;
   }
 `;
@@ -162,10 +167,10 @@ const AutoCompleteContainer = styled.div`
   background-color: #fff !important;
   /* border: 1px solid #717171 !important; */
   border-radius: 1.6rem !important;
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
 `;
 const AutoComplete = styled.div`
   display: flex;
@@ -182,89 +187,85 @@ const AutoComplete = styled.div`
 `;
 
 const AutoCompleteIcon = styled.div`
-min-width: 4.5rem;
-min-height: 4.5rem;
-display:flex;
-justify-content: center;
-align-items: center;  
-background: #ebebeb;
-border-radius:0.5rem;
-border:1px solid #ebebeb;
-margin-right: 0.8rem;
+  min-width: 4.5rem;
+  min-height: 4.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ebebeb;
+  border-radius: 0.5rem;
+  border: 1px solid #ebebeb;
+  margin-right: 0.8rem;
 `;
 
+const HeaderSearch = forwardRef(
+  (
+    {
+      scrollY,
+      searchStartState,
+      calendar,
+      location,
+      personnel,
+      showSearchHeader,
+      showCalendar,
+      showLocation,
+      showPersonnel,
+      searchOnclick,
+      scrollStatus,
+      address,
+      setAddress,
+      setLocation,
+    },
+    ref,
+  ) => {
+    // const [location, setLocation] = useState(false);
+    // const [calendar, setCalendar] = useState(false);
+    // const [personnel, setPersonnel] = useState(false);
+    // 검색 시작 하기 눌렀을 시 모달 초기 상태
+    // const [searchStartState, setSear~chStartState] = useState(false);
+    const [gu, setGu] = useState(null);
+    const [currentLocation, setCurrentLocation] = useState({
+      lat: null,
+      lng: null,
+    });
 
-const HeaderSearch = forwardRef((
-  {
-    scrollY,
-    searchStartState,
-    calendar,
-    location,
-    personnel,
-    showSearchHeader,
-    showCalendar,
-    showLocation,
-    showPersonnel,
-    searchOnclick,
-    scrollStatus,
-    address,
-    setAddress,
-    setLocation,
-  }, ref) => {
-  // const [location, setLocation] = useState(false);
-  // const [calendar, setCalendar] = useState(false);
-  // const [personnel, setPersonnel] = useState(false);
-  // 검색 시작 하기 눌렀을 시 모달 초기 상태
-  // const [searchStartState, setSear~chStartState] = useState(false);
-  const [gu, setGu] = useState(null);
-  const [currentLocation, setCurrentLocation] = useState({
-    lat: null,
-    lng: null,
-  });
 
-  // console.log(gu);
+    const [count, setCount] = useState({
+      adultNum: 0,
+      childNum: 0,
+      infantNum: 0,
+      status: false,
+    });
+    const history = useHistory();
 
-  const [count, setCount] = useState({
-    adultNum: 0,
-    childNum: 0,
-    infantNum: 0,
-    status: false,
-  });
-  const history = useHistory();
+    const onSubmit = e => {
+      e.preventDefault();
+    };
 
-  const onSubmit = e => {
-    e.preventDefault();
-  }
- 
-  const getCurrentLocation = async e => {
-  console.log('getCurrent', e);
-    await navigator.geolocation.getCurrentPosition((position) => {
-      console.log(position);
-      setCurrentLocation({
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
+    const getCurrentLocation = async e => {
+      await navigator.geolocation.getCurrentPosition(position => {
+        setCurrentLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
       });
-    });
-    // console.log('gu', gu);
-    // console.log('currentLocation', currentLocation.lat, currentLocation.lng);
-  }
-  // console.log('currentLocation', currentLocation);
+    };
 
-  const [dateRange, setDateRange] = useState({
-    // 체크인 날짜의 초기값 지정
-    startDate: null,
-    // 체크아웃 날짜의 초기값 지정
-    endDate: null,
-  });
-    // 달력 날짜 포커스 상태
-  const [focus, setFocus] = useState('startDate');
-  // 달력 날짜 변경 함수
-  const handleOnDateChange = ({ startDate, endDate }) => {
-    setDateRange({
-      startDate: startDate,
-      endDate: endDate,
+    const [dateRange, setDateRange] = useState({
+      // 체크인 날짜의 초기값 지정
+      startDate: null,
+      // 체크아웃 날짜의 초기값 지정
+      endDate: null,
     });
-  };
+    // 달력 날짜 포커스 상태
+    const [focus, setFocus] = useState('startDate');
+    // 달력 날짜 변경 함수
+    const handleOnDateChange = ({ startDate, endDate }) => {
+      setDateRange({
+        startDate: startDate,
+        endDate: endDate,
+      });
+    };
 
     // 게스트 증가 함수
     const increaseGuestNum = type => {
@@ -286,198 +287,336 @@ const HeaderSearch = forwardRef((
         });
       }
     };
-  const searchResult = () => {
-    // 전부 다 입력했을 경우
-    if (address.length !== 0 && dateRange.startDate !== null && dateRange.endDate !== null && count.adultNum !== 0) {
-      history.push(`/accommodations/search?searchKeyword=${address}&checkIn=${dateRange.startDate.format('YYYY-MM-DD')}&checkout=${dateRange.endDate.format('YYYY-MM-DD')}&guestNum=${count.adultNum+count.childNum}`);
-    }
-    // 위치만 입력 했을경우
-    else if (address.length !== 0 && dateRange.startDate === null && dateRange.endDate === null && count.adultNum === 0) {
-      history.push(`/accommodations/search?searchKeyword=${address}`);
-    }
-    // 위치, 체크인, 체크아웃 입력했을 경우
-    else if (address.length !== 0 && dateRange.startDate !== null && dateRange.endDate !== null && count.adultNum === 0) {
-      history.push(`/accommodations/search?searchKeyword=${address}&checkIn=${dateRange.startDate.format('YYYY-MM-DD')}&checkout=${dateRange.endDate.format('YYYY-MM-DD')}`);
-    } 
-    // 위치, 게스트 수 입력했을 경우
-    else if (address.length !== 0 && dateRange.startDate === null && dateRange.endDate === null && count.adultNum !== 0) {
-      history.push(`/accommodations/search?searchKeyword=${address}&guestNum=${count.adultNum+count.childNum}`);
-    }
-  };
-
-  // google place autocomplete
-  // const [address, setAddress] = useState('');
-  const handleChange = address => {
-    setAddress(address);
-  };
-  const handleSelect = address => {
-    setAddress(address.split(' ')[2]);
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
-      .catch(error => console.error('Error', error));
-  };
-
-
-  useEffect(() => {
-    if (currentLocation.lat !== null && currentLocation.lng !== null) {
-      async function getAddress() {
-        console.log('들어와 ?');
-        try {
-          const res = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation.lat},${currentLocation.lng}&key=AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU`);
-          console.log('geolocation',res);
-          if (res) {
-            setGu(res.data.results[4].formatted_address.substr(11));
-          }
-        } catch (e) {
-          console.log(e);
-        }
+    const searchResult = () => {
+      // 전부 다 입력했을 경우
+      if (
+        address.length !== 0 &&
+        dateRange.startDate !== null &&
+        dateRange.endDate !== null &&
+        count.adultNum !== 0
+      ) {
+        history.push(
+          `/accommodations/search?searchKeyword=${address}&checkIn=${dateRange.startDate.format(
+            'YYYY-MM-DD',
+          )}&checkout=${dateRange.endDate.format('YYYY-MM-DD')}&guestNum=${
+            count.adultNum + count.childNum
+          }`,
+        );
       }
-      getAddress();
-    }
-    if (address.length !== 0) {
-      setLocation(false);
-    }
+      // 위치만 입력 했을경우
+      else if (
+        address.length !== 0 &&
+        dateRange.startDate === null &&
+        dateRange.endDate === null &&
+        count.adultNum === 0
+      ) {
+        history.push(`/accommodations/search?searchKeyword=${address}`);
+      }
+      // 위치, 체크인, 체크아웃 입력했을 경우
+      else if (
+        address.length !== 0 &&
+        dateRange.startDate !== null &&
+        dateRange.endDate !== null &&
+        count.adultNum === 0
+      ) {
+        history.push(
+          `/accommodations/search?searchKeyword=${address}&checkIn=${dateRange.startDate.format(
+            'YYYY-MM-DD',
+          )}&checkout=${dateRange.endDate.format('YYYY-MM-DD')}`,
+        );
+      }
+      // 위치, 게스트 수 입력했을 경우
+      else if (
+        address.length !== 0 &&
+        dateRange.startDate === null &&
+        dateRange.endDate === null &&
+        count.adultNum !== 0
+      ) {
+        history.push(
+          `/accommodations/search?searchKeyword=${address}&guestNum=${
+            count.adultNum + count.childNum
+          }`,
+        );
+      }
+    };
 
-  }, [address, currentLocation, gu, location, setLocation]);
+    // google place autocomplete
+    // const [address, setAddress] = useState('');
+    const handleChange = address => {
+      setAddress(address);
+    };
+    const handleSelect = address => {
+      setAddress(address.split(' ')[2]);
+      geocodeByAddress(address)
+        .then(results => getLatLng(results[0]))
+        .then(latLng => console.log('Success', latLng))
+        .catch(error => console.error('Error', error));
+    };
 
-  
-  return (
-    <SearchHeader onSubmit={onSubmit} scrollY={scrollY} searchStartState={searchStartState} scrollStatus={scrollStatus} id='test'>
-      <Button className="w-27rem text-left" scrollY={scrollY} searchStartState={searchStartState} onClick={showLocation} scrollStatus={scrollStatus}  data-name="location">
+    useEffect(() => {
+      if (currentLocation.lat !== null && currentLocation.lng !== null) {
+        async function getAddress() {
+          try {
+            const res = await axios.get(
+              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation.lat},${currentLocation.lng}&key=AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU`,
+            );
+            if (res) {
+              setGu(res.data.results[4].formatted_address.substr(11));
+            }
+          } catch (e) {
+            console.log(e);
+          }
+        }
+        getAddress();
+      }
+      if (address.length !== 0) {
+        setLocation(false);
+      }
+    }, [address, currentLocation, gu, location, setLocation]);
+
+    return (
+      <SearchHeader
+        onSubmit={onSubmit}
+        scrollY={scrollY}
+        searchStartState={searchStartState}
+        scrollStatus={scrollStatus}
+        id="test"
+      >
+        <Button
+          className="w-27rem text-left"
+          scrollY={scrollY}
+          searchStartState={searchStartState}
+          onClick={showLocation}
+          scrollStatus={scrollStatus}
+          data-name="location"
+        >
           <div className="border-r px-14" data-name="location">
-            <b className="block text-1.2rem" data-name="location">위치</b>
-            <label className="a11y-hidden" htmlFor="search-input" data-name="location">
-            여행지를 골라주세요.
+            <b className="block text-1.2rem" data-name="location">
+              위치
+            </b>
+            <label
+              className="a11y-hidden"
+              htmlFor="search-input"
+              data-name="location"
+            >
+              여행지를 골라주세요.
             </label>
             <PlacesAutocomplete
               value={gu || address}
               onChange={handleChange}
               onSelect={handleSelect}
-          >
-            {({ getInputProps, suggestions, getSuggestionItemProps }) => {
-              return (
-              <div>
-                  <input
-                  
-                  id="search-input"
-                  type="text"
-                  data-name="location"
-                  // className='location-search-input block text-1.4rem text-#717171 bg-transparent'
-                  className = 'block text-1.4rem text-#717171 bg-transparent'
-                    {...getInputProps({
-                      placeholder: '어디로 여행가세요?'
-                    }) }
-                />
-                <AutoCompleteContainer className="autocomplete-dropdown-container">
-                  {suggestions.map(suggestion => {
-                    const className = suggestion.active
-                      ? 'suggestion-item--active'
-                      : 'suggestion-item';
-                    // inline style for demonstration purpose
-                    const style = suggestion.active
-                      ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                      : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                    
-                    return (
-                      <AutoComplete
-                        {...getSuggestionItemProps(suggestion, {
-                          className,
-                          style,
-                        })}
-                      >
-                        <div className="w-full text-1.4rem flex items-center p-0.8rem">
-                          <AutoCompleteIcon >
-                            <FaMapMarkerAlt />
-                          </AutoCompleteIcon>
-                          {suggestion.description}
-                        </div>
-                      </AutoComplete>
-                    );
-                  })}
-                </AutoCompleteContainer>
-              </div>
-            )}}
-            {/* <input
-              id="search-input"
-              type="text"
-              placeholder="어디로 여행가세요?"
-              className="block text-1.6rem text-#717171 bg-transparent"
-            data-name="location"
-            defaultValue={gu && gu}
-            ></input> */}
-      </PlacesAutocomplete>
+            >
+              {({ getInputProps, suggestions, getSuggestionItemProps }) => {
+                return (
+                  <div>
+                    <input
+                      id="search-input"
+                      type="text"
+                      data-name="location"
+                      // className='location-search-input block text-1.4rem text-#717171 bg-transparent'
+                      className="block text-1.4rem text-#717171 bg-transparent"
+                      {...getInputProps({
+                        placeholder: '어디로 여행가세요?',
+                      })}
+                    />
+                    <AutoCompleteContainer className="autocomplete-dropdown-container">
+                      {suggestions.map(suggestion => {
+                        const className = suggestion.active
+                          ? 'suggestion-item--active'
+                          : 'suggestion-item';
+                        // inline style for demonstration purpose
+                        const style = suggestion.active
+                          ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                          : { backgroundColor: '#ffffff', cursor: 'pointer' };
 
+                        return (
+                          <AutoComplete
+                            {...getSuggestionItemProps(suggestion, {
+                              className,
+                              style,
+                            })}
+                          >
+                            <div className="w-full text-1.4rem flex items-center p-0.8rem">
+                              <AutoCompleteIcon>
+                                <FaMapMarkerAlt />
+                              </AutoCompleteIcon>
+                              {suggestion.description}
+                            </div>
+                          </AutoComplete>
+                        );
+                      })}
+                    </AutoCompleteContainer>
+                  </div>
+                );
+              }}
+            </PlacesAutocomplete>
           </div>
         </Button>
 
-      <Button startDate={dateRange.startDate} className="w-18rem text-left" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showCalendar} scrollStatus={scrollStatus} data-name="calendar">
-          <div className="border-r px-6" data-name="calendar" >
-            <b className="block text-1.2rem" data-name="calendar">체크인</b>
-          <span className="block text-1.4rem text-#717171" data-name="calendar">{dateRange.startDate
-                    ? dateRange.startDate.format('YYYY-MM-DD')
-                    : '날짜 추가'}</span>
-          </div>
-        </Button>
-
-        <Button endDate={dateRange.endDate} className="w-18rem text-left" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showCalendar} scrollStatus={scrollStatus} data-name="calendar">
+        <Button
+          startDate={dateRange.startDate}
+          className="w-18rem text-left"
+          scrollY={scrollY}
+          searchStartState={searchStartState}
+          onClick={showCalendar}
+          scrollStatus={scrollStatus}
+          data-name="calendar"
+        >
           <div className="border-r px-6" data-name="calendar">
-            <b className="block text-1.2rem" data-name="calendar">체크아웃</b>
-            <span className="block text-1.4rem text-#717171" data-name="calendar">{
-                  dateRange.endDate
-                    ? dateRange.endDate.format('YYYY-MM-DD')
-                    : '날짜 추가'
-                }</span>
+            <b className="block text-1.2rem" data-name="calendar">
+              체크인
+            </b>
+            <span
+              className="block text-1.4rem text-#717171"
+              data-name="calendar"
+            >
+              {dateRange.startDate
+                ? dateRange.startDate.format('YYYY-MM-DD')
+                : '날짜 추가'}
+            </span>
           </div>
         </Button>
 
-        <Button className="w-22rem text-left px-6" scrollY={ scrollY } searchStartState = {searchStartState} onClick={showPersonnel} scrollStatus={scrollStatus} data-name="personnel">
-          <div className="relative" data-name="personnel"> 
-            <b className="block text-1.2rem" data-name="personnel">인원</b>
-          <span className="block text-1.4rem text-#717171" data-name="personnel">{count.adultNum !== 0 ? `게스트 ${count.adultNum+count.childNum+count.infantNum}명` : '게스트 추가'}</span>
-          {location || calendar || personnel || address.length !== 0 ?
-            <SubmitButton onClick={searchResult} data-name="no-hide">
-            <BiSearch size={20} className=" text-white" data-name="no-hide"/>
-            <span className="text-white text-1.6rem ml-0.4rem" data-name="no-hide">검색</span>
-          </SubmitButton> :
-            <SearchButton data-name="open" location={location} calendar={calendar} personnel={personnel} onClick={searchOnclick}>
-            <BiSearch size={ 20 } className=" text-white"  data-name="search"/>
-            </SearchButton>
-          }
-
+        <Button
+          endDate={dateRange.endDate}
+          className="w-18rem text-left"
+          scrollY={scrollY}
+          searchStartState={searchStartState}
+          onClick={showCalendar}
+          scrollStatus={scrollStatus}
+          data-name="calendar"
+        >
+          <div className="border-r px-6" data-name="calendar">
+            <b className="block text-1.2rem" data-name="calendar">
+              체크아웃
+            </b>
+            <span
+              className="block text-1.4rem text-#717171"
+              data-name="calendar"
+            >
+              {dateRange.endDate
+                ? dateRange.endDate.format('YYYY-MM-DD')
+                : '날짜 추가'}
+            </span>
           </div>
-      </Button>
-      {scrollY && !searchStartState &&
-        <div className="flex w-full justify-between items-center pr-0.8rem" onClick={showSearchHeader} data-name="open">
-        <span className="text-1.4rem ml-2rem" data-name="open">검색 시작하기</span>
-        <button className="flex justify-center items-center w-3rem h-3rem rounded-full bg-airbnb hover:bg-#DE1661 transition transform hover:ease-in-out " data-name="open">
-          <BiSearch className=" w-6 h-6 text-white" />
-        </button>
-        </div>}
+        </Button>
+
+        <Button
+          className="w-22rem text-left px-6"
+          scrollY={scrollY}
+          searchStartState={searchStartState}
+          onClick={showPersonnel}
+          scrollStatus={scrollStatus}
+          data-name="personnel"
+        >
+          <div className="relative" data-name="personnel">
+            <b className="block text-1.2rem" data-name="personnel">
+              인원
+            </b>
+            <span
+              className="block text-1.4rem text-#717171"
+              data-name="personnel"
+            >
+              {count.adultNum !== 0
+                ? `게스트 ${
+                    count.adultNum + count.childNum + count.infantNum
+                  }명`
+                : '게스트 추가'}
+            </span>
+            {location || calendar || personnel || address.length !== 0 ? (
+              <SubmitButton onClick={searchResult} data-name="no-hide">
+                <BiSearch
+                  size={20}
+                  className=" text-white"
+                  data-name="no-hide"
+                />
+                <span
+                  className="text-white text-1.6rem ml-0.4rem"
+                  data-name="no-hide"
+                >
+                  검색
+                </span>
+              </SubmitButton>
+            ) : (
+              <SearchButton
+                data-name="open"
+                location={location}
+                calendar={calendar}
+                personnel={personnel}
+                onClick={searchOnclick}
+              >
+                <BiSearch
+                  size={20}
+                  className=" text-white"
+                  data-name="search"
+                />
+              </SearchButton>
+            )}
+          </div>
+        </Button>
+        {scrollY && !searchStartState && (
+          <div
+            className="flex w-full justify-between items-center pr-0.8rem"
+            onClick={showSearchHeader}
+            data-name="open"
+          >
+            <span className="text-1.4rem ml-2rem" data-name="open">
+              검색 시작하기
+            </span>
+            <button
+              className="flex justify-center items-center w-3rem h-3rem rounded-full bg-airbnb hover:bg-#DE1661 transition transform hover:ease-in-out "
+              data-name="open"
+            >
+              <BiSearch className=" w-6 h-6 text-white" />
+            </button>
+          </div>
+        )}
         {location && (
-          <SearchLocation >
+          <SearchLocation>
             <LocationButton onClick={getCurrentLocation} data-name="no-hide">
               <figure data-name="no-hide">
-                <img data-name="no-hide" className="w-4.5rem h-4.5rem rounded-xl " src={'/img/mapIcon.jpg'} alt="어디로 여행가세요 아이콘"/>
-                <figcaption data-name="no-hide" className="a11y-hidden">어디로 여행가세요?</figcaption>
+                <img
+                  data-name="no-hide"
+                  className="w-4.5rem h-4.5rem rounded-xl "
+                  src={'/img/mapIcon.jpg'}
+                  alt="어디로 여행가세요 아이콘"
+                />
+                <figcaption data-name="no-hide" className="a11y-hidden">
+                  어디로 여행가세요?
+                </figcaption>
               </figure>
-            <span className="text-1.6rem ml-1.8rem text-#727272" data-name="no-hide">가까운 여행지 둘러보기</span>
+              <span
+                className="text-1.6rem ml-1.8rem text-#727272"
+                data-name="no-hide"
+              >
+                가까운 여행지 둘러보기
+              </span>
             </LocationButton>
           </SearchLocation>
         )}
-      {calendar && (
-        <SearchCalendar>
-          <HeaderCalendar handleOnDateChange={handleOnDateChange} dateRange={dateRange} focus={focus} setFocus={setFocus}/>
-        </SearchCalendar>
+        {calendar && (
+          <SearchCalendar>
+            <HeaderCalendar
+              handleOnDateChange={handleOnDateChange}
+              dateRange={dateRange}
+              focus={focus}
+              setFocus={setFocus}
+            />
+          </SearchCalendar>
         )}
-      {personnel && (
-        <SearchPersonnel >
-          <HeaderGuestEditModal count={count} setCount={setCount} increaseGuestNum={increaseGuestNum} decreaseGuestNum={decreaseGuestNum}/>
-        </SearchPersonnel>
-      )}
-    </SearchHeader>
-  );
-});
-
+        {personnel && (
+          <SearchPersonnel>
+            <HeaderGuestEditModal
+              count={count}
+              setCount={setCount}
+              increaseGuestNum={increaseGuestNum}
+              decreaseGuestNum={decreaseGuestNum}
+            />
+          </SearchPersonnel>
+        )}
+      </SearchHeader>
+    );
+  },
+);
 
 export default HeaderSearch;

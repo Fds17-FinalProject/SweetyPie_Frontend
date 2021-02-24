@@ -14,7 +14,7 @@ const SearchContainer = () => {
 
   useEffect(() => {
     dispatch(getAccommList(url.pathname + url.search));
-    dispatch(getPricesAction());
+    dispatch(getPricesAction(url.search));
   }, [dispatch, url.pathname, url.search]);
 
   return (

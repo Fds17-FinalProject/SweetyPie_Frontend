@@ -51,7 +51,7 @@ export const modifyReservation = ({
   totalPrice,
 }) =>
   axios.patch(
-    `https://sweetypie.ga/api/reservation/${reservationId}`,
+    `https://sweetypie.ga/api/${reservationId}`,
     {
       checkInDate,
       checkoutDate,
@@ -70,7 +70,7 @@ export const modifyReservation = ({
 
 // 예약 취소 DELETE 요청
 export const removeReservation = reservationId => {
-  axios.delete(`https://sweetypie.ga/api/reservation/${reservationId}`, {
+  axios.delete(`https://sweetypie.ga/api/${reservationId}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },

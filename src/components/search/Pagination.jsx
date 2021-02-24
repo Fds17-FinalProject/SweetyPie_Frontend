@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import axios from 'axios'
 import ReactPaginate from 'react-paginate';
 import '../../index.css';
 import { useSelector } from 'react-redux';
@@ -30,7 +29,7 @@ function Pagination() {
 
   useEffect(() => { 
     setOffset(url.searchParams.get('page') || 1)
-  },[]);
+  },[url.searchParams]);
 
   return (
     <div>

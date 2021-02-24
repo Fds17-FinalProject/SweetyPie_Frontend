@@ -2,6 +2,7 @@ import React from "react";
 import { Bar } from "react-chartjs-2";
 
 const BarChart = ({ data, highlight }) => {
+  console.log(highlight);
   const counts = new Array(50).fill(0);
   if (data.length !== 0) {
     for (let i = 0; i < data.length; i++) {

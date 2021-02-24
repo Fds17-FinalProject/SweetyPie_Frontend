@@ -8,8 +8,7 @@
 # Demo
 
 - Click here to see our website.
-- Click here to see our demo video.
-  .
+- Click here to see our demo video..
 
 # 프론트엔드 핵심 목표
 

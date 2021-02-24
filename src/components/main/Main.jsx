@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MainCity from './MainCity';
 import MainRecommendation from './MainRecommendation';
 import CommonHeaderContainer from '../../containers/CommonHeaderContainer';
-import Footer from './MainFooter';
+import MainFooter from './MainFooter';
 import RecommendPopup from '../main/RecommendPopup';
 import { Link } from 'react-router-dom';
 
@@ -172,7 +172,7 @@ const Main = ({ searchMainCity, searchAccommType }) => {
             </div>
 
             <div className="flex w-full">
-            <Link to="/accommodation/8888" className="w-1/4 mr-8">
+              <Link to="/accommodation/8888" className="w-1/4 mr-8">
                 <RecommendPopup
                    img={[
                     "https://a0.muscache.com/pictures/c305294e-84aa-4c5c-bdd6-2205d3dead08.jpg",
@@ -252,7 +252,7 @@ const Main = ({ searchMainCity, searchAccommType }) => {
           </section>
         </div>
       </div>
-      <Footer />
+      <MainFooter />
     </div>
   );
 };
