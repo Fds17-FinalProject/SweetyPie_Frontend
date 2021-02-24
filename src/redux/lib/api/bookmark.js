@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getBookmark = async () => {
-  await axios.get(`http://3.34.50.91/api/bookmark`, {
+  await axios.get(`https://sweetypie.ga/api/bookmark`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
@@ -10,7 +10,7 @@ export const getBookmark = async () => {
 
 export const postBookmark = async id => {
   await axios.post(
-    `http://3.34.50.91/api/bookmark`,
+    `https://sweetypie.ga/api/bookmark`,
     {
       accommodationId: id,
     },
@@ -23,7 +23,7 @@ export const postBookmark = async id => {
 };
 
 export const deleteBookmark = async id => {
-  await axios.delete(`http://3.34.50.91/api/bookmark/${id}`, {
+  await axios.delete(`https://sweetypie.ga/api/bookmark/${id}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
