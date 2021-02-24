@@ -188,7 +188,7 @@ const AccommodationSearchHeader = ({showSearchHeader, searchStartState, setLocat
     infantNum: 0,
     status: false,
   });
-  console.log('count', count);
+
   const url = new URL(window.location.href);
   const history = useHistory();
 
@@ -276,8 +276,7 @@ const AccommodationSearchHeader = ({showSearchHeader, searchStartState, setLocat
     // 체크아웃 날짜의 초기값 지정
     endDate: null,
   });
-  console.log('startDate', dateRange.startDate);
-  console.log('endDate', dateRange.endDate);
+  
     // 달력 날짜 포커스 상태
   const [focus, setFocus] = useState('startDate');
   // 달력 날짜 변경 함수

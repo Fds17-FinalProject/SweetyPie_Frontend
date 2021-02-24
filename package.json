@@ -31,6 +31,7 @@
     "react-dates": "^21.8.0",
     "react-dom": "^17.0.1",
     "react-error-boundary": "^3.1.0",
+    "react-geocode": "^0.2.3",
     "react-helmet-async": "^1.0.7",
     "react-hooks-paginator": "^0.4.4",
     "react-icons": "^4.1.0",

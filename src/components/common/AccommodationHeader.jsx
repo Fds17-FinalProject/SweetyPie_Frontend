@@ -64,7 +64,7 @@ const AccommodationHeader = ({
   const HeaderUser = () => {
     return (
       <HeaderUserMenu
-        className="flex bg-white p-2 rounded-3xl border-gray-300 border w-28	h-14"
+        className="flex bg-white p-2 rounded-3xl border-gray-300 border w-28 h-14"
         onClick={showModal}
       >
         <div className="flex-grow w-full h-full">
@@ -149,7 +149,7 @@ const AccommodationHeader = ({
   const HeaderLogo = () => {
     return (
       <div>
-        <Link to="#">
+        <Link to="/">
           <SVG name="logo" width="102px" color="#ff385c" height="32px" />
         </Link>
       </div>

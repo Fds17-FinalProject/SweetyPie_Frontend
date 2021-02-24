@@ -1,7 +1,7 @@
 import axios from 'axios';
 // 예약 내역 GET 요청
 export const readReservation = memberId =>
-  axios.get(`http://3.34.50.91/api/reservation`, {
+  axios.get(`https://sweetypie.ga/api/reservation`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
@@ -20,7 +20,7 @@ export const paymentReservation = ({
   totalPrice,
 }) =>
   axios.post(
-    `http://3.34.50.91/api/reservation`,
+    `https://sweetypie.ga/api/reservation`,
     {
       memberId: 1,
       accommodationId,
@@ -51,7 +51,7 @@ export const modifyReservation = ({
   totalPrice,
 }) =>
   axios.patch(
-    `http://3.34.50.91/api/reservation/${reservationId}`,
+    `https://sweetypie.ga/api/${reservationId}`,
     {
       checkInDate,
       checkoutDate,
@@ -70,7 +70,7 @@ export const modifyReservation = ({
 
 // 예약 취소 DELETE 요청
 export const removeReservation = reservationId => {
-  axios.delete(`http://3.34.50.91/api/reservation/${reservationId}`, {
+  axios.delete(`https://sweetypie.ga/api/${reservationId}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },

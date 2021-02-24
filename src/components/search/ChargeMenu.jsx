@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import RangeSlider from "./RangeSlider";
-import { useDispatch, useSelector } from 'react-redux';
-import { getPricesAction } from '../../redux/modules/payment';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import onClickOutside from "react-onclickoutside";
 
