@@ -202,6 +202,8 @@ const ModifyAccountContainer = () => {
   console.log();
 
   useEffect(() => {
+    // 회원 계정 정보 받아오기
+    dispatch(readMemberInfo());
     // 로그인이나 회원가입 성공 시 모달창 Close
     // useEffect에서 하는 이유는 dispatch가 비동기라서 에러객체가 담기는 시점을 알 수 없기 때문에
     if (authError === null) {
