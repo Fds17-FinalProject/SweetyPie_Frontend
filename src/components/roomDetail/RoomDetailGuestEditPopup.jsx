@@ -1,12 +1,29 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import SVG from '../../assets/svg';
-const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
+import onClickOutside from 'react-onclickoutside';
+
+const RoomDetailGuestEditPopup = ({
+  onCloseModal,
+  count,
+  setCount,
+  visible,
+  setVisible,
+}) => {
+  // 팝업창 영역 외부 클릭 시 닫히게 하기
+  RoomDetailGuestEditPopup.handleClickOutside = () =>
+    setVisible({
+      ...visible,
+      state: false,
+      type: 'calendar',
+    });
+
   const history = useHistory();
   const url = new URL(window.location.href);
   let adultNum = +url.searchParams.get('adultNum');
   let childNum = +url.searchParams.get('childNum');
   let infantNum = +url.searchParams.get('infantNum');
+
   console.log(
     'adultNum',
     adultNum,
@@ -344,4 +361,11 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
     </div>
   );
 };
-export default RoomDetailGuestEditPopup;
+
+RoomDetailGuestEditPopup.prototype = {};
+
+const clickOutsideConfig = {
+  handleClickOutside: () => RoomDetailGuestEditPopup.handleClickOutside,
+};
+
+export default onClickOutside(RoomDetailGuestEditPopup, clickOutsideConfig);

@@ -1,25 +1,25 @@
+
 import React from 'react';
 import styled from 'styled-components';
 import SVG from '../../assets/svg';
 import { Link } from "react-router-dom";
 import { BiMenu } from 'react-icons/bi';
-import Modal from './Modal';
+import Modal from '../common/Modal';
 import AuthModal from '../main/AuthModal';
-import SocialRegisterModal from './SocialRegisterModal';
-import HeaderSearch from '../main/HeaderSearch';
+import SocialRegisterModal from '../common/SocialRegisterModal';
 
-  
 const MainHeader = styled.header`
-position: ${({scrollY}) => !scrollY ? 'absolute' : 'fixed'};
+position: fixed;
 display: flex;
+max-width: 144rem;
 width: 100%;
 height: ${({searchStartState}) => searchStartState ? '18rem' : '8rem'};
 justify-content: space-between;
 padding-left: 8rem;
 padding-right: 8rem;
 padding-top: 2rem;
-background: ${({scrollY}) => !scrollY ? 'transparent' : '#fff'};
-z-index: 1;
+background:#fff;
+z-index: 10;
 box-sizing: border-box;
 box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
 `;
@@ -30,41 +30,26 @@ background-color: #fff;
 padding: 0.5rem;
 border: 1px solid rgba(209, 213, 219);
 border-radius: 1.5rem;
-min-width: 7rem;
+width: 7rem;
 height: 3.5rem;
 `;
 
-const CommonHeader = (
+const ModifyHeader = (
   {
-    showModal,         // 유저메뉴(버거바) open
-    hideModal,         // 모달 close
-    changeModal,       // 유저메뉴 -> 로그인, 회원가입 모달 뷰 교체
-    visible,           // 유저메뉴 open,close 상태
-    authVisible,       // 회원가입, 로그인 모달 open, close 상태
-    searchStartState,  // 검색 시작 버튼 누르면 애니메이션 교체해주기 위한 상태
-    scrollY,           // scrollY 값 30이상이면 true : false
-    setScrollY,
-    calendar,          // 검색 바 -> 체크인, 체크아웃 눌렀을때 나오는 뷰 상태
-    location,          // 검색 바 ->  위치 눌렀을때 나오는 뷰 상태
-    personnel,         // 검색 바 -> 인원수 눌렀을 때 뷰 상태
-    showAuthModal,     // 회원가입, 로그인 모달
-    showSearchHeader,  // 스크롤 30이상 시 검색 시작하기 누를 시 3번째 헤더로 변경
-    showCalendar,      // 체크인 체크아웃 view open
-    showLocation,      // 위치 view open 
-    showPersonnel ,    // 인원 수 view open
-    searchOnclick,     // 헤더 검색 버튼 누를 시 위치로 focus가게 하면서 버튼 스타일 변경
-    onChange,          // 로그인 회원가입 모달 인풋 onChange
-    registerSubmit,    // 회원가입 모달 submit
-    loginSubmit,       // 로그인 모달 submit
-    state,              // store (useSelector)
-    checkedToken,       // 로컬스토리지에 토큰이 있는지 없는지 유무(로그인 됐는지)
-    socialModal,        // 소셜로 회원가입 모달
+    showModal,            // 유저메뉴(버거바) open
+    hideModal,            // 모달 close
+    changeModal,          // 유저메뉴 -> 로그인, 회원가입 모달 뷰 교체
+    visible,              // 유저메뉴 open,close 상태
+    authVisible,          // 회원가입, 로그인 모달 open, close 상태
+    showAuthModal,        // 회원가입, 로그인 모달
+    onChange,             // 로그인 회원가입 모달 인풋 onChange
+    registerSubmit,       // 회원가입 모달 submit
+    loginSubmit,          // 로그인 모달 submit
+    state,                // store (useSelector)
+    checkedToken,         // 로컬스토리지에 토큰이 있는지 없는지 유무(로그인 됐는지)
+    socialModal,          // 소셜로 회원가입 모달
     socialRegisterSubmit, // 소셜로 회원가입 submit
-    userLogout,            // 로그아웃 api콜 함수 
-    scrollStatus,
-    address,
-    setAddress,
-    setLocation,
+    userLogout,         // 로그아웃 api콜 함수 
   }) => {
   // 버거바
 const HeaderUser = () => {
@@ -141,12 +126,12 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
     return (
       <div>
         <Link to="/">
-          <SVG name="logo" width="102px" color={!scrollY ? '#fff' : '#ff385c'} height="32px" />
+          <SVG name="logo" width="102px" color="#ff385c" height="32px" />
         </Link>
       </div>
     );
   };
-  
+
 
   return (
   <>
@@ -177,29 +162,12 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
       )}
 
     
-      <MainHeader scrollY={ scrollY } searchStartState={searchStartState}>
-        <HeaderLogo color="#fff" scrollY={ scrollY }/>
-        <HeaderSearch
-          scrollY={scrollY}
-          setScroll={setScrollY}
-          searchStartState={searchStartState}
-          calendar={calendar}
-          location={location}
-          personnel={personnel}
-          showSearchHeader={showSearchHeader}
-          showCalendar={showCalendar}
-          showLocation={showLocation}
-          showPersonnel={showPersonnel}
-          searchOnclick={searchOnclick}
-          scrollStatus={scrollStatus}
-          address={address}
-          setAddress={setAddress}
-          setLocation={setLocation}
-        />
+      <MainHeader >
+        <HeaderLogo color="#fff" />
         <HeaderUser />
       </MainHeader>
       </>
   );
 };
 
-export default CommonHeader;
+export default ModifyHeader;

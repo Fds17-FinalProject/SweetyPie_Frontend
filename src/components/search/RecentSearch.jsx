@@ -1,7 +1,6 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Carousel from '../common/Carousel';
 import { AiFillStar } from 'react-icons/ai';
-import MultipleCarousel from '../common/MultipleCarousel';
 
 const RecentSearch = (props) => {
   const { 

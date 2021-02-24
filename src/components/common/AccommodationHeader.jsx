@@ -149,7 +149,7 @@ const AccommodationHeader = ({
   const HeaderLogo = () => {
     return (
       <div>
-        <Link to="#">
+        <Link to="/">
           <SVG name="logo" width="102px" color="#ff385c" height="32px" />
         </Link>
       </div>
