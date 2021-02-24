@@ -17,12 +17,6 @@ const Calendar = ({
 }) => {
   const { startDate, endDate } = dateRange;
 
-  // // 테스트용 더미 데이터
-  // const bookedDate = [
-  //   { id: '1', startDate: '2021-03-08', endDate: '2021-03-11' },
-  //   { id: '2', startDate: '2021-03-20', endDate: '2021-03-22' },
-  // ];
-
   // moment-range를 통해 moment 생성 함수를 받아온다 -> moment() 호출 시 moment객체 생성
   const moment = extendMoment(Moment);
 

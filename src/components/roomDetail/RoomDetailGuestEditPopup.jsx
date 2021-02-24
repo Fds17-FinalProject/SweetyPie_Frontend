@@ -1,10 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import SVG from '../../assets/svg';
+import onClickOutside from 'react-onclickoutside';
 
-const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
+const RoomDetailGuestEditPopup = ({
+  onCloseModal,
+  count,
+  setCount,
+  visible,
+  setVisible,
+}) => {
+  // 팝업창 영역 외부 클릭 시 닫히게 하기
+  RoomDetailGuestEditPopup.handleClickOutside = () =>
+    setVisible({
+      ...visible,
+      state: false,
+      type: 'calendar',
+    });
+
   const history = useHistory();
   const url = new URL(window.location.href);
+  let adultNum = +url.searchParams.get('adultNum');
+  let childNum = +url.searchParams.get('childNum');
+  let infantNum = +url.searchParams.get('infantNum');
+
+  console.log(
+    'adultNum',
+    adultNum,
+    'childNum',
+    childNum,
+    'infantNum',
+    infantNum,
+  );
+  console.log(
+    'adult',
+    count.adultNum,
+    'child',
+    count.childNum,
+    'infant',
+    count.infantNum,
+  );
 
   // URL query 추가 및 변경하기
   const changeUrl = (key, value) => {
@@ -33,7 +68,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
     });
     changeUrl(type, count[type] - 1);
     // 어른이 0명이 되면 어린이와 아이 인원 초기화
-    if (count.adultNum === 1) resetGuestNum();
+    if (type === 'adultNum' && count.adultNum === 1) resetGuestNum();
   };
 
   const resetGuestNum = () => {
@@ -47,14 +82,14 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
     });
   };
 
-  console.log(
-    'adult',
-    count.adultNum,
-    'child',
-    count.childNum,
-    'infant',
-    count.infantNum,
-  );
+  // 첫 렌더링 시, state의 인원수와 url의 adultNum, childNum, infantNum 동기화
+  useEffect(() => {
+    setCount({
+      adultNum: adultNum,
+      childNum: childNum,
+      infantNum: infantNum,
+    });
+  }, []);
 
   return (
     <div className="w-full h-full" onClick={onCloseModal}>
@@ -67,7 +102,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
             <li className="mt-2.4rem text-1.6rem flex justify-between">
               <div className="text-1.6rem text-#484848 font-semibold">성인</div>
               <div className="flex items-center justify-between w-10.4rem h-3.2rem">
-                {count.adultNum === 0 ? (
+                {adultNum === 0 ? (
                   <button
                     onClick={() => decreaseGuestNum('adultNum')}
                     className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
@@ -103,8 +138,8 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
                     </div>
                   </button>
                 )}
-                <span className="text-1.6rem">{count.adultNum}</span>
-                {count.adultNum === 5 ? (
+                <span className="text-1.6rem">{adultNum || 0}</span>
+                {adultNum === 5 ? (
                   <button
                     onClick={() => increaseGuestNum('adultNum')}
                     className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
@@ -150,7 +185,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
                 <div className="text-1.4rem text-#484848">2~12세</div>
               </div>
               <div className="flex items-center justify-between w-10.4rem h-3.2rem">
-                {count.childNum === 0 || count.adultNum === 0 ? (
+                {childNum === 0 || adultNum === 0 ? (
                   <button
                     onClick={() => decreaseGuestNum('childNum')}
                     className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
@@ -186,8 +221,8 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
                     </div>
                   </button>
                 )}
-                <span className="text-1.6rem">{count.childNum}</span>
-                {count.childNum === 5 || count.adultNum === 0 ? (
+                <span className="text-1.6rem">{childNum || 0}</span>
+                {childNum === 5 || adultNum === 0 ? (
                   <button
                     onClick={() => increaseGuestNum('childNum')}
                     className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
@@ -233,7 +268,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
                 <div className="text-1.4rem text-#484848">2세 미만</div>
               </div>
               <div className="flex items-center justify-between w-10.4rem h-3.2rem">
-                {count.infantNum === 0 || count.adultNum === 0 ? (
+                {infantNum === 0 || adultNum === 0 ? (
                   <button
                     onClick={() => decreaseGuestNum('infantNum')}
                     className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
@@ -269,8 +304,8 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
                     </div>
                   </button>
                 )}
-                <span className="text-1.6rem">{count.infantNum}</span>
-                {count.infantNum === 5 || count.adultNum === 0 ? (
+                <span className="text-1.6rem">{infantNum || 0}</span>
+                {infantNum === 5 || adultNum === 0 ? (
                   <button
                     onClick={() => increaseGuestNum('infantNum')}
                     className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
@@ -327,4 +362,10 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
   );
 };
 
-export default RoomDetailGuestEditPopup;
+RoomDetailGuestEditPopup.prototype = {};
+
+const clickOutsideConfig = {
+  handleClickOutside: () => RoomDetailGuestEditPopup.handleClickOutside,
+};
+
+export default onClickOutside(RoomDetailGuestEditPopup, clickOutsideConfig);
