@@ -1,47 +1,26 @@
 import React, { useEffect, useState } from 'react';
-import CommonHeader from '../components/common/CommonHeader';
-import { throttle } from 'lodash';
 import { changeField, initializeForm, authRegister, socialRegisterSubmitAction} from "../redux/modules/auth";
 import { useDispatch, useSelector } from 'react-redux';
 import { getToken, logout } from '../redux/lib/api/auth';
+import SimpleHeader from '../components/common/SimpleHeader';
 
-const CommonHeaderContainer = (
-  { location,
-    calendar,
-    personnel,
-    setLocation,
-    setCalendar,
-    setPersonnel,
-    searchStartState,
-    setSearchStartState,
-    address,
-    setAddress,
-    
-    
-  }) => {
-  const [flexibleScroll, setFlexibleScroll] = useState({
-    currentScroll: 0,
-    scrollPlus: 0,
-    scrollMinus: 0,
-    scrollStatus: false,
-  });
-    
+const SimpleHeaderContainer = () => {
     // 로컬스토리지 토큰 유무 
     const [checkedToken, setCheckedToken] = useState(false);
-    // 스크롤 위치
-    const [scrollY, setScrollY] = useState(false);
     const [socialModal, setSocialModal] = useState(false);
     // 유저 메뉴 모달 초기 상태
     const [visible, setVisible] = useState(false);
-  
+  const [checkedLogin, setCheckedLogin] = useState(false);
+
+
     // // 검색 시작 하기 눌렀을 시 모달 초기 상태
     // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
     // 하나의 모달 회원가입 폼 모달 띄우는것 때문에 생각정리안된게있어서 일단 객체 상태로 냅둠!
-  const [authVisible, setAuthVisible] = useState({
+    const [ authVisible, setAuthVisible ] = useState({
       // 'login' or 'register'
       type: null,
-  });
-  const [checkedLogin, setCheckedLogin] = useState(false);
+    });
+  
     // 유저 메뉴 모달 open
     const showModal = () => {
       setVisible(true);
@@ -108,51 +87,6 @@ const CommonHeaderContainer = (
       }
     };
   
-// 검색 시작하기 onClick시 헤더 스타일 변경
-  const showSearchHeader = ({ target }) => {
-    if (target.dataset.name === 'open') {
-      // 상태 true로 바뀌면서 스타일 변경
-      setSearchStartState(true);
-      // 위치 open
-      setLocation(true);
-      setFlexibleScroll({
-        ...flexibleScroll,
-        currentScroll: window.scrollY,
-        scrollPlus: window.scrollY + 150,
-        scrollMinus: window.scrollY > 150 ? window.scrollY - 150 : 1,
-      })
-    }
-  };
-  // 헤더 위치 (어디로 여행가세요?)
-  const showLocation = ({ target }) => {
-    if (target.dataset.name === 'location') {
-      setLocation(true);
-      setCalendar(false);
-      setPersonnel(false);
-    }
-  };
-  // 헤더 켈린더 ( 체크인, 체크아웃 )
-  const showCalendar = ({ target }) => {
-    if (target.dataset.name === 'calendar') {
-      setCalendar(true);
-      setLocation(false);
-      setPersonnel(false);
-    }
-  };
-  // 헤더 인원 수
-  const showPersonnel = ({ target }) => {
-    if (target.dataset.name === 'personnel') {
-      setPersonnel(true);
-      setLocation(false);
-      setCalendar(false);
-    }
-  };
-  // 헤더에 검색 버튼 누를 시 location: true 하면서 검색 버튼 스타일 변경
-  const searchOnclick = ({ target }) => {
-    if (target.dataset.name === 'search') {
-      setLocation(true);
-    }
-  };
 //  로그인, 회원가입
   const dispatch = useDispatch();
   const state = useSelector(state => state.auth);
@@ -179,10 +113,12 @@ const CommonHeaderContainer = (
   
   const socialRegisterSubmit = e => {
     e.preventDefault();
+    console.log(socialRegister);
     const { email, name, contact, birthDate, socialId } = socialRegister;
     dispatch(socialRegisterSubmitAction({ email, name, contact, birthDate, socialId }));
   };
 
+  
   const loginSubmit = async e => {
     e.preventDefault();
     const { email, password } = login;
@@ -207,6 +143,8 @@ const CommonHeaderContainer = (
   };
 
 
+  
+
   useEffect(() => {
     // 로그인이나 회원가입 성공 시 모달창 Close
     // useEffect에서 하는 이유는 dispatch가 비동기라서 에러객체가 담기는 시점을 알 수 없기 때문에
@@ -214,6 +152,7 @@ const CommonHeaderContainer = (
       setAuthVisible(false);
     }
     // 구글로 회원가입 시 서버에서 받아온 유저정보에 socialId가 있다면 회원가입 모달창 open
+    console.log('socialRegister', socialRegister.socialId);
     if (socialRegister.socialId) {
       setSocialModal(true);
     }
@@ -227,52 +166,19 @@ const CommonHeaderContainer = (
       setVisible(false);
       setCheckedToken(true);
     }
-    function watchScroll() {
-    window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
-    }; 
-    function wathchFlexibleScroll() {
-      // console.log('scrollPlus', flexibleScroll.scrollPlus);
-      if (flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus) {
-        setSearchStartState(false);
-        setLocation(false);
-        setCalendar(false);
-        setPersonnel(false);
-        setFlexibleScroll({
-          ...flexibleScroll,
-          currentScroll: 0,
-          scrollPlus: 0,
-          scrollMinus: 0,
-        })
-      }
-    }
-    wathchFlexibleScroll();
-    window.addEventListener('scroll', throttle(watchScroll, 150));
-    window.addEventListener('scroll', wathchFlexibleScroll);
-
-  return () => {
-    window.removeEventListener('scroll', watchScroll);
-  };
-}, [authError, socialRegister.socialId, checkedToken, setSearchStartState]);
+}, [authError, socialRegister.socialId, checkedToken]);
+// }, [auth, authError, dispatch]);
 
 
   return (
     <>
-      <CommonHeader
+      <SimpleHeader
         showModal={showModal}
         hideModal={hideModal}
         changeModal={changeModal}
         authVisible={authVisible}
         visible={visible}
         showAuthModal={showAuthModal}
-        searchStartState={searchStartState}
-        location={location}
-        calendar={calendar}
-        personnel={personnel}
-        scrollY={scrollY}
-        setScrollY={setScrollY}
-        scrollStatus={flexibleScroll.srollStatus}
-        setLocation={setLocation}
-
         socialModal={socialModal}
         onChange={onChange}
         registerSubmit={registerSubmit}
@@ -281,19 +187,10 @@ const CommonHeaderContainer = (
         userLogout={userLogout}
         state={state}
         checkedToken={checkedToken}
-
-        showSearchHeader={showSearchHeader}
-        showLocation={showLocation}
-        showCalendar={showCalendar}
-        showPersonnel={showPersonnel}
-        searchOnclick={searchOnclick}
-
-        address={address}
-        setAddress={setAddress}
         checkedLogin={checkedLogin}
       />  
     </>
   )
 };
 
-export default CommonHeaderContainer;
+export default SimpleHeaderContainer;

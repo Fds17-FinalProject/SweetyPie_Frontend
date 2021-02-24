@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import MainCity from './MainCity';
 import MainRecommendation from './MainRecommendation';
 import CommonHeaderContainer from '../../containers/CommonHeaderContainer';
-import Footer from './Footer';
-import MapPopup from '../search/MapPopup';
-import RecommendPopup from './RecommendPopup';
+import Footer from './MainFooter';
+import RecommendPopup from '../main/RecommendPopup';
+import { Link } from 'react-router-dom';
 
 const MainContainer = styled.div`
   background-image: url('/img/main.jpg');
@@ -172,7 +172,7 @@ const Main = ({ searchMainCity, searchAccommType }) => {
             </div>
 
             <div className="flex w-full">
-              <div className="w-1/4 mr-8">
+            <Link to="/accommodation/8888" className="w-1/4 mr-8">
                 <RecommendPopup
                    img={[
                     "https://a0.muscache.com/pictures/c305294e-84aa-4c5c-bdd6-2205d3dead08.jpg",
@@ -190,8 +190,8 @@ const Main = ({ searchMainCity, searchAccommType }) => {
                   }}
                   className="rounded-xl"
                 />
-              </div>
-              <div className="w-1/4 mr-8">
+              </Link>
+              <Link to="/accommodation/7779" className="w-1/4 mr-8">
                 <RecommendPopup
                   img={[
                     "https://a0.muscache.com/pictures/424f6985-5fb9-439c-994a-11f5e958ac75.jpg",
@@ -209,8 +209,8 @@ const Main = ({ searchMainCity, searchAccommType }) => {
                   }}
                   className="rounded-xl"
                 />
-              </div>
-              <div className="w-1/4 mr-8">
+              </Link>
+              <Link to="/accommodation/" className="w-1/4 mr-8">
                 <RecommendPopup
                   img={[
                     "https://a0.muscache.com/pictures/22d2aa5d-333f-4179-b0c3-1c324da50f43.jpg",
@@ -228,8 +228,8 @@ const Main = ({ searchMainCity, searchAccommType }) => {
                   }}
                   className="rounded-xl"
                 />
-              </div>
-              <div className="w-1/4 mr-8">
+              </Link>
+              <Link to="/accommodation/" className="w-1/4 mr-8">
                 <RecommendPopup
                   img={[
                     "https://a0.muscache.com/pictures/0825d983-4ec8-41a5-9bc7-b0b56ed8f97c.jpg",
@@ -247,7 +247,7 @@ const Main = ({ searchMainCity, searchAccommType }) => {
                   }}
                   className="rounded-xl"
                 />
-              </div>
+              </Link>
             </div>
           </section>
         </div>

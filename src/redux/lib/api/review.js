@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 작성된 리뷰 GET 요청
 export const readReview = reservationId =>
-  axios.get(`http://3.34.50.91/api/review/${reservationId}`, {
+  axios.get(`https://sweetypie.ga/api/review/${reservationId}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
@@ -16,7 +16,7 @@ export const postReview = ({
   content,
 }) =>
   axios.post(
-    `http://3.34.50.91/api/review`,
+    `https://sweetypie.ga/api/review`,
     {
       accommodationId,
       reservationId,
@@ -32,4 +32,4 @@ export const postReview = ({
 
 // 임시 리뷰 삭제용 DELETE
 export const deleteReview = () =>
-  axios.delete(`http://3.34.50.91/api/review/96554`);
+  axios.delete(`https://sweetypie.ga/api/review/96554`);

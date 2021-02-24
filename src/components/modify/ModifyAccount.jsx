@@ -1,9 +1,7 @@
 import React from 'react';
-import Footer from '../main/Footer';
+import CommonFooter from '../common/CommonFooter';
 import ModifyInput from './ModifyInput';
 import ModifyContent from './ModifyContent';
-import HeaderLogo from '../main/HeaderLogo';
-import HeaderUser from '../main/HeaderUser';
 import ModifyDescription from './ModifyDescription';
 import ModifyHeader from './ModifyHeader';
 
@@ -156,7 +154,7 @@ const ModifyAccount = ({
           </button>
         </div>
       </div>
-      <Footer />
+      <CommonFooter />
     </div>
   );
 };

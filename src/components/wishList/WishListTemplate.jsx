@@ -1,9 +1,13 @@
 import React from 'react';
+import SimpleHeaderContainer from '../../containers/SimpleHeaderContainer';
+import CommonFooter from '../common/CommonFooter';
 import WishListCard from './WishListCard';
 
 const WishListTemplate = ({ bookmarks, loading }) => {
   return (
-    <div className="max-w-screen-2xl mt-3.6rem px-32 pb-6.5rem">
+    <>
+    <SimpleHeaderContainer />      
+    <div className="px-32 pb-6.5rem">
       <section>
         <h1 className="text-3.2rem mb-10 pl-6 font-semibold">저장 목록</h1>
         <div className="max-w-screen-2xl mx-6 h-0.5 border-t"></div>
@@ -27,7 +31,9 @@ const WishListTemplate = ({ bookmarks, loading }) => {
           )}
         </ul>
       </section>
-    </div>
+      </div>
+      <CommonFooter />
+    </>
   );
 };
 

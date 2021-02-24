@@ -263,7 +263,6 @@ window.addEventListener('scroll', wathchFlexibleScroll);
       setLocation={setLocation}
       setPersonnel={setPersonnel}
       setCalendar={setCalendar}
-      
       socialModal={socialModal}
       onChange={onChange}
       registerSubmit={registerSubmit}

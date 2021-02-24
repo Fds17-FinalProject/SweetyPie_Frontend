@@ -1,12 +1,10 @@
-import styled, { css, keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import HeaderGuestEditModal from '../common/HeaderGuestEditModal';
 import { BiSearch } from 'react-icons/bi';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 import HeaderCalendar from '../main/HeaderCalendar';
-import Moment from 'moment';
-import { extendMoment } from 'moment-range';
 
 const scrollUp = keyframes`
 from {
