@@ -7,6 +7,7 @@ const RoomDetailGuestEditPopup = ({ onCloseModal, count, setCount }) => {
   let adultNum = +url.searchParams.get('adultNum');
   let childNum = +url.searchParams.get('childNum');
   let infantNum = +url.searchParams.get('infantNum');
+
   console.log(
     'adultNum',
     adultNum,

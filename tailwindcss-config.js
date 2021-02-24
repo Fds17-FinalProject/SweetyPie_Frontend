@@ -27,7 +27,7 @@ module.exports = {
       },
       colors: {
         airbnb: '#ff385c',
-        airbnbHover: '#ff5473',
+        airbnbHover: '#dc143c',
         searchBorder: 'rgba(118, 118, 118, 0.28)',
         searchBackground: 'rgb(255, 255, 255)',
         '#222': '#222',
