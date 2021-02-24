@@ -30,6 +30,7 @@ const Main = () => {
   const [location, setLocation] = useState(false);
   const [calendar, setCalendar] = useState(false);
   const [personnel, setPersonnel] = useState(false);
+  const [address, setAddress] = useState('');
   // 검색 시작 하기 눌렀을 시 모달 초기 상태
   const [searchStartState, setSearchStartState] = useState(false);
   const hideSearchModal = ({ target }) => {
@@ -52,6 +53,9 @@ const Main = () => {
         setPersonnel={setPersonnel}
         searchStartState={searchStartState}
         setSearchStartState={setSearchStartState}
+        address={address}
+        setAddress={setAddress}
+        
       />
       <MainContainer>
         <section className="w-full pt-72 pb-16 px-32">
@@ -62,7 +66,7 @@ const Main = () => {
       </MainContainer>
 
       <div>
-        <div className="max-w-screen-2xl px-32">
+        <div className="px-32">
           <section>
             <div className="flex flex-wrap py-24">
               <div className="flex w-full pb-3">
