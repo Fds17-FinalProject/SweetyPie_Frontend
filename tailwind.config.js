@@ -925,9 +925,9 @@ module.exports = {
     zIndex: ['responsive', 'focus-within', 'focus'],
   },
   plugins: [
-    require('@fullhuman/postcss-purgecss')({
-      content: ['./src/**/*.jsx', './src/**/*.js', './src/**/*.html'],
-      defaultExtractor: content => content.match(/[A-Za-z0-9_:/]+/g) || [],
-    }),
+    // require('@fullhuman/postcss-purgecss')({
+    //   content: ['./src/**/*.jsx', './src/**/*.js', './src/**/*.html'],
+    //   defaultExtractor: content => content.match(/[A-Za-z0-9_:/]+/g) || [],
+    // }),
   ],
 };
