@@ -1,30 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import GoogleMapReact from 'google-map-react';
 import SVG from '../../assets/svg';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
 import MapPopup from './MapPopup';
-// 1. 아이디가 서로 일치하고 IsHovering이 true이면 까만색
-// 2. 아이디가 서로 일치하고 false이면 하얀색
-// 3. 아이디가 다르면 하얀색
-
-// const Marker = styled.button`
-//   background-color: `${props => console.log(props)}`;
-//   box-shadow: rgb(0 0 0 / 8%) 0px 0px 0px 1px, rgb(0 0 0 / 18%) 0px 1px 2px;
-//   // color: `${isHovering.id === id && isHovering.isHovering ? 'rgb(34, 34, 34)' : 'rgb(255, 255, 255)'}`;
-//   width: 32px;
-//   height: 32px;
-//   border-radius: 50%,
-//   justify-content: center;
-//   align-items: center;
-//   display: flex;
-
-// `;
-
+import Geocode from "react-geocode";
 
 const Marker = ({ isHovering, accommId, id, setId, img, accomm, hoverId, setHoverId }) => {
   const [coord, setCoord] = useState({ clientX: null, clientY: null });
-  
+
   const onClick = (e) => {
     setId(accommId);
     setCoord({
@@ -69,22 +52,48 @@ const Marker = ({ isHovering, accommId, id, setId, img, accomm, hoverId, setHove
   )
 };
  
-const SearchMap = ({ accommodations, loading, isHovering, id, setId }) => {
+const SearchMap = ({ accommodations, loading, isHovering, id, setId, address }) => {
   const [hoverId, setHoverId] = useState(0);
   const [coord, setCoord] = useState({
     clientX: null,
     clientY: null,
   })
   
+  const [center, setCenter] = useState({
+    lat: null,
+    lng: null,
+  });
+
+  useEffect(() => { 
+    Geocode.setApiKey("AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU");
+    
+      Geocode.fromAddress(address).then(
+        (response) => {
+          const { lat, lng } = response.results[0].geometry.location;
+          setCenter({
+            lat: lat,
+            lng: lng,
+          })
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+  }, [address]);
+
+  
   const history = useHistory();
 
-   const defaultProps = {
+
+  const defaultProps = {
     center: {
-      lat: 37.556708,
-      lng: 126.910326
+      lat:  center.lat,
+      lng:  center.lng,
     },
     zoom: 14
   };
+
+  console.log(defaultProps.center.lat);
  
   let boundaryCoordinate = {};
  
@@ -92,9 +101,8 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId }) => {
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
         <GoogleMapReact
-          // onClick={_onClick}
           bootstrapURLKeys={{ key: 'AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU' }}
-          defaultCenter={defaultProps.center}
+          center={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           options={{
             scrollwheel: true
@@ -134,12 +142,11 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId }) => {
                 accomm={accomm}
                 coord={coord}
               />)
-            }
-              )}
+            })}
         </GoogleMapReact>
       </div>
     );
   
 }
  
-export default SearchMap;
+export default React.memo(SearchMap);

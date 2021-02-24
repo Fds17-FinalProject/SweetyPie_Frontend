@@ -3,9 +3,11 @@ import { Grid, Button, TextField, InputAdornment } from '@material-ui/core';
 import { Slider, Rail, Handles, Tracks, Ticks } from "react-compound-slider";
 import { MuiRail, MuiHandle, MuiTrack, MuiTick } from "./Components";
 import BarChart from './BarChart';
+import { useSelector } from 'react-redux';
 
 const RangeSlider = ({data, inputValues, setInputValues}) => {
   // const sortedData = props.data.slice().sort((a, b) => a - b);
+
   const range = [data[0], data[data.length - 1]];
 
 

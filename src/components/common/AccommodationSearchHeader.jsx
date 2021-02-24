@@ -153,6 +153,9 @@ const AccommodationSearchHeader = ({
     infantNum: 0,
     status: false,
   });
+
+  const url = new URL(window.location.href);
+
   const history = useHistory();
   // 헤더 위치 (어디로 여행가세요?)
   const showLocation = ({ target }) => {
@@ -201,7 +204,9 @@ const AccommodationSearchHeader = ({
     // 체크아웃 날짜의 초기값 지정
     endDate: null,
   });
-  // 달력 날짜 포커스 상태
+  
+    // 달력 날짜 포커스 상태
+
   const [focus, setFocus] = useState('startDate');
   // 달력 날짜 변경 함수
   const handleOnDateChange = ({ startDate, endDate }) => {

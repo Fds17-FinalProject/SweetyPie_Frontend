@@ -14,19 +14,19 @@ const MapContainer = styled.div`
 `;
 
 const MapPopup = ({ img, accomm, coord, accommId }) => {
-
+console.log(coord);
   let x;
   let y;
   if (860 < coord.clientX && coord.clientX < 1147 && 110 < coord.clientY && coord.clientY < 407) {
     x = '20px';
     y = '20px';
-  } else if (1147 < coord.clientX && coord.clientX < 1414 && 110 < coord.clientY && coord.clientY < 407) {
-    x = '-260px';
-    y = '30px';
+  } else if (1147 < coord.clientX && coord.clientX < 1450 && 110 < coord.clientY && coord.clientY < 407) {
+    x = '-280px';
+    y = '-50px';
   } else if (860 < coord.clientX && coord.clientX < 1147 && 407 < coord.clientY && coord.clientY < 800) {
     x = '50px'
     y = '-240px';
-  } else if (1147 < coord.clientX && coord.clientX < 1414 && 407 < coord.clientY && coord.clientY < 800) {
+  } else if (1147 < coord.clientX && coord.clientX < 1450 && 407 < coord.clientY && coord.clientY < 800) {
     x = '-280px';
     y = '-260px';
   }
