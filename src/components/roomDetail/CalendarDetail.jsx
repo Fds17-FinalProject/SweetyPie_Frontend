@@ -29,10 +29,12 @@ const CalendarDetail = ({ gu, bookedDateDtos }) => {
 
   // 달력 날짜 변경 함수
   const handleOnDateChange = ({ startDate, endDate }) => {
-    setDateRange({
-      startDate: startDate,
-      endDate: endDate,
-    });
+    if (startDate !== endDate) {
+      setDateRange({
+        startDate: startDate,
+        endDate: endDate,
+      });
+    }
     // 변경된 날짜에 따라 url 변경(checkInDate, checkOut)
     // 만약, checkoutDate가 checkInDate보다 이전일 때, 음수로 숙박일수 지정되지 않도록 조절
     startDate && changeUrl('checkInDate', startDate.format('YYYY-MM-DD'));
