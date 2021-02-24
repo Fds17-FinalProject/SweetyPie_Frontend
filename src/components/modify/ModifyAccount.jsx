@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CommonFooter from '../common/CommonFooter';
 import ModifyInput from './ModifyInput';
 import ModifyContent from './ModifyContent';
