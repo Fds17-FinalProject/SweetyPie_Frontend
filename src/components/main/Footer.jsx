@@ -1,7 +1,15 @@
 import React from 'react';
 import { ImInstagram, ImFacebook } from 'react-icons/im';
 import { IoLogoTwitter } from 'react-icons/io';
-
+import styled from 'styled-components';
+const FooterWrap = styled.footer`
+  width: 100%;
+  height: 5rem;
+  background: #f3f4f6;
+  padding-left: 8rem;
+  padding-right: 8rem;
+  transform: translateY(30rem);
+`;
 const FooterContainer = () => {
   return (
     <div className="flex justify-between items-center w-full h-full border-t py-10 ">
@@ -14,7 +22,6 @@ const FooterContainer = () => {
     </div>
   );
 };
-
 const FooterContent = () => {
   return (
     <>
@@ -34,7 +41,6 @@ const FooterContent = () => {
     </>
   );
 };
-
 const SnsContainer = () => {
   return (
     <ul className="flex">
@@ -56,13 +62,11 @@ const SnsContainer = () => {
     </ul>
   );
 };
-
 const Footer = () => {
   return (
-    <footer className="h-20 bg-gray-100 px-19.4rem">
+    <FooterWrap>
       <FooterContainer />
-    </footer>
+    </FooterWrap>
   );
 };
-
 export default Footer;
