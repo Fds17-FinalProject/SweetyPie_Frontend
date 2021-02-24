@@ -152,6 +152,9 @@ const RoomDetailTemplate = ({
       {visible.type === 'safety' && visible.state && (
         <RoomDetailSafetyModal onCloseModal={onCloseModal} />
       )}
+      {visible.type === 'refund' && visible.state && (
+        <RoomDetailRefundModal onCloseModal={onCloseModal} />
+      )}
       {scrollHeader.visible === false && <AccommodationHeaderContainer />}
       {scrollHeader.visible && <RoomDetailHeader scrollHeader={scrollHeader} />}
       {loading === false && (

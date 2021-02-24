@@ -14,7 +14,6 @@ const RoomDetailContainer = () => {
       loading: loading['roomDetail/READ_ROOMDETAIL'],
     }),
   );
-  // console.log(accommodation);
 
   const dispatch = useDispatch();
   // url의 accommodation_id 가져오기
