@@ -17,7 +17,6 @@ const MainContainer = styled.div`
 const Textarea = styled.span`
   color: #fff;
   display: block;
-  width: 30rem;
   font-size: 5.2rem;
   line-height: 5.8rem;
   font-weight: 800;
@@ -57,14 +56,14 @@ const Main = ({ searchMainCity, searchAccommType }) => {
       <MainContainer>
         <section className="w-full pt-72 pb-16 px-32">
           <div>
-            <Textarea>이제, 여행은 가까운 곳에서</Textarea>
+            <Textarea>이제, 여행은<br/>가까운 곳에서</Textarea>
           </div>
         </section>
       </MainContainer>
 
       <div>
         <div className="px-32">
-          <section>
+          <section className="mb-4rem">
             <div className="flex flex-wrap py-24">
               <div className="flex w-full pb-3">
                 <button className="w-1/4" onClick={e => searchMainCity('서울')}>
@@ -119,8 +118,8 @@ const Main = ({ searchMainCity, searchAccommType }) => {
             </div>
           </section>
 
-          <section className="w-full">
-            <div className="text-3.2rem pb-12">
+          <section className="w-full mb-6rem">
+            <div className="text-3.2rem pb-12 font-semibold">
               어디에서나, 여행은 살아보는 거야!
             </div>
 
@@ -167,50 +166,31 @@ const Main = ({ searchMainCity, searchAccommType }) => {
           </section>
 
           <section className="w-full pb-16">
-            <div className="text-3.2rem pb-12">
+            <div className="text-3.2rem pb-12 font-semibold">
               이 달의 추천 여행지&#58; 강릉{' '}
             </div>
 
             <div className="flex w-full">
-              <Link to="/accommodation/8888" className="w-1/4 mr-8">
+              <Link to="/accommodation/10301" className="w-1/4 mr-8">
                 <RecommendPopup
                    img={[
-                    "https://a0.muscache.com/pictures/c305294e-84aa-4c5c-bdd6-2205d3dead08.jpg",
-                    "https://a0.muscache.com/pictures/700a645c-5ab4-437c-abd7-23ecf24d7505.jpg",
-                    "https://a0.muscache.com/pictures/2599f9ec-9351-4248-83ae-182e862a6d2f.jpg",
-                    "https://a0.muscache.com/pictures/9e369fe5-0d11-4351-81b8-31ec12aecb48.jpg",
-                    "https://a0.muscache.com/pictures/4bf5279d-b94a-4ae2-88c9-bcc405603043.jpg",
+                    "https://a0.muscache.com/pictures/e8e52ae4-c670-4b1c-a2cd-326e46f2f95f.jpg",
+                    "https://a0.muscache.com/pictures/48f4cbe3-4a48-4304-8878-863155371811.jpg",
+                    "https://a0.muscache.com/pictures/4b6f57df-ebc3-4267-89ef-9c24a44b67e4.jpg",
+                    "https://a0.muscache.com/pictures/f97e069d-8114-4786-8127-a39b68f2e772.jpg",
+                    "https://a0.muscache.com/pictures/01fa0cbd-9833-415e-8a37-f427d57a7a2c.jpg",
                   ]}
                   accomm={{
-                    rating: 4.79,
+                    rating: 5.0,
                     reviewNum: 6,
                     buildingType: '아파트',
                     accommodationType: '전체',
-                    title: 'LIKE MY HOME 라이크마이홈 (Gangneung, Jumunjin)',
+                    title: '[로니로니하우스]펜트하우스넓은베란다주문진5분오션뷰&마운틴뷰',
                   }}
                   className="rounded-xl"
                 />
               </Link>
-              <Link to="/accommodation/7779" className="w-1/4 mr-8">
-                <RecommendPopup
-                  img={[
-                    "https://a0.muscache.com/pictures/424f6985-5fb9-439c-994a-11f5e958ac75.jpg",
-                    "https://a0.muscache.com/pictures/9eb5c97e-d29c-4a04-aea9-a6c5595da09f.jpg",
-                    "https://a0.muscache.com/pictures/2a9e6b39-fdb2-45b3-bbee-50e59b3a769b.jpg",
-                    "https://a0.muscache.com/pictures/743b2a1a-e62f-4451-b86c-835926a36371.jpg",
-                    "https://a0.muscache.com/pictures/47135fe4-0550-4b7d-a151-7ab539cf4c98.jpg",
-                  ]}
-                  accomm={{
-                    rating: 4.0,
-                    reviewNum: 6,
-                    buildingType: '펜션',
-                    accommodationType: '전체',
-                    title: '스파의 이완과 테라스의 풍경이 멋진 강릉의 301호 객실',
-                  }}
-                  className="rounded-xl"
-                />
-              </Link>
-              <Link to="/accommodation/" className="w-1/4 mr-8">
+              <Link to="/accommodation/7774" className="w-1/4 mr-8">
                 <RecommendPopup
                   img={[
                     "https://a0.muscache.com/pictures/22d2aa5d-333f-4179-b0c3-1c324da50f43.jpg",
@@ -229,21 +209,40 @@ const Main = ({ searchMainCity, searchAccommType }) => {
                   className="rounded-xl"
                 />
               </Link>
-              <Link to="/accommodation/" className="w-1/4 mr-8">
+              <Link to="/accommodation/10337" className="w-1/4 mr-8">
                 <RecommendPopup
                   img={[
-                    "https://a0.muscache.com/pictures/0825d983-4ec8-41a5-9bc7-b0b56ed8f97c.jpg",
-                    "https://a0.muscache.com/pictures/00d00be3-aabd-4d7f-93bf-d170b3f6d6e5.jpg",
-                    "https://a0.muscache.com/pictures/420c229f-d481-4b7e-81fe-d5fba9416261.jpg",
-                    "https://a0.muscache.com/pictures/21c27e06-3a85-4ee7-8d9f-424933bea99e.jpg",
-                    "https://a0.muscache.com/pictures/df6e7448-80a9-4030-adaa-98e4dd4fbc28.jpg",
+                    "https://a0.muscache.com/pictures/79213d9e-c20c-4f56-ba7a-7c4715c193d5.jpg",
+                    "https://a0.muscache.com/pictures/82782a1d-7a7e-4b7b-b95d-5159443070c8.jpg",
+                    "https://a0.muscache.com/pictures/f241c9ca-9cac-408e-b78b-a10d20ec03f4.jpg",
+                    "https://a0.muscache.com/pictures/f92c4b7e-4636-4e4f-81e1-94c8351f8148.jpg",
+                    "https://a0.muscache.com/pictures/20b93647-285f-441c-9ff0-cb1d9ef40173.jpg",
                   ]}
                   accomm={{
                     rating: 4.33,
-                    reviewNum: 3,
+                    reviewNum: 6,
                     buildingType: '펜션',
+                    accommodationType: '개인실',
+                    title: '코발트 블루가 있는 인테리어가 돋보이는 객실 301호',
+                  }}
+                  className="rounded-xl"
+                />
+              </Link>
+              <Link to="/accommodation/10506" className="w-1/4 mr-8">
+                <RecommendPopup
+                  img={[
+                    "https://a0.muscache.com/pictures/81dcf13e-24bb-491c-ae1d-6f9a80b1e9b3.jpg",
+                    "https://a0.muscache.com/pictures/6933e53d-82e6-457a-af9e-2593ae7af789.jpg",
+                    "https://a0.muscache.com/pictures/399d2d25-942b-4f18-81e4-397cd5f9cac3.jpg",
+                    "https://a0.muscache.com/pictures/9f55dcd2-36c4-47a6-b2a1-06b61f2ebe55.jpg",
+                    "https://a0.muscache.com/pictures/4b2abd7e-08c8-4ca3-8f88-972d8d6956f7.jpg",
+                  ]}
+                  accomm={{
+                    rating: 4.94,
+                    reviewNum: 3,
+                    buildingType: '아파트',
                     accommodationType: '전체',
-                    title: '우드와 화이트의 색상이 어우러진  강릉 폴카 객실',
+                    title: '# 영진해변#오션뷰# 동해바다를 한눈에 담은 더 힐 하우스',
                   }}
                   className="rounded-xl"
                 />

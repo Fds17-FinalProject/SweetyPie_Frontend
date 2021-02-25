@@ -27,7 +27,6 @@ const StyledSlider = styled(Slider)`
   }
 
   .slick-arrow::before {
-    /* font-size: 25px; */
     width: 30px;
   }
 
@@ -46,7 +45,7 @@ const SlickArrowLeft = ({ currentSlide, slideCount, ...props }) => {
       aria-hidden="true"
       aria-disabled={currentSlide === slideCount + 1 ? true : false}
       type="button"
-      style={{ width: 100, heigth: 100, position: 'absolute', zIndex: 10, bottom: 50, left: -25 }}
+      style={{ width: 50, heigth: 100, position: 'absolute', zIndex: 10, bottom: 50, left: 0 }}
     >
       Previous
     </button>
@@ -62,7 +61,7 @@ const SlickArrowRight = ({ currentSlide, slideCount, ...props }) => (
     aria-hidden="true"
     aria-disabled={currentSlide === slideCount - 1 ? true : false}
     type="button"
-    style={{ width: 100, heigth: 100, position: 'absolute', zIndex: 10, bottom: 50, right: -25 }}
+    style={{ width: 50, heigth: 100, position: 'absolute', zIndex: 10, bottom: 50, right: 0 }}
   >
     Next
   </button>
@@ -88,7 +87,7 @@ const Carousel = ({ size, img }) => {
 
   return (
     <StyledSlider size={size} LowQualityImg={LowQualityImg} {...settings} >
-      {LowQualityImg.map(image => (<img src={image} alt="" />))}
+      {LowQualityImg.map(image => (<img src={image} alt={image} className="rounded-t-xl" />))}
     </StyledSlider>
   );
 };

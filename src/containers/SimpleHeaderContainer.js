@@ -3,6 +3,7 @@ import { changeField, initializeForm, authRegister, socialRegisterSubmitAction} 
 import { useDispatch, useSelector } from 'react-redux';
 import { getToken, logout } from '../redux/lib/api/auth';
 import SimpleHeader from '../components/common/SimpleHeader';
+import { useHistory } from 'react-router';
 
 const SimpleHeaderContainer = () => {
     // 로컬스토리지 토큰 유무 
@@ -20,7 +21,7 @@ const SimpleHeaderContainer = () => {
       // 'login' or 'register'
       type: null,
     });
-  
+  const history = useHistory();
     // 유저 메뉴 모달 open
     const showModal = () => {
       setVisible(true);
@@ -140,6 +141,7 @@ const SimpleHeaderContainer = () => {
     logout();
     localStorage.removeItem('token');
     setCheckedToken(false);
+    history.push('/');
   };
 
 
