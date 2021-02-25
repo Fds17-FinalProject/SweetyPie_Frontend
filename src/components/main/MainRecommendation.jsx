@@ -8,7 +8,7 @@ const MainRecommendation = ({src, alt, children}) => {
           src={img + src}
           alt={alt}
         />
-        <figcaption className="text-left text-1.8rem p-4 font-extrabold">{children}</figcaption>
+        <figcaption className="text-left text-1.8rem p-4">{children}</figcaption>
       </figure>
   );
 };
