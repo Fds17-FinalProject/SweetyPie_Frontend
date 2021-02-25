@@ -1,6 +1,5 @@
-import axios from 'axios';
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { removeReservation } from '../../redux/lib/api/reservations';
 
 const CommonChoiceModal = ({ hideModal, children, reservationId }) => {
