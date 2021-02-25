@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import SearchTemplate from '../components/search/SearchTemplate';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAccommList } from '../redux/modules/accommodations';
-import { useLocation } from 'react-router-dom';
 import { getPricesAction } from '../redux/modules/payment';
 
 const SearchContainer = () => {

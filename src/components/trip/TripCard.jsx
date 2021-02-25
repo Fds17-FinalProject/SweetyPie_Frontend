@@ -11,7 +11,6 @@ import {
 const TripCard = ({ reservations, tab, reviewStatus, setReviewStatus }) => {
   // 예약 숙소 정보
   const {
-    memberId,
     accommodationId,
     reservationId,
     checkInDate,

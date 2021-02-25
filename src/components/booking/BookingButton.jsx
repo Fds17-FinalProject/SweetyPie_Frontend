@@ -1,4 +1,3 @@
-// BookingButton
 import React from 'react';
 import SVG from '../../assets/svg';
 import {

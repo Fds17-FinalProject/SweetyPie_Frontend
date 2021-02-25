@@ -5,6 +5,12 @@ import BookingTemplate from '../components/booking/BookingTemplate';
 import { useSelector } from 'react-redux';
 
 const BookingContainer = () => {
+  window.scrollTo({
+    left: 0,
+    top: 0,
+    behavior: 'smooth',
+  });
+
   // 숙소 정보를 roomDetail 리듀서에서 꺼내온다
   const { accommodations } = useSelector(({ roomDetail }) => ({
     accommodations: roomDetail.accommodation,
@@ -32,13 +38,14 @@ const BookingContainer = () => {
   );
 
   // reservations 리듀서가 있다면 저장된 예약 중 일치하는 숙소의 정보를 받아온다 없다면 localStorage에서 숙소 정보를 받아온다
-  const reservationInfo = reservations
-    ? reservations.filter(
-        reservation => reservation.reservationId === reservationId,
-      )[0]
-    : JSON.parse(localStorage.getItem('modifyreservation'));
+  const reservationInfo =
+    reservations.length !== 0
+      ? reservations.filter(
+          reservation => reservation.reservationId === reservationId,
+        )[0]
+      : JSON.parse(localStorage.getItem('modifyreservation'));
 
-  // 최초 렌더링 이후 해당 숙소 정보를 localStorage에 저장
+  // 최초 렌더링 이후 해당 예약 숙소 정보를 localStorage에 저장
   localStorage.setItem('modifyreservation', JSON.stringify(reservationInfo));
 
   // 모달창 상태

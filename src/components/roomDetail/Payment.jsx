@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { HiStar } from 'react-icons/hi';
 import { GrDown, GrUp } from 'react-icons/gr';
 import classNames from 'classnames';

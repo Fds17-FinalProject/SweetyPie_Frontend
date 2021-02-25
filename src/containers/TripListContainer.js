@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import TripTemplate from '../components/trip/TripTemplate';
 import { useDispatch, useSelector } from 'react-redux';
-import reservation, { readReservation } from '../redux/modules/reservation';
+import { readReservation } from '../redux/modules/reservation';
 import dayjs from 'dayjs';
 
 const TripListContainer = () => {

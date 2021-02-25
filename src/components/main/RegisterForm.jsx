@@ -1,4 +1,18 @@
 import React from 'react';
+import styled, { keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+from {
+  opacity: 0
+}
+to {
+  opacity: 1
+}
+`;
+const ModalBackground = styled.div`
+animation: ${fadeIn} 0.25s ease-in;
+`;
+
 
 const RegisterForm = ({ hideModal, onChange, registerSubmit, state }) => {
   const { register, authError } = state;
@@ -34,7 +48,7 @@ const RegisterForm = ({ hideModal, onChange, registerSubmit, state }) => {
   const curDate = year + '-' + month + '-' + day;
 
   return (
-    <>
+    <ModalBackground>
       <h1 className="a11y-hidden">회원가입 팝업창</h1>
       <h2 className="text-1.6rem font-extrabold border-b pb-8 mb-2rem">
         회원가입 완료
@@ -167,14 +181,20 @@ const RegisterForm = ({ hideModal, onChange, registerSubmit, state }) => {
         <span className="block py-2 px-4 w-full h-3rem text-airbnb text-center text-1.4rem">
           {authError && '중복된 이메일입니다.'}
         </span>
-        <button
-          className="mt-8 w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none"
-          disabled={emptyInput || invalidValue}
-        >
-          회원가입
-        </button>
+        {emptyInput || invalidValue ? (
+          <button
+            className="mt-8 w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 bg-gray-300 text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none cursor-default"
+            disabled
+          >
+            회원가입
+          </button>
+        ) : (
+          <button className="mt-8 w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none">
+            회원가입
+          </button>
+        )}
       </form>
-    </>
+    </ModalBackground>
   );
 };
 
