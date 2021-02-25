@@ -9,19 +9,19 @@ import SocialRegisterModal from './SocialRegisterModal';
 import AccommodationSearchHeader from '../common/AccommodationSearchHeader';
 
 const MainHeader = styled.header`
-position: fixed;
-top: 0;
-display: flex;
-width: 100%;
-height: ${({searchStartState}) => searchStartState ? '18rem' : '8rem'};
-justify-content: space-between;
-padding-left: 8rem;
-padding-right: 8rem;
-padding-top: 2rem;
-background:#fff;
-z-index: 10;
-box-sizing: border-box;
-box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
+  position: fixed;
+  top: 0;
+  display: flex;
+  width: 100%;
+  height: ${({ searchStartState }) => (searchStartState ? '18rem' : '8rem')};
+  justify-content: space-between;
+  padding-left: 8rem;
+  padding-right: 8rem;
+  padding-top: 2rem;
+  background: #fff;
+  z-index: 10;
+  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
 `;
 
 const HeaderUserMenu = styled.button`
@@ -61,10 +61,12 @@ const AccommodationHeader = ({
   setPersonnel,
   checkedLogin,
   address,
-  setAddress
+  setAddress,
 }) => {
   // 버거바
   const HeaderUser = () => {
+    const img = window.location.origin;
+
     return (
       <HeaderUserMenu
         className="flex bg-white p-2 rounded-3xl border-gray-300 border w-28 h-14"
@@ -74,13 +76,22 @@ const AccommodationHeader = ({
           <BiMenu className="w-full h-full text-gray-600" />
         </div>
         <div className="flex-grow w-full h-full">
-          <SVG
-            name="user"
-            width="100%"
-            viewBox="0 0 32 32"
-            height="100%"
-            xmlns="http://www.w3.org/2000/svg"
-          />
+          {checkedToken ? (
+            <img
+              className="w-10 h-10"
+              src={img + '/img/avatar.png'}
+              alt="login profile"
+            />
+          ) : (
+            <SVG
+              name="user"
+              width="100%"
+              viewBox="0 0 32 32"
+              height="100%"
+              xmlns="http://www.w3.org/2000/svg"
+              className="rounded-full"
+            />
+          )}
         </div>
       </HeaderUserMenu>
     );
@@ -112,20 +123,31 @@ const AccommodationHeader = ({
             {/* 로그인 안했을 시  */}
             <ul>
               {/* MenuList에 auth props를 넣어서 로그인인지 회원가입인지 구분 */}
-              {checkedToken ? 
-                 <>
-                 <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
-                   <Link className="block w-full" to="/reservation">예약내역</Link>
-                 </li>
-                 <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
-                   <Link className="block w-full" to="/wishlist">저장목록</Link>
-                 </li>
-                 <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
-                   <Link className="block w-full" to="/modify">계정</Link>
-                 </li>
-               <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100" onClick={userLogout}>로그아웃</li>
-               </>
-               : 
+              {checkedToken ? (
+                <>
+                  <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
+                    <Link className="block w-full" to="/reservation">
+                      예약내역
+                    </Link>
+                  </li>
+                  <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
+                    <Link className="block w-full" to="/wishlist">
+                      저장목록
+                    </Link>
+                  </li>
+                  <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
+                    <Link className="block w-full" to="/modify">
+                      계정
+                    </Link>
+                  </li>
+                  <li
+                    className="cursor-pointer	py-4 px-6 hover:bg-gray-100"
+                    onClick={userLogout}
+                  >
+                    로그아웃
+                  </li>
+                </>
+              ) : (
                 // {/* 로그인 했을 시 */}
                 <>
                   <MenuList auth="login" showAuthModal={showAuthModal}>
@@ -136,7 +158,7 @@ const AccommodationHeader = ({
                   </MenuList>
                   <MenuList>도움말</MenuList>
                 </>
-              }
+              )}
             </ul>
           </div>
         </div>

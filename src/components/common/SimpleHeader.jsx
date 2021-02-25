@@ -53,8 +53,7 @@ const SimpleHeader = ({
   // 버거바
   const HeaderUser = () => {
     const img = window.location.origin;
-    console.log(checkedToken);
-    console.log('loading', state.loading);
+
     return (
       <HeaderUserMenu
         className="flex bg-white p-2 rounded-3xl border-gray-300 border w-28 h-14"
@@ -64,7 +63,7 @@ const SimpleHeader = ({
           <BiMenu className="w-full h-full text-gray-600" />
         </div>
         <div className="flex align-items w-full h-full">
-          {loading && checkedToken ? (
+          {checkedToken ? (
             <img
               className="w-10 h-10"
               src={img + '/img/avatar.png'}
