@@ -201,6 +201,8 @@ const CommonHeader = ({
 }) => {
   // 버거바
   const HeaderUser = () => {
+    const img = window.location.origin;
+
     return (
       <HeaderUserMenu
         className="flex bg-white p-2 rounded-3xl border-gray-300 border w-28	h-14"
@@ -210,13 +212,22 @@ const CommonHeader = ({
           <BiMenu className="w-full h-full text-gray-600" />
         </div>
         <div className="flex-grow w-full h-full">
-          <SVG
-            name="user"
-            width="100%"
-            viewBox="0 0 32 32"
-            height="100%"
-            xmlns="http://www.w3.org/2000/svg"
-          />
+          {checkedToken ? (
+            <img
+              // className="w-10 h-10"
+              src={img + '/img/avatar.png'}
+              alt="login profile"
+            />
+          ) : (
+            <SVG
+              name="user"
+              width="100%"
+              viewBox="0 0 32 32"
+              height="100%"
+              xmlns="http://www.w3.org/2000/svg"
+              className="rounded-full"
+            />
+          )}
         </div>
       </HeaderUserMenu>
     );
