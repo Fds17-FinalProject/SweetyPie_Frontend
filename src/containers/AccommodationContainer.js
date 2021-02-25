@@ -8,6 +8,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { getToken, logout } from '../redux/lib/api/auth';
 import AccommodationHeader from '../components/common/AccommodationHeader';
+import { useHistory } from 'react-router';
 const AccommodationHeaderContainer = () => {
   // 로컬스토리지 토큰 유무
   const [checkedToken, setCheckedToken] = useState(false);
@@ -38,6 +39,7 @@ const AccommodationHeaderContainer = () => {
       scrollMinus: 0,
       scrollStatus: false,
     });
+  const history = useHistory();
    // 검색 시작하기 onClick시 헤더 스타일 변경
    const showSearchHeader = ({ target }) => {
     if (target.dataset.name === 'open') {
@@ -182,6 +184,7 @@ const AccommodationHeaderContainer = () => {
     logout();
     localStorage.removeItem('token');
     setCheckedToken(false);
+    history.push('/');
   };
 
   useEffect(() => {

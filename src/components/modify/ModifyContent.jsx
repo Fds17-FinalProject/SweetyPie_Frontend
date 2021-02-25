@@ -1,3 +1,5 @@
+import React from 'react';
+
 const ModifyContent = ({ children, content, name, onClick }) => {
   return (
     <div className=" flex relative flex-wrap border-b border-#rgb235 pt-0.8rem pb-2.4rem">

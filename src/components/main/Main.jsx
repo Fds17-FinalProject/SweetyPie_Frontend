@@ -17,7 +17,6 @@ const MainContainer = styled.div`
 const Textarea = styled.span`
   color: #fff;
   display: block;
-  width: 30rem;
   font-size: 5.2rem;
   line-height: 5.8rem;
   font-weight: 800;
@@ -57,7 +56,7 @@ const Main = ({ searchMainCity, searchAccommType }) => {
       <MainContainer>
         <section className="w-full pt-72 pb-16 px-32">
           <div>
-            <Textarea>이제, 여행은 가까운 곳에서</Textarea>
+            <Textarea>이제, 여행은<br/>가까운 곳에서</Textarea>
           </div>
         </section>
       </MainContainer>
