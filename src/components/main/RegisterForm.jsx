@@ -1,4 +1,18 @@
 import React from 'react';
+import styled, { keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+from {
+  opacity: 0
+}
+to {
+  opacity: 1
+}
+`;
+const ModalBackground = styled.div`
+animation: ${fadeIn} 0.25s ease-in;
+`;
+
 
 const RegisterForm = ({ hideModal, onChange, registerSubmit, state }) => {
   const { register, authError } = state;
@@ -34,7 +48,7 @@ const RegisterForm = ({ hideModal, onChange, registerSubmit, state }) => {
   const curDate = year + '-' + month + '-' + day;
 
   return (
-    <>
+    <ModalBackground>
       <h1 className="a11y-hidden">회원가입 팝업창</h1>
       <h2 className="text-1.6rem font-extrabold border-b pb-8 mb-2rem">
         회원가입 완료
@@ -174,7 +188,7 @@ const RegisterForm = ({ hideModal, onChange, registerSubmit, state }) => {
           회원가입
         </button>
       </form>
-    </>
+    </ModalBackground>
   );
 };
 
