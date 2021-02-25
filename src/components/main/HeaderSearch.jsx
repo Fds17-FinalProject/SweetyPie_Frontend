@@ -338,10 +338,10 @@ const HeaderSearch = forwardRef(
       setAddress(address);
     };
     const handleSelect = address => {
-      if (!address.split(' ')[2]) {
-        return;
-      }
-      setAddress(address.split(' ')[2]);
+      // if (!address.split(' ')[2]) {
+      //   return;
+      // }
+      setAddress(address);
       geocodeByAddress(address)
         .then(results => getLatLng(results[0]))
         .then(latLng => console.log('Success', latLng))
