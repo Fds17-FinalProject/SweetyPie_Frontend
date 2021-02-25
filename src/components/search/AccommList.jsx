@@ -48,8 +48,10 @@ const AccommList = props => {
     setBookMark(!bookMark);
     !bookMark ? postBookmark(id) : deleteBookmark(id);
   };
+
   const img =
     accommodationPictures && accommodationPictures.map(picture => picture.url);
+  
   const setLocal = id => () => {
     recentSearch.unshift({
       id,
