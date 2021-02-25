@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-export const getBookmark = async () => {
+export const getBookmark = async () =>
   await axios.get(`https://sweetypie.ga/api/bookmark`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   });
-};
 
 export const postBookmark = async id => {
   await axios.post(

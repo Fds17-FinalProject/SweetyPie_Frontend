@@ -8,6 +8,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { getToken, logout } from '../redux/lib/api/auth';
 import AccommodationHeader from '../components/common/AccommodationHeader';
+import { useHistory } from 'react-router';
 const AccommodationHeaderContainer = () => {
   // 로컬스토리지 토큰 유무
   const [checkedToken, setCheckedToken] = useState(false);
@@ -30,13 +31,15 @@ const AccommodationHeaderContainer = () => {
   
     const [location, setLocation] = useState(false);
     const [calendar, setCalendar] = useState(false);
-    const [personnel, setPersonnel] = useState(false);
+  const [personnel, setPersonnel] = useState(false);
+  const [address, setAddress] = useState('');
     const [flexibleScroll, setFlexibleScroll] = useState({
       currentScroll: 0,
       scrollPlus: 0,
       scrollMinus: 0,
       scrollStatus: false,
     });
+  const history = useHistory();
    // 검색 시작하기 onClick시 헤더 스타일 변경
    const showSearchHeader = ({ target }) => {
     if (target.dataset.name === 'open') {
@@ -181,6 +184,7 @@ const AccommodationHeaderContainer = () => {
     logout();
     localStorage.removeItem('token');
     setCheckedToken(false);
+    history.push('/');
   };
 
   useEffect(() => {
@@ -190,7 +194,6 @@ const AccommodationHeaderContainer = () => {
       setAuthVisible(false);
     }
     // 구글로 회원가입 시 서버에서 받아온 유저정보에 socialId가 있다면 회원가입 모달창 open
-    // console.log('socialRegister', socialRegister.socialId);
     if (socialRegister.socialId) {
       setSocialModal(true);
     }
@@ -220,6 +223,8 @@ const AccommodationHeaderContainer = () => {
     }
     wathchFlexibleScroll();
     window.addEventListener('scroll', wathchFlexibleScroll);
+
+    
   }, [authError, socialRegister.socialId, checkedToken]);
   // }, [auth, authError, dispatch]);
   return (
@@ -248,6 +253,8 @@ const AccommodationHeaderContainer = () => {
         state={state}
         checkedToken={checkedToken}
         checkedLogin={checkedLogin}
+        address={address}
+        setAddress={setAddress}
       />  
     </>
   );
