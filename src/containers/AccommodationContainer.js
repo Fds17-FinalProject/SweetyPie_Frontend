@@ -179,7 +179,6 @@ const AccommodationHeaderContainer = ({ authVisible, setAuthVisible }) => {
     logout();
     localStorage.removeItem('token');
     setCheckedToken(false);
-    history.push('/');
   };
 
   useEffect(() => {

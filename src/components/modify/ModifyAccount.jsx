@@ -253,7 +253,6 @@ const ModifyAccount = ({
             계정을 비활성화 하셔야 하나요?
           </h2>
           <button
-            // onClick={onWithdrawal}
             onClick={onShowModal}
             className="text-#008489 text-1.4rem font-semibold"
           >

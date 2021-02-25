@@ -9,7 +9,6 @@ import {
 } from '../redux/modules/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { getToken, logout } from '../redux/lib/api/auth';
-import { useHistory } from 'react-router';
 
 const CommonHeaderContainer = ({
   location,
@@ -47,7 +46,6 @@ const CommonHeaderContainer = ({
     type: null,
   });
 
-  const history = useHistory();
   // 유저 메뉴 모달 open
   const showModal = () => {
     setVisible(true);
@@ -106,7 +104,6 @@ const CommonHeaderContainer = ({
     if (target.dataset.name) {
       setVisible(false);
       setAuthVisible(false);
-      // setPersonnel(false);
       setSocialModal(false);
     }
   };
@@ -221,11 +218,11 @@ const CommonHeaderContainer = ({
       setCheckedLogin(true);
     }
   };
+  
   const userLogout = e => {
     logout();
     localStorage.removeItem('token');
     setCheckedToken(false);
-    history.push('/');
   };
 
 
