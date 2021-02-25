@@ -28,7 +28,7 @@ const RegisterForm = ({ hideModal, onChange, registerSubmit, state }) => {
   const year = date.getUTCFullYear();
   let month = date.getMonth() + 1;
   month = month >= 10 ? month : '0' + month;
-  let day = date.getDate();
+  let day = date.getDate() - 1;
   day = day >= 10 ? day : '0' + day;
   // 오늘 날짜 2021-02-18
   const curDate = year + '-' + month + '-' + day;
@@ -142,7 +142,7 @@ const RegisterForm = ({ hideModal, onChange, registerSubmit, state }) => {
         <span className="block py-2 px-4 h-3rem text-airbnb text-1.2rem">
           {!register.password.match(passwordReg) &&
             register.password.length > 0 &&
-            '특수문자, 문자, 숫자를 포함해서 8자 이상 작성해주세요'}
+            '특수문자, 영문, 숫자를 포함해서 8자 이상 작성해주세요'}
         </span>
 
         <label htmlFor="password-confirm-input" className="a11y-hidden">
@@ -163,7 +163,6 @@ const RegisterForm = ({ hideModal, onChange, registerSubmit, state }) => {
             register.passwordConfirm.length > 0 &&
             '비밀번호가 일치하지 않습니다.'}
         </span>
-        {/* <Button color='pink' size='lg' className="mt-8" disabled>회원가입</Button> */}
 
         <span className="block py-2 px-4 w-full h-3rem text-airbnb text-center text-1.4rem">
           {authError && '중복된 이메일입니다.'}
