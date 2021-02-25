@@ -102,7 +102,7 @@ const AccommodationHeader = ({
       <div
         data-name="close"
         onClick={hideModal}
-        className="w-screen h-screen flex justify-center items-center text-white fixed top-0 z-50"
+        className="w-screen h-screen flex justify-center items-center text-white fixed top-0 z-20"
       >
         <div className="w-96 z-50 bg-white border rounded-2xl absolute top-28 right-32 overflow-y-auto flex flex-col text-#727272 text-1.4rem">
           <h1 className="a11y-hidden">유저 메뉴 모달창</h1>
