@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import AccommTypeMenu from './AccommTypeMenu';
 import styled from 'styled-components';
 import AccommList from './AccommList';
@@ -105,7 +105,9 @@ const SearchTemplate = ({ accommodations, loading, prices }) => {
         setAuthVisible={setAuthVisible}
       />
       <div className="w-86.4rem border pr-8 pl-8 pt-32">
-        <span className="text-1.4rem pb-4">{ prices >= 300 ? '300개 이상의 숙소' : `${prices}개의 숙소` }</span>
+        <span className="text-1.4rem pb-4">
+          {prices >= 300 ? '300개 이상의 숙소' : `${prices}개의 숙소`}
+        </span>
         <h1 className="text-5xl mb-12 font-bold">
           {location.pathname === '/accommodations/mapSearch'
             ? '지도에서 선택한 지역의 숙소'

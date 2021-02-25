@@ -10,7 +10,6 @@ const Description = ({ accommodationDesc }) => {
   const accommodationDescription =
     accommodationDesc === null ? defaultAccomDesc : accommodationDesc;
 
-  console.log(defaultAccomDesc);
   return (
     <div className="text-1.6rem whitespace-pre-wrap">
       {accommodationDescription}

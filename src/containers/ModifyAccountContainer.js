@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import ModifyAccount from '../components/modify/ModifyAccount';
-import { getToken, getUser, logout, withdrawal } from '../redux/lib/api/auth';
+import { getToken, logout, withdrawal } from '../redux/lib/api/auth';
 import {
   authRegister,
   changeField,
@@ -245,7 +245,6 @@ const ModifyAccountContainer = () => {
   const onWithdrawal = e => {
     withdrawal();
     localStorage.removeItem('token');
-
   };
 
   return (
