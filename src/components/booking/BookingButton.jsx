@@ -38,7 +38,7 @@ const BookingButton = ({
   // 수정 완료 버튼 클릭 시 patch 요청 및 확인 모달창 show
   const patchReservation = async type => {
     // 예약 수정 patch 요청
-    const res = await modifyReservation({
+    await modifyReservation({
       reservationId,
       checkInDate,
       checkoutDate,
@@ -56,8 +56,7 @@ const BookingButton = ({
   // 결제 완료 버튼 클릭 시 post 요청 및 확인 모달창 show
   const postReservation = async type => {
     // 예약 하기 post 요청
-    const res = await paymentReservation({
-      // memberId,
+    await paymentReservation({
       accommodationId,
       checkInDate,
       checkoutDate,
@@ -67,8 +66,6 @@ const BookingButton = ({
       childNum,
       totalPrice,
     });
-
-    console.log(res);
 
     // 확인 버튼 모달 open
     showModal(type);

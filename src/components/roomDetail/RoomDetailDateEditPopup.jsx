@@ -124,7 +124,7 @@ const RoomDetailDateEditPopup = ({
         <div className="flex items-center text-1.4rem justify-end pr-1.6rem">
           <button
             onClick={deleteDate}
-            className="underline p-0.8rem font-semibold"
+            className="underline text-1.4rem p-0.8rem rounded-lg font-bold hover:bg-gray-100"
           >
             날짜 지우기
           </button>
