@@ -14,10 +14,10 @@ const Title = ({
   const id = window.location.pathname.split('/')[2];
 
   const [isBookmark, setIsBookmark] = useState(bookmarked);
-  const toggleBookmark = id => (
+  const toggleBookmark = id => {
     setIsBookmark(!isBookmark);
     isBookmark ? deleteBookmark(id) : postBookmark(id);
-  );
+  };
 
   return (
     <div className="pt-2.4rem">
