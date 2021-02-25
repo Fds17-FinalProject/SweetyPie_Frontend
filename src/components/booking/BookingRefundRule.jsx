@@ -18,9 +18,9 @@ const BookingRefundRule = ({ checkInDateArr }) => {
           있습니다. 그 후에는 {checkinMonth}월 {checkinDay}일 1:00 PM 전에
           예약을 취소하면 첫 1박 요금 및 서비스 수수료를 제외한 요금 전액이
           환불됩니다.&nbsp;
-          <button className="text-1.6rem text-black font-semibold underline">
+          {/* <button className="text-1.6rem text-black font-semibold underline">
             자세히 알아보기
-          </button>
+          </button> */}
         </span>
       </div>
       <div className="pt-10 pl-10 border-l-8 border-orange">

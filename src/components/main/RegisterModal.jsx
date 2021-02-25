@@ -25,7 +25,7 @@ const RegisterModal = ({ hideModal, changeModal }) => {
       </button>
       <a
         className="flex items-center rounded-lg	border border-#e5e7eb py-4 px-1.2rem hover:border-#727272"
-        href="https://accounts.google.com/o/oauth2/v2/auth?client_id=358569667723-j52n7u0kd91fst85dotu0pssmk55qro9.apps.googleusercontent.com&redirect_uri=https://sweetypie.netlify.app/redirect&response_type=code&scope=email%20profile%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.file&access_type=offline"
+        href="https://accounts.google.com/o/oauth2/v2/auth?client_id=358569667723-j52n7u0kd91fst85dotu0pssmk55qro9.apps.googleusercontent.com&redirect_uri=https://sweetypie.netlify.app/redirect/oauth2callback&response_type=code&scope=email%20profile%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.file&access_type=offline"
       >
         <FcGoogle className="w-2.4rem h-2rem" />
         <span className="flex-grow">구글 계정으로 회원가입</span>
