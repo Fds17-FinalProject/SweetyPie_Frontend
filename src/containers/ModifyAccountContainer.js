@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 import ModifyAccount from '../components/modify/ModifyAccount';
 import { getToken, getUser, logout, withdrawal } from '../redux/lib/api/auth';
 import {
@@ -50,6 +51,7 @@ const ModifyAccountContainer = () => {
     scrollMinus: 0,
     scrollStatus: false,
   });
+  const history = useHistory();
   // 검색 시작하기 onClick시 헤더 스타일 변경
   const showSearchHeader = ({ target }) => {
     if (target.dataset.name === 'open') {
@@ -187,12 +189,11 @@ const ModifyAccountContainer = () => {
     }
   };
   const userLogout = e => {
-    console.log('e', e);
     logout();
     localStorage.removeItem('token');
     setCheckedToken(false);
+    history.push('/');
   };
-
   useEffect(() => {
     // 회원 계정 정보 받아오기
     dispatch(readMemberInfo());
