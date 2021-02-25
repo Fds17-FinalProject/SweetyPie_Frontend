@@ -78,31 +78,64 @@ const AccommTypeMenu = ({ setFilter }) => {
         <div className="flex flex-row" >
           <Checkbox name="전체" top="50px" checkBox={checkBox} onClick={onClick} accommType={accommType} setAccommType={setAccommType}/>
           <span className="mb-6 ml-20">
-            <div className="text-1.6rem house">집 전체</div>
-            <div className="text-1.4rem">집 전체를 단독으로 사용합니다.</div>
+            <div
+              onClick={onClick("전체")}
+              className="text-1.6rem house cursor-pointer"
+            >
+              집 전체
+            </div>
+            <div
+              onClick={onClick("전체")}
+              className="text-1.4rem cursor-pointer"
+            >
+              집 전체를 단독으로 사용합니다.
+            </div>
           </span>
         </div>
         <div>
             <Checkbox name="개인실" top="120px" checkBox={checkBox} onClick={onClick} accommType={accommType} setAccommType={setAccommType} />
           <span className="inline-block mb-6 ml-20 w-265px h-60px" style={{display: 'inline-block', width: 265, height: 60}}>
-            <div className="text-1.6rem personal">개인실</div>
-            <div className="text-1.4rem">침실은 단독으로 쓰고, 이외의 공간은 호스트나 다른 게스트와 함께 이용할 수도 있습니다.</div>
+            <div
+              onClick={onClick("개인실")}
+              className="text-1.6rem personal cursor-pointer"
+            >
+              개인실
+            </div>
+            <div
+              onClick={onClick("개인실")}
+              className="text-1.4rem cursor-pointer"
+            >
+              침실은 단독으로 쓰고, 이외의 공간은 호스트나 다른 게스트와 함께 이용할 수도 있습니다.
+            </div>
           </span>
         </div>
 
       <div>
         <Checkbox name="객실" top="190px" checkBox={checkBox} onClick={onClick} accommType={accommType} setAccommType={setAccommType} />
         <span className="inline-block mb-6 ml-20" style={{display: 'inline-block', width: 265, height: 60}}>
-          <div className="text-1.6rem hotel">호텔 객실</div>
-          <div className="text-1.4rem">부티크 호텔, 호스텔 등의 개인실이나 다인실을 이용합니다.</div>
+            <div
+              onClick={onClick("객실")}
+              className="text-1.6rem hotel cursor-pointer"
+            >호텔 객실</div>
+            <div
+              onClick={onClick("객실")}
+              className="text-1.4rem cursor-pointer"
+            >부티크 호텔, 호스텔 등의 개인실이나 다인실을 이용합니다.</div>
         </span>
       </div>
 
       <div>
         <Checkbox name="다인실"  top="270px" checkBox={checkBox} onClick={onClick} accommType={accommType} setAccommType={setAccommType} />
         <span className="inline-block mb-6 ml-20" style={{display: 'inline-block', width: 270, height: 60}}>
-          <div className="text-1.6rem multi">다인실</div>
-          <div className="text-1.4rem">사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와 함께 이용합니다</div>
+            <div
+              onClick={onClick("다인실")}
+              className="text-1.6rem multi cursor-pointer"
+            >다인실</div>
+            <div
+              onClick={onClick("다인실")}
+              className="text-1.4rem cursor-pointer">
+              사적 공간 없이, 침실이나 욕실 등을 호스트나 다른 게스트와 함께 이용합니다
+            </div>
         </span>
       </div>
       </div>

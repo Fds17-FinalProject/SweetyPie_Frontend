@@ -9,18 +9,18 @@ const Marker = ({ isHovering, accommId, id, setId, img, accomm, hoverId, setHove
   const [coord, setCoord] = useState({ clientX: null, clientY: null });
 
   const onClick = (e) => {
-    setId(accommId);
     setCoord({
       clientX: e.clientX,
       clientY: e.clientY,
-    })
+    });
+    setId(accommId);
   };
 
   const image = img.map(img => img.url);
   return (
     <div
       onClick={onClick}
-      className="relative "
+      className="relative"
       >
       {accommId === id 
         && <MapPopup accomm={accomm} img={image} coord={coord} accommId={accommId} />}
@@ -66,7 +66,7 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId, address }) 
     lng: null,
   });
 
-  const [zoom, setZoom] = useState(14);
+  const [zoom, setZoom] = useState(13);
 
   useEffect(() => { 
     Geocode.setApiKey("AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU");
@@ -121,7 +121,6 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId, address }) 
   };
 
   let boundaryCoordinate = {};
-  console.log(history.location.search.split('types')[1]);
 
     return (
       // Important! Always set the container height explicitly

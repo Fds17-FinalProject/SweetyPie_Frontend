@@ -142,7 +142,7 @@ const SearchTemplate = ({ accommodations, loading, prices }) => {
         </div>
         <div className="pt-40 flex flex-col flex-wrap items-center">
           <Pagination />
-          <div className="text-1.4rem text-#22222">숙소 300개 이상 중 1 - 20</div>
+          <div className="text-1.4rem text-#22222">{ prices >= 300 ? `300개 이상의 숙소 중 1 - ${prices}` : `${prices}개의 숙소 중 1 - ${prices}` }</div>
           <div className="text-1.2rem text-#717171 py-14">전체 요금을 보려면 날짜를 입력하세요. 추가 요금이 적용되고 세금이 추가될 수 있습니다.</div>
         </div>  
       </div>
