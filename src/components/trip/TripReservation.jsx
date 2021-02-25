@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const TripReservation = () => {
   return (
-    <div className="mt-6 flex">
+    <div className="flex">
       <Link
         className="p-6 mr-2 text-1.6rem font-semibold text-gray-500  hover:text-airbnb focus:text-airbnb active:text-airbnb"
         to="/reservation?tab=upcoming"

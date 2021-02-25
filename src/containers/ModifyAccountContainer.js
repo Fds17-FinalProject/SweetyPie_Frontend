@@ -165,7 +165,6 @@ const ModifyAccountContainer = () => {
 
   const socialRegisterSubmit = e => {
     e.preventDefault();
-    console.log(socialRegister);
     const { email, name, contact, birthDate, socialId } = socialRegister;
     dispatch(
       socialRegisterSubmitAction({ email, name, contact, birthDate, socialId }),
@@ -175,11 +174,8 @@ const ModifyAccountContainer = () => {
   const loginSubmit = async e => {
     e.preventDefault();
     const { email, password } = login;
-    // const res = await dispatch(authLogin({ email, password }));
     const res = await getToken({ email, password });
     const token = res.data.token;
-    console.log('RES', res);
-    console.log('token', token);
     // error객체가 오면 에러메세지 띄워주고(서버에서 준 에러메세지 띄워주는거 아직 미구현)
     // 성공하면 history.push('/)
     if (token) {
@@ -189,8 +185,6 @@ const ModifyAccountContainer = () => {
     } else {
       console.log('error');
     }
-    const resUser = await getUser();
-    console.log(resUser);
   };
   const userLogout = e => {
     console.log('e', e);
@@ -198,8 +192,6 @@ const ModifyAccountContainer = () => {
     localStorage.removeItem('token');
     setCheckedToken(false);
   };
-
-  console.log();
 
   useEffect(() => {
     // 회원 계정 정보 받아오기
@@ -210,7 +202,6 @@ const ModifyAccountContainer = () => {
       setAuthVisible(false);
     }
     // 구글로 회원가입 시 서버에서 받아온 유저정보에 socialId가 있다면 회원가입 모달창 open
-    console.log('socialRegister', socialRegister.socialId);
     if (socialRegister.socialId) {
       setSocialModal(true);
     }
@@ -226,16 +217,10 @@ const ModifyAccountContainer = () => {
     }
 
     function wathchFlexibleScroll() {
-      console.log('scrollPlus', flexibleScroll.scrollPlus);
-      // console.log('scrollMinus', flexibleScroll.scrollMinus);
-      // console.log('Scroll', window.scrollY);
-      // console.log('currentScroll', flexibleScroll.currentScroll);
-      // console.log('비교', flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus);
       if (
         flexibleScroll.scrollPlus < window.scrollY ||
         window.scrollY < flexibleScroll.scrollMinus
       ) {
-        // console.log('if문');
         setSearchStartState(false);
         setLocation(false);
         setCalendar(false);
@@ -254,20 +239,16 @@ const ModifyAccountContainer = () => {
   // }, [auth, authError, dispatch]);
 
   const onClick = e => {
-    console.log(e.target.name);
     e.preventDefault();
-    // console.log(['TARGET'], e.target.name);
     setModify({ ...modify, [e.target.name]: !modify[e.target.name] });
-    // console.log(['MODIFY'], modify);
   };
   const onWithdrawal = e => {
-    console.log('e', e);
     withdrawal();
     localStorage.removeItem('token');
-    console.log('회원삭제완료');
     // setAuthVisible(false);
     // setToken(false);
   };
+
   return (
     <>
       <ModifyAccount
@@ -304,4 +285,5 @@ const ModifyAccountContainer = () => {
     </>
   );
 };
+
 export default ModifyAccountContainer;

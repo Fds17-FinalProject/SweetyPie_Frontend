@@ -69,7 +69,6 @@ export const socialRegister = async ({
     birthDate,
     socialId,
   });
-  await console.log('socialRes', res);
   return res;
 };
 
@@ -77,7 +76,6 @@ export const logout = async () => {
   const res = await axios.get('https://sweetypie.ga/api/logout', {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   });
-  console.log('res', res);
   return res;
 };
 
@@ -85,6 +83,5 @@ export const withdrawal = async () => {
   const res = await axios.delete('https://sweetypie.ga/api/member', {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   });
-  console.log('auth.js(res)', res);
   return res;
 };
