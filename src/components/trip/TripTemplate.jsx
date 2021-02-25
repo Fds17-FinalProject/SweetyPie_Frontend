@@ -22,7 +22,7 @@ const TripTemplate = ({
       <SimpleHeaderContainer />
       <div className="pt-32 px-32 pb-6.5rem">
         <section>
-          <h1 className="text-3.2rem pl-6 font-semibold py-16">예약 내역</h1>
+          <h1 className="text-3.2rem font-semibold py-16">예약 내역</h1>
           <TripReservation />
           <div className="max-w-screen-2xl mx-6 h-0.5 border-t"></div>
 
