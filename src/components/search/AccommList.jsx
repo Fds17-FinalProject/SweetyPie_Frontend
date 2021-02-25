@@ -83,13 +83,14 @@ const AccommList = props => {
       >
         <div className="h-25rem border-t border-#EBEBEB pt-10 pb-10 relative">
           <HoverSvg
-            className="absolute top-8 right-0 z-9"
+            className="absolute top-8 right-0"
             onClick={bookMarkClick(id)}
+            style={{zIndex: 9}}
           >
             <FiHeart
               fill={bookMark ? 'rgb(255, 56, 92)' : '#fff'}
               size={30}
-              stroke={bookMark ? '' : 'black'}
+              stroke={bookMark ? '' : '#181818'}
               className="absolute top-2 left-2"
             />
           </HoverSvg>
