@@ -89,7 +89,7 @@ const SearchLocation = styled.div`
 const SearchCalendar = styled.div`
   position: absolute;
   top: 8rem;
-  width: 100%;
+  width: 75rem;
   border-radius: 2.5rem;
   background: #fff;
   display: flex;
@@ -160,7 +160,6 @@ const AutoCompleteContainer = styled.div`
   left: 0;
   width: 50rem !important;
   background-color: #fff !important;
-  /* border: 1px solid #717171 !important; */
   border-radius: 1.6rem !important;
   display: flex;
   flex-wrap: wrap;
@@ -402,7 +401,7 @@ const HeaderSearch = forwardRef(
                       id="search-input"
                       type="text"
                       data-name="location"
-                      className="block text-1.4rem text-#717171 bg-transparent"
+                      className="block text-1.4rem text-#717171 font-semibold bg-transparent"
                       {...getInputProps({
                         placeholder: '어디로 여행가세요?',
                       })}
@@ -475,7 +474,7 @@ const HeaderSearch = forwardRef(
           data-name="calendar"
         >
           <div className="border-r px-6" data-name="calendar">
-            <b className="block text-1.2rem" data-name="calendar">
+            <b className="block text-1.2rem font-semibold" data-name="calendar">
               체크아웃
             </b>
             <span

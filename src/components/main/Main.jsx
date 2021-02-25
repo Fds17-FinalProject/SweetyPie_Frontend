@@ -63,7 +63,7 @@ const Main = ({ searchMainCity, searchAccommType }) => {
 
       <div>
         <div className="px-32">
-          <section>
+          <section className="mb-4rem">
             <div className="flex flex-wrap py-24">
               <div className="flex w-full pb-3">
                 <button className="w-1/4" onClick={e => searchMainCity('서울')}>
@@ -118,8 +118,8 @@ const Main = ({ searchMainCity, searchAccommType }) => {
             </div>
           </section>
 
-          <section className="w-full">
-            <div className="text-3.2rem pb-12">
+          <section className="w-full mb-6rem">
+            <div className="text-3.2rem pb-12 font-semibold">
               어디에서나, 여행은 살아보는 거야!
             </div>
 
@@ -166,7 +166,7 @@ const Main = ({ searchMainCity, searchAccommType }) => {
           </section>
 
           <section className="w-full pb-16">
-            <div className="text-3.2rem pb-12">
+            <div className="text-3.2rem pb-12 font-semibold">
               이 달의 추천 여행지&#58; 강릉{' '}
             </div>
 
