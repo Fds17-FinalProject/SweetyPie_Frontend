@@ -60,6 +60,8 @@ const AccommodationHeader = ({
   setCalendar,
   setPersonnel,
   checkedLogin,
+  address,
+  setAddress
 }) => {
   // 버거바
   const HeaderUser = () => {
@@ -222,8 +224,9 @@ const AccommodationHeader = ({
           location={location}
           calendar={calendar}
           personnel={personnel}
+          address={address}
+          setAddress={setAddress}
         />
-        {/* \showSearchHeader, searchStartState, setLocation, setCalendar, setPersonnel, location, calendar, personnel */}
         <HeaderUser />
       </MainHeader>
     </>
