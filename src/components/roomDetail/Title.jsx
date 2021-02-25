@@ -38,7 +38,7 @@ const Title = ({
         </div>
         <button
           className="inline-flex items-center justify-center px-2 h-12 font-bold text-black text-xl transition-colors duration-150 focus:outline-none bg-white rounded-md focus:shadow-outline hover:bg-gray-200 transform hover:scale-110"
-          onClick={toggleBookmark(id)}
+          onClick={() => toggleBookmark(id)}
         >
           {isBookmark ? (
             <HiHeart className="text-3xl inline-block mr-2 text-airbnb" />
