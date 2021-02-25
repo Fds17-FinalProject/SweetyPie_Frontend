@@ -396,7 +396,7 @@ const HeaderSearch = forwardRef(
               여행지를 골라주세요.
             </label>
             <PlacesAutocomplete
-              value={gu || address}
+              value={address}
               onChange={handleChange}
               onSelect={handleSelect}
             >

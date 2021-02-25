@@ -100,6 +100,14 @@ const RoomDetailTemplate = ({
     }
   };
 
+  // // 검색 시작 하기 눌렀을 시 모달 초기 상태
+  // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
+  // 하나의 모달 회원가입 폼 모달 띄우는것 때문에 생각정리안된게있어서 일단 객체 상태로 냅둠!
+  const [authVisible, setAuthVisible] = useState({
+    // 'login' or 'register'
+    type: null,
+  });
+
   // 스크롤 시 Photos 컴포넌트를 지나면 navigation header 보이기
   // 스크롤 시 후기 컴포넌트를 지나면 navigation header에 예약하기 버튼 보이기
   window.onscroll = () => {
@@ -138,8 +146,19 @@ const RoomDetailTemplate = ({
       {visible.type === 'refund' && visible.state && (
         <RoomDetailRefundModal onCloseModal={onCloseModal} />
       )}
-      {scrollHeader.visible === false && <AccommodationHeaderContainer />}
-      {scrollHeader.visible && <RoomDetailHeader scrollHeader={scrollHeader} />}
+      {scrollHeader.visible === false && (
+        <AccommodationHeaderContainer
+          authVisible={authVisible}
+          setAuthVisible={setAuthVisible}
+        />
+      )}
+      {scrollHeader.visible && (
+        <RoomDetailHeader
+          scrollHeader={scrollHeader}
+          authVisible={authVisible}
+          setAuthVisible={setAuthVisible}
+        />
+      )}
       {loading === false && (
         <div className="max-w-full mt-32" id="photos">
           <div className="mx-48 px-32">
@@ -181,6 +200,8 @@ const RoomDetailTemplate = ({
                 onShowPopup={onShowPopup}
                 onCloseModal={onCloseModal}
                 count={count}
+                authVisible={authVisible}
+                setAuthVisible={setAuthVisible}
               />
               {visible.type === 'calendar' && visible.state && (
                 <RoomDetailDateEditPopup
