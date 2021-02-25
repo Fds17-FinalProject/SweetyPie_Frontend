@@ -8,8 +8,8 @@ const FooterWrap = styled.footer`
   background: #f3f4f6;
   padding-left: 8rem;
   padding-right: 8rem;
-  transform: translateY(30rem);
-`
+  transform: translateY(37rem);
+`;
 
 const FooterContainer = () => {
   return (

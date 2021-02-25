@@ -334,13 +334,17 @@ const AccommodationSearchHeader = ({
       );
     }
   };
-
+  const searchOptions = {
+    types: ['(cities)', '(locality)'],
+    // componentRestrictions: {country: "us"}
+   }
   // google place autocomplete
   const handleChange = address => {
     setAddress(address);
   };
+
   const handleSelect = address => {
-    setAddress(address.split(' ')[2]);
+    setAddress(address);
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(latLng => console.log('Success', latLng))
@@ -392,6 +396,7 @@ const AccommodationSearchHeader = ({
             value={gu || address}
             onChange={handleChange}
             onSelect={handleSelect}
+            searchOptions={{ types: [ '(regions)' ] }}
           >
             {({ getInputProps, suggestions, getSuggestionItemProps }) => {
               return (
