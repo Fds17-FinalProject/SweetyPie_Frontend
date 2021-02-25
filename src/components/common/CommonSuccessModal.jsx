@@ -5,6 +5,8 @@ const CommonSuccessModal = ({ hideModal, children }) => {
   const history = useHistory();
 
   const moveReservationPage = () => {
+    localStorage.removeItem('accommodationInfo');
+    localStorage.removeItem('modifyreservation');
     history.push('/reservation');
   };
 
