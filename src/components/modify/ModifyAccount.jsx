@@ -46,7 +46,6 @@ const ModifyAccount = ({
   });
 
   const changeInputValue = (e, name) => {
-    console.log(e.target.value);
     setInputValue({ [name]: e.target.value });
   };
 

@@ -202,7 +202,6 @@ const ModifyAccountContainer = () => {
       setAuthVisible(false);
     }
     // 구글로 회원가입 시 서버에서 받아온 유저정보에 socialId가 있다면 회원가입 모달창 open
-    console.log('socialRegister', socialRegister.socialId);
     if (socialRegister.socialId) {
       setSocialModal(true);
     }
@@ -222,7 +221,6 @@ const ModifyAccountContainer = () => {
         flexibleScroll.scrollPlus < window.scrollY ||
         window.scrollY < flexibleScroll.scrollMinus
       ) {
-        // console.log('if문');
         setSearchStartState(false);
         setLocation(false);
         setCalendar(false);
@@ -241,7 +239,6 @@ const ModifyAccountContainer = () => {
   // }, [auth, authError, dispatch]);
 
   const onClick = e => {
-    console.log(e.target.name);
     e.preventDefault();
     setModify({ ...modify, [e.target.name]: !modify[e.target.name] });
   };
