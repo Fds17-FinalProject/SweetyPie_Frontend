@@ -7,12 +7,12 @@ const Reviews = ({ rating, reviewNum, reviews, onShowModal }) => {
   const img = window.location.origin;
   const ratingRoundUp = rating.toFixed(2);
   const names = [
-    '동찬 킴',
-    'YoungSeo Im',
-    '한슬',
-    'Forever Na',
-    'BokBok',
     '준철',
+    'YoungSeo Im',
+    '동찬 킴',
+    'Forever Na',
+    '한슬',
+    'BokBok',
   ];
   const profileImages = [
     img + '/img/profile_01.jpg',

@@ -9,7 +9,7 @@ const BookingTitle = ({ subPage, query }) => {
   const { checkInDate, checkoutDate, adultNum, childNum, infantNum } = query;
 
   return (
-    <div className="flex items-center pb-7 px-32 pt-6.4rem xl:mx-48 md:mx-0">
+    <div className="flex items-center pb-7 px-32 xl:mx-48 md:mx-0 pt-44">
       <div className="w-20 h-20 -ml-8 flex items-center justify-center rounded-50% hover:bg-#f7f7f7">
         {subPage === 'modify' ? (
           <Link
