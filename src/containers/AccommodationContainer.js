@@ -30,7 +30,8 @@ const AccommodationHeaderContainer = () => {
   
     const [location, setLocation] = useState(false);
     const [calendar, setCalendar] = useState(false);
-    const [personnel, setPersonnel] = useState(false);
+  const [personnel, setPersonnel] = useState(false);
+  const [address, setAddress] = useState('');
     const [flexibleScroll, setFlexibleScroll] = useState({
       currentScroll: 0,
       scrollPlus: 0,
@@ -190,7 +191,6 @@ const AccommodationHeaderContainer = () => {
       setAuthVisible(false);
     }
     // 구글로 회원가입 시 서버에서 받아온 유저정보에 socialId가 있다면 회원가입 모달창 open
-    // console.log('socialRegister', socialRegister.socialId);
     if (socialRegister.socialId) {
       setSocialModal(true);
     }
@@ -220,6 +220,8 @@ const AccommodationHeaderContainer = () => {
     }
     wathchFlexibleScroll();
     window.addEventListener('scroll', wathchFlexibleScroll);
+
+    
   }, [authError, socialRegister.socialId, checkedToken]);
   // }, [auth, authError, dispatch]);
   return (
@@ -248,6 +250,8 @@ const AccommodationHeaderContainer = () => {
         state={state}
         checkedToken={checkedToken}
         checkedLogin={checkedLogin}
+        address={address}
+        setAddress={setAddress}
       />  
     </>
   );

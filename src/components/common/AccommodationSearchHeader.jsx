@@ -5,6 +5,12 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router';
 import HeaderCalendar from '../main/HeaderCalendar';
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from 'react-places-autocomplete';
+import { FaMapMarkerAlt } from 'react-icons/fa';
+
 const scrollUp = keyframes`
 from {
   transform: scale(0.3, 0.75) translateY(-8rem);
@@ -132,6 +138,43 @@ const SubmitButton = styled.button.attrs(() => ({ type: 'button' }))`
     transition: ease-in-out;
   }
 `;
+const AutoCompleteContainer = styled.div`
+  position: absolute;
+  top: 7.8rem;
+  left: 0;
+  width: 50rem !important;
+  background-color: #fff !important;
+  border-radius: 1.6rem !important;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`;
+const AutoComplete = styled.div`
+  display: flex;
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+  margin-top: 1.2rem;
+  margin-bottom: 1.2rem;
+  margin-left: 0.4rem;
+  margin-right: 0.4rem;
+  width: 50rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
+const AutoCompleteIcon = styled.div`
+  min-width: 4.5rem;
+  min-height: 4.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ebebeb;
+  border-radius: 0.5rem;
+  border: 1px solid #ebebeb;
+  margin-right: 0.8rem;
+`;
 const AccommodationSearchHeader = ({
   showSearchHeader,
   searchStartState,
@@ -141,6 +184,8 @@ const AccommodationSearchHeader = ({
   location,
   calendar,
   personnel,
+  address,
+  setAddress
 }) => {
   const [gu, setGu] = useState(null);
   const [currentLocation, setCurrentLocation] = useState({
@@ -153,8 +198,7 @@ const AccommodationSearchHeader = ({
     infantNum: 0,
     status: false,
   });
-
-  const url = new URL(window.location.href);
+  console.log('address', address);
 
   const history = useHistory();
   // 헤더 위치 (어디로 여행가세요?)
@@ -235,36 +279,96 @@ const AccommodationSearchHeader = ({
       });
     }
   };
-  const searchResult = e => {
-    if (gu !== null) {
+  const searchResult = () => {
+    // 전부 다 입력했을 경우
+    if (
+      address.length !== 0 &&
+      dateRange.startDate !== null &&
+      dateRange.endDate !== null &&
+      count.adultNum !== 0
+    ) {
       history.push(
-        `/accommodations/?searchKeyword=${gu}&ckeckIn=${
-          dateRange.startDate !== null &&
-          dateRange.startDate.format('YYYY-MM-DD')
-        }&checkout=${
-          dateRange.endDate !== null && dateRange.endDate.format('YYYY-MM-DD')
-        }&guestNum=${count.adultNum + count.childNum}`,
+        `/accommodations/search?searchKeyword=${address}&checkIn=${dateRange.startDate.format(
+          'YYYY-MM-DD',
+        )}&checkout=${dateRange.endDate.format('YYYY-MM-DD')}&guestNum=${
+          count.adultNum + count.childNum
+        }&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${count.infantNum}`,
+      );
+    }
+    // 위치만 입력 했을경우
+    else if (
+      address.length !== 0 &&
+      dateRange.startDate === null &&
+      dateRange.endDate === null &&
+      count.adultNum === 0
+    ) {
+      history.push(`/accommodations/search?searchKeyword=${address}`);
+    }
+    // 위치, 체크인, 체크아웃 입력했을 경우
+    else if (
+      address.length !== 0 &&
+      dateRange.startDate !== null &&
+      dateRange.endDate !== null &&
+      count.adultNum === 0
+    ) {
+      history.push(
+        `/accommodations/search?searchKeyword=${address}&checkIn=${dateRange.startDate.format(
+          'YYYY-MM-DD',
+        )}&checkout=${dateRange.endDate.format('YYYY-MM-DD')}`,
+      );
+    }
+    // 위치, 게스트 수 입력했을 경우
+    else if (
+      address.length !== 0 &&
+      dateRange.startDate === null &&
+      dateRange.endDate === null &&
+      count.adultNum !== 0
+    ) {
+      history.push(
+        `/accommodations/search?searchKeyword=${address}&guestNum=${
+          count.adultNum + count.childNum
+        }&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${count.infantNum}`,
       );
     }
   };
+
+   // google place autocomplete
+   const handleChange = address => {
+    setAddress(address);
+  };
+  const handleSelect = address => {
+    setAddress(address.split(' ')[2]);
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => console.log('Success', latLng))
+      .catch(error => console.error('Error', error));
+  };
+
   useEffect(() => {
-    if (currentLocation.lat !== null && currentLocation.lng !== null) {
-      async function getAddress() {
-        const res = await axios.get(
-          `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation.lat},${currentLocation.lng}&key=AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU`,
-        );
-        if (res) {
-          setGu(res.data.results[4].formatted_address.substr(10));
+      if (currentLocation.lat !== null && currentLocation.lng !== null) {
+        async function getAddress() {
+          try {
+            const res = await axios.get(
+              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation.lat},${currentLocation.lng}&key=AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU`,
+            );
+            if (res) {
+              setGu(res.data.results[4].formatted_address.substr(11));
+            }
+          } catch (e) {
+            console.log(e);
+          }
         }
+        getAddress();
       }
-      getAddress();
-    }
-  }, [currentLocation, gu]);
+      if (address.length !== 0) {
+        setLocation(false);
+      }
+    }, [address, currentLocation, gu, location, setLocation]);
+
   return (
     <SearchHeader
       onSubmit={onSubmit}
       searchStartState={searchStartState}
-      id="test"
     >
       <Button
         className="w-27rem text-left"
@@ -283,16 +387,58 @@ const AccommodationSearchHeader = ({
           >
             여행지를 골라주세요.
           </label>
-          <input
-            id="search-input"
-            type="text"
-            placeholder="어디로 여행가세요?"
-            className="block text-1.6rem text-#717171 bg-transparent"
-            data-name="location"
-            defaultValue={gu && gu}
-          ></input>
-        </div>
-      </Button>
+
+
+          <PlacesAutocomplete
+              value={gu || address}
+              onChange={handleChange}
+              onSelect={handleSelect}
+            >
+              {({ getInputProps, suggestions, getSuggestionItemProps }) => {
+                return (
+                  <div>
+                    <input
+                      id="search-input"
+                      type="text"
+                      data-name="location"
+                      className="block text-1.4rem text-#717171 bg-transparent"
+                      {...getInputProps({
+                        placeholder: '어디로 여행가세요?',
+                      })}
+                    />
+                    <AutoCompleteContainer className="autocomplete-dropdown-container">
+                      {suggestions.map(suggestion => {
+                        const className = suggestion.active
+                          ? 'suggestion-item--active'
+                          : 'suggestion-item';
+                        // inline style for demonstration purpose
+                        const style = suggestion.active
+                          ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                          : { backgroundColor: '#ffffff', cursor: 'pointer' };
+
+                        return (
+                          <AutoComplete
+                            {...getSuggestionItemProps(suggestion, {
+                              className,
+                              style,
+                            })}
+                          >
+                            <div className="w-full text-1.4rem flex items-center p-0.8rem">
+                              <AutoCompleteIcon>
+                                <FaMapMarkerAlt />
+                              </AutoCompleteIcon>
+                              {suggestion.description}
+                            </div>
+                          </AutoComplete>
+                        );
+                      })}
+                    </AutoCompleteContainer>
+                  </div>
+                );
+              }}
+            </PlacesAutocomplete>
+          </div>
+        </Button>
       <Button
         test={true}
         startDate={dateRange.startDate}
@@ -348,7 +494,7 @@ const AccommodationSearchHeader = ({
               ? `게스트 ${count.adultNum + count.childNum + count.infantNum}명`
               : '게스트 추가'}
           </span>
-          {location || calendar || personnel ? (
+          {location || calendar || personnel || address.length !== 0 ? (
             <SubmitButton onClick={searchResult}>
               <BiSearch size={20} className=" text-white" />
               <span className="text-white text-1.6rem ml-0.4rem">검색</span>

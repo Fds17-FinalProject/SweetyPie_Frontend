@@ -22,7 +22,7 @@ const LoginModal = ({ hideModal, changeModal, onChange, loginSubmit, state, chec
           </button>
           <button className="flex items-center rounded-lg	border border-#e5e7eb py-4 px-1.2rem hover:border-#727272">
             <FcGoogle className="w-2.4rem h-2rem"/>
-        <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=358569667723-j52n7u0kd91fst85dotu0pssmk55qro9.apps.googleusercontent.com&redirect_uri=http://localhost:3000/redirect&response_type=code&scope=email%20profile%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.file&access_type=offline"
+        <a href="https://accounts.google.com/o/oauth2/v2/auth?client_id=358569667723-j52n7u0kd91fst85dotu0pssmk55qro9.apps.googleusercontent.com&redirect_uri=https://sweetypie.netlify.app/redirect&response_type=code&scope=email%20profile%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.file&access_type=offline"
             className="flex-grow">구글 계정으로 로그인</a>
           </button>
 
@@ -40,7 +40,7 @@ const LoginModal = ({ hideModal, changeModal, onChange, loginSubmit, state, chec
 
             <div className="flex items-center">
               <label className="a11y-hidden" htmlFor="password-input">비밀번호</label>
-              <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="text" id="password-input" name="password" placeholder="비밀번호" onChange={(e) => onChange({ e, form: 'login' })} value={login.password}/>
+              <input className="border rounded-lg py-4 px-1.2rem focus:ring-1 focus:ring-#727272 w-full h-full" type="password" id="password-input" name="password" placeholder="비밀번호" onChange={(e) => onChange({ e, form: 'login' })} value={login.password}/>
             </div>
             <span className="text-airbnb flex justify-center items-center h-1.2rem my-1.2rem">{checkedLogin && '이메일과 비밀번호를 확인해주세요.'}</span>
             <button className="flex items-center w-full rounded-lg	 py-4 px-1.2rem text-#fff bg-airbnb">

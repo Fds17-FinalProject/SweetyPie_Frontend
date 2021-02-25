@@ -53,6 +53,8 @@ const Marker = ({ isHovering, accommId, id, setId, img, accomm, hoverId, setHove
 };
  
 const SearchMap = ({ accommodations, loading, isHovering, id, setId, address }) => {
+  const url = new URL(window.location.href);
+
   const [hoverId, setHoverId] = useState(0);
   const [coord, setCoord] = useState({
     clientX: null,

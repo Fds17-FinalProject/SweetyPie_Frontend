@@ -112,7 +112,6 @@ const SearchPersonnel = styled.div`
 
 const LocationButton = styled.button.attrs(() => ({ type: 'button' }))`
   width: 100%;
-  /* height: 1rem; */
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   padding: 1rem 2rem;
@@ -131,8 +130,6 @@ const SearchButton = styled.button.attrs(() => ({ type: 'button' }))`
   justify-content: center;
   align-items: center;
   width: 4.8rem;
-  /* width: ${({ location, calendar, personnel }) =>
-    location || calendar || personnel ? '8.5rem' : '4.8rem'}; */
   height: 4.8rem;
   border-radius: 999rem;
   background: #ff385c;
@@ -149,8 +146,6 @@ const SubmitButton = styled.button.attrs(() => ({ type: 'button' }))`
   justify-content: center;
   align-items: center;
   width: 8.5rem;
-  /* width: ${({ location, calendar, personnel }) =>
-    location || calendar || personnel ? '8.5rem' : '4.8rem'}; */
   height: 4.8rem;
   border-radius: 999rem;
   background: #ff385c;
@@ -218,11 +213,7 @@ const HeaderSearch = forwardRef(
     },
     ref,
   ) => {
-    // const [location, setLocation] = useState(false);
-    // const [calendar, setCalendar] = useState(false);
-    // const [personnel, setPersonnel] = useState(false);
     // 검색 시작 하기 눌렀을 시 모달 초기 상태
-    // const [searchStartState, setSear~chStartState] = useState(false);
     const [gu, setGu] = useState(null);
     const [currentLocation, setCurrentLocation] = useState({
       lat: null,
@@ -300,7 +291,7 @@ const HeaderSearch = forwardRef(
             'YYYY-MM-DD',
           )}&checkout=${dateRange.endDate.format('YYYY-MM-DD')}&guestNum=${
             count.adultNum + count.childNum
-          }`,
+          }&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${count.infantNum}`,
         );
       }
       // 위치만 입력 했을경우
@@ -335,13 +326,12 @@ const HeaderSearch = forwardRef(
         history.push(
           `/accommodations/search?searchKeyword=${address}&guestNum=${
             count.adultNum + count.childNum
-          }`,
+          }&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${count.infantNum}`,
         );
       }
     };
 
     // google place autocomplete
-    // const [address, setAddress] = useState('');
     const handleChange = address => {
       setAddress(address);
     };
@@ -380,7 +370,6 @@ const HeaderSearch = forwardRef(
         scrollY={scrollY}
         searchStartState={searchStartState}
         scrollStatus={scrollStatus}
-        id="test"
       >
         <Button
           className="w-27rem text-left"
@@ -413,7 +402,6 @@ const HeaderSearch = forwardRef(
                       id="search-input"
                       type="text"
                       data-name="location"
-                      // className='location-search-input block text-1.4rem text-#717171 bg-transparent'
                       className="block text-1.4rem text-#717171 bg-transparent"
                       {...getInputProps({
                         placeholder: '어디로 여행가세요?',
