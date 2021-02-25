@@ -5,6 +5,12 @@ import BookingTemplate from '../components/booking/BookingTemplate';
 import { useSelector } from 'react-redux';
 
 const BookingContainer = () => {
+  window.scrollTo({
+    left: 0,
+    top: 0,
+    behavior: 'smooth',
+  });
+
   // 숙소 정보를 roomDetail 리듀서에서 꺼내온다
   const { accommodations } = useSelector(({ roomDetail }) => ({
     accommodations: roomDetail.accommodation,
