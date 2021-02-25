@@ -1,5 +1,5 @@
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import SVG from '../../assets/svg';
 import { Link } from 'react-router-dom';
 // import { BiMenu, BiSearch } from 'react-icons/bi';
@@ -202,7 +202,6 @@ const CommonHeader = ({
   // 버거바
   const HeaderUser = () => {
     const img = window.location.origin;
-    console.log(checkedToken);
 
     return (
       <HeaderUserMenu

@@ -1,5 +1,17 @@
 import React from 'react';
+import styled, { keyframes } from 'styled-components';
 
+const fadeIn = keyframes`
+from {
+  opacity: 0
+}
+to {
+  opacity: 1
+}
+`;
+const ModalBackground = styled.div`
+animation: ${fadeIn} 0.25s ease-in;
+`;
 
 const SocialRegisterModal = ({ hideModal, onChange, socialRegisterSubmit, state }) => {
   const { socialRegister, authError } = state;
@@ -23,7 +35,7 @@ const SocialRegisterModal = ({ hideModal, onChange, socialRegisterSubmit, state 
       data-name="close"
       className="w-full h-full overflow-hidden flex bg-modal justify-center items-center text-white fixed top-0 z-50"
     >
-      <div className="w-56rem z-50 bg-white border rounded-2xl flex flex-col overflow-y-auto text-#727272 text-center p-8 relative text-1.4rem">
+      <ModalBackground className="w-56rem z-50 bg-white border rounded-2xl flex flex-col overflow-y-auto text-#727272 text-center p-8 relative text-1.4rem">
       <h1 className="a11y-hidden">회원가입 팝업창</h1>
           <h2 className="text-1.6rem font-extrabold border-b pb-8 mb-2rem">회원가입 완료</h2>
           <button
@@ -60,7 +72,7 @@ const SocialRegisterModal = ({ hideModal, onChange, socialRegisterSubmit, state 
         <button className="mt-8 w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none">회원가입</button>
 
         </form>
-      </div>
+      </ModalBackground>
     </div>
   );
 };

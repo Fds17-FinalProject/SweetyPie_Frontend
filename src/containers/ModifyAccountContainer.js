@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import ModifyAccount from '../components/modify/ModifyAccount';
-import { getToken, getUser, logout, withdrawal } from '../redux/lib/api/auth';
+import { getToken, logout, withdrawal } from '../redux/lib/api/auth';
 import {
   authRegister,
   changeField,
@@ -120,7 +120,6 @@ const ModifyAccountContainer = () => {
     if (target.dataset.name) {
       setVisible(false);
       setAuthVisible(false);
-      // setPersonnel(false);
       setSocialModal(false);
     }
   };
@@ -237,17 +236,15 @@ const ModifyAccountContainer = () => {
     wathchFlexibleScroll();
     window.addEventListener('scroll', wathchFlexibleScroll);
   }, [socialRegister.socialId, checkedToken, dispatch]);
-  // }, [auth, authError, dispatch]);
 
   const onClick = e => {
     e.preventDefault();
     setModify({ ...modify, [e.target.name]: !modify[e.target.name] });
   };
+
   const onWithdrawal = e => {
     withdrawal();
     localStorage.removeItem('token');
-    // setAuthVisible(false);
-    // setToken(false);
   };
 
   return (
