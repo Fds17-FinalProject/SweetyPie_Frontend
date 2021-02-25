@@ -4,6 +4,7 @@ import ModifyInput from './ModifyInput';
 import ModifyContent from './ModifyContent';
 import ModifyDescription from './ModifyDescription';
 import ModifyHeader from './ModifyHeader';
+import ModifyDisabledModal from './ModifyDisabledModal';
 
 const ModifyAccount = ({
   onClick,
@@ -97,8 +98,23 @@ const ModifyAccount = ({
     }
   };
 
+  // 회원 탈퇴 확인 및 취소 모달
+  const [disableModal, setDisableModal] = useState(false);
+  const onShowModal = () => {
+    setDisableModal(true);
+  };
+  const onCloseModal = ({ target }) => {
+    if (target.dataset.name === 'close') setDisableModal(false);
+  };
+
   return (
     <div>
+      {disableModal && (
+        <ModifyDisabledModal
+          onCloseModal={onCloseModal}
+          onWithdrawal={onWithdrawal}
+        />
+      )}
       <ModifyHeader
         showModal={showModal}
         hideModal={hideModal}
@@ -238,7 +254,8 @@ const ModifyAccount = ({
             계정을 비활성화 하셔야 하나요?
           </h2>
           <button
-            onClick={onWithdrawal}
+            // onClick={onWithdrawal}
+            onClick={onShowModal}
             className="text-#008489 text-1.4rem font-semibold"
           >
             지금 처리하기
