@@ -2,10 +2,21 @@ import React from 'react';
 import LoginModal from './LoginModal';
 import RegisterForm from './RegisterForm';
 import RegisterModal from './RegisterModal';
+import styled, { keyframes } from 'styled-components';
 const AuthModal = ({ hideModal, authVisible, changeModal, onChange, registerSubmit, loginSubmit, state, checkedLogin }) => {
-
+  const fadeIn = keyframes`
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+`;
+const ModalBackground = styled.div`
+animation: ${fadeIn} 0.25s ease-in;
+`;
   return (
-    <div
+    <ModalBackground
       onClick={hideModal}
       data-name="close"
       className="w-full h-full overflow-hidden flex bg-modal justify-center items-center text-white fixed top-0 z-50"
@@ -15,7 +26,7 @@ const AuthModal = ({ hideModal, authVisible, changeModal, onChange, registerSubm
         {authVisible.type === 'register' && <RegisterModal changeModal={changeModal}/>}
         {authVisible.type === 'form' && <RegisterForm changeModal={changeModal} onChange={onChange} registerSubmit={registerSubmit} state={state}/>}
       </div>
-    </div>
+    </ModalBackground>
   );
 };
 
