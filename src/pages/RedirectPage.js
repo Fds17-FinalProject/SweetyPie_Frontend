@@ -13,7 +13,7 @@ const RedirectPage = ({ history }) => {
     console.log('url', url);
     try {
       const res = await axios.get(
-        `https://sweetypie.gq/api/login/google${url}`,
+        `https://sweetypie.ga/api/login/google${url}`,
       );
       // 모달창 띄우기
       console.log('res', res);

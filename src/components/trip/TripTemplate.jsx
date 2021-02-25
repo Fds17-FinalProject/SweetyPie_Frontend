@@ -23,7 +23,7 @@ const TripTemplate = ({
       <div className="pt-32 px-32 pb-6.5rem">
         <section>
           <h1 className="text-3.2rem font-semibold py-16">예약 내역</h1>
-          <TripReservation />
+          <TripReservation location={location} tab={tab} />
           <div className="max-w-screen-2xl mx-6 h-0.5 border-t"></div>
 
           {/* 예정된 예약이 없다면 보여줄 화면 */}
