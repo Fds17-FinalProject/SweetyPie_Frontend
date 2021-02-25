@@ -88,13 +88,13 @@ const BookingTemplate = ({
             hideModal={hideModal}
             reservationId={reservationId}
           >
-            예약을 취소하시겠습니까?
+            숙소 예약을 취소하시겠습니까?
           </CommonChoiceModal>
         </Modal>
       )}
       <SimpleHeaderContainer />
       <BookingTitle subPage={subPage} query={query} />
-      <main className="max-w-screen-2xl px-32 xl:mx-48 md:mx-0 pb-4.8rem">
+      <main className="px-32 xl:mx-48 md:mx-0 pb-4.8rem">
         <div className="flex justify-between">
           <div className="w-1/2">
             <BookingBanner
