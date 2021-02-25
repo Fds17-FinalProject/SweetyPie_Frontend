@@ -80,6 +80,7 @@ const AccommList = props => {
         onMouseEnter={onMouseEnter(id)}
         onMouseLeave={onMouseLeave(id)}
         data-name="accommList"
+        className="pr-8 pl-5"
       >
         <div className="h-25rem border-t border-#EBEBEB pt-10 pb-10 relative">
           <HoverSvg
