@@ -14,7 +14,7 @@ const RedirectPage = ({ history }) => {
     const url = window.location.search;
     console.log('url', url);
     try {
-      const res = await axios.get(`https://sweetypie.gq/api/login/google${url}`);
+      const res = await axios.get(`https://sweetypie.ga/api/login/google${url}`);
       // 모달창 띄우기
       console.log('res', res);
       await dispatch(socialRegister(res.data));
@@ -27,7 +27,6 @@ const RedirectPage = ({ history }) => {
         console.log('error');
       }
       history.push('/');
-      
     } catch (error) { 
       console.log(error);
     }
@@ -48,4 +47,3 @@ const RedirectPage = ({ history }) => {
 
 export default RedirectPage;
 
-// Action type
