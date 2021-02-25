@@ -220,7 +220,6 @@ const HeaderSearch = forwardRef(
       lng: null,
     });
 
-
     const [count, setCount] = useState({
       adultNum: 0,
       childNum: 0,
@@ -291,7 +290,9 @@ const HeaderSearch = forwardRef(
             'YYYY-MM-DD',
           )}&checkout=${dateRange.endDate.format('YYYY-MM-DD')}&guestNum=${
             count.adultNum + count.childNum
-          }&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${count.infantNum}`,
+          }&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${
+            count.infantNum
+          }`,
         );
       }
       // 위치만 입력 했을경우
@@ -326,7 +327,9 @@ const HeaderSearch = forwardRef(
         history.push(
           `/accommodations/search?searchKeyword=${address}&guestNum=${
             count.adultNum + count.childNum
-          }&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${count.infantNum}`,
+          }&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${
+            count.infantNum
+          }`,
         );
       }
     };
@@ -336,6 +339,9 @@ const HeaderSearch = forwardRef(
       setAddress(address);
     };
     const handleSelect = address => {
+      if (!address.split(' ')[2]) {
+        return;
+      }
       setAddress(address.split(' ')[2]);
       geocodeByAddress(address)
         .then(results => getLatLng(results[0]))
