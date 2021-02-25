@@ -61,7 +61,7 @@ const ModifyInput = ({
       <button
         name={name}
         onClick={e => patchMemberInfo(e, name, value, content)}
-        className="text-white text-1.6rem h-16 w-32 px-5 m-2 bg-#008489 hover:bg-#004F52 shadow-lg rounded-lg"
+        className="text-white text-1.6rem h-16 w-32 px-5 m-2 shadow-lg rounded-lg bg-#008489 hover:bg-#004F52 "
       >
         저장
       </button>
