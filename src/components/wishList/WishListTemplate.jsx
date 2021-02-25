@@ -10,7 +10,6 @@ const WishListTemplate = ({ bookmarks, loading }) => {
       <div className="px-32 pb-6.5rem pt-32">
         <section>
           <h1 className="text-3.2rem font-semibold py-16">저장 목록</h1>
-          <div className="max-w-screen-2xl mx-6 h-0.5 border-t"></div>
           <ul className="flex flex-wrap justify-start items-center content-center">
             {/* 저장 목록 */}
             {loading === false &&
