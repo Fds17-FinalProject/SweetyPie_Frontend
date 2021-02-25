@@ -37,6 +37,7 @@
     "react-icons": "^4.1.0",
     "react-onclickoutside": "^6.10.0",
     "react-paginate": "^7.0.0",
+    "react-places-autocomplete": "^7.3.0",
     "react-rangeslider": "^2.2.0",
     "react-redux": "^7.2.2",
     "react-router": "^5.2.0",

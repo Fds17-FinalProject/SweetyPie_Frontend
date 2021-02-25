@@ -29,7 +29,7 @@ const SafetyModal = styled.div`
   animation: ${slideUp} 0.25s ease-out;
 `;
 
-const RoomDetailSafetyModal = ({ onCloseModal, visible }) => {
+const RoomDetailSafetyModal = ({ onCloseModal }) => {
   return (
     <ModalBackground
       className="fixed top-0 left-0 bg-modal flex justify-center items-center w-full h-full z-20"
@@ -40,7 +40,6 @@ const RoomDetailSafetyModal = ({ onCloseModal, visible }) => {
         <div className="h-7.2rem" data-name="close">
           <button
             className="inline-flex items-center justify-center w-16 h-16 mr-4 text-black text-4xl transition-colors duration-150 focus:outline-none border-black bg-white rounded-full focus:shadow-outline hover:bg-gray-200 transform hover:scale-110 relative left-5 top-5"
-            // onClick={onCloseModal}
             data-name="close"
           >
             <HiOutlineX data-name="close" />

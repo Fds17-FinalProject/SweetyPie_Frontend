@@ -6,3 +6,5 @@ export const getList = async query =>
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   });
+
+

@@ -3,25 +3,23 @@ import styled from 'styled-components';
 import SVG from '../../assets/svg';
 import { Link } from 'react-router-dom';
 import { BiMenu } from 'react-icons/bi';
-import Modal from './Modal';
+import Modal from '../common/Modal';
 import AuthModal from '../main/AuthModal';
-import SocialRegisterModal from './SocialRegisterModal';
-import AccommodationSearchHeader from '../common/AccommodationSearchHeader';
+import SocialRegisterModal from '../common/SocialRegisterModal';
 
 const MainHeader = styled.header`
-position: fixed;
-top: 0;
-display: flex;
-width: 100%;
-height: ${({searchStartState}) => searchStartState ? '18rem' : '8rem'};
-justify-content: space-between;
-padding-left: 8rem;
-padding-right: 8rem;
-padding-top: 2rem;
-background:#fff;
-z-index: 10;
-box-sizing: border-box;
-box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
+  position: fixed;
+  display: flex;
+  width: 100%;
+  height: ${({ searchStartState }) => (searchStartState ? '18rem' : '8rem')};
+  justify-content: space-between;
+  padding-left: 8rem;
+  padding-right: 8rem;
+  padding-top: 2rem;
+  background: #fff;
+  z-index: 10;
+  box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
 `;
 
 const HeaderUserMenu = styled.button`
@@ -34,17 +32,13 @@ const HeaderUserMenu = styled.button`
   height: 3.5rem;
 `;
 
-const AccommodationHeader = ({
+const ModifyHeader = ({
   showModal, // 유저메뉴(버거바) open
   hideModal, // 모달 close
   changeModal, // 유저메뉴 -> 로그인, 회원가입 모달 뷰 교체
   visible, // 유저메뉴 open,close 상태
   authVisible, // 회원가입, 로그인 모달 open, close 상태
-  searchStartState, // 검색 시작 버튼 누르면 애니메이션 교체해주기 위한 상태
-  scrollY, // scrollY 값 30이상이면 true : false
-  setScrollY,
   showAuthModal, // 회원가입, 로그인 모달
-  showSearchHeader,
   onChange, // 로그인 회원가입 모달 인풋 onChange
   registerSubmit, // 회원가입 모달 submit
   loginSubmit, // 로그인 모달 submit
@@ -53,19 +47,12 @@ const AccommodationHeader = ({
   socialModal, // 소셜로 회원가입 모달
   socialRegisterSubmit, // 소셜로 회원가입 submit
   userLogout, // 로그아웃 api콜 함수
-  location,
-  calendar,
-  personnel,
-  setLocation,
-  setCalendar,
-  setPersonnel,
-  checkedLogin,
 }) => {
   // 버거바
   const HeaderUser = () => {
     return (
       <HeaderUserMenu
-        className="flex bg-white p-2 rounded-3xl border-gray-300 border w-28 h-14"
+        className="flex bg-white p-2 rounded-3xl border-gray-300 border w-28	h-14"
         onClick={showModal}
       >
         <div className="flex-grow w-full h-full">
@@ -102,7 +89,7 @@ const AccommodationHeader = ({
       <div
         data-name="close"
         onClick={hideModal}
-        className="w-screen h-screen flex justify-center items-center text-white fixed top-0 z-20"
+        className="w-screen h-screen flex justify-center items-center text-white fixed top-0 z-50"
       >
         <div className="w-96 z-50 bg-white border rounded-2xl absolute top-28 right-32 overflow-y-auto flex flex-col text-#727272 text-1.4rem">
           <h1 className="a11y-hidden">유저 메뉴 모달창</h1>
@@ -110,20 +97,23 @@ const AccommodationHeader = ({
             {/* 로그인 안했을 시  */}
             <ul>
               {/* MenuList에 auth props를 넣어서 로그인인지 회원가입인지 구분 */}
-              {checkedToken ? 
-                 <>
-                 <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
-                   <Link className="block w-full" to="/reservation">예약내역</Link>
-                 </li>
-                 <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
-                   <Link className="block w-full" to="/wishlist">저장목록</Link>
-                 </li>
-                 <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
-                   <Link className="block w-full" to="/modify">계정</Link>
-                 </li>
-               <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100" onClick={userLogout}>로그아웃</li>
-               </>
-               : 
+              {checkedToken ? (
+                <>
+                  <MenuList>예약 내역</MenuList>
+                  <MenuList>저장 목록</MenuList>
+                  <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
+                    <Link className="block w-full" to="/modify">
+                      계정
+                    </Link>
+                  </li>
+                  <li
+                    className="cursor-pointer	py-4 px-6 hover:bg-gray-100"
+                    onClick={userLogout}
+                  >
+                    로그아웃
+                  </li>
+                </>
+              ) : (
                 // {/* 로그인 했을 시 */}
                 <>
                   <MenuList auth="login" showAuthModal={showAuthModal}>
@@ -134,7 +124,7 @@ const AccommodationHeader = ({
                   </MenuList>
                   <MenuList>도움말</MenuList>
                 </>
-              }
+              )}
             </ul>
           </div>
         </div>
@@ -153,7 +143,6 @@ const AccommodationHeader = ({
       </div>
     );
   };
-
   return (
     <>
       {/* UserMenu(버거바) Modal 렌더링 */}
@@ -176,7 +165,6 @@ const AccommodationHeader = ({
             onChange={onChange}
             loginSubmit={loginSubmit}
             state={state}
-            checkedLogin={checkedLogin}
           />
         </Modal>
       )}
@@ -208,26 +196,11 @@ const AccommodationHeader = ({
           state={state}
         />
       )}
-
-      <MainHeader scrollY={scrollY} searchStartState={searchStartState}>
-        <HeaderLogo color="#fff" scrollY={scrollY} />
-        <AccommodationSearchHeader
-          setLocation={setLocation}
-          setCalendar={setCalendar}
-          setPersonnel={setPersonnel}
-          scrollY={scrollY}
-          setScroll={setScrollY}
-          searchStartState={searchStartState}
-          showSearchHeader={showSearchHeader}
-          location={location}
-          calendar={calendar}
-          personnel={personnel}
-        />
-        {/* \showSearchHeader, searchStartState, setLocation, setCalendar, setPersonnel, location, calendar, personnel */}
+      <MainHeader>
+        <HeaderLogo color="#fff" />
         <HeaderUser />
       </MainHeader>
     </>
   );
 };
-
-export default AccommodationHeader;
+export default ModifyHeader;
