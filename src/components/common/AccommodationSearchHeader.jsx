@@ -185,7 +185,7 @@ const AccommodationSearchHeader = ({
   calendar,
   personnel,
   address,
-  setAddress
+  setAddress,
 }) => {
   const [gu, setGu] = useState(null);
   const [currentLocation, setCurrentLocation] = useState({
@@ -198,7 +198,6 @@ const AccommodationSearchHeader = ({
     infantNum: 0,
     status: false,
   });
-  console.log('address', address);
 
   const history = useHistory();
   // 헤더 위치 (어디로 여행가세요?)
@@ -248,8 +247,8 @@ const AccommodationSearchHeader = ({
     // 체크아웃 날짜의 초기값 지정
     endDate: null,
   });
-  
-    // 달력 날짜 포커스 상태
+
+  // 달력 날짜 포커스 상태
 
   const [focus, setFocus] = useState('startDate');
   // 달력 날짜 변경 함수
@@ -292,7 +291,9 @@ const AccommodationSearchHeader = ({
           'YYYY-MM-DD',
         )}&checkout=${dateRange.endDate.format('YYYY-MM-DD')}&guestNum=${
           count.adultNum + count.childNum
-        }&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${count.infantNum}`,
+        }&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${
+          count.infantNum
+        }`,
       );
     }
     // 위치만 입력 했을경우
@@ -327,13 +328,15 @@ const AccommodationSearchHeader = ({
       history.push(
         `/accommodations/search?searchKeyword=${address}&guestNum=${
           count.adultNum + count.childNum
-        }&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${count.infantNum}`,
+        }&adultNum=${count.adultNum}&childNum=${count.childNum}&infantNum=${
+          count.infantNum
+        }`,
       );
     }
   };
 
-   // google place autocomplete
-   const handleChange = address => {
+  // google place autocomplete
+  const handleChange = address => {
     setAddress(address);
   };
   const handleSelect = address => {
@@ -345,31 +348,28 @@ const AccommodationSearchHeader = ({
   };
 
   useEffect(() => {
-      if (currentLocation.lat !== null && currentLocation.lng !== null) {
-        async function getAddress() {
-          try {
-            const res = await axios.get(
-              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation.lat},${currentLocation.lng}&key=AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU`,
-            );
-            if (res) {
-              setGu(res.data.results[4].formatted_address.substr(11));
-            }
-          } catch (e) {
-            console.log(e);
+    if (currentLocation.lat !== null && currentLocation.lng !== null) {
+      async function getAddress() {
+        try {
+          const res = await axios.get(
+            `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation.lat},${currentLocation.lng}&key=AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU`,
+          );
+          if (res) {
+            setGu(res.data.results[4].formatted_address.substr(11));
           }
+        } catch (e) {
+          console.log(e);
         }
-        getAddress();
       }
-      if (address.length !== 0) {
-        setLocation(false);
-      }
-    }, [address, currentLocation, gu, location, setLocation]);
+      getAddress();
+    }
+    if (address.length !== 0) {
+      setLocation(false);
+    }
+  }, [address, currentLocation, gu, location, setLocation]);
 
   return (
-    <SearchHeader
-      onSubmit={onSubmit}
-      searchStartState={searchStartState}
-    >
+    <SearchHeader onSubmit={onSubmit} searchStartState={searchStartState}>
       <Button
         className="w-27rem text-left"
         searchStartState={searchStartState}
@@ -388,57 +388,56 @@ const AccommodationSearchHeader = ({
             여행지를 골라주세요.
           </label>
 
-
           <PlacesAutocomplete
-              value={gu || address}
-              onChange={handleChange}
-              onSelect={handleSelect}
-            >
-              {({ getInputProps, suggestions, getSuggestionItemProps }) => {
-                return (
-                  <div>
-                    <input
-                      id="search-input"
-                      type="text"
-                      data-name="location"
-                      className="block text-1.4rem text-#717171 bg-transparent"
-                      {...getInputProps({
-                        placeholder: '어디로 여행가세요?',
-                      })}
-                    />
-                    <AutoCompleteContainer className="autocomplete-dropdown-container">
-                      {suggestions.map(suggestion => {
-                        const className = suggestion.active
-                          ? 'suggestion-item--active'
-                          : 'suggestion-item';
-                        // inline style for demonstration purpose
-                        const style = suggestion.active
-                          ? { backgroundColor: '#fafafa', cursor: 'pointer' }
-                          : { backgroundColor: '#ffffff', cursor: 'pointer' };
+            value={gu || address}
+            onChange={handleChange}
+            onSelect={handleSelect}
+          >
+            {({ getInputProps, suggestions, getSuggestionItemProps }) => {
+              return (
+                <div>
+                  <input
+                    id="search-input"
+                    type="text"
+                    data-name="location"
+                    className="block text-1.4rem text-#717171 bg-transparent"
+                    {...getInputProps({
+                      placeholder: '어디로 여행가세요?',
+                    })}
+                  />
+                  <AutoCompleteContainer className="autocomplete-dropdown-container">
+                    {suggestions.map(suggestion => {
+                      const className = suggestion.active
+                        ? 'suggestion-item--active'
+                        : 'suggestion-item';
+                      // inline style for demonstration purpose
+                      const style = suggestion.active
+                        ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                        : { backgroundColor: '#ffffff', cursor: 'pointer' };
 
-                        return (
-                          <AutoComplete
-                            {...getSuggestionItemProps(suggestion, {
-                              className,
-                              style,
-                            })}
-                          >
-                            <div className="w-full text-1.4rem flex items-center p-0.8rem">
-                              <AutoCompleteIcon>
-                                <FaMapMarkerAlt />
-                              </AutoCompleteIcon>
-                              {suggestion.description}
-                            </div>
-                          </AutoComplete>
-                        );
-                      })}
-                    </AutoCompleteContainer>
-                  </div>
-                );
-              }}
-            </PlacesAutocomplete>
-          </div>
-        </Button>
+                      return (
+                        <AutoComplete
+                          {...getSuggestionItemProps(suggestion, {
+                            className,
+                            style,
+                          })}
+                        >
+                          <div className="w-full text-1.4rem flex items-center p-0.8rem">
+                            <AutoCompleteIcon>
+                              <FaMapMarkerAlt />
+                            </AutoCompleteIcon>
+                            {suggestion.description}
+                          </div>
+                        </AutoComplete>
+                      );
+                    })}
+                  </AutoCompleteContainer>
+                </div>
+              );
+            }}
+          </PlacesAutocomplete>
+        </div>
+      </Button>
       <Button
         test={true}
         startDate={dateRange.startDate}
