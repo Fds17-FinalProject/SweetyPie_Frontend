@@ -250,7 +250,7 @@ const ModifyAccountContainer = () => {
     }
     wathchFlexibleScroll();
     window.addEventListener('scroll', wathchFlexibleScroll);
-  }, [authError, socialRegister.socialId, checkedToken]);
+  }, [socialRegister.socialId, checkedToken, dispatch]);
   // }, [auth, authError, dispatch]);
 
   const onClick = e => {

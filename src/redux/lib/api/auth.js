@@ -6,13 +6,12 @@ export const getToken = async ({ email, password }) => {
     password,
   });
 };
-export const getUser = async () => {
+export const getUser = async () =>
   await axios.get('https://sweetypie.ga/api/member', {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     },
   });
-};
 
 // 계정 페이지 회원수정 PUT
 export const modifyUser = async ({
