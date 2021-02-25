@@ -130,8 +130,10 @@ const UserMenu = ({ hideModal, showAuthModal }) => {
             // {/* 로그인 했을 시 */}
             <>
               <MenuList auth='login' showAuthModal={showAuthModal} >로그인</MenuList>
-              <MenuList auth='register' showAuthModal={showAuthModal} >회원 가입</MenuList>
-              <MenuList>도움말</MenuList>
+                <MenuList auth='register' showAuthModal={showAuthModal} >회원 가입</MenuList>
+                <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
+                  <a href="https://www.airbnb.co.kr/help/home" className="block w-full">도움말</a>
+                </li>
             </>}
           </ul>
         </div>

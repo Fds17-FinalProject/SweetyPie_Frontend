@@ -96,35 +96,29 @@ const ModifyHeader = ({
           <div>
             {/* 로그인 안했을 시  */}
             <ul>
-              {/* MenuList에 auth props를 넣어서 로그인인지 회원가입인지 구분 */}
-              {checkedToken ? (
-                <>
-                  <MenuList>예약 내역</MenuList>
-                  <MenuList>저장 목록</MenuList>
+            {/* MenuList에 auth props를 넣어서 로그인인지 회원가입인지 구분 */}
+              {checkedToken ?
+              <>
                   <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
-                    <Link className="block w-full" to="/modify">
-                      계정
-                    </Link>
+                    <Link className="block w-full" to="/reservation">예약내역</Link>
                   </li>
-                  <li
-                    className="cursor-pointer	py-4 px-6 hover:bg-gray-100"
-                    onClick={userLogout}
-                  >
-                    로그아웃
+                  <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
+                    <Link className="block w-full" to="/wishlist">저장목록</Link>
                   </li>
+                  <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
+                    <Link className="block w-full" to="/modify">계정</Link>
+                  </li>
+                <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100" onClick={userLogout}>로그아웃</li>
                 </>
-              ) : (
-                // {/* 로그인 했을 시 */}
-                <>
-                  <MenuList auth="login" showAuthModal={showAuthModal}>
-                    로그인
-                  </MenuList>
-                  <MenuList auth="register" showAuthModal={showAuthModal}>
-                    회원 가입
-                  </MenuList>
-                  <MenuList>도움말</MenuList>
-                </>
-              )}
+                : 
+              // {/* 로그인 했을 시 */}
+              <>
+                <MenuList auth='login' showAuthModal={showAuthModal} >로그인</MenuList>
+                  <MenuList auth='register' showAuthModal={showAuthModal} >회원 가입</MenuList>
+                  <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
+                    <a href="https://www.airbnb.co.kr/help/home" className="block w-full">도움말</a>
+                  </li>
+              </>}
             </ul>
           </div>
         </div>

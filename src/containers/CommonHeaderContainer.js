@@ -249,7 +249,6 @@ const CommonHeaderContainer = ({
       window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
     }
     function wathchFlexibleScroll() {
-      // console.log('scrollPlus', flexibleScroll.scrollPlus);
       if (flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus) {
         setSearchStartState(false);
         setLocation(false);
