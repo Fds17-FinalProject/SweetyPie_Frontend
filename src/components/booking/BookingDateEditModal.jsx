@@ -2,6 +2,24 @@ import { useState } from 'react';
 import Calendar from '../common/Calendar';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
+import styled, { keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+`;
+
+const ModalBackground = styled.div`
+  animation: ${fadeIn} 0.25s ease-in;
+`;
+
+const DateEditModal = styled.div`
+  animation: ${fadeIn} 0.25s ease-out;
+`;
 
 const BookingDateEditModal = ({
   hideModal,
@@ -77,12 +95,11 @@ const BookingDateEditModal = ({
   };
 
   return (
-    <div
-      data-name="modal"
+    <ModalBackground
       onClick={hideModal}
-      className="w-screen h-screen flex justify-center items-center bg-modal text-white fixed top-0"
+      className="w-screen h-screen flex justify-center items-center bg-modal text-white fixed top-0 z-20"
     >
-      <div
+      <DateEditModal
         className="w-66rem px-3.2rem pt-6.4rem pb-3.2rem bg-white relative top-0 
         overflow-y-auto flex flex-col text-black rounded-3xl border border-#b0b0b0"
       >
@@ -154,7 +171,7 @@ const BookingDateEditModal = ({
         <div className="flex items-center text-1.4rem justify-end pr-1.6rem">
           <button
             onClick={deleteDate}
-            className="underline p-0.8rem font-semibold"
+            className="underline text-1.4rem p-0.8rem rounded-lg font-bold hover:bg-gray-100"
           >
             날짜 지우기
           </button>
@@ -176,8 +193,8 @@ const BookingDateEditModal = ({
             </button>
           )}
         </div>
-      </div>
-    </div>
+      </DateEditModal>
+    </ModalBackground>
   );
 };
 export default BookingDateEditModal;

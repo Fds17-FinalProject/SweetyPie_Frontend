@@ -24,23 +24,6 @@ const RoomDetailGuestEditPopup = ({
   let childNum = +url.searchParams.get('childNum');
   let infantNum = +url.searchParams.get('infantNum');
 
-  console.log(
-    'adultNum',
-    adultNum,
-    'childNum',
-    childNum,
-    'infantNum',
-    infantNum,
-  );
-  console.log(
-    'adult',
-    count.adultNum,
-    'child',
-    count.childNum,
-    'infant',
-    count.infantNum,
-  );
-
   // URL query 추가 및 변경하기
   const changeUrl = (key, value) => {
     url.searchParams.set(key, value);
