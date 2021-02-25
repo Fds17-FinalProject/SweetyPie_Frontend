@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { HiStar, HiOutlineHeart, HiHeart } from 'react-icons/hi';
 
 const Title = ({
@@ -12,6 +12,12 @@ const Title = ({
 }) => {
   const ratingRoundUp = rating.toFixed(2);
   const id = window.location.pathname.split('/')[2];
+
+  const [isBookmark, setIsBookmark] = useState(bookmarked);
+  const toggleBookmark = id => (
+    setIsBookmark(!isBookmark);
+    isBookmark ? deleteBookmark(id) : postBookmark(id);
+  );
 
   return (
     <div className="pt-2.4rem">
@@ -32,18 +38,15 @@ const Title = ({
         </div>
         <button
           className="inline-flex items-center justify-center px-2 h-12 font-bold text-black text-xl transition-colors duration-150 focus:outline-none bg-white rounded-md focus:shadow-outline hover:bg-gray-200 transform hover:scale-110"
-          onClick={
-            bookmarked ? () => deleteBookmark(id) : () => postBookmark(id)
-          }
+          onClick={toggleBookmark(id)}
         >
-          {bookmarked ? (
+          {isBookmark ? (
             <HiHeart className="text-3xl inline-block mr-2 text-airbnb" />
           ) : (
             <HiOutlineHeart className="text-3xl inline-block mr-2" />
           )}
-
           <span className="underline text-1.4rem">
-            {bookmarked ? '저장 완료' : '저장'}
+            {isBookmark ? '저장 완료' : '저장'}
           </span>
         </button>
       </div>
