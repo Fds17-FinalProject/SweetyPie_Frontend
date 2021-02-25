@@ -82,7 +82,7 @@ const BookingButton = ({
             ? () => patchReservation('edit')
             : () => postReservation('edit')
         }
-        className="flex items-center justify-center w-60 h-20 mr-10 bg-#D70466 text-white font-bold rounded-2xl relative"
+        className="flex items-center justify-center w-60 h-20 mr-10 bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl relative shadow-lg transform focus:scale-90 duration-150"
       >
         <SVG
           name="lock"
@@ -98,7 +98,7 @@ const BookingButton = ({
       {subPage === 'modify' && (
         <button
           onClick={() => showModal('delete')}
-          className="flex items-center justify-center w-60 h-20 bg-gray-400 text-black font-bold rounded-2xl"
+          className="flex items-center justify-center w-60 h-20 bg-#b0b0b0 text-black font-bold rounded-2xl shadow-lg transform focus:scale-90 duration-150 hover:bg-gray-300"
         >
           <span className="m-2 text-2xl">예약 취소</span>
         </button>

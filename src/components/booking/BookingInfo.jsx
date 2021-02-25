@@ -35,7 +35,7 @@ const BookingInfo = ({
       <div className="mt-10 relative">
         <p className="text-1.6rem font-semibold">날짜</p>
         <button
-          className="text-1.6rem font-semibold underline absolute right-0 top-0"
+          className="text-1.6rem p-0.8rem rounded-lg font-bold underline absolute right-0 top-0 hover:bg-gray-100"
           onClick={() => showModal('date')}
         >
           수정
@@ -47,7 +47,7 @@ const BookingInfo = ({
       <div className="mt-10 relative">
         <p className="text-1.6rem font-semibold">게스트</p>
         <button
-          className="text-1.6rem font-semibold underline absolute right-0 top-0"
+          className="text-1.6rem p-0.8rem rounded-lg font-bold underline absolute right-0 top-0 hover:bg-gray-100"
           onClick={() => showModal('guest')}
         >
           수정

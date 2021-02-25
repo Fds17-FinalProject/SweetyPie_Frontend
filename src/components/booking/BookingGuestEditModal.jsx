@@ -1,7 +1,32 @@
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import SVG from '../../assets/svg';
-import { IconButton } from '../common/Button';
+import styled, { keyframes } from 'styled-components';
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0
+  }
+  to {
+    opacity: 1
+  }
+`;
+
+const slideUp = keyframes`
+  from {
+    transform: translateY(50%);
+  } to {
+    transform: translateY(0);
+  }
+`;
+
+const ModalBackground = styled.div`
+  animation: ${fadeIn} 0.25s ease-in;
+`;
+
+const GuestEditModal = styled.div`
+  animation: ${fadeIn} 0.25s ease-out;
+`;
 
 const BookingGuestEditModal = ({ hideModal, setVisible, query }) => {
   const { adultNum, childNum, infantNum } = query;
@@ -56,12 +81,11 @@ const BookingGuestEditModal = ({ hideModal, setVisible, query }) => {
   };
 
   return (
-    <div
-      data-name="modal"
+    <ModalBackground
       onClick={hideModal}
-      className="w-screen h-screen flex justify-center items-center bg-modal text-white fixed top-0"
+      className="w-screen h-screen flex justify-center items-center bg-modal text-white fixed top-0 z-20"
     >
-      <div
+      <GuestEditModal
         className="w-38rem pt-5.6rem bg-white relative top-0 
         overflow-y-auto flex flex-col text-black rounded-3xl border border-#b0b0b0"
       >
@@ -334,19 +358,19 @@ const BookingGuestEditModal = ({ hideModal, setVisible, query }) => {
           <button
             data-name="close"
             onClick={hideModal}
-            className="text-1.6rem font-semibold underline"
+            className="inline-flex items-center justify-center px-2 h-12 font-bold text-black text-xl transition-colors focus:outline-none bg-white rounded-md focus:shadow-outline hover:bg-gray-200 transform hover:scale-110 duration-150 underline text-1.4rem"
           >
             취소
           </button>
           <button
             onClick={modifyGuest}
-            className="text-1.6rem text-#fff font-semibold py-1.4rem px-2.4rem bg-black rounded-xl"
+            className="text-1.6rem text-#fff font-semibold py-1.4rem px-2.4rem bg-black rounded-xl transform focus:scale-90 duration-150 "
           >
             저장하기
           </button>
         </div>
-      </div>
-    </div>
+      </GuestEditModal>
+    </ModalBackground>
   );
 };
 
