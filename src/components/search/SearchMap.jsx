@@ -66,6 +66,8 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId, address }) 
     lng: null,
   });
 
+  const [zoom, setZoom] = useState(14);
+
   useEffect(() => { 
     Geocode.setApiKey("AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU");
     
@@ -81,6 +83,29 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId, address }) 
           console.error(error);
         }
       );
+
+    if (url.searchParams.has('minLatitude')) {
+      const minLat = url.searchParams.get('minLatitude');
+      const maxLat = url.searchParams.get('maxLatitude');
+      const minLng = url.searchParams.get('minLongitude');
+      const maxLng = url.searchParams.get('maxLongitude');
+
+      setCenter({
+        lat: (+minLat + +maxLat) / 2,
+        lng: (+minLng + +maxLng) / 2,
+      })
+    }
+
+    if (url.searchParams.get('zoom') === '9') setZoom(11);
+
+    if (url.searchParams.get('zoom') === '15') {
+      setCenter({
+        lat: 36.55138889,
+        lng: 128.03388889,
+      });
+      setZoom(7);
+    }
+
   }, [address]);
 
   
@@ -89,16 +114,14 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId, address }) 
 
   const defaultProps = {
     center: {
-      lat:  center.lat,
-      lng:  center.lng,
+      lat:  center.lat && center.lat,
+      lng:  center.lng && center.lng,
     },
-    zoom: 14
+    zoom,
   };
 
-  console.log(defaultProps.center.lat);
- 
   let boundaryCoordinate = {};
- 
+
     return (
       // Important! Always set the container height explicitly
       <div style={{ height: '100vh', width: '100%' }}>
@@ -109,6 +132,19 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId, address }) 
           options={{
             scrollwheel: true
           }}
+          // onBoundsChange={_onBoundsChange}
+          // onZoomAnimationEnd={() => {
+          //   console.log(boundaryCoordinate);
+          //   history.push(
+          //     'mapSearch?minLatitude='
+          //     + boundaryCoordinate.minLatitude +
+          //     '&maxLatitude='
+          //     + boundaryCoordinate.maxLatitude +
+          //     '&minLongitude='
+          //     + boundaryCoordinate.minLongitude +
+          //     '&maxLongitude='
+          //     + boundaryCoordinate.maxLongitude)
+          // }}
           onDragEnd={() => {
             history.push(
               'mapSearch?minLatitude='
@@ -118,14 +154,16 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId, address }) 
               '&minLongitude='
               + boundaryCoordinate.minLongitude +
               '&maxLongitude='
-              + boundaryCoordinate.maxLongitude)
+              + boundaryCoordinate.maxLongitude
+              + `${history.location.search.split('types')[1] && `&types${history.location.search.split('types')[1]}`}`
+              )
           }}
           onChange={({ center, zoom, bounds, marginBounds }) => {
               boundaryCoordinate = {
-                minLatitude: marginBounds.sw.lat,
-                maxLatitude: marginBounds.ne.lat,
-                minLongitude: marginBounds.sw.lng,
-                maxLongitude: marginBounds.ne.lng
+                minLatitude: bounds.sw.lat,
+                maxLatitude: bounds.ne.lat,
+                minLongitude: bounds.sw.lng,
+                maxLongitude: bounds.ne.lng
               }
           }}
         > 
