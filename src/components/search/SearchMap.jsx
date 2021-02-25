@@ -121,6 +121,7 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId, address }) 
   };
 
   let boundaryCoordinate = {};
+  console.log(history.location.search.split('types')[1]);
 
     return (
       // Important! Always set the container height explicitly
@@ -155,7 +156,7 @@ const SearchMap = ({ accommodations, loading, isHovering, id, setId, address }) 
               + boundaryCoordinate.minLongitude +
               '&maxLongitude='
               + boundaryCoordinate.maxLongitude
-              + `${history.location.search.split('types')[1] && `&types${history.location.search.split('types')[1]}`}`
+              + `${history.location.search.split('types')[1] ? `&types${history.location.search.split('types')[1]}` : ''}`
               )
           }}
           onChange={({ center, zoom, bounds, marginBounds }) => {

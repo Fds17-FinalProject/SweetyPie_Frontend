@@ -8,6 +8,8 @@ const CommonChoiceModal = ({ hideModal, children, reservationId }) => {
   // 예약 취소
   const cancleReservation = async () => {
     await removeReservation(reservationId);
+    localStorage.removeItem('accommodationInfo');
+    localStorage.removeItem('modifyreservation');
     history.push('/reservation');
   };
 

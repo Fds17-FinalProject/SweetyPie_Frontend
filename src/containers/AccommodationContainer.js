@@ -8,7 +8,8 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { getToken, logout } from '../redux/lib/api/auth';
 import AccommodationHeader from '../components/common/AccommodationHeader';
-const AccommodationHeaderContainer = () => {
+import { useHistory } from 'react-router';
+const AccommodationHeaderContainer = ({ authVisible, setAuthVisible }) => {
   // 로컬스토리지 토큰 유무
   const [checkedToken, setCheckedToken] = useState(false);
   // 스크롤 위치
@@ -19,102 +20,98 @@ const AccommodationHeaderContainer = () => {
   const [searchStartState, setSearchStartState] = useState(false);
   const [checkedLogin, setCheckedLogin] = useState(false);
 
+  // // // 검색 시작 하기 눌렀을 시 모달 초기 상태
+  // // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
+  // // 하나의 모달 회원가입 폼 모달 띄우는것 때문에 생각정리안된게있어서 일단 객체 상태로 냅둠!
+  // const [authVisible, setAuthVisible] = useState({
+  //   // 'login' or 'register'
+  //   type: null,
+  // });
 
-    // // 검색 시작 하기 눌렀을 시 모달 초기 상태
-    // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
-    // 하나의 모달 회원가입 폼 모달 띄우는것 때문에 생각정리안된게있어서 일단 객체 상태로 냅둠!
-    const [ authVisible, setAuthVisible ] = useState({
-      // 'login' or 'register'
-      type: null,
-    });
-  
-    const [location, setLocation] = useState(false);
-    const [calendar, setCalendar] = useState(false);
-    const [personnel, setPersonnel] = useState(false);
-    const [address, setAddress] = useState('');
-    const [flexibleScroll, setFlexibleScroll] = useState({
-      currentScroll: 0,
-      scrollPlus: 0,
-      scrollMinus: 0,
-      scrollStatus: false,
-    });
-   // 검색 시작하기 onClick시 헤더 스타일 변경
-   const showSearchHeader = ({ target }) => {
+  const [location, setLocation] = useState(false);
+  const [calendar, setCalendar] = useState(false);
+  const [personnel, setPersonnel] = useState(false);
+  const [address, setAddress] = useState('');
+  const [flexibleScroll, setFlexibleScroll] = useState({
+    currentScroll: 0,
+    scrollPlus: 0,
+    scrollMinus: 0,
+    scrollStatus: false,
+  });
+  const history = useHistory();
+  // 검색 시작하기 onClick시 헤더 스타일 변경
+  const showSearchHeader = ({ target }) => {
     if (target.dataset.name === 'open') {
       // 상태 true로 바뀌면서 스타일 변경
       setSearchStartState(true);
       // 위치 open
       setLocation(true);
     }
-   };
-  
-    // 유저 메뉴 모달 open
-    const showModal = () => {
-      setVisible(true);
-    };
-    // 유저 메뉴 -> 로그인 or 회원가입 눌렀을 시 authVisible의 타입에 따라 모달 Open 
-    // userMenu -> menuList 컴포넌트에서 auth를 인자로 받아서 type이 로그인인지 회원가입인지 구분
-    const showAuthModal = (auth) => {
-      if (auth === 'login') {
-        // 로그인 or 회원가입 누를 시 유저메뉴 close 
-        setVisible(false);
-        // type에 들어온 조건 별로 모달 Open
-        setAuthVisible({
-          ...authVisible,
-          type: 'login',
-        });
-        // open시 login form 초기화
-        dispatch(initializeForm('login'));
-      }
-      else if (auth === 'register') {
-        setVisible(false);
-        setAuthVisible({
-          ...authVisible,
-          type: 'register',
-        });
-      }
-    };
-  
-    // 회원가입 모달에서 아이디가 있으세요? -> 로그인 버튼
-    // 온클릭 이벤트 만들어서 type:'login'
-    // 로그인 모달에서 아이디가 없으세요? -> 회원가입 버튼
-    // type: 'register'
-    const changeModal = (auth) => {
-      if (auth === 'register') {
-        setAuthVisible({
-          ...authVisible,
-          type: 'login',
-        });
-        showAuthModal(auth);
-      }
-      else if (auth === 'login') {
-        setAuthVisible({
-          ...authVisible,
-          type: 'register',
-        });
-        showAuthModal(auth);
-      }
-      else if (auth === 'form') {
-        setAuthVisible({
-          ...authVisible,
-          type: 'form',
-        });
-        // open 시 회원가입 폼 초기화 
-        dispatch(initializeForm('register'));
-      }
-    };
+  };
 
-  
-    // 모달 close
-    const hideModal = ({ target }) => {
-      if (target.dataset.name) {
-        setVisible(false);
-        setAuthVisible(false);
-        setSocialModal(false);
-      }
-    };
-  
-//  로그인, 회원가입
+  // 유저 메뉴 모달 open
+  const showModal = () => {
+    setVisible(true);
+  };
+  // 유저 메뉴 -> 로그인 or 회원가입 눌렀을 시 authVisible의 타입에 따라 모달 Open
+  // userMenu -> menuList 컴포넌트에서 auth를 인자로 받아서 type이 로그인인지 회원가입인지 구분
+  const showAuthModal = auth => {
+    if (auth === 'login') {
+      // 로그인 or 회원가입 누를 시 유저메뉴 close
+      setVisible(false);
+      // type에 들어온 조건 별로 모달 Open
+      setAuthVisible({
+        ...authVisible,
+        type: 'login',
+      });
+      // open시 login form 초기화
+      dispatch(initializeForm('login'));
+    } else if (auth === 'register') {
+      setVisible(false);
+      setAuthVisible({
+        ...authVisible,
+        type: 'register',
+      });
+    }
+  };
+
+  // 회원가입 모달에서 아이디가 있으세요? -> 로그인 버튼
+  // 온클릭 이벤트 만들어서 type:'login'
+  // 로그인 모달에서 아이디가 없으세요? -> 회원가입 버튼
+  // type: 'register'
+  const changeModal = auth => {
+    if (auth === 'register') {
+      setAuthVisible({
+        ...authVisible,
+        type: 'login',
+      });
+      showAuthModal(auth);
+    } else if (auth === 'login') {
+      setAuthVisible({
+        ...authVisible,
+        type: 'register',
+      });
+      showAuthModal(auth);
+    } else if (auth === 'form') {
+      setAuthVisible({
+        ...authVisible,
+        type: 'form',
+      });
+      // open 시 회원가입 폼 초기화
+      dispatch(initializeForm('register'));
+    }
+  };
+
+  // 모달 close
+  const hideModal = ({ target }) => {
+    if (target.dataset.name) {
+      setVisible(false);
+      setAuthVisible(false);
+      setSocialModal(false);
+    }
+  };
+
+  //  로그인, 회원가입
   const dispatch = useDispatch();
   const state = useSelector(state => state.auth);
   const { register, login, socialRegister, authError } = state;
@@ -205,7 +202,10 @@ const AccommodationHeaderContainer = () => {
       setCheckedToken(true);
     }
     function wathchFlexibleScroll() {
-      if (flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus) {
+      if (
+        flexibleScroll.scrollPlus < window.scrollY ||
+        window.scrollY < flexibleScroll.scrollMinus
+      ) {
         setSearchStartState(false);
         setLocation(false);
         setCalendar(false);
@@ -220,8 +220,6 @@ const AccommodationHeaderContainer = () => {
     }
     wathchFlexibleScroll();
     window.addEventListener('scroll', wathchFlexibleScroll);
-
-    
   }, [authError, socialRegister.socialId, checkedToken]);
   // }, [auth, authError, dispatch]);
   return (
@@ -252,7 +250,7 @@ const AccommodationHeaderContainer = () => {
         checkedLogin={checkedLogin}
         address={address}
         setAddress={setAddress}
-      />  
+      />
     </>
   );
 };
