@@ -74,7 +74,6 @@ const CommonHeader = ({
         className="flex bg-white p-2 rounded-3xl border-gray-300 border w-28 h-14"
         onClick={showModal}
       >
-        {/* <div className="flex align-center"> */}
         <div className="flex-grow w-full h-full">
           <BiMenu className="w-full h-full text-gray-600" />
         </div>
@@ -96,7 +95,6 @@ const CommonHeader = ({
             />
           )}
         </div>
-        {/* </div> */}
       </HeaderUserMenu>
     );
   };
