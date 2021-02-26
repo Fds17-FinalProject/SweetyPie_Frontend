@@ -5,6 +5,12 @@ import { getAccommList } from '../redux/modules/accommodations';
 import { getPricesAction } from '../redux/modules/payment';
 
 const SearchContainer = () => {
+  window.scrollTo({
+    left: 0,
+    top: 0,
+    behavior: 'smooth',
+  });
+
   const accommodations = useSelector(state => state.accommodations);
   const prices = useSelector(state => state.payment.prices.length);
   const loading = useSelector(state => state.loading['search/GET_ACCOMM_LIST']);
