@@ -9,7 +9,6 @@ import {
 } from '../redux/modules/auth';
 import { useDispatch, useSelector } from 'react-redux';
 import { getToken, logout } from '../redux/lib/api/auth';
-import { useHistory } from 'react-router';
 
 const CommonHeaderContainer = ({
   location,
@@ -38,7 +37,7 @@ const CommonHeaderContainer = ({
   // 유저 메뉴 모달 초기 상태
   const [visible, setVisible] = useState(false);
   const [checkedLogin, setCheckedLogin] = useState(false);
-  const history = useHistory();
+
   // // 검색 시작 하기 눌렀을 시 모달 초기 상태
   // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
   // 하나의 모달 회원가입 폼 모달 띄우는것 때문에 생각정리안된게있어서 일단 객체 상태로 냅둠!
@@ -200,8 +199,6 @@ const CommonHeaderContainer = ({
     dispatch(
       socialRegisterSubmitAction({ email, name, contact, birthDate, socialId }),
     );
-    setSocialModal(false);
-    history.push('/');
   };
 
   const loginSubmit = async e => {
