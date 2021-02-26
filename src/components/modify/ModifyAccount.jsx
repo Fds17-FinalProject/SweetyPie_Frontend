@@ -37,20 +37,20 @@ const ModifyAccount = ({
   const contactReg = /^\d{3}\d{4}\d{4}$/;
   const passwordReg = /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*[#?!@$%^&*-]).{8,30}$/;
 
+  // 비밀번호 default 값
+  const defaultPassword = '********';
+
   const [inputValue, setInputValue] = useState({
-    email: '',
-    name: '',
-    birthDate: '',
-    contact: '',
-    password: '',
+    email: email,
+    name: name,
+    birthDate: birthDate,
+    contact: contact,
+    password: defaultPassword,
   });
 
   const changeInputValue = (e, name) => {
     setInputValue({ [name]: e.target.value });
   };
-
-  // 비밀번호 default 값
-  const defaultPassword = '********';
 
   // 개인정보 변경
   const patchMemberInfo = async (e, name, value) => {
@@ -64,7 +64,7 @@ const ModifyAccount = ({
         }),
       );
       setModify({ ...modify, [e.target.name]: !modify[e.target.name] });
-    } else if (name === 'birthDate') {
+    } else if (name === 'birthDate' && value.length > 9) {
       await dispatch(
         modifyMemberInfo({
           name: userInfo.name,
@@ -130,6 +130,7 @@ const ModifyAccount = ({
         state={state}
         checkedToken={checkedToken}
       />
+
       <div className="max-w-screen-2xl w-full flex-grow-1 px-72 pt-32 min-h-75rem">
         <h1 className="a11y-hidden">개인정보 수정</h1>
         <h2 className="text-3.2rem font-extrabold text-#727272 py-16">
@@ -229,7 +230,6 @@ const ModifyAccount = ({
                 modifyMemberInfo={modifyMemberInfo}
                 value={inputValue.contact}
                 changeInputValue={changeInputValue}
-                contactReg={contactReg}
               >
                 전화번호 수정
               </ModifyInput>

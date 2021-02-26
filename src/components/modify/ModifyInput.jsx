@@ -11,8 +11,8 @@ const ModifyInput = ({
   value,
   changeInputValue,
   nameReg,
-  passwordReg,
   contactReg,
+  passwordReg,
 }) => {
   return (
     <div className=" flex relative flex-wrap border-b border-#rgb235 pt-0.8rem pb-0.8rem">
@@ -29,28 +29,7 @@ const ModifyInput = ({
         id={id}
         // type={name === 'password' ? 'password' : ''}
       ></input>
-      <div className="w-full mt-4 mb-4 ml-4 text-1.2rem font-normal text-airbnb">
-        {name !== 'name'
-          ? ''
-          : !value.match(nameReg)
-          ? '한글로 2글자 이상 작성해주세요'
-          : ''}
-        {name !== 'birthDate'
-          ? ''
-          : value.length < 10
-          ? 'YYYY-MM-DD 형태에 맞게 입력해주세요'
-          : ''}
-        {name !== 'password'
-          ? ''
-          : !value.match(passwordReg)
-          ? '특수문자, 문자, 숫자를 포함해서 8자 이상 작성해주세요'
-          : ''}
-        {name !== 'contact'
-          ? ''
-          : !value.match(contactReg)
-          ? '휴대폰 번호를 작성해주세요'
-          : ''}
-      </div>
+      <div className="w-full mt-4 mb-4 ml-4 text-1.2rem font-normal text-airbnb"></div>
       <button
         className="absolute top-0.8 right-0 text-#008489 text-1.6rem"
         name={name}
