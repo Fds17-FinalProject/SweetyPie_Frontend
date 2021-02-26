@@ -52,8 +52,7 @@ const MapPopup = ({ img, accomm, coord, accommId }) => {
     <Link to={`accommodation/${accommId}`}>
       <MapContainer
         style={{ left: x, top: y }}
-        className="w-27.5rem h-28rem truncate mt-8 rounded-2xl absolute z-10"
-      >
+        className="w-27.5rem h-28rem truncate mt-8 rounded-2xl absolute z-10">
         <Carousel size="Medium" img={img} />
         <div className="text-1.4rem p-8 bg-white">
           <AiFillStar
