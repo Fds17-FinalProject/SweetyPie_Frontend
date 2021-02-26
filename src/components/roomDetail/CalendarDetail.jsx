@@ -52,7 +52,8 @@ const CalendarDetail = ({ gu, bookedDateDtos }) => {
     });
     url.searchParams.delete('checkInDate');
     url.searchParams.delete('checkoutDate');
-    history.push(url.search);
+    const accommodationId = window.location.pathname.split('/')[2];
+    history.push(`${accommodationId + url.search}`);
   };
 
   // checkInDate와 chcekoutDate가 변경될 때마다 url에서 받아와 달력 컴포넌트에 적용
