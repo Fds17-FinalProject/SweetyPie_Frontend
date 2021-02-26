@@ -74,7 +74,7 @@ const Payment = ({
             ₩{numberWithCommas(price)}원
           </span>
           <span className="text-#717171 text-1.6rem"> / 박</span>
-          <div className="inline-flex text-1.4rem ml-32">
+          <div className="inline-flex text-1.4rem ml-7rem">
             <span className="inline-flex items-center flex-start mr-1 mb-1">
               <HiStar className="inline-block text-airbnb" />
             </span>
