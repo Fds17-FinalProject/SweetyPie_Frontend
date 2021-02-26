@@ -273,7 +273,7 @@ const CommonHeaderContainer = ({
     return () => {
       window.removeEventListener('scroll', watchScroll);
     };
-  }, [authError, socialRegister.socialId, checkedToken, setSearchStartState]);
+  }, [authError, checkedToken, setSearchStartState]);
 
   return (
     <>
