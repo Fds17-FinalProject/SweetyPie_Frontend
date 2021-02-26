@@ -8,7 +8,7 @@ const BookingContainer = () => {
   window.scrollTo({
     left: 0,
     top: 0,
-    behavior: 'smooth',
+    // behavior: 'smooth',
   });
 
   // 숙소 정보를 roomDetail 리듀서에서 꺼내온다
