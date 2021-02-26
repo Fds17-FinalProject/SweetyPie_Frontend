@@ -199,7 +199,6 @@ const CommonHeaderContainer = ({
     dispatch(
       socialRegisterSubmitAction({ email, name, contact, birthDate, socialId }),
     );
-    setAuthVisible(false);
   };
 
   const loginSubmit = async e => {
@@ -229,7 +228,7 @@ const CommonHeaderContainer = ({
   useEffect(() => {
     // 로그인이나 회원가입 성공 시 모달창 Close
     // useEffect에서 하는 이유는 dispatch가 비동기라서 에러객체가 담기는 시점을 알 수 없기 때문에
-    if (authError === null) {
+    if (authError !== null) {
       setAuthVisible(false);
     }
     // 구글로 회원가입 시 서버에서 받아온 유저정보에 socialId가 있다면 회원가입 모달창 open

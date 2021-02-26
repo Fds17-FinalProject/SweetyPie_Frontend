@@ -7,7 +7,7 @@ const WishListTemplate = ({ bookmarks, loading }) => {
   return (
     <>
       <SimpleHeaderContainer />
-      <div className="px-32 pb-6.5rem pt-32 h-screen">
+      <div className="px-32 pb-6.5rem pt-32 h-full">
         <section>
           <h1 className="text-3.2rem font-semibold py-16">저장 목록</h1>
           <ul className="flex flex-wrap justify-start items-center content-center">
@@ -31,7 +31,7 @@ const WishListTemplate = ({ bookmarks, loading }) => {
           </ul>
         </section>
       </div>
-      <CommonFooter />
+      <CommonFooter className="absolute bottom-0" />
     </>
   );
 };
