@@ -19,7 +19,7 @@
 
 ### 1. 메인 페이지 
 
-- 
+-
 
 ### 2. 검색 페이지
 
@@ -59,14 +59,17 @@
 
 - 
 
-### 5. 예약 내역 페이지 / 저장 목록 페이지
+### 5. 예약내역 페이지
 
 - 
 
-### 6. 계정 페이지
+### 6. 저장목록 페이지
 
 - 
 
+### 7. 계정 페이지
+
+- 
 
 <br>
 
@@ -89,7 +92,7 @@
 │    ├── pages                            # pages files
 │    └── redux                            # redux 상태관리 모음
 │          ├── lib                          # api 모음
-│          └── modules                      # 상태 관리에 필요한 ducks 구조의 redux action, reducer 
+│          └── modules                      # 상태 관리에 필요한 ducks 구조의 redux action, reducer
 ├── .eslintignore, estlintrc.js         # lint에 필요한 파일
 ├── .prettierrc                         # Pritter 설정 파일
 ├── .nvmrc                              # node version 설정 파일
@@ -101,7 +104,6 @@
 ```
 
 <br>
-
 
 # 개발기간
 
@@ -142,7 +144,7 @@
   <img src="https://contrib.rocks/image?repo=Fds17-FinalProject/SweetyPie_Backend" />
 </a>
 
-Frontend: [김동찬](https://github.com/dongchan-K), [김재민](https://github.com/Kim-Jaemin420), [이한슬](https://github.com/hanseul-lee), [임영서](https://github.com/youngseo-im) 
+Frontend: [김동찬](https://github.com/dongchan-K), [김재민](https://github.com/Kim-Jaemin420), [이한슬](https://github.com/hanseul-lee), [임영서](https://github.com/youngseo-im) <br>
 Backend: [나영원](https://github.com/FoeverNa), [이재복](https://github.com/Tezla-Lee), [임준철](https://github.com/limjoonchul)
 
 <br>
