@@ -1,6 +1,6 @@
 # SweetyPie - Airbnb Clone Coding
+![logo_PK](https://user-images.githubusercontent.com/69497936/109405536-ed76eb80-79b4-11eb-8dbc-171b3d5856a3.png)
 
-![logo](https://user-images.githubusercontent.com/69497936/108152812-34dfbb00-711d-11eb-8ce5-ac79cc606f48.png)
 <br>
 
 > 2021.01.25부터 2021.02.26까지 5주간 진행한 airbnb 클론 코딩 프로젝트입니다. <br>
@@ -17,7 +17,7 @@
 
 # 서비스 기능
 
-### 1. 메인 페이지
+### 1. 메인 페이지 
 
 -
 
@@ -52,16 +52,16 @@
 - 숙박일수에 따른 가격 및 수수료 변화
 - 스크롤 이벤트를 이용한 페이지 내부 navigation header 구현
 - 스크롤 위치에 따른 header 렌더링 변화
-- 후기 모두보기 클릭 시, 초기 6개 리뷰를 포함한 모든 리뷰 보기 모달 구현
+- 후기 모두보기 클릭 시, 초기 6개 리뷰를 포함한 모든 리뷰 보기 모달 구현 
 - 더보기, 자세히보기 모달 구현
 
 ### 4. 결제 페이지
 
--
+- 
 
 ### 5. 예약내역 페이지
 
--
+- 
 
 ### 6. 저장목록 페이지
 
@@ -69,28 +69,27 @@
 
 ### 7. 계정 페이지
 
--
+- 
 
 <br>
 
 # Directory structure
-
 - redux ducks 패턴 적용
 
 ```
 ├── src                                 # source files
 │    ├── assets                           # 공통 css js configuration files
 │    ├── components                       # presentation component files
-│	   │   ├── booking                        # 예약 컴포넌트
-│	   │   ├── common                         # 공통 컴포넌트
-│	   │   ├── main                           # 메인 컴포넌트
-│	   │   ├── modify                         # 수정 컴포넌트
-│	   │   ├── roomDetail                     # 상세보기 컴포넌트
-│	   │   ├── search                         # 검색 컴포넌트
-│	   │   ├── trip                           # 예약 내역 컴포넌트
-│	   │   └── wishlist                       # 저장 목록 컴포넌트
-│	   ├── containers                       # containers component files
-│	   ├── pages                            # pages files
+│    │   ├── booking                        # 예약 컴포넌트
+│    │   ├── common                         # 공통 컴포넌트
+│    │   ├── main                           # 메인 컴포넌트
+│    │   ├── modify                         # 수정 컴포넌트
+│    │   ├── roomDetail                     # 상세보기 컴포넌트
+│    │   ├── search                         # 검색 컴포넌트
+│    │   ├── trip                           # 예약 내역 컴포넌트
+│    │   └── wishlist                       # 저장 목록 컴포넌트
+│    ├── containers                       # containers component files
+│    ├── pages                            # pages files
 │    └── redux                            # redux 상태관리 모음
 │          ├── lib                          # api 모음
 │          └── modules                      # 상태 관리에 필요한 ducks 구조의 redux action, reducer
@@ -134,10 +133,10 @@
 
 - Agile - Scrum
 
+
 <br>
 
 # 구성원
-
 <a href="https://github.com/Fds17-FinalProject/SweetyPie_Frontend/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=Fds17-FinalProject/SweetyPie_Frontend" />
 </a>
