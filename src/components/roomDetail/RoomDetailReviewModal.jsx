@@ -44,11 +44,14 @@ const RoomDetailReviewModal = ({
     'BokBok',
     '준철',
   ];
+
   const profileImages = [
-    img + '/img/avatar.png',
     img + '/img/profile_01.jpg',
     img + '/img/profile_02.jpg',
     img + '/img/profile_03.jpg',
+    img + '/img/profile_04.jpg',
+    img + '/img/profile_05.jpg',
+    img + '/img/profile_06.jpg',
   ];
 
   return (
@@ -138,7 +141,7 @@ const RoomDetailReviewModal = ({
                 <div className="mr-8% w-full">
                   <ReviewProfile
                     name={names[review.id % 6]}
-                    profileImage={profileImages[review.id % 4]}
+                    profileImage={profileImages[review.id % 6]}
                     reviews={review}
                   />
                 </div>

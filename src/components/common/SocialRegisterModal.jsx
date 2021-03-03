@@ -1,17 +1,34 @@
 import React from 'react';
+import styled, { keyframes } from 'styled-components';
 
+const fadeIn = keyframes`
+from {
+  opacity: 0
+}
+to {
+  opacity: 1
+}
+`;
+const ModalBackground = styled.div`
+animation: ${fadeIn} 0.25s ease-in;
+`;
 
 const SocialRegisterModal = ({ hideModal, onChange, socialRegisterSubmit, state }) => {
   const { socialRegister, authError } = state;
-  console.log('modal autherror', authError);
   const emailReg = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
   const nameReg = /^[가-힇]{2,30}$/;
   const contactReg = /^\d{3}\d{3,4}\d{4}$/;
-  const passwordReg = /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*[#?!@$%^&*-]).{8,30}$/;
-  // 인풋이 하나라도 비어있는 경우 버튼 disabled
-  // const emptyInput = socialRegister.email.length === 0 || socialRegister.name.length === 0 || socialRegister.contact.length === 0 || socialRegister.birthDate.length === 0 || socialRegister.password.length === 0 || socialRegister.passwordConfirm.length === 0;
-  // 인풋을 제대로 작성하지 않은 경우 버튼 disabled
-  // const invalidValue = !socialRegister.email.match(emailReg) || !socialRegister.name.match(nameReg) || !socialRegister.contact.match(contactReg) || !socialRegister.password.match(passwordReg) || socialRegister.password !== socialRegister.passwordConfirm;
+   // 인풋이 하나라도 비어있는 경우 버튼 disabled
+  const emptyInput =
+    socialRegister.email.length === 0 ||
+    socialRegister.name.length === 0 ||
+    socialRegister.contact.length === 0 ||
+    socialRegister.birthDate.length === 0;
+ // 인풋을 제대로 작성하지 않은 경우 버튼 disabled
+  const invalidValue =
+    !socialRegister.email.match(emailReg) ||
+    !socialRegister.name.match(nameReg) ||
+    !socialRegister.contact.match(contactReg);
 
   // 오늘 날짜 Get (생년월일 오늘 날짜 이전만 선택 가능하게 하기 위해서)
   const date = new Date();
@@ -28,10 +45,9 @@ const SocialRegisterModal = ({ hideModal, onChange, socialRegisterSubmit, state 
     <div
       onClick={hideModal}
       data-name="close"
-      // className="w-screen h-screen flex bg-modal justify-center items-center text-white fixed top-0"
       className="w-full h-full overflow-hidden flex bg-modal justify-center items-center text-white fixed top-0 z-50"
     >
-      <div className="w-56rem z-50 bg-white border rounded-2xl flex flex-col overflow-y-auto text-#727272 text-center p-8 relative text-1.4rem">
+      <ModalBackground className="w-56rem z-50 bg-white border rounded-2xl flex flex-col overflow-y-auto text-#727272 text-center p-8 relative text-1.4rem">
       <h1 className="a11y-hidden">회원가입 팝업창</h1>
           <h2 className="text-1.6rem font-extrabold border-b pb-8 mb-2rem">회원가입 완료</h2>
           <button
@@ -62,13 +78,25 @@ const SocialRegisterModal = ({ hideModal, onChange, socialRegisterSubmit, state 
         <input className="w-full border rounded-lg py-4 px-1.2rem" id="birth-input" type="date" min="1920-01-01" max={curDate}  name="birthDate" placeholder="휴대폰 번호" autoComplete="off" onChange={(e) => onChange({e, form:'socialRegister'})} value={socialRegister.birthDate}></input>
           <span className="block py-2 px-4 h-3rem text-airbnb text-1.2rem"></span>
           
-          <span className="block py-2 px-4 h-3rem text-airbnb text-1.2rem">{authError && '중복된 이메일입니다.'}</span>
+          <span className="block py-2 px-4 w-full h-3rem text-airbnb text-center text-1.4rem">
+          {authError && '중복된 이메일입니다.'}
+        </span>
 
-
-        <button className="mt-8 w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none">회원가입</button>
-
+          {emptyInput || invalidValue ? (
+          <button
+            className="mt-8 w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 bg-gray-300 text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none cursor-default"
+            disabled
+          >
+            회원가입
+          </button>
+        ) : (
+          <button className="mt-8 w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none">
+            회원가입
+          </button>
+            )}
+          
         </form>
-      </div>
+      </ModalBackground>
     </div>
   );
 };

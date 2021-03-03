@@ -1,12 +1,8 @@
-import SVG from '../../assets/svg';
-
-const HeaderGuestEditModal = ({ count, setCount, increaseGuestNum, decreaseGuestNum }) => {
+const HeaderGuestEditModal = ({ count, increaseGuestNum, decreaseGuestNum }) => {
 
   return (
 
-      // <div className="w-38rem bg-white relative top-0 overflow-y-auto flex flex-col text-black rounded-3xl border border-#b0b0b0">
         <div className="px-2.4rem py-0.8rem w-full" data-name="no-hide">
-          {/* <ul className="pt-0.8rem"> */}
           <ul className="pt-0.8rem" data-name="no-hide">
             <li className="py-1.2rem text-1.6rem flex justify-between border-b items-center" data-name="no-hide">
               <div className="text-1.6rem text-#484848 font-semibold" data-name="no-hide">성인</div>
@@ -14,7 +10,7 @@ const HeaderGuestEditModal = ({ count, setCount, increaseGuestNum, decreaseGuest
                 {count.adultNum === 0 ? (
                   <button
                     onClick={() => decreaseGuestNum('adultNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                     data-name="no-hide"
                   >
@@ -56,7 +52,7 @@ const HeaderGuestEditModal = ({ count, setCount, increaseGuestNum, decreaseGuest
                 {count.adultNum === 5 ? (
                   <button
                     onClick={() => increaseGuestNum('adultNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                     data-name="no-hide"
                   >
@@ -108,7 +104,7 @@ const HeaderGuestEditModal = ({ count, setCount, increaseGuestNum, decreaseGuest
                 {count.childNum === 0 || count.adultNum === 0 ? (
                   <button
                     onClick={() => decreaseGuestNum('childNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                     data-name="no-hide"
                   >
@@ -151,7 +147,7 @@ const HeaderGuestEditModal = ({ count, setCount, increaseGuestNum, decreaseGuest
                 {count.childNum === 5 || count.adultNum === 0 ? (
                   <button
                     onClick={() => increaseGuestNum('childNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                     data-name="no-hide"
                   >
@@ -203,7 +199,7 @@ const HeaderGuestEditModal = ({ count, setCount, increaseGuestNum, decreaseGuest
                 {count.infantNum === 0 || count.adultNum === 0 ? (
                   <button
                     onClick={() => decreaseGuestNum('infantNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                     data-name="no-hide"
                   >
@@ -246,7 +242,7 @@ const HeaderGuestEditModal = ({ count, setCount, increaseGuestNum, decreaseGuest
                 {count.infantNum === 5 || count.adultNum === 0 ? (
                   <button
                     onClick={() => increaseGuestNum('infantNum')}
-                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-default"
+                    className="w-3.2rem h-3.2rem flex justify-center items-center rounded-50% border text-#rgb235 cursor-not-allowed"
                     disabled="true"
                     data-name="no-hide">
                     <div className="w-2.2rem h-2.2rem p-2" data-name="no-hide">
@@ -289,7 +285,6 @@ const HeaderGuestEditModal = ({ count, setCount, increaseGuestNum, decreaseGuest
           </ul>
         </div>
        
-      // </div>
   );
 };
 

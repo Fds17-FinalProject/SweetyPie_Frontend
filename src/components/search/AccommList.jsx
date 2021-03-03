@@ -38,21 +38,20 @@ const AccommList = props => {
     onMouseEnter,
     onMouseLeave,
     bookmarked,
+    loading,
   } = props;
   const cost = price && price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   const [bookMark, setBookMark] = useState(bookmarked);
+
   const bookMarkClick = id => () => {
     setBookMark(!bookMark);
-    if (!bookMark) {
-      console.log(bookMark);
-      postBookmark(id);
-    } else {
-      deleteBookmark(id);
-    }
+    !bookMark ? postBookmark(id) : deleteBookmark(id);
   };
+
   const img =
     accommodationPictures && accommodationPictures.map(picture => picture.url);
+  
   const setLocal = id => () => {
     recentSearch.unshift({
       id,
@@ -68,6 +67,14 @@ const AccommList = props => {
     localStorage.setItem('recentSearch', JSON.stringify([...uniqueSet]));
   };
 
+  const url = new URL(window.location.href);
+
+  const checkIn = url.searchParams.get('checkIn');
+  const checkout = url.searchParams.get('checkout');
+  const adultNum = url.searchParams.get('adultNum');
+  const childNum = url.searchParams.get('childNum');
+  const infantNum = url.searchParams.get('infantNum');
+
   return (
     <li
       key={id}
@@ -75,20 +82,31 @@ const AccommList = props => {
       onMouseEnter={onMouseEnter(id)}
       onMouseLeave={onMouseLeave(id)}
       data-name="accommList"
+      className="pr-8 pl-5"
     >
       <div className="h-25rem border-t border-#EBEBEB pt-10 pb-10 relative">
         <HoverSvg
-          className="absolute top-8 right-0 z-20"
+          className="absolute top-8 right-0"
           onClick={bookMarkClick(id)}
+          style={{ zIndex: 9 }}
         >
           <FiHeart
             fill={bookMark ? 'rgb(255, 56, 92)' : '#fff'}
             size={30}
-            stroke={bookMark ? '' : 'black'}
+            stroke={bookMark ? '' : '#181818'}
             className="absolute top-2 left-2"
           />
         </HoverSvg>
-        <Link to={`/accommodation/${id}`} className="flex focus:outline-none">
+        <Link
+          to={`/accommodation/${id}?${
+            checkIn ? `checkInDate=${checkIn}&` : ''
+          }${checkout ? `checkoutDate=${checkout}` : ''}${
+            adultNum ? `&adultNum=${adultNum}&` : ''
+          }${childNum ? `childNum=${childNum}&` : ''}${
+            infantNum ? `infantNum=${infantNum}` : ''
+          }`}
+          className="flex focus:outline-none"
+        >
           <Carousel size="Large" img={img} />
           <div className="relative w-54rem truncate ml-5">
             <span className="text-#717171 text-1.4rem inline-block">

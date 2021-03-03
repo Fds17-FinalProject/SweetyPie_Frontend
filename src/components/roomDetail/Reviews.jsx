@@ -7,18 +7,20 @@ const Reviews = ({ rating, reviewNum, reviews, onShowModal }) => {
   const img = window.location.origin;
   const ratingRoundUp = rating.toFixed(2);
   const names = [
-    '동찬 킴',
-    'YoungSeo Im',
-    '한슬',
-    'Forever Na',
-    'BokBok',
     '준철',
+    'YoungSeo Im',
+    '동찬 킴',
+    'Forever Na',
+    '한슬',
+    'BokBok',
   ];
   const profileImages = [
-    img + '/img/avatar.png',
     img + '/img/profile_01.jpg',
     img + '/img/profile_02.jpg',
     img + '/img/profile_03.jpg',
+    img + '/img/profile_04.jpg',
+    img + '/img/profile_05.jpg',
+    img + '/img/profile_06.jpg',
   ];
 
   return (
@@ -128,7 +130,7 @@ const Reviews = ({ rating, reviewNum, reviews, onShowModal }) => {
                   <div className="inline-block mr-8% w-5/12">
                     <ReviewProfile
                       name={names[review.id % 6]}
-                      profileImage={profileImages[review.id % 4]}
+                      profileImage={profileImages[review.id % 6]}
                       reviews={review}
                     />
                   </div>
@@ -141,7 +143,7 @@ const Reviews = ({ rating, reviewNum, reviews, onShowModal }) => {
                   <div className="inline-block mr-8% w-5/12">
                     <ReviewProfile
                       name={names[review.id % 6]}
-                      profileImage={profileImages[review.id % 4]}
+                      profileImage={profileImages[review.id % 6]}
                       reviews={review}
                     />
                   </div>
@@ -154,7 +156,7 @@ const Reviews = ({ rating, reviewNum, reviews, onShowModal }) => {
                   <div className="inline-block mr-8% w-5/12">
                     <ReviewProfile
                       name={names[review.id % 6]}
-                      profileImage={profileImages[review.id % 4]}
+                      profileImage={profileImages[review.id % 6]}
                       reviews={review}
                     />
                   </div>

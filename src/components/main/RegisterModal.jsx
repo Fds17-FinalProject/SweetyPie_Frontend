@@ -1,12 +1,23 @@
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import SVG from '../../assets/svg';
-// import axios from 'axios';
+import styled, { keyframes } from 'styled-components';
 
+const fadeIn = keyframes`
+from {
+  opacity: 0
+}
+to {
+  opacity: 1
+}
+`;
+const ModalBackground = styled.div`
+animation: ${fadeIn} 0.25s ease-in;
+`;
 
 const RegisterModal = ({ hideModal, changeModal }) => {
   return (
-    <>
+    <ModalBackground>
       <h1 className="a11y-hidden">회원가입 팝업창</h1>
       <h2 className="text-1.6rem font-extrabold border-b pb-8 mb-2rem">
         회원 가입
@@ -25,7 +36,7 @@ const RegisterModal = ({ hideModal, changeModal }) => {
       </button>
       <a
         className="flex items-center rounded-lg	border border-#e5e7eb py-4 px-1.2rem hover:border-#727272"
-        href="https://accounts.google.com/o/oauth2/v2/auth?client_id=358569667723-j52n7u0kd91fst85dotu0pssmk55qro9.apps.googleusercontent.com&redirect_uri=http://localhost:3000/redirect&response_type=code&scope=email%20profile%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.file&access_type=offline"
+        href="https://accounts.google.com/o/oauth2/v2/auth?client_id=358569667723-j52n7u0kd91fst85dotu0pssmk55qro9.apps.googleusercontent.com&redirect_uri=https://sweetypie.netlify.app/redirect/oauth2callback&response_type=code&scope=email%20profile%20openid%20https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fdrive.file&access_type=offline"
       >
         <FcGoogle className="w-2.4rem h-2rem" />
         <span className="flex-grow">구글 계정으로 회원가입</span>
@@ -39,7 +50,7 @@ const RegisterModal = ({ hideModal, changeModal }) => {
       </div>
 
       <button
-        className="flex items-center rounded-lg py-4 px-1.2rem text-#fff bg-airbnb"
+        className="flex w-full items-center rounded-lg py-4 px-1.2rem text-#fff bg-airbnb"
         onClick={() => changeModal('form')}
       >
         <SVG
@@ -61,7 +72,7 @@ const RegisterModal = ({ hideModal, changeModal }) => {
           로그인
         </button>
       </div>
-    </>
+    </ModalBackground>
   );
 };
 

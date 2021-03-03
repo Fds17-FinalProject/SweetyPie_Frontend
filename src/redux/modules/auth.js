@@ -1,6 +1,8 @@
 import { createAction, handleActions } from 'redux-actions';
-import createRequestSaga, { createRequestActionTypes } from '../lib/createRequestSaga';
-import *as authAPI from '../lib/api/auth'
+import createRequestSaga, {
+  createRequestActionTypes,
+} from '../lib/createRequestSaga';
+import * as authAPI from '../lib/api/auth';
 import { takeLatest } from 'redux-saga/effects';
 
 // Action type
@@ -19,9 +21,11 @@ const SOCIAL = 'auth/SOCIAL';
 
 // 위의 반복되는 코드를 아래처럼 작성
 
-const [SOCIAL_REGISTER, SOCIAL_REGISTER_SUCCESS, SOCIAL_REGISTER_FAILURE] = createRequestActionTypes(
-  'auth/SOCIAL_REGISTER',
-);
+const [
+  SOCIAL_REGISTER,
+  SOCIAL_REGISTER_SUCCESS,
+  SOCIAL_REGISTER_FAILURE,
+] = createRequestActionTypes('auth/SOCIAL_REGISTER');
 const [REGISTER, REGISTER_SUCCESS, REGISTER_FAILURE] = createRequestActionTypes(
   'auth/REGISTER',
 );
@@ -29,52 +33,76 @@ const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
   'auth/LOGIN',
 );
 
+// 유저 정보 받아오기
+const [
+  READ_MEMBERINFO,
+  READ_MEMBERINFO_SUCCESS,
+  READ_MEMBERINFO_FAILURE,
+] = createRequestActionTypes('auth/READ_MEMBERINFO');
+
+// 유저 정보 수정
+const [
+  MODIFY_MEMBERINFO,
+  MODIFY_MEMBERINFO_SUCCESS,
+  MODIFY_MEMBERINFO_FAILURE,
+] = createRequestActionTypes('auth/MODIFY_MEMBERINFO');
 
 const START_LOADING = 'loading/START_LOADING';
 const FINISH_LOADING = 'loading/FINISH_LOADING';
 
 // Create action
 // export const changeField = createAction(
-  // CHANGE_FIELD,
-  // ({ form, key, value }) => ({
-  //   form, // register, socialRegister, login(로그인도 같이 할 수 있을까요)
-  //   key, // username, password, passwordConfirm, email, contact, birthDate
-  //   value, // 실제 바꾸려는 값
-  // }),
-  // ({ form, key, value }) => ({
-  //  }),
+// CHANGE_FIELD,
+// ({ form, key, value }) => ({
+//   form, // register, socialRegister, login(로그인도 같이 할 수 있을까요)
+//   key, // username, password, passwordConfirm, email, contact, birthDate
+//   value, // 실제 바꾸려는 값
+// }),
+// ({ form, key, value }) => ({
+//  }),
 // );
 
-// social 
+// social
 export const socialRegister = createAction(SOCIAL);
 // export const social = createAction()
+
+// 유저정보 가져오기
+export const readMemberInfo = createAction(READ_MEMBERINFO);
+
+// 유저정보 수정하기
+export const modifyMemberInfo = createAction(MODIFY_MEMBERINFO);
 
 export const changeField = createAction(CHANGE_FIELD);
 
 export const initializeForm = createAction(INITIALIZE_FORM, form => form);
 // initializeForm의 결과 { type: INITIALIZE_FORM, payload: form}
 // 함수가 어떤 파라미터를 필요로 하는지 파악 할 수 있다( 선택 사항 )
-export const socialRegisterSubmitAction = createAction(SOCIAL_REGISTER, ({ email, name, contact, birthDate, socialId }) => ({
-  email,
-  name,
-  contact,
-  birthDate,
-  socialId,
-}));
-export const authRegister = createAction(REGISTER, ({ name, email, contact, birthDate, password, passwordConfirm }) => ({
-  name,
-  email,
-  contact,
-  birthDate,
-  password,
-  passwordConfirm,
-}));
+export const socialRegisterSubmitAction = createAction(
+  SOCIAL_REGISTER,
+  ({ email, name, contact, birthDate, socialId }) => ({
+    email,
+    name,
+    contact,
+    birthDate,
+    socialId,
+  }),
+);
+export const authRegister = createAction(
+  REGISTER,
+  ({ name, email, contact, birthDate, password, passwordConfirm }) => ({
+    name,
+    email,
+    contact,
+    birthDate,
+    password,
+    passwordConfirm,
+  }),
+);
 
 export const authLogin = createAction(LOGIN, ({ email, password }) => ({
   email,
   password,
 }));
-
 
 export const startLoading = createAction(
   START_LOADING,
@@ -84,7 +112,7 @@ export const startLoading = createAction(
 export const finishLoading = createAction(
   FINISH_LOADING,
   requestType => requestType,
-)
+);
 
 // Initialize form
 const initialState = {
@@ -107,32 +135,33 @@ const initialState = {
     email: '',
     password: '',
   },
+  userInfo: {
+    email: '',
+    name: '',
+    birthDate: '',
+    contact: '',
+  },
   auth: null,
-  authError: null,
+  authError: '',
 };
-
-// Reducer
-// 파라미터가 존재하는 경우의 리듀서 함수
-// handleActions 의 첫번째 파라미터는 액션을 처리하는 함수들로 이뤄진 객체이고
-// 두번째 파라미터는 초기 상태입니다.
-
-// 아래 코드는 action 객체를 비구조화 할당하고, payload 값을 form, key, value를 쓰겠다는 의미입니다(추후에 이렇게 수정할 예정).
-
-// [CHANGE_FIELD]: (state, action ) => ({
-//   [action.payload.form]: {
-//     ...state[action.payload.form],
-//     [action.payload.key]: action.payload.value,
-//   },
-// }),
-// 위의 코드를 간단하게 작성
-
 
 // 1. saga 생성
 // REGISTER가 발생하면 authAPI.register 함수(비동기)를 실행하겠다. 즉, 곧 registerSaga함수가 제너레이트 함수가 된다.
 const registerSaga = createRequestSaga(REGISTER, authAPI.register);
 // const loginSaga = createRequestSaga(LOGIN, authAPI.login);
 const loginSaga = createRequestSaga(LOGIN, authAPI.getToken);
-const socialRegisterSaga = createRequestSaga(SOCIAL_REGISTER, authAPI.socialRegister);
+const socialRegisterSaga = createRequestSaga(
+  SOCIAL_REGISTER,
+  authAPI.socialRegister,
+);
+// 유저 정보 가져오기
+const readMemberInfoSaga = createRequestSaga(READ_MEMBERINFO, authAPI.getUser);
+
+// 유저 정보 수정하기
+const modifyMemberInfoSaga = createRequestSaga(
+  MODIFY_MEMBERINFO,
+  authAPI.modifyUser,
+);
 
 export function* authSaga() {
   // 사가 로직
@@ -141,24 +170,26 @@ export function* authSaga() {
   // 만약 발생을 했다면 registerSaga generator 함수를 실행
   yield takeLatest(REGISTER, registerSaga);
   yield takeLatest(LOGIN, loginSaga);
-  yield takeLatest(SOCIAL_REGISTER, socialRegisterSaga)
+  yield takeLatest(SOCIAL_REGISTER, socialRegisterSaga);
+  yield takeLatest(READ_MEMBERINFO, readMemberInfoSaga);
+  yield takeLatest(MODIFY_MEMBERINFO, modifyMemberInfoSaga);
 }
 // 2. 만든 사가 함수를 모듈의 인덱스 파일에서 합쳐주기.
 const auth = handleActions(
   {
-    [CHANGE_FIELD]: (state, { payload: {form, key, value}}) => {
-      // console.log(form, key, value)
-      return ({
+    [CHANGE_FIELD]: (state, { payload: { form, key, value } }) => {
+      return {
         ...state,
-      [form]: {
-        ...state[form],
+        [form]: {
+          ...state[form],
           [key]: value,
-      }
-    })},
+        },
+      };
+    },
     [INITIALIZE_FORM]: (state, { payload: form }) => ({
       ...state,
       [form]: initialState[form],
-      authError: null, // 폼 전환 시 회원 인증 에러 초기화
+      authError: '', // 폼 전환 시 회원 인증 에러 초기화
     }),
     [REGISTER_SUCCESS]: (state, { payload: auth }) => ({
       ...state,
@@ -179,16 +210,14 @@ const auth = handleActions(
       authError: error,
     }),
     [START_LOADING]: (state, action) => ({
-       ...state,
-        [action.payload]: true,
+      ...state,
+      [action.payload]: true,
     }),
     [FINISH_LOADING]: (state, action) => ({
       ...state,
       [action.payload]: false,
     }),
     [SOCIAL]: (state, action) => {
-      console.log('STATE', state);
-      console.log('ACTION', action);
       return {
         ...state,
         socialRegister: {
@@ -196,8 +225,8 @@ const auth = handleActions(
           email: action.payload.email,
           name: action.payload.name,
           socialId: action.payload.socialId,
-        }
-      }
+        },
+      };
     },
 
     [SOCIAL_REGISTER_SUCCESS]: (state, { payload: auth }) => ({
@@ -209,7 +238,24 @@ const auth = handleActions(
       ...state,
       authError: error,
     }),
-},
+    [READ_MEMBERINFO_SUCCESS]: (state, { payload: userInfo }) => ({
+      ...state,
+      userInfo: userInfo,
+    }),
+    [READ_MEMBERINFO_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      authError: error,
+    }),
+    [MODIFY_MEMBERINFO]: (state, action) => ({
+      ...state,
+      userInfo: {
+        ...state.userInfo,
+        name: action.payload.name,
+        birthDate: action.payload.birthDate,
+        contact: action.payload.contact,
+      },
+    }),
+  },
   initialState,
 );
 

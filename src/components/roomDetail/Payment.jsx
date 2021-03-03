@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { HiStar } from 'react-icons/hi';
 import { GrDown, GrUp } from 'react-icons/gr';
 import classNames from 'classnames';
@@ -12,15 +12,17 @@ const Payment = ({
   visible,
   onShowPopup,
   onCloseModal,
+  authVisible,
+  setAuthVisible,
 }) => {
   // url에서 정보 가져오기
-  let url = new URL(window.location.href);
-  let checkInDate = url.searchParams.get('checkInDate');
-  let checkoutDate = url.searchParams.get('checkoutDate');
-  let adultNum = url.searchParams.get('adultNum');
-  let childNum = url.searchParams.get('childNum');
-  let infantNum = url.searchParams.get('infantNum');
-  let accommodationId = window.location.pathname.split('/')[2];
+  const url = new URL(window.location.href);
+  const checkInDate = url.searchParams.get('checkInDate');
+  const checkoutDate = url.searchParams.get('checkoutDate');
+  const adultNum = url.searchParams.get('adultNum');
+  const childNum = url.searchParams.get('childNum');
+  const infantNum = url.searchParams.get('infantNum');
+  const accommodationId = window.location.pathname.split('/')[2];
 
   const day = moment(checkoutDate).diff(moment(checkInDate), 'day') || 0;
   const pricewithDay = price * day;
@@ -28,11 +30,41 @@ const Payment = ({
   const totalPrice = +price * +day + +fees + 10000;
   const ratingRoundUp = rating.toFixed(2);
   const totalGuest = +adultNum + +childNum + +infantNum;
+  const history = useHistory();
 
   // 금액 표기 시 세자리 수마다 콤마(,)찍어주기
   const numberWithCommas = x => {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   };
+
+  // 비회원 예약하기 블로킹
+  const moveToBooking = () => {
+    // 토큰이 있다면 예약 페이지로 이동
+    if (localStorage.getItem('token')) {
+      history.push(
+        `/booking/payment/${accommodationId}?checkInDate=${checkInDate}&checkoutDate=${checkoutDate}&adultNum=${adultNum}&childNum=${
+          childNum ? childNum : 0
+        }&infantNum=${infantNum ? infantNum : 0}`,
+      );
+    } else {
+      // 없다면 login 모달창을 띄우면서 최상단으로 이동
+      setAuthVisible({ ...authVisible, type: 'login' });
+      window.scrollTo({
+        left: 0,
+        top: 0,
+        behavior: 'smooth',
+      });
+      // 모달 떠있을 시 스크롤 막기
+      document.body.style.overflow = 'hidden';
+    }
+  };
+
+  useEffect(() => {
+    // 스크룰 금지 풀기
+    if (!authVisible.type) {
+      document.body.style.overflow = 'unset';
+    }
+  }, [authVisible]);
 
   return (
     <div className="w-full px-2.4rem py-10 sticky border rounded-3xl shadow-xl bg-white">
@@ -42,7 +74,7 @@ const Payment = ({
             ₩{numberWithCommas(price)}원
           </span>
           <span className="text-#717171 text-1.6rem"> / 박</span>
-          <div className="inline-flex text-1.4rem ml-40">
+          <div className="inline-flex text-1.4rem ml-7rem">
             <span className="inline-flex items-center flex-start mr-1 mb-1">
               <HiStar className="inline-block text-airbnb" />
             </span>
@@ -121,24 +153,27 @@ const Payment = ({
             </button>
           </div>
         </div>
-        <Link
+        {/* <Link
           to={`/booking/payment/${accommodationId}?checkInDate=${checkInDate}&checkoutDate=${checkoutDate}&adultNum=${adultNum}&childNum=${
             childNum ? childNum : 0
           }&infantNum=${infantNum ? infantNum : 0}`}
-        >
-          {totalGuest !== 0 && checkInDate && checkoutDate ? (
-            <button className="bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none w-full h-20 px-6 m-2 text-2xl transform focus:scale-90">
-              예약하기
-            </button>
-          ) : (
-            <button
-              className="bg-gray-300 text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 cursor-default"
-              disabled="true"
-            >
-              예약하기
-            </button>
-          )}
-        </Link>
+        > */}
+        {totalGuest !== 0 && checkInDate && checkoutDate ? (
+          <button
+            className="bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none w-full h-20 px-6 m-2 text-2xl transform focus:scale-90"
+            onClick={moveToBooking}
+          >
+            예약하기
+          </button>
+        ) : (
+          <button
+            className="bg-gray-300 text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 cursor-default"
+            disabled="true"
+          >
+            예약하기
+          </button>
+        )}
+        {/* </Link> */}
       </div>
       <p className="my-5 text-1.4rem text-center">
         예약 확정 전에는 요금이 청구되지 않습니다.

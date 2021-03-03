@@ -1,4 +1,3 @@
-// BookingButton
 import React from 'react';
 import SVG from '../../assets/svg';
 import {
@@ -38,7 +37,7 @@ const BookingButton = ({
   // 수정 완료 버튼 클릭 시 patch 요청 및 확인 모달창 show
   const patchReservation = async type => {
     // 예약 수정 patch 요청
-    const res = await modifyReservation({
+    await modifyReservation({
       reservationId,
       checkInDate,
       checkoutDate,
@@ -56,8 +55,7 @@ const BookingButton = ({
   // 결제 완료 버튼 클릭 시 post 요청 및 확인 모달창 show
   const postReservation = async type => {
     // 예약 하기 post 요청
-    const res = await paymentReservation({
-      // memberId,
+    await paymentReservation({
       accommodationId,
       checkInDate,
       checkoutDate,
@@ -67,8 +65,6 @@ const BookingButton = ({
       childNum,
       totalPrice,
     });
-
-    console.log(res);
 
     // 확인 버튼 모달 open
     showModal(type);
@@ -82,7 +78,7 @@ const BookingButton = ({
             ? () => patchReservation('edit')
             : () => postReservation('edit')
         }
-        className="flex items-center justify-center w-60 h-20 mr-10 bg-#D70466 text-white font-bold rounded-2xl relative"
+        className="flex items-center justify-center w-60 h-20 mr-10 bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl relative shadow-lg transform focus:scale-90 duration-150"
       >
         <SVG
           name="lock"
@@ -98,7 +94,7 @@ const BookingButton = ({
       {subPage === 'modify' && (
         <button
           onClick={() => showModal('delete')}
-          className="flex items-center justify-center w-60 h-20 bg-gray-400 text-black font-bold rounded-2xl"
+          className="flex items-center justify-center w-60 h-20 bg-#b0b0b0 text-black font-bold rounded-2xl shadow-lg transform focus:scale-90 duration-150 hover:bg-gray-300"
         >
           <span className="m-2 text-2xl">예약 취소</span>
         </button>

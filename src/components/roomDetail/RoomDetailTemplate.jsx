@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../../assets/output.css';
 import Photos from './Photos';
 import Introduction from './Introduction';
 import Title from './Title';
@@ -13,10 +12,13 @@ import Map from './Map';
 import Host from './Host';
 import ThingsToKnow from './ThingsToKnow';
 import RoomDetailHeader from './RoomDetailHeader';
-import RoomDetailSafetyModal from './RoomDetailSafetyModal';
-import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 import RoomDetailReviewModal from './RoomDetailReviewModal';
+import RoomDetailSafetyModal from './RoomDetailSafetyModal';
+import RoomDetailRefundModal from './RoomDetailRefundModal';
+import RoomDetailGuestEditPopup from './RoomDetailGuestEditPopup';
 import RoomDetailDateEditPopup from './RoomDetailDateEditPopup';
+import AccommodationHeaderContainer from '../../containers/AccommodationContainer';
+import CommonFooter from '../common/CommonFooter';
 
 const RoomDetailTemplate = ({
   accommodation,
@@ -65,7 +67,10 @@ const RoomDetailTemplate = ({
   });
 
   // 스크롤 헤더 상태관리
-  const [scrollHeader, setScrollHeader] = useState(false);
+  const [scrollHeader, setScrollHeader] = useState({
+    visible: false,
+    button: false,
+  });
 
   // 타입에 맞는 모달창을 보여줌
   const onShowModal = type =>
@@ -95,10 +100,25 @@ const RoomDetailTemplate = ({
     }
   };
 
+  // // 검색 시작 하기 눌렀을 시 모달 초기 상태
+  // 유저 메뉴 -> 로그인, 회원가입 모달 초기상태,
+  // 하나의 모달 회원가입 폼 모달 띄우는것 때문에 생각정리안된게있어서 일단 객체 상태로 냅둠!
+  const [authVisible, setAuthVisible] = useState({
+    // 'login' or 'register'
+    type: null,
+  });
+
   // 스크롤 시 Photos 컴포넌트를 지나면 navigation header 보이기
+  // 스크롤 시 후기 컴포넌트를 지나면 navigation header에 예약하기 버튼 보이기
   window.onscroll = () => {
     const pageY = window.pageYOffset;
-    pageY >= 600 ? setScrollHeader(true) : setScrollHeader(false);
+    if (pageY < 600) {
+      setScrollHeader({ ...scrollHeader, visible: false });
+    } else if (600 < pageY && pageY < 2900) {
+      setScrollHeader({ ...scrollHeader, visible: true, button: false });
+    } else if (pageY > 2900) {
+      setScrollHeader({ ...scrollHeader, visible: true, button: true });
+    }
   };
 
   // 모달창 팝업시 body 스크롤 방지
@@ -123,12 +143,24 @@ const RoomDetailTemplate = ({
       {visible.type === 'safety' && visible.state && (
         <RoomDetailSafetyModal onCloseModal={onCloseModal} />
       )}
-      {/* {visible.type === 'refund' && visible.state && (
+      {visible.type === 'refund' && visible.state && (
         <RoomDetailRefundModal onCloseModal={onCloseModal} />
-      )} */}
-      {scrollHeader && <RoomDetailHeader />}
+      )}
+      {scrollHeader.visible === false && (
+        <AccommodationHeaderContainer
+          authVisible={authVisible}
+          setAuthVisible={setAuthVisible}
+        />
+      )}
+      {scrollHeader.visible && (
+        <RoomDetailHeader
+          scrollHeader={scrollHeader}
+          authVisible={authVisible}
+          setAuthVisible={setAuthVisible}
+        />
+      )}
       {loading === false && (
-        <div className="max-w-screen-2xl mt-32" id="photos">
+        <div className="max-w-full mt-32" id="photos">
           <div className="mx-48 px-32">
             <Title
               title={title}
@@ -168,17 +200,22 @@ const RoomDetailTemplate = ({
                 onShowPopup={onShowPopup}
                 onCloseModal={onCloseModal}
                 count={count}
+                authVisible={authVisible}
+                setAuthVisible={setAuthVisible}
               />
               {visible.type === 'calendar' && visible.state && (
                 <RoomDetailDateEditPopup
                   onCloseModal={onCloseModal}
                   setVisible={setVisible}
+                  visible={visible}
                   bookedDateDtos={bookedDateDtos}
                 />
               )}
               {visible.type === 'guest' && visible.state && (
                 <RoomDetailGuestEditPopup
                   onCloseModal={onCloseModal}
+                  setVisible={setVisible}
+                  visible={visible}
                   count={count}
                   setCount={setCount}
                 />
@@ -207,6 +244,7 @@ const RoomDetailTemplate = ({
           </div>
         </div>
       )}
+      <CommonFooter />
     </>
   );
 };

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Calendar from '../common/Calendar';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
+import onClickOutside from 'react-onclickoutside';
 
 const RoomDetailDateEditPopup = ({
   onCloseModal,
@@ -9,6 +10,14 @@ const RoomDetailDateEditPopup = ({
   setVisible,
   bookedDateDtos,
 }) => {
+  // 팝업창 영역 외부 클릭 시 닫히게 하기
+  RoomDetailDateEditPopup.handleClickOutside = () =>
+    setVisible({
+      ...visible,
+      state: false,
+      type: 'calendar',
+    });
+
   const history = useHistory();
 
   // URL query parameter 가져오기
@@ -28,11 +37,14 @@ const RoomDetailDateEditPopup = ({
   const [focus, setFocus] = useState('startDate');
 
   // 달력 날짜 변경 함수
+  // 0박 방지
   const handleOnDateChange = ({ startDate, endDate }) => {
-    setDateRange({
-      startDate: startDate,
-      endDate: endDate,
-    });
+    if (startDate !== endDate) {
+      setDateRange({
+        startDate: startDate,
+        endDate: endDate,
+      });
+    }
   };
 
   // 달력 모달창 저장하기 클릭 시 쿼리 변경 및 모달 끄기
@@ -112,7 +124,7 @@ const RoomDetailDateEditPopup = ({
         <div className="flex items-center text-1.4rem justify-end pr-1.6rem">
           <button
             onClick={deleteDate}
-            className="underline p-0.8rem font-semibold"
+            className="underline text-1.4rem p-0.8rem rounded-lg font-bold hover:bg-gray-100"
           >
             날짜 지우기
           </button>
@@ -140,4 +152,10 @@ const RoomDetailDateEditPopup = ({
   );
 };
 
-export default RoomDetailDateEditPopup;
+RoomDetailDateEditPopup.prototype = {};
+
+const clickOutsideConfig = {
+  handleClickOutside: () => RoomDetailDateEditPopup.handleClickOutside,
+};
+
+export default onClickOutside(RoomDetailDateEditPopup, clickOutsideConfig);

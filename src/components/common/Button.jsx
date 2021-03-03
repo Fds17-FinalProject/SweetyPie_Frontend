@@ -38,31 +38,3 @@ export const IconButton = ({ status, children, onClick }) => {
     </button>
   );
 };
-
-// 아이콘 모음
-// import {
-//   HiChevronRight,
-//   HiOutlineHeart,
-//   HiChevronLeft,
-//   HiHeart,
-//   HiOutlineX,
-// } from 'react-icons/hi';
-// import { FcGoogle } from 'react-icons/fc';
-{
-  /* <button class="inline-flex items-center justify-center w-16 h-16 mr-4 text-black text-4xl transition-colors duration-150 focus:outline-none bg-white rounded-full focus:shadow-outline hover:text-red-300 hover:bg-gray-200 focus:text-red-500 transform hover:scale-110">
-    <HiOutlineHeart />
-  </button>
-  <button class="inline-flex items-center justify-center w-16 h-16 mr-4 text-black text-4xl transition-colors duration-150 focus:outline-none bg-white rounded-full focus:shadow-outline hover:text-red-300 hover:bg-gray-200 focus:text-red-500 transform hover:scale-110">
-    <HiHeart />
-  </button>
-  <button class="inline-flex items-center justify-center w-16 h-16 mr-4 text-black text-4xl border-2 border-gray-300 transition-colors duration-150 focus:outline-none bg-white  rounded-full focus:shadow-outline hover:bg-gray-100 transform hover:scale-110">
-    <HiChevronLeft />
-  </button>
-  <button class="inline-flex items-center justify-center w-16 h-16 mr-4 text-black text-4xl border-2 border-gray-300 transition-colors duration-150 focus:outline-none bg-white rounded-full focus:shadow-outline hover:bg-gray-100 transform hover:scale-110">
-    <HiChevronRight />
-  </button>
-  <button className="inline-flex items-center justify-center w-16 h-16 mr-4 text-black text-4xl transition-colors duration-150 focus:outline-none bg-white rounded-full focus:shadow-outline  hover:bg-gray-200 transform hover:scale-110">
-    <HiOutlineX />
-  </button>
-           */
-}
