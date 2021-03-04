@@ -213,12 +213,6 @@ const HeaderSearch = forwardRef(
     ref,
   ) => {
     // 검색 시작 하기 눌렀을 시 모달 초기 상태
-    const [gu, setGu] = useState(null);
-    const [currentLocation, setCurrentLocation] = useState({
-      lat: null,
-      lng: null,
-    });
-
     const [count, setCount] = useState({
       adultNum: 0,
       childNum: 0,
@@ -231,12 +225,21 @@ const HeaderSearch = forwardRef(
       e.preventDefault();
     };
 
-    const getCurrentLocation = async e => {
-      await navigator.geolocation.getCurrentPosition(position => {
-        setCurrentLocation({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        });
+    const getCurrentLocation =  e => {
+      navigator.geolocation.getCurrentPosition(position => {
+        
+        (async function() {
+          try {
+            const res = await axios.get(
+              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${position.coords.latitude},${position.coords.longitude}&key=AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU`,
+            );
+            if (res) {
+              setAddress(res.data.results[4].formatted_address.substr(11));
+            }
+          } catch (e) {
+            console.log(e);
+          }
+        })()
       });
     };
 
@@ -335,39 +338,16 @@ const HeaderSearch = forwardRef(
 
     // google place autocomplete
     const handleChange = address => {
+      setLocation(false);
       setAddress(address);
     };
     const handleSelect = address => {
-      // if (!address.split(' ')[2]) {
-      //   return;
-      // }
       setAddress(address);
       geocodeByAddress(address)
         .then(results => getLatLng(results[0]))
         .then(latLng => console.log('Success', latLng))
         .catch(error => console.error('Error', error));
     };
-
-    useEffect(() => {
-      if (currentLocation.lat !== null && currentLocation.lng !== null) {
-        async function getAddress() {
-          try {
-            const res = await axios.get(
-              `https://maps.googleapis.com/maps/api/geocode/json?latlng=${currentLocation.lat},${currentLocation.lng}&key=AIzaSyA6XrrGClq-qmlmWDQCWGsgau4tzbQcINU`,
-            );
-            if (res) {
-              setGu(res.data.results[4].formatted_address.substr(11));
-            }
-          } catch (e) {
-            console.log(e);
-          }
-        }
-        getAddress();
-      }
-      if (address.length !== 0) {
-        setLocation(false);
-      }
-    }, [address, currentLocation, gu, location, setLocation]);
 
     return (
       <SearchHeader

@@ -120,7 +120,7 @@ const CommonHeaderContainer = ({
         currentScroll: window.scrollY,
         scrollPlus: window.scrollY + 150,
         scrollMinus: window.scrollY > 150 ? window.scrollY - 150 : 1,
-      })
+      });
     }
   };
   // 헤더 위치 (어디로 여행가세요?)
@@ -218,13 +218,12 @@ const CommonHeaderContainer = ({
       setCheckedLogin(true);
     }
   };
-  
+
   const userLogout = e => {
     logout();
     localStorage.removeItem('token');
     setCheckedToken(false);
   };
-
 
   useEffect(() => {
     // 로그인이나 회원가입 성공 시 모달창 Close
@@ -250,7 +249,10 @@ const CommonHeaderContainer = ({
       window.scrollY > 20 ? setScrollY(true) : setScrollY(false);
     }
     function wathchFlexibleScroll() {
-      if (flexibleScroll.scrollPlus < window.scrollY || window.scrollY < flexibleScroll.scrollMinus) {
+      if (
+        flexibleScroll.scrollPlus < window.scrollY ||
+        window.scrollY < flexibleScroll.scrollMinus
+      ) {
         setSearchStartState(false);
         setLocation(false);
         setCalendar(false);
@@ -305,7 +307,7 @@ const CommonHeaderContainer = ({
         address={address}
         setAddress={setAddress}
         checkedLogin={checkedLogin}
-      />  
+      />
     </>
   );
 };
