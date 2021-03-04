@@ -50,6 +50,7 @@ const ModifyHeader = ({
 }) => {
   // 버거바
   const HeaderUser = () => {
+    const img = window.location.origin;
     return (
       <HeaderUserMenu
         className="flex bg-white p-2 rounded-3xl border-gray-300 border w-28	h-14"
@@ -59,12 +60,10 @@ const ModifyHeader = ({
           <BiMenu className="w-full h-full text-gray-600" />
         </div>
         <div className="flex-grow w-full h-full">
-          <SVG
-            name="user"
-            width="100%"
-            viewBox="0 0 32 32"
-            height="100%"
-            xmlns="http://www.w3.org/2000/svg"
+          <img
+            className="w-10 h-10"
+            src={img + '/img/avatar.png'}
+            alt="login profile"
           />
         </div>
       </HeaderUserMenu>
@@ -96,29 +95,50 @@ const ModifyHeader = ({
           <div>
             {/* 로그인 안했을 시  */}
             <ul>
-            {/* MenuList에 auth props를 넣어서 로그인인지 회원가입인지 구분 */}
-              {checkedToken ?
-              <>
+              {/* MenuList에 auth props를 넣어서 로그인인지 회원가입인지 구분 */}
+              {checkedToken ? (
+                <>
                   <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
-                    <Link className="block w-full" to="/reservation">예약내역</Link>
+                    <Link className="block w-full" to="/reservation">
+                      예약내역
+                    </Link>
                   </li>
                   <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
-                    <Link className="block w-full" to="/wishlist">저장목록</Link>
+                    <Link className="block w-full" to="/wishlist">
+                      저장목록
+                    </Link>
                   </li>
                   <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
-                    <Link className="block w-full" to="/modify">계정</Link>
+                    <Link className="block w-full" to="/modify">
+                      계정
+                    </Link>
                   </li>
-                <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100" onClick={userLogout}>로그아웃</li>
+                  <li
+                    className="cursor-pointer	py-4 px-6 hover:bg-gray-100"
+                    onClick={userLogout}
+                  >
+                    로그아웃
+                  </li>
                 </>
-                : 
-              // {/* 로그인 했을 시 */}
-              <>
-                <MenuList auth='login' showAuthModal={showAuthModal} >로그인</MenuList>
-                  <MenuList auth='register' showAuthModal={showAuthModal} >회원 가입</MenuList>
+              ) : (
+                // {/* 로그인 했을 시 */}
+                <>
+                  <MenuList auth="login" showAuthModal={showAuthModal}>
+                    로그인
+                  </MenuList>
+                  <MenuList auth="register" showAuthModal={showAuthModal}>
+                    회원 가입
+                  </MenuList>
                   <li className="cursor-pointer	py-4 px-6 hover:bg-gray-100">
-                    <a href="https://www.airbnb.co.kr/help/home" className="block w-full">도움말</a>
+                    <a
+                      href="https://www.airbnb.co.kr/help/home"
+                      className="block w-full"
+                    >
+                      도움말
+                    </a>
                   </li>
-              </>}
+                </>
+              )}
             </ul>
           </div>
         </div>

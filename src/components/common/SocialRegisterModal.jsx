@@ -18,6 +18,18 @@ const SocialRegisterModal = ({ hideModal, onChange, socialRegisterSubmit, state 
   const emailReg = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
   const nameReg = /^[가-힇]{2,30}$/;
   const contactReg = /^\d{3}\d{3,4}\d{4}$/;
+   // 인풋이 하나라도 비어있는 경우 버튼 disabled
+  const emptyInput =
+    socialRegister.email.length === 0 ||
+    socialRegister.name.length === 0 ||
+    socialRegister.contact.length === 0 ||
+    socialRegister.birthDate.length === 0;
+ // 인풋을 제대로 작성하지 않은 경우 버튼 disabled
+  const invalidValue =
+    !socialRegister.email.match(emailReg) ||
+    !socialRegister.name.match(nameReg) ||
+    !socialRegister.contact.match(contactReg);
+
   // 오늘 날짜 Get (생년월일 오늘 날짜 이전만 선택 가능하게 하기 위해서)
   const date = new Date();
   // 년, 월, 일 (월, 일은 한자리 수 일 경우 앞에 + 0,  ex 1995-02-02)
@@ -66,11 +78,23 @@ const SocialRegisterModal = ({ hideModal, onChange, socialRegisterSubmit, state 
         <input className="w-full border rounded-lg py-4 px-1.2rem" id="birth-input" type="date" min="1920-01-01" max={curDate}  name="birthDate" placeholder="휴대폰 번호" autoComplete="off" onChange={(e) => onChange({e, form:'socialRegister'})} value={socialRegister.birthDate}></input>
           <span className="block py-2 px-4 h-3rem text-airbnb text-1.2rem"></span>
           
-          <span className="block py-2 px-4 h-3rem text-airbnb text-1.2rem">{authError && '중복된 이메일입니다.'}</span>
+          <span className="block py-2 px-4 w-full h-3rem text-airbnb text-center text-1.4rem">
+          {authError && '중복된 이메일입니다.'}
+        </span>
 
-
-        <button className="mt-8 w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none">회원가입</button>
-
+          {emptyInput || invalidValue ? (
+          <button
+            className="mt-8 w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 bg-gray-300 text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none cursor-default"
+            disabled
+          >
+            회원가입
+          </button>
+        ) : (
+          <button className="mt-8 w-full h-20 px-6 m-2 text-2xl transform focus:scale-90 bg-airbnb hover:bg-airbnbHover text-white font-bold rounded-2xl transition-all duration-150 shadow-md focus:outline-none">
+            회원가입
+          </button>
+            )}
+          
         </form>
       </ModalBackground>
     </div>

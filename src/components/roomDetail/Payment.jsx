@@ -16,13 +16,13 @@ const Payment = ({
   setAuthVisible,
 }) => {
   // url에서 정보 가져오기
-  let url = new URL(window.location.href);
-  let checkInDate = url.searchParams.get('checkInDate');
-  let checkoutDate = url.searchParams.get('checkoutDate');
-  let adultNum = url.searchParams.get('adultNum');
-  let childNum = url.searchParams.get('childNum');
-  let infantNum = url.searchParams.get('infantNum');
-  let accommodationId = window.location.pathname.split('/')[2];
+  const url = new URL(window.location.href);
+  const checkInDate = url.searchParams.get('checkInDate');
+  const checkoutDate = url.searchParams.get('checkoutDate');
+  const adultNum = url.searchParams.get('adultNum');
+  const childNum = url.searchParams.get('childNum');
+  const infantNum = url.searchParams.get('infantNum');
+  const accommodationId = window.location.pathname.split('/')[2];
 
   const day = moment(checkoutDate).diff(moment(checkInDate), 'day') || 0;
   const pricewithDay = price * day;
@@ -74,7 +74,7 @@ const Payment = ({
             ₩{numberWithCommas(price)}원
           </span>
           <span className="text-#717171 text-1.6rem"> / 박</span>
-          <div className="inline-flex text-1.4rem ml-40">
+          <div className="inline-flex text-1.4rem ml-7rem">
             <span className="inline-flex items-center flex-start mr-1 mb-1">
               <HiStar className="inline-block text-airbnb" />
             </span>
