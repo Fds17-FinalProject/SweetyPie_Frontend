@@ -9,9 +9,7 @@
 
 <br>
 
-# 💝 Wiki
-
-- [Click here](https://github.com/hanseul-lee/SweetyPie_Frontend/wiki) to see our wiki
+# 💝 [GitHub Wiki 링크](https://github.com/hanseul-lee/SweetyPie_Frontend/wiki) 
 
 # 💫 Demo
 
