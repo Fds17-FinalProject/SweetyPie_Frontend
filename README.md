@@ -1,10 +1,11 @@
+
 # SweetyPie - Airbnb Clone Coding
 
 ![logo_PK](https://user-images.githubusercontent.com/69497936/109405536-ed76eb80-79b4-11eb-8dbc-171b3d5856a3.png)
 
 <br>
 
-https://user-images.githubusercontent.com/69497936/119243989-ed971980-bba6-11eb-9816-6a403432560e.mp4
+![image](https://github.com/helloheeeelllooo/hellooo/blob/main/SweetyPie-Preview.gif?raw=true)
 
 <br>
 
