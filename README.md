@@ -1,6 +1,3 @@
-
-
-
 # SweetyPie - Airbnb Clone Coding
 
 ![logo_PK](https://user-images.githubusercontent.com/69497936/109405536-ed76eb80-79b4-11eb-8dbc-171b3d5856a3.png)
@@ -12,7 +9,7 @@
 
 <br>
 
-https://user-images.githubusercontent.com/69497936/119243412-6dba8080-bba1-11eb-9944-a30b75b5bfaf.mp4
+https://user-images.githubusercontent.com/69497936/119243989-ed971980-bba6-11eb-9816-6a403432560e.mp4
 
 <br>
 
@@ -21,7 +18,7 @@ https://user-images.githubusercontent.com/69497936/119243412-6dba8080-bba1-11eb-
 # 💫 Demo
 
 - [Click here](https://sweetypie.netlify.app/) to see our website.
-- [Click here](https://github.com/hanseul-lee/SweetyPie_Frontend/wiki) to see our demo video.
+- [Click here](https://github.com/hanseul-lee/SweetyPie_Frontend/wiki/demo) to see our demo video.
 
 <br>
 
