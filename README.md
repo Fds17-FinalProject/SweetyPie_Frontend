@@ -3,14 +3,15 @@
 
 ![logo_PK](https://user-images.githubusercontent.com/69497936/109405536-ed76eb80-79b4-11eb-8dbc-171b3d5856a3.png)
 
+> 2021.01.25부터 2021.02.26까지 5주간 진행한 airbnb 클론 코딩 프로젝트입니다. <br>
+> 기획 1주, 개발 4주의 일정으로 진행하였습니다.
+> 
 <br>
 
 ![image](https://github.com/helloheeeelllooo/hellooo/blob/main/SweetyPie-Preview.gif?raw=true)
 
 <br>
 
-> 2021.01.25부터 2021.02.26까지 5주간 진행한 airbnb 클론 코딩 프로젝트입니다. <br>
-> 기획 1주, 개발 4주의 일정으로 진행하였습니다.
 <Br>
 
 # 💝 [GitHub Wiki 링크](https://github.com/hanseul-lee/SweetyPie_Frontend/wiki) 
