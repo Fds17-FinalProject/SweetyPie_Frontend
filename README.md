@@ -42,9 +42,12 @@ https://user-images.githubusercontent.com/69497936/119243989-ed971980-bba6-11eb-
 # ⚙ 기술스택 & 툴
 
 ### Front-End
+| HTML | CSS | JavaScript | React | Redux | redux-saga | Tailwindcss | Styled-components|
+|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
+|<img height="50px" src="https://cdn.svgporn.com/logos/html-5.svg">|<img height="50px" src="https://cdn.svgporn.com/logos/css-3.svg">|<img height="50px" src="https://cdn.svgporn.com/logos/javascript.svg">|<img height="50px" src="https://cdn.svgporn.com/logos/react.svg">|<img height="50px" src="https://cdn.svgporn.com/logos/redux.svg">|<img height="50px" src="https://cdn.svgporn.com/logos/redux-saga.svg">|<img height="50px" src="https://cdn.svgporn.com/logos/tailwindcss-icon.svg">|<img height="50px" src="https://www.styled-components.com/atom.png">|
 
 - HTML/CSS
-- Javascript
+- JavaScript
 - React
 - redux
 - redux-saga
@@ -67,7 +70,6 @@ https://user-images.githubusercontent.com/69497936/119243989-ed971980-bba6-11eb-
 # 🙋‍♀ 구성원
 
 ### Front-End
-
 <img align="left" width="40" height="40" src="https://avatars.githubusercontent.com/u/67866773?v=4">
 
 [Dongchan-Kim](https://github.com/dongchan-K) <br> SweetyPie Front-End
