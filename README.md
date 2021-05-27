@@ -8,7 +8,7 @@
 > 
 <br>
 
-![image](https://github.com/helloheeeelllooo/hellooo/blob/main/SweetyPie-Preview.gif?raw=true)
+![image](https://github.com/hanseul-lee/SweetyPie_Frontend/blob/main/public/img/SweetyPie-Preview.gif?raw=true)
 
 <br>
 
