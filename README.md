@@ -14,13 +14,13 @@
 
 <Br>
 
-# 💝 [GitHub Wiki 링크](https://github.com/hanseul-lee/SweetyPie_Frontend/wiki) 
+# 💝 [GitHub Wiki 링크](https://github.com/Fds17-FinalProject/SweetyPie_Frontend/wiki) 
 - 프로젝트 기획, Functional Specification, design, sprint, convention 등을 확인할 수 있습니다.
   
 # 💫 Demo
 
 - [Click here](https://sweetypie.netlify.app/) to see our website.
-- [Click here](https://github.com/hanseul-lee/SweetyPie_Frontend/wiki/demo) to see our demo video.
+- [Click here](https://github.com/Fds17-FinalProject/SweetyPie_Frontend/wiki/Demo) to see our demo video.
 
 <br>
 
